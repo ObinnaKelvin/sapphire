@@ -7,6 +7,7 @@ import Stats from '../../components/stats/Stats';
 import WhyUs from '../../components/whyUs/WhyUs';
 import Review from '../../components/reviews/Review';
 import ReviewForm from '../../components/reviewForm/ReviewForm';
+import Footer from '../../components/footer/Footer';
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
         <WhyUs />
         <Review />
         <ReviewForm />
+        <Footer />
     </div>
   )
 }

@@ -1,0 +1,103 @@
+.review-form-container {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .review-form-wrapper {
+        width: 1000px;
+        height: max-content;
+        // border: 1px solid red;
+        padding: 50px 30px 30px 30px;
+
+        .review-form-header {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            .spikes {
+
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                gap: 9px;
+                transform: rotate(35.277deg);
+                margin: -1px 0px 0px 2px;
+
+                .spike {
+                    height: 2px;
+                    width: 19.416px;
+                    background-color: #0C4CAC;
+                }
+
+                .spikeOne {
+                    transform: rotate(29.277deg);
+                    width: 13px;
+                }
+                .spikeTwo {
+                    margin-left: -10px;
+                }
+                .spikeThree {
+                    transform: rotate(-29.277deg);
+                    width: 13px;
+                }
+            }
+
+            .review-form-header-text {
+                margin: 5px 20px;
+                color: #838383;
+                font-size: 25px;
+                font-weight: 600;
+
+                span {
+                    color: #0C4CAC;
+                }
+
+            }
+
+        }
+
+        .review-form-body {
+            // border: 1px solid black;
+
+            .review-form-left {
+                width: 50%;
+                svg {
+                    width: 400px;
+                }
+            }
+
+            .review-form-right {
+                width: 50%;
+
+            }
+        }
+
+    }
+
+    .review-form-backcircle {
+
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-color: #82B1FF;
+            opacity: 0.4;
+            position: absolute;
+            margin: 250px 0px 0px -1380px;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+
+        .review-form-backcircle-inner {
+
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            opacity: 0.5;
+            margin: 30px 0px 0px 4px;
+        }
+
+    }
+}
