@@ -38,7 +38,7 @@ const Navbar = () => {
                 <Link to={'/'}  className={currentMenu === 1 ? 'link active' : 'link'} onClick={() => switchMenu(1)}>
                 <div>Home</div>
                 </Link>
-                <Link to={'/about'} className={currentMenu === 2 ? 'link active' : 'link'} onClick={() => switchMenu(2)}>
+                <Link to={'/about-us'} className={currentMenu === 2 ? 'link active' : 'link'} onClick={() => switchMenu(2)}>
                 <div>About</div>
                 </Link>
                 <Link to={'/blog'} className={currentMenu === 3 ? 'link active' : 'link'} onClick={() => switchMenu(3)}>
