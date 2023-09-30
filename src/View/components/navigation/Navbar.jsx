@@ -91,6 +91,7 @@ const Navbar = () => {
                     </div>
                 </Link>
         </div>
+        <div className= {open ? "navbar-overlay open" : "navbar-overlay"}></div>
     </div>
   )
 }

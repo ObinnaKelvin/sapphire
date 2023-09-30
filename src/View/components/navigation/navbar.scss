@@ -108,17 +108,17 @@
         z-index: 13;
         display: none;
 
-        .navbar-overlay{
-            height: 100vh;
-            width: 99%;
-            position: fixed;
-            z-index: 2;
-        }
-        .navbar-overlay.open{
-            display: inline-block;
-            background-color: black;
-            opacity: 0.3;
-        }
+        // .navbar-overlay{
+        //     height: 100vh;
+        //     width: 99%;
+        //     position: fixed;
+        //     z-index: 2;
+        // }
+        // .navbar-overlay.open{
+        //     display: inline-block;
+        //     background-color: black;
+        //     opacity: 0.3;
+        // }
     
         .book {
             display: flex;
@@ -135,6 +135,18 @@
                 font-size: 5px;
             }
         }
+    }
+
+    .navbar-overlay{
+        height: 100vh;
+        width: 99%;
+        position: fixed;
+        z-index: 2;
+    }
+    .navbar-overlay.open{
+        display: inline-block;
+        background-color: black;
+        opacity: 0.3;
     }
 }
 
@@ -204,7 +216,19 @@
         .navbar-sidebar.open {
             top: 60px;
             left: 0px;
+            transition: 600ms;
+        }
+
+        .navbar-overlay {
+            top: 60px;
+            left: 400px;
             transition: 500ms;
+            // z-index: 13;
+        }
+        .navbar-overlay.open{
+            top: 60px;
+            left: 0px;
+            transition: 200ms;
         }
     }
 }
