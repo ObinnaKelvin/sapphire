@@ -8,6 +8,7 @@ import coker from '../../assets/images/coker.jpg';
 import oke from '../../assets/images/oke.jpg';
 import ohene from '../../assets/images/ohene.jpg';
 import anyadike from '../../assets/images/anyadike.png';
+import Footer from '../../components/footer/Footer';
 
 function AboutUs() {
   return (
@@ -308,6 +309,8 @@ function AboutUs() {
                 </div>
             </div>
         </div>
+
+        <Footer />
     </div>
   )
 }

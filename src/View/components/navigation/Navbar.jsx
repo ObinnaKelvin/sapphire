@@ -53,7 +53,6 @@ const Navbar = () => {
                 <Link to={'/book-appointment'} className='link' onClick={() => switchMenu(6)}>
                     <div className='book'>
                         <span>Book Appointment</span>
-                        {/* <span>|</span> */}
                         <span>
                             <CalendarClock size={19}/>
                         </span>
@@ -66,27 +65,32 @@ const Navbar = () => {
                     <span className="hamThree"></span>
             </div>
         </div>
-        {/* <div className={ open ? 'navbar-sidebar open' : 'navbar-sidebar'}> */}
-            {/* <div className="navbar-overlay"></div> */}
-            {/* <Link to={'/'}  className={currentMenu === 1 ? 'link active' : 'link'} onClick={() => switchMenu(1)}>
-              <div>Home</div>
-            </Link>
-            <Link to={'/about'} className={currentMenu === 2 ? 'link active' : 'link'} onClick={() => switchMenu(2)}>
-              <div>About</div>
-            </Link>
-            <Link to={'/blog'} className={currentMenu === 3 ? 'link active' : 'link'} onClick={() => switchMenu(3)}>
-              <div>Blog</div>
-            </Link>
-            <Link to={'/gallery'} className={currentMenu === 4 ? 'link active' : 'link'} onClick={() => switchMenu(4)}>
-              <div>Gallery</div>
-            </Link>
-            <Link to={'/contact-us'} className={currentMenu === 5 ? 'link active' : 'link'} onClick={() => switchMenu(5)}>
-              <div>Contact Us</div>
-            </Link>
-            <Link to={'/book-appointment'} className='link book' onClick={() => switchMenu(6)}>
-              <div>Book Appointment</div>
-            </Link>
-        </div> */}
+        <div className={ open ? 'navbar-sidebar open' : 'navbar-sidebar'}>
+            {/* <div className= {open ? "navbar-overlay open" : "navbar-overlay"}></div> */}
+                <Link to={'/'}  className={currentMenu === 1 ? 'link active' : 'link'} onClick={() => switchMenu(1)}>
+                <div>Home</div>
+                </Link>
+                <Link to={'/about-us'} className={currentMenu === 2 ? 'link active' : 'link'} onClick={() => switchMenu(2)}>
+                <div>About</div>
+                </Link>
+                <Link to={'/blog'} className={currentMenu === 3 ? 'link active' : 'link'} onClick={() => switchMenu(3)}>
+                <div>Blog</div>
+                </Link>
+                <Link to={'/gallery'} className={currentMenu === 4 ? 'link active' : 'link'} onClick={() => switchMenu(4)}>
+                <div>Gallery</div>
+                </Link>
+                <Link to={'/contact-us'} className={currentMenu === 5 ? 'link active' : 'link'} onClick={() => switchMenu(5)}>
+                <div>Contact Us</div>
+                </Link>
+                <Link to={'/book-appointment'} className='link' onClick={() => switchMenu(6)}>
+                    <div className='book'>
+                        <span>Book Appointment</span>
+                        <span>
+                            <CalendarClock size={19}/>
+                        </span>
+                    </div>
+                </Link>
+        </div>
     </div>
   )
 }

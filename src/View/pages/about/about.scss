@@ -86,7 +86,8 @@
 
                 display: flex;
                 width: 250px;
-                height: 300px;
+                // height: 300px;
+                min-height: 300px;
                 // height: max-content;
                 flex-direction: column;
                 background-color: white;
