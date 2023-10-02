@@ -22,7 +22,7 @@ const Stats = () => {
                     <CountUp end={50000} duration={2} enableScrollSpy={true}/>
                     +
                 </div>
-                <p>Happy Patients</p>
+                <span>Happy Patients</span>
             </div>
             <div className="stats-item">
                 <img src={medical} alt='happy'/>
@@ -30,7 +30,7 @@ const Stats = () => {
                     <CountUp end={97} duration={2} enableScrollSpy={true}/>
                     %
                 </div>
-                <p>Recovery Rate</p>
+                <span>Recovery Rate</span>
             </div>
             <div className="stats-item">
                 <img src={talent} alt='happy'/>
@@ -38,7 +38,7 @@ const Stats = () => {
                     <CountUp end={110} duration={2} enableScrollSpy={true}/>
                     +
                 </div>
-                <p>Years of Experience</p>
+                <span>Years of Experience</span>
             </div>
         </div>
     </div>
