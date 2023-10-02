@@ -220,3 +220,234 @@
         }
     }
 }
+
+@media only screen and (min-width: 320px) and (max-width: 400px){ //Mobile
+
+    .aboutUs-container {
+        height: 100vh;
+        // border: 1px solid blue;
+        display: flex;
+        flex-direction: column;
+    
+        .aboutUs-banner {
+    
+            // border: 1px solid black;
+            height: 140px;
+            position: relative;
+            margin: 60px 0px 0px 0px;
+            background-image: url("../../assets/images/aboutbg.jpg");
+            background-position: bottom;
+            background-size: cover;
+            background-position-y: -850px;
+    
+            .aboutUs-darkOverlay {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background-color: black;
+                opacity: 0.4;
+                z-index: 1;
+            }
+            .aboutUs-header {
+                max-width: 1000px;
+                // border: 1px solid red;
+                margin: auto auto;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 25px;
+                color: white;
+                padding: 0px 10px;
+    
+                p{
+                    z-index: 7;
+                }
+            }
+    
+        }
+    
+        .aboutUs-who {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            // opacity: 0.2;
+    
+            .aboutUs-who-wrapper {
+                width: 1000px;
+                height: max-content;
+                // border: 1px solid red;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 50px 0px 50px 0px;
+                gap: 30px;
+    
+                .aboutUs-who-we-are {
+                    width: 100%;
+                    padding: 10px;
+                    // width: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    // align-items: center;
+                    // justify-content: center;
+    
+                    .aboutUs-who-we-are-headerText {
+                        font-size: 25px;
+                        font-weight: 500;
+    
+                        span {
+                            color: rgba(0, 0, 0, 0.40);;
+                        }
+                    }
+    
+                    .aboutUs-who-we-are-content {
+    
+                        padding: 0px 0px 10px 0px;
+                        p {
+                            line-height: 30px;
+                        }
+                    }
+                }
+    
+                .aboutUs-action {
+    
+                    display: flex;
+                    width: 200px;
+                    // height: 300px;
+                    min-height: 300px;
+                    // height: max-content;
+                    flex-direction: column;
+                    background-color: white;
+                    border-radius: 0px 40px 0px 40px;
+                    padding: 10px 20px 30px 20px;
+                    position: relative;
+    
+                    .top-tag{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 40px;
+                        height: 30px;
+                        padding:  10px 15px 20px 10px;
+                        border-radius: 5px 5px 30px 5px;
+                        position: absolute;
+                        margin: -20px 0px 0px -35px;
+    
+    
+                        img {
+                            width: 30px;
+                            height: 30px;
+                        }
+                    }
+    
+                    .aboutUs-action-headerText.vision {
+                        text-align: center;
+                        font-weight: 500;
+                        color: #ECA116;
+                    }
+    
+                    .aboutUs-action-content {
+                        font-size: 14px;
+                        margin-top: 30px;
+                    }
+    
+                    .aboutUs-action-headerText.value {
+                        text-align: center;
+                        font-weight: 500;
+                        color: #EC4665;
+                    }
+    
+                    .aboutUs-action-headerText.mission {
+                        text-align: center;
+                        font-weight: 500;
+                        color: #00b0ff;
+                    }
+    
+    
+                }
+    
+                .aboutUs-action.vision {
+                        .top-tag {
+                            background-color: #ECA116;
+                        }
+                }
+    
+                .aboutUs-action.values {
+                        .top-tag {
+                            background-color: #EC4665;
+                        }
+                }
+    
+                .aboutUs-action.mission {
+                    .top-tag {
+                        background-color: #00b0ff;
+                    }
+                }
+    
+    
+    
+    
+            }
+    
+        }
+    
+        .aboutUs-team {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+    
+            .aboutUs-team-wrapper {
+                width: 1000px;
+                height: max-content;
+                // border: 1px solid red;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                padding: 50px 0px 50px 0px;
+    
+                .aboutUs-team-headerText {
+                    font-size: 30px;
+                    font-weight: 500;
+                    color: #0C4CAC;
+                    margin: 0px 0px 50px 0px;
+                }
+    
+                .aboutUs-team-member {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 30px;
+                    margin: 0px 0px 10px 0px;
+    
+                    .profile-pic-holder {
+                        position: relative;
+                        img {
+                            width: 250px;
+                        }
+    
+                        .name-holder {
+                            background-color: #0C4CAC;
+                            padding: 15px;
+                            width: 220px;
+                            color: #fff;
+                            position: absolute;
+                            font-weight: bold;
+                            margin: -60px -20px -20px -10px;
+                        }
+                    }
+    
+                    .profile-info-holder {
+                        // border: 1px solid red;
+    
+                        p:nth-child(1) {
+                            color: #ECA116;
+                        }
+                    }
+                }
+            }
+        }
+    }    
+
+}
