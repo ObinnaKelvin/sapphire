@@ -8,14 +8,14 @@ function Footer() {
   return (
     <div className="footer-container">
         <div className="footer-top">
-            <div className="footer-top-upper">
+            {/* <div className="footer-top-upper">
                 <div className="footer-top-upper-left">
                     Emergency Dial
                 </div>
                 <div className="footer-top-upper-right">
                     0703500000000
                 </div>
-            </div>
+            </div> */}
             <div className="footer-top-inner">
                 <div className="footer-logo-holder">
 
