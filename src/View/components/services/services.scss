@@ -152,8 +152,9 @@
             .services-items {
                 display: flex;
                 flex-direction: row;
+                // justify-content: space-between;
                 flex-wrap: wrap;
-                gap: 10px;
+                gap: 15px;
                 max-width: 1000px;
                 // border: 1px solid black;
                 // align-items: center;
