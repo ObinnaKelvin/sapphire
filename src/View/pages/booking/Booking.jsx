@@ -10,8 +10,12 @@ function Booking() {
         <div className="booking-banner">
             <div className='booking-overlay'></div>
             <div className="booking-header">
-                    <p>Booking is Simple!</p>
+                    <p>Schedule an Appointment With Us</p>
+                    {/* <p>Booking is Simple!</p> */}
             </div>
+        </div>
+        <div className="booking-decision">
+
         </div>
         <div className="booking-wrapper">
 
