@@ -1,0 +1,46 @@
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+
+    .booking-banner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 300px;
+        margin: 60px 0px 0px 0px;
+        background-image: url("../../assets/images/alarm.jpg");
+        position: relative;
+        background-size: cover;
+        background-position-y: -400px;
+
+        .booking-overlay {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: #052659;
+            opacity: 0.9;
+            z-index: 1;
+
+        }
+
+        .booking-header {
+            height: 100%;
+            width: 1000px;
+            color: white;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            p{
+                z-index: 7;
+            }
+
+        }
+    }
+
+    .booking-wrapper {
+
+    }
+}

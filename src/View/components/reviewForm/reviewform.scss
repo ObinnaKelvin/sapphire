@@ -60,6 +60,8 @@
 
         .review-form-body {
             // border: 1px solid black;
+            display: flex;
+            flex-direction: row;
 
             .review-form-left {
                 width: 50%;
@@ -70,6 +72,7 @@
 
             .review-form-right {
                 width: 50%;
+
 
             }
         }
