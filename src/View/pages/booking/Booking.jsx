@@ -15,7 +15,18 @@ function Booking() {
             </div>
         </div>
         <div className="booking-decision">
-
+          <div className="decision-item">
+            <div className="button-now">
+              Book a Slot, Pay NOW!
+            </div>
+            Payment ensures that you hold down a slot.
+          </div>
+          <div className="decision-item">
+            <div className="button-later">
+              Book a Slot, Pay LATER!
+            </div>
+            Temporary slot is booked but confirmed when payment is made.
+          </div>
         </div>
         <div className="booking-wrapper">
 
