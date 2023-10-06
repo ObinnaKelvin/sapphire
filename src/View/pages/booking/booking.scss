@@ -74,6 +74,10 @@
         align-items: center;
         gap: 30px;
         padding: 40px;
+        animation-name: slideDownUp2;
+        animation-duration: 1.5s;
+        animation-timing-function: ease-out;
+        // animation-delay: 0.5s;
 
         .decision-item {
             width: 30%;
@@ -212,6 +216,18 @@
             }
         }
     }
+    
+    @keyframes slideDownUp2 {
+        from {
+            transform: translateY(100px);
+            // opacity: 0;
+        }
+
+        to {
+            transform: translateY(0px);
+            // opacity: 1;
+        }
+    }
 
     .booking-wrapper {
 
@@ -250,7 +266,7 @@
                     // transition: transform 1000ms ease 1s;
                     // top: 460px;
                     animation-name: slideDownUp;
-                    animation-duration: 1.5s;
+                    animation-duration: 1s;
     
                 }
     
@@ -287,7 +303,10 @@
             gap: 30px;
             padding: 40px 10px;
             animation-name: slideDownUp2;
-            animation-duration: 2.5s;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-out;
+            // animation-delay: 0.5s;
+
     
             .decision-item {
                 width: 80%;

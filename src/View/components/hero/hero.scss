@@ -30,13 +30,45 @@
                         color: #0C4CAC;
                     }
                     // border: 1px solid black;
+                    
+                    animation-name: slideUp;
+                    animation-duration: 1.2s;
                 }
+
+                @keyframes slideUp--one {
+                    from {
+                        transform: translateY(0px);
+                        opacity: 0;
+                    }
+
+                    to {
+                        transform: translateY(0px);
+                        opacity: 1;
+                    }
+                }
+
+
                 .hero-description {
                     width: 350px;
                     line-height: 30px;
                     height: max-content;
                     color: #838383;
+                    animation-name: slideUp;
+                    animation-duration: 1.2s;
+                    animation-timing-function: ease-out;
 
+                }
+
+                @keyframes slideUp {
+                    from {
+                        transform: translateY(100px);
+                        opacity: 0;
+                    }
+
+                    to {
+                        transform: translateY(0px);
+                        opacity: 1;
+                    }
                 }
 
                 .hero-cta {

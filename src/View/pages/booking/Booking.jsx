@@ -55,7 +55,7 @@ function Booking() {
               Track you Bookings!
             </div>
             <div className="description">
-              View all your booking records
+              View all records of your bookings.
             </div>
             <div className="action-button monitor">
               <MoveRight />
