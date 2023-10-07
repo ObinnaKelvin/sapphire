@@ -67,7 +67,7 @@
         margin: -100px auto 0px auto;
         z-index: 2;
         background-color: white;
-        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+        // box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
         overflow: hidden;
         display: flex;
         flex-direction: row;
@@ -80,10 +80,10 @@
         // animation-delay: 0.5s;
 
         .decision-item {
-            width: 30%;
+            width: 33%;
             height: 300px;
-            border: 1px solid #ececec;
-            // border: 2px solid #0C4CAC;
+            box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+            // border: 1px solid #ececec;
             padding: 0px 0px 20px 0px;
             display: flex;
             flex-direction: column;
@@ -295,7 +295,6 @@
             // margin: -100px auto 0px auto;
             z-index: 2;
             background-color: white;
-            box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -310,7 +309,8 @@
     
             .decision-item {
                 width: 80%;
-                border: 1px solid #ececec;
+                // border: 1px solid #ececec;
+                box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
                 padding: 0px 0px 20px 0px;
                 display: flex;
                 flex-direction: column;

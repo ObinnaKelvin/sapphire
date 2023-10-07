@@ -18,7 +18,7 @@ function Booking() {
         <div className="booking-decision">
           <div className="decision-item">
             <div className="icon now">
-              <CalendarCheck size={40} />
+              <CalendarCheck size={35} />
             </div>
             <div className="action now">
               Book a Slot, Pay Now!
@@ -35,7 +35,7 @@ function Booking() {
           </div>
           <div className="decision-item">
             <div className="icon later">
-              <Hourglass size={40} />
+              <Hourglass size={35} />
             </div>
             <div className="action later">
               Book a Slot, Pay Later!
@@ -49,7 +49,7 @@ function Booking() {
           </div>
           <div className="decision-item">
             <div className="icon monitor">
-              <Bookmark size={40} />
+              <Bookmark size={35} />
             </div>
             <div className="action monitor">
               Track you Bookings!
