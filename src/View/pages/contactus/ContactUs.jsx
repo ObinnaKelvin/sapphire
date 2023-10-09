@@ -5,6 +5,7 @@ import { MapPin,Phone,Mails } from 'lucide-react';
 import location from '../../assets/images/locationbg.png'
 import call from '../../assets/images/callbg.png'
 import email from '../../assets/images/emailbg.png'
+import Footer from '../../components/footer/Footer';
 
 
 function ContactUs() {
@@ -66,6 +67,8 @@ function ContactUs() {
           </div>
         </div>
       </div>
+
+      <Footer />
 
     </div>
   )
