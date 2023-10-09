@@ -10,7 +10,7 @@ function Gallery() {
         <Navbar />
 
         <div className="gallery-banner">
-            <div className='gallery-darkOverlay'></div>
+            <div className='gallery-overlay'></div>
             <div className="gallery-header">
                     <p>Gallery</p>
             </div>

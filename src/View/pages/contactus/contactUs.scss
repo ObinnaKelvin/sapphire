@@ -1,0 +1,141 @@
+.contactus-container {
+
+    display: flex;
+    flex-direction: column;
+
+    .contactus-banner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 150px;
+        margin: 60px 0px 0px 0px;
+        background-image: url("../../assets/images/contact.jpg");
+        position: relative;
+        background-size: cover;
+        background-position-y: -400px;
+
+        .contactus-overlay {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            opacity: 0.7;
+            // background-color: #052659;
+            // opacity: 0.9;
+            z-index: 1;
+
+        }
+
+        .contactus-header {
+            height: 100%;
+            width: 1000px;
+            color: white;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            p{
+                z-index: 7;
+                // margin-top: -70px;
+                // transform: translateY(-140px);
+                // transition: transform 1000ms ease 1s;
+                // top: 460px;
+                animation-name: slideDownUp;
+                animation-duration: 1.5s;
+
+            }
+
+            @keyframes slideDownUp {
+                from {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateY(0px);
+                    opacity: 1;
+                }
+            }
+
+        }
+    }
+
+    .contactus-items {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .contactus-items-wrapper {
+            width: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+            // margin: -70px 0px 0px 0px;
+            margin: 0px 0px 0px 0px;
+            z-index: 2;
+            background-color: white;
+            justify-content: space-around;
+            padding: 50px 0px;
+
+            .contactus-item {
+                display: flex;
+                flex-direction: column;
+                width: 260px;
+                gap: 15px;
+                padding: 30px 20px;
+                color: white;
+                border: 1px solid #d3d3d3;
+                border-radius: 10px;
+                box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+                z-index: 2;
+                position: relative;
+                overflow: hidden;
+
+                .item-caption {
+                    font-weight: 500;
+                    font-size: 20px;
+                    z-index: 2;
+                }
+
+                .item-caption.phone, .item-caption.address {
+                    color: #1d74f5;
+                }
+
+                .item-description {
+                    font-size: 14px;
+                    z-index: 2;
+                }
+
+                .overlay-image {
+                    display: flex;
+                    position: absolute;
+                    margin: 0px 0px 0px 160px;
+
+                    img {
+                        width: 190px;
+                        z-index: 1;
+                        opacity: 0.2;
+                    }
+
+                }
+            }
+
+            .contactus-item.address {
+                // background-color: #967adc;
+                background-color: #121f33;
+            }
+
+            .contactus-item.phone {
+                // background-color: #da4453;
+                background-color: white;
+                color: #687d99;
+                border: 1px solid #4b89da;
+            }
+
+            .contactus-item.email {
+                background-color: #4b89da;
+            }
+        }
+    }
+
+}

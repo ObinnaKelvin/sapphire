@@ -3,7 +3,7 @@ import Home from './View/pages/home/Home';
 import AboutUs from './View/pages/about/AboutUs';
 import Blog from './View/pages/blog/Blog';
 import Gallery from './View/pages/gallery/Gallery'
-// import Contact from './View/pages/contact/Contact'
+import Contact from './View/pages/contactus/ContactUs'
 import Booking from './View/pages/booking/Booking'
 import './App.scss'
 
@@ -15,7 +15,7 @@ function App() {
           <Route path='/about-us' element={<AboutUs />}/>
           <Route path='/blog' element={<Blog />}/>
           <Route path='/gallery' element={<Gallery />}/>
-          {/* <Route path='/contact-us' element={<Contact />}/> */}
+          <Route path='/contact-us' element={<Contact />}/>
           <Route path='/book-appointment' element={<Booking />}/>
         </Routes>
     </Router>
