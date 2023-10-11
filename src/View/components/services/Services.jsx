@@ -34,7 +34,7 @@ const Services = () => {
                     <div className="img-holder">
                         <img src={kidney} alt='Urology surgery'/>
                     </div>
-                    <p>Urology Surgery</p>
+                    <p>Urological Surgery</p>
                 </div>
                 <div className="services-item">
                     <div className="img-holder">
