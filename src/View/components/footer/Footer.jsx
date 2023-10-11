@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './footer.scss'
 
 function Footer() {
@@ -17,15 +18,27 @@ function Footer() {
                 </div>
             </div> */}
             <div className="footer-top-inner">
+
                 <div className="footer-logo-holder">
 
                 </div>
+
                 <div className="footer-link-holder">
-                    <div>ABOUT</div>
-                    <div>BLOG</div>
-                    <div>GALLERY</div>
-                    <div>CONTACT</div>
-                    <div>MY SAPPHIRE</div>
+                    <Link to={'/about-us'} className='link'>
+                        <div>ABOUT</div>
+                    </Link>
+                    <Link to={'/blog'} className='link'>
+                        <div>BLOG</div>
+                    </Link>
+                    <Link to={'/gallery'} className='link'>
+                        <div>GALLERY</div>
+                    </Link>
+                    <Link to={'/contact-us'} className='link'>
+                        <div>CONTACT</div>
+                    </Link>
+                    <Link className='link mysapphire'>
+                        <div>MY SAPPHIRE</div>
+                    </Link>
                 </div>
 
             </div>

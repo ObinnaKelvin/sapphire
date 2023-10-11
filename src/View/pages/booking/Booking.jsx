@@ -2,6 +2,7 @@ import React from 'react';
 import './booking.scss';
 import Navbar from '../../components/navigation/Navbar'
 import {CalendarCheck, MoveRight, Hourglass, Bookmark} from 'lucide-react'
+import Footer from '../../components/footer/Footer';
 
 function Booking() {
   return (
@@ -65,6 +66,8 @@ function Booking() {
         <div className="booking-wrapper">
 
         </div>
+
+        <Footer />
     </div>
   )
 }

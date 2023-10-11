@@ -66,7 +66,6 @@ const Navbar = () => {
             </div>
         </div>
         <div className={ open ? 'navbar-sidebar open' : 'navbar-sidebar'} onClick={() => setOpen(false)}>
-            {/* <div className= {open ? "navbar-overlay open" : "navbar-overlay"}></div> */}
                 <Link to={'/'}  className={currentMenu === 1 ? 'link active' : 'link'} onClick={() => switchMenu(1)}>
                 <div>Home</div>
                 </Link>

@@ -478,3 +478,36 @@
         }
     }
 }
+
+
+@media only screen and (min-width: 961px) and (max-width: 1600px){ //Tablet
+
+    .navbar-container {
+
+        .navbar-header{
+
+            .navbar-header-logo {
+            }
+
+            .navbar-header-right {
+            }
+            .navbar-hamburger{
+            }
+        }
+        .navbar-sidebar {
+            display: none;
+        }
+        .navbar-sidebar.open {
+            display: none;
+        }
+
+        .navbar-overlay {
+            display: none;
+            // z-index: 13;
+        }
+        .navbar-overlay.open{
+            display: none;
+        }
+    }    
+
+}

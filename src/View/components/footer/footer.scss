@@ -33,7 +33,11 @@
         .footer-top-inner {
             width: 600px;
             display: flex;
-            flex-direction: column;
+            // border: 1px solid white;
+            align-items: center;
+            justify-content: center;
+            // flex-direction: row;
+            // gap: 30px;
 
             .footer-logo-holder {
 
@@ -41,7 +45,7 @@
 
             .footer-link-holder {
                 display: flex;
-                // gap: 20px;
+                gap: 20px;
                 justify-content: space-around;
                 align-items: center;
                 color: white;
@@ -52,7 +56,24 @@
                     cursor: pointer;
                 }
 
-                div:nth-child(5) {
+                // div:nth-child(5) {
+                //     background-color: #0C4CAC;
+                //     color: #fff;
+                //     padding: 5px 10px;
+                //     font-weight: 500;
+                //     border-radius: 19px;
+                // }
+
+                .link {
+                    text-decoration: none;
+                    color: #fff;
+
+                    div {
+                        cursor: pointer;
+                    }
+                }
+
+                .link.mysapphire {
                     background-color: #0C4CAC;
                     color: #fff;
                     padding: 5px 10px;
