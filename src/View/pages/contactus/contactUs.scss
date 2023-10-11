@@ -291,3 +291,154 @@
     }
 
 }
+
+@media only screen and (min-width: 401px) and (max-width: 450px){ //Mobile
+
+    .contactus-container {
+
+        display: flex;
+        flex-direction: column;
+    
+        .contactus-banner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 130px;
+            margin: 60px 0px 0px 0px;
+            background-image: url("../../assets/images/contact.jpg");
+            position: relative;
+            background-size: cover;
+            background-position-y: -250px;
+    
+            .contactus-overlay {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background-color: black;
+                opacity: 0.7;
+                // background-color: #052659;
+                // opacity: 0.9;
+                z-index: 1;
+    
+            }
+    
+            .contactus-header {
+                height: 100%;
+                width: 100%;
+                color: white;
+                font-size: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+    
+                p{
+                    z-index: 7;
+                    // margin-top: -70px;
+                    // transform: translateY(-140px);
+                    // transition: transform 1000ms ease 1s;
+                    // top: 460px;
+                    animation-name: slideDownUp;
+                    animation-duration: 1.5s;
+    
+                }
+    
+                @keyframes slideDownUp {
+                    from {
+                        transform: translateY(100px);
+                        opacity: 0;
+                    }
+    
+                    to {
+                        transform: translateY(0px);
+                        opacity: 1;
+                    }
+                }
+    
+            }
+        }
+    
+        .contactus-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+    
+            .contactus-items-wrapper {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                // flex-wrap: wrap;
+                // margin: -70px 0px 0px 0px;
+                margin: 0px 0px 0px 0px;
+                z-index: 2;
+                // background-color: white;
+                justify-content: space-around;
+                padding: 30px 0px;
+                // border: 1px solid red;
+                align-items: center;
+                gap: 20px;
+    
+                .contactus-item {
+                    display: flex;
+                    flex-direction: column;
+                    width: 270px;
+                    // height: 100px;
+                    gap: 10px;
+                    padding: 10px 20px;
+                    color: white;
+                    // border: 1px solid #d3d3d3;
+                    border-radius: 10px;
+                    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+                    z-index: 2;
+                    position: relative;
+                    overflow: hidden;
+    
+                    .item-caption {
+                        font-weight: 500;
+                        font-size: 15px;
+                        z-index: 2;
+                    }
+    
+                    .item-caption.phone, .item-caption.address {
+                        color: #1d74f5;
+                    }
+    
+                    .item-description {
+                        font-size: 12px;
+                        z-index: 2;
+                    }
+    
+                    .overlay-image {
+                        display: flex;
+                        position: absolute;
+                        margin: 0px 0px 0px 190px;
+    
+                        img {
+                            width: 130px;
+                            z-index: 1;
+                            opacity: 0.2;
+                        }
+    
+                    }
+                }
+    
+                .contactus-item.address {
+                    // background-color: #967adc;
+                    background-color: #121f33;
+                }
+    
+                .contactus-item.phone {
+                    // background-color: #da4453;
+                    background-color: white;
+                    color: #687d99;
+                    border: 1px solid #4b89da;
+                }
+    
+                .contactus-item.email {
+                    background-color: #4b89da;
+                }
+            }
+        }
+    
+    }
+
+}
