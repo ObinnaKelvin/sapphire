@@ -115,3 +115,57 @@
         }
     }
 }
+
+@media only screen and (min-width: 401px) and (max-width: 450px){ //Mobile
+
+    .stats-container {
+        height: max-content;
+        padding: 50px 0px;
+
+        .shimmer {
+            opacity: 0.5;
+            position: absolute;
+    
+            img{
+                width: 150px;
+                height: 150px;
+            }
+        }
+    
+        .shimmerOne {
+            right: -30px;
+            margin-top: -500px;
+        }
+    
+        .shimmerTwo {
+            left: -70px;
+            margin-top: 500px;
+        }
+
+        .stats-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+            .stats-item {
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                gap: 5px;
+    
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+    
+                .stats-figures {
+                    font-size: 30px;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}

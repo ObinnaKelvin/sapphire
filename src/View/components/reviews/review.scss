@@ -177,3 +177,35 @@
     }
 
 }
+
+
+@media only screen and (min-width: 401px) and (max-width: 450px){ //Mobile
+
+    .review-container {
+
+        .review-wrapper {
+            height: max-content;
+
+            .review-header {
+
+                .spikes {
+                    margin: -3px 0px 0px 2px;
+                }
+
+                .review-header-text {
+                    margin: 5px 20px;
+                    color: #838383;
+                    font-size: 17px;
+                    font-weight: 600;
+    
+                    span {
+                        color: #69F0AE;
+                    }
+    
+                }
+            }
+        }
+    
+    }
+
+}
