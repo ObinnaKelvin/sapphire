@@ -99,7 +99,7 @@ function Plogin() {
                     </div>
                     <div className="text-description">
                         <h3>Check your email</h3>
-                        <p>We just emailed a reset password. Kindly check your email and login again.</p>
+                        <p>We just emailed you a reset password. Kindly check your email and login again.</p>
                     </div>
                     <div className="sub-info">
                         <span onClick={(e)=>setActiveStep(1)}>Login now!</span> or <span onClick={(e)=>setActiveStep(2)}>Resend Password</span>
