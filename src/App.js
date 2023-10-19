@@ -6,6 +6,8 @@ import Gallery from './View/pages/gallery/Gallery'
 import Contact from './View/pages/contactus/ContactUs'
 import Booking from './View/pages/booking/Booking'
 import './App.scss'
+import Plogin from "./View/pages/patientLogin/Plogin";
+import Slogin from "./View/pages/staffLogin/Slogin";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path='/gallery' element={<Gallery />}/>
           <Route path='/contact-us' element={<Contact />}/>
           <Route path='/book-appointment' element={<Booking />}/>
+          <Route path='/patient-login' element={<Plogin />}/>
+          <Route path='/staff-login' element={<Slogin />}/>
         </Routes>
     </Router>
   );

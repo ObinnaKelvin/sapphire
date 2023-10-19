@@ -3,6 +3,7 @@ import './booking.scss';
 import Navbar from '../../components/navigation/Navbar'
 import {CalendarCheck, MoveRight, Hourglass, Bookmark} from 'lucide-react'
 import Footer from '../../components/footer/Footer';
+import { Link } from 'react-router-dom';
 
 function Booking() {
   return (
@@ -19,7 +20,7 @@ function Booking() {
         <div className="booking-decision">
           <div className="decision-item">
             <div className="icon now">
-              <CalendarCheck size={35} />
+              <CalendarCheck size={25} />
             </div>
             <div className="action now">
               Book a Slot, Pay Now!
@@ -36,7 +37,7 @@ function Booking() {
           </div>
           <div className="decision-item">
             <div className="icon later">
-              <Hourglass size={35} />
+              <Hourglass size={25} />
             </div>
             <div className="action later">
               Book a Slot, Pay Later!
@@ -48,20 +49,22 @@ function Booking() {
               <MoveRight />
             </div>
           </div>
-          <div className="decision-item">
-            <div className="icon monitor">
-              <Bookmark size={35} />
+            <div className="decision-item">
+              <div className="icon monitor">
+                <Bookmark size={25} />
+              </div>
+              <div className="action monitor">
+                Track you Bookings!
+              </div>
+              <div className="description">
+                View all records of your bookings.
+              </div>
+              <Link to='/patient-login'>
+                <div className="action-button monitor">
+                  <MoveRight />
+                </div>
+              </Link>
             </div>
-            <div className="action monitor">
-              Track you Bookings!
-            </div>
-            <div className="description">
-              View all records of your bookings.
-            </div>
-            <div className="action-button monitor">
-              <MoveRight />
-            </div>
-          </div>
         </div>
         <div className="booking-wrapper">
 
