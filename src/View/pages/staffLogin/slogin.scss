@@ -1,0 +1,923 @@
+.slogin-container {
+    display: flex;
+
+    .slogin-wrapper {
+
+        display: flex;
+        width: 100%;
+        // margin: 60px 0px 0px 0px;
+        // border: 1px solid red;
+
+        .slogin-wrapper-left {
+            width: 50%;
+            // border: 1px solid red;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slogin-wrapper-left.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: 0.5s ease;
+        }
+
+        .slogin-wrapper-left.inactive {
+            opacity: 0;
+            // visibility: hidden;
+            display: none;
+            transform: translateY(-20px);
+            transition: 0.5s ease;
+            position: absolute;
+        }
+
+        .slogin-wrapper-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+            // border: 1px solid red;
+
+            .form-holder {
+
+                .phase1 {
+                    display: flex;
+                    flex-direction: column;
+                    width: 350px;
+                    // border: 1px solid red;
+                    padding: 50px 30px;
+                    animation-name: slideUpsloginForm;
+                    animation-duration: 1s;
+                    animation-timing-function: ease-out;
+
+                    .headerText {
+                        margin: 20px auto ;
+                        color: #5e5e5e;
+                        span {
+                            color: #0C4CAC;
+                        }
+                    }
+
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 30px;
+
+                        section {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+
+                            input:focus, textarea:focus, select:focus {
+                                outline: #0C4CAC;
+                                border: 1px solid #0C4CAC;
+                            }
+
+                            .formInput {
+                                width: 97%;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: 1px solid #e0e0e0;
+                            }
+
+                        }
+
+                        button {
+                            margin: 0px auto ;
+                            padding: 15px 0px 15px 15px;
+                            border-radius: 2em;
+                            border: none;
+                            width: 100%;
+                            background-color: #0C4CAC;
+                            color: white;
+                            font-size: 15px;
+                        }
+
+                        .sub-info {
+                            // border: 1px solid red;
+                            margin: -11px auto 0px auto;
+                            font-size: 13px;
+                            color: #0C4CAC;
+                            cursor: pointer;
+                        }
+                    }
+
+                }
+
+                .phase1.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+
+                .phase1.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
+                }
+
+                .phase2 {
+                    display: flex;
+                    flex-direction: column;
+                    width: 350px;
+                    // border: 1px solid red;
+                    padding: 50px 30px;
+                    animation-name: slideUpsloginForm;
+                    animation-duration: 1s;
+                    animation-timing-function: ease-out;
+
+                    .headerText {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin: 10px 0px ;
+                        color: #5e5e5e;
+                        // border: 1px solid red;
+
+                        p{
+                            text-align: center;
+                        }
+
+                        span {
+                            color: #0C4CAC;
+                        }
+                    }
+
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 30px;
+
+                        section {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+
+                            input:focus, textarea:focus, select:focus {
+                                outline: #0C4CAC;
+                                border: 1px solid #0C4CAC;
+                            }
+
+                            .formInput {
+                                width: 97%;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: 1px solid #e0e0e0;
+                            }
+
+                        }
+
+                        button {
+                            margin: 0px auto ;
+                            padding: 15px 0px 15px 15px;
+                            border-radius: 2em;
+                            border: none;
+                            width: 100%;
+                            background-color: #0C4CAC;
+                            color: white;
+                            font-size: 15px;
+                        }
+
+                        .submit {
+                            margin: 0px auto ;
+                            padding: 15px 0px 15px 15px;
+                            border-radius: 2em;
+                            border: none;
+                            width: 100%;
+                            background-color: #0C4CAC;
+                            color: white;
+                            font-size: 15px;
+                            text-align: center;
+                        }
+
+                        .sub-info {
+                            // border: 1px solid red;
+                            margin: -11px auto 0px auto;
+                            font-size: 13px;
+                            color: #999999;
+                            cursor: pointer;
+
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+                    }
+
+                }
+    
+                @keyframes slideUpsloginForm {
+                    from {
+                        transform: translateY(100px);
+                        // opacity: 0;
+                    }
+            
+                    to {
+                        transform: translateY(0px);
+                        // opacity: 1;
+                    }
+                }
+
+                .phase2.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+
+                .phase2.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
+                }
+
+            }
+            
+        }
+        .slogin-wrapper-right.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: 0.5s ease;
+        }
+
+        .slogin-wrapper-right.inactive {
+            opacity: 0;
+            // visibility: hidden;
+            display: none;
+            transform: translateY(-20px);
+            transition: 0.5s ease;
+            position: absolute;
+        }
+
+        .phase3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            // border: 1px solid red;
+            width: 100%;
+            height: 100vh;
+            margin: 0px 0px 0px 0px;
+
+            .phase3-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                // border: 1px solid red;
+
+                .img-holder {
+                    img {
+                        width: 270px;
+                    }
+                }
+    
+                .text-description {
+                    width: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+    
+                    p{
+                        text-align: center;
+                    }
+                }
+    
+                .sub-info {
+                    span {
+                        padding: 5px 15px;
+                        background-color: #0C4CAC;
+                        color: #fff;
+                        cursor: pointer;
+                        font-size: 12px;
+                        border-radius: 20px;
+
+                    }
+                }
+            }
+
+        }
+
+        .phase3.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: 0.5s ease;
+        }
+
+        .phase3.inactive {
+            opacity: 0;
+            // visibility: hidden;
+            display: none;
+            transform: translateY(-20px);
+            transition: 0.5s ease;
+            position: absolute;
+        }
+
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 400px){ //Mobile
+
+    .slogin-container {
+        display: flex;
+    
+        .slogin-wrapper {
+    
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            // margin: 60px 0px 0px 0px;
+            // border: 1px solid red;
+    
+            .slogin-wrapper-left {
+                // width: 50%;
+                width: 200px;
+                // border: 1px solid red;
+                height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 70px auto -50px auto;
+
+                img {
+                    width: 200px;
+                }
+            }
+            .slogin-wrapper-right {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                // border: 1px solid red;
+    
+                .form-holder {
+
+                    .phase1 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 93%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                    .phase2 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 93%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                }
+                
+            }
+    
+        }
+    }   
+
+}
+
+@media only screen and (min-width: 401px) and (max-width: 450px){ //Mobile
+
+    .slogin-container {
+        display: flex;
+    
+        .slogin-wrapper {
+    
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            // margin: 60px 0px 0px 0px;
+            // border: 1px solid red;
+    
+            .slogin-wrapper-left {
+                // width: 50%;
+                width: 200px;
+                // border: 1px solid red;
+                height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 70px auto -50px auto;
+
+                img {
+                    width: 200px;
+                }
+            }
+            .slogin-wrapper-right {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                // border: 1px solid red;
+    
+                .form-holder {
+
+                    .phase1 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                    .phase2 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                }
+                
+            }
+    
+        }
+    } 
+
+}
+
+@media only screen and (min-width: 451px) and (max-width: 700px){ //Mini Tablet
+
+    .slogin-container {
+        display: flex;
+    
+        .slogin-wrapper {
+    
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            // margin: 60px 0px 0px 0px;
+            // border: 1px solid red;
+    
+            .slogin-wrapper-left {
+                // width: 50%;
+                width: 300px;
+                // border: 1px solid red;
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 70px auto -50px auto;
+
+                img {
+                    width: 300px;
+                }
+            }
+            .slogin-wrapper-right {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                // border: 1px solid red;
+    
+                .form-holder {
+
+                    .phase1 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 400px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                    .phase2 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 400px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                }
+                
+            }
+    
+        }
+    } 
+}
+
+@media only screen and (min-width: 701px) and (max-width: 960px){ //Mini Tablet
+    .slogin-container {
+        display: flex;
+    
+        .slogin-wrapper {
+    
+            display: flex;
+            width: 100%;
+            // margin: 60px 0px 0px 0px;
+            // border: 1px solid red;
+    
+            .slogin-wrapper-left {
+                width: 50%;
+                // border: 1px solid red;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 400px;
+                }
+            }
+            .slogin-wrapper-right {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 50%;
+                // border: 1px solid red;
+    
+                .form-holder {
+
+                    .phase1 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 320px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 97%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                    .phase2 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 320px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 97%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                }
+                
+            }
+    
+        }
+    }
+}

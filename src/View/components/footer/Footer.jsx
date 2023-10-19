@@ -36,7 +36,7 @@ function Footer() {
                     <Link to={'/contact-us'} className='link'>
                         <div>CONTACT</div>
                     </Link>
-                    <Link className='link mysapphire'>
+                    <Link to={'/staff-login'} className='link mysapphire'>
                         <div>MY SAPPHIRE</div>
                     </Link>
                 </div>
