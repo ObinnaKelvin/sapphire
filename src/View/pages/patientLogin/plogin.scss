@@ -32,6 +32,9 @@
                     width: 350px;
                     // border: 1px solid red;
                     padding: 50px 30px;
+                    animation-name: slideUpPloginForm;
+                    animation-duration: 1s;
+                    animation-timing-function: ease-out;
 
                     .headerText {
                         margin: 20px auto ;
@@ -109,6 +112,9 @@
                     width: 350px;
                     // border: 1px solid red;
                     padding: 50px 30px;
+                    animation-name: slideUpPloginForm;
+                    animation-duration: 1s;
+                    animation-timing-function: ease-out;
 
                     .headerText {
                         display: flex;
@@ -176,6 +182,18 @@
                     }
 
                 }
+    
+                @keyframes slideUpPloginForm {
+                    from {
+                        transform: translateY(100px);
+                        // opacity: 0;
+                    }
+            
+                    to {
+                        transform: translateY(0px);
+                        // opacity: 1;
+                    }
+                }
 
                 .phase2.active {
                     opacity: 1;
@@ -238,6 +256,58 @@
                 .form-holder {
 
                     .phase1 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 93%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                    .phase2 {
                         display: flex;
                         flex-direction: column;
                         width: 300px;
@@ -387,6 +457,58 @@
                         }
 
                     }
+                    .phase2 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
                 }
                 
             }
@@ -485,6 +607,58 @@
                         }
 
                     }
+                    .phase2 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 400px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
                 }
                 
             }
@@ -527,6 +701,58 @@
                 .form-holder {
 
                     .phase1 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 320px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
+    
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 97%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
+                            }
+        
+                            button {
+                                margin: 0px auto ;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
+                            }
+                        }
+
+                    }
+                    .phase2 {
                         display: flex;
                         flex-direction: column;
                         width: 320px;
