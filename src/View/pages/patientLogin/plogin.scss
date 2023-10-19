@@ -25,55 +25,174 @@
             // border: 1px solid red;
 
             .form-holder {
-                display: flex;
-                flex-direction: column;
-                width: 350px;
-                // border: 1px solid red;
-                padding: 50px 30px;
 
-                .headerText {
-                    margin: 20px auto ;
-                    color: #5e5e5e;
-                    span {
-                        color: #0C4CAC;
-                    }
-                }
-
-                form {
+                .phase1 {
                     display: flex;
                     flex-direction: column;
-                    gap: 30px;
+                    width: 350px;
+                    // border: 1px solid red;
+                    padding: 50px 30px;
 
-                    section {
+                    .headerText {
+                        margin: 20px auto ;
+                        color: #5e5e5e;
+                        span {
+                            color: #0C4CAC;
+                        }
+                    }
+
+                    form {
                         display: flex;
                         flex-direction: column;
                         gap: 30px;
 
-                        input:focus, textarea:focus, select:focus {
-                            outline: #0C4CAC;
-                            border: 1px solid #0C4CAC;
+                        section {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+
+                            input:focus, textarea:focus, select:focus {
+                                outline: #0C4CAC;
+                                border: 1px solid #0C4CAC;
+                            }
+
+                            .formInput {
+                                width: 97%;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: 1px solid #e0e0e0;
+                            }
+
                         }
 
-                        .formInput {
-                            width: 97%;
+                        button {
+                            margin: 0px auto ;
                             padding: 15px 0px 15px 15px;
                             border-radius: 2em;
-                            border: 1px solid #e0e0e0;
+                            border: none;
+                            width: 100%;
+                            background-color: #0C4CAC;
+                            color: white;
+                            font-size: 15px;
                         }
 
+                        .sub-info {
+                            // border: 1px solid red;
+                            margin: -11px auto 0px auto;
+                            font-size: 13px;
+                            color: #0C4CAC;
+                            cursor: pointer;
+                        }
                     }
 
-                    button {
-                        margin: 0px auto ;
-                        padding: 15px 0px 15px 15px;
-                        border-radius: 2em;
-                        border: none;
-                        width: 100%;
-                        background-color: #0C4CAC;
-                        color: white;
-                        font-size: 15px;
-                    }
                 }
+
+                .phase1.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+
+                .phase1.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
+                }
+
+                .phase2 {
+                    display: flex;
+                    flex-direction: column;
+                    width: 350px;
+                    // border: 1px solid red;
+                    padding: 50px 30px;
+
+                    .headerText {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin: 10px 0px ;
+                        color: #5e5e5e;
+                        // border: 1px solid red;
+
+                        p{
+                            text-align: center;
+                        }
+
+                        span {
+                            color: #0C4CAC;
+                        }
+                    }
+
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 30px;
+
+                        section {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 30px;
+
+                            input:focus, textarea:focus, select:focus {
+                                outline: #0C4CAC;
+                                border: 1px solid #0C4CAC;
+                            }
+
+                            .formInput {
+                                width: 97%;
+                                padding: 15px 0px 15px 15px;
+                                border-radius: 2em;
+                                border: 1px solid #e0e0e0;
+                            }
+
+                        }
+
+                        button {
+                            margin: 0px auto ;
+                            padding: 15px 0px 15px 15px;
+                            border-radius: 2em;
+                            border: none;
+                            width: 100%;
+                            background-color: #0C4CAC;
+                            color: white;
+                            font-size: 15px;
+                        }
+
+                        .sub-info {
+                            // border: 1px solid red;
+                            margin: -11px auto 0px auto;
+                            font-size: 13px;
+                            color: #999999;
+                            cursor: pointer;
+
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+                    }
+
+                }
+
+                .phase2.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+
+                .phase2.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
+                }
+
             }
             
         }
@@ -117,54 +236,58 @@
                 // border: 1px solid red;
     
                 .form-holder {
-                    display: flex;
-                    flex-direction: column;
-                    width: 300px;
-                    // border: 1px solid red;
-                    padding: 50px 30px;
-    
-                    .headerText {
-                        margin: 20px auto ;
-                        color: #5e5e5e;
-                        span {
-                            color: #0C4CAC;
-                        }
-                    }
-    
-                    form {
+
+                    .phase1 {
                         display: flex;
                         flex-direction: column;
-                        gap: 30px;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
     
-                        section {
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
                             display: flex;
                             flex-direction: column;
                             gap: 30px;
-    
-                            input:focus, textarea:focus, select:focus {
-                                outline: #0C4CAC;
-                                border: 1px solid #0C4CAC;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 93%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
                             }
-    
-                            .formInput {
-                                width: 93%;
+        
+                            button {
+                                margin: 0px auto ;
                                 padding: 15px 0px 15px 15px;
                                 border-radius: 2em;
-                                border: 1px solid #e0e0e0;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
                             }
-    
                         }
-    
-                        button {
-                            margin: 0px auto ;
-                            padding: 15px 0px 15px 15px;
-                            border-radius: 2em;
-                            border: none;
-                            width: 100%;
-                            background-color: #0C4CAC;
-                            color: white;
-                            font-size: 15px;
-                        }
+
                     }
                 }
                 
@@ -211,54 +334,58 @@
                 // border: 1px solid red;
     
                 .form-holder {
-                    display: flex;
-                    flex-direction: column;
-                    width: 300px;
-                    // border: 1px solid red;
-                    padding: 50px 30px;
-    
-                    .headerText {
-                        margin: 20px auto ;
-                        color: #5e5e5e;
-                        span {
-                            color: #0C4CAC;
-                        }
-                    }
-    
-                    form {
+
+                    .phase1 {
                         display: flex;
                         flex-direction: column;
-                        gap: 30px;
+                        width: 300px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
     
-                        section {
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
                             display: flex;
                             flex-direction: column;
                             gap: 30px;
-    
-                            input:focus, textarea:focus, select:focus {
-                                outline: #0C4CAC;
-                                border: 1px solid #0C4CAC;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
                             }
-    
-                            .formInput {
-                                width: 94%;
+        
+                            button {
+                                margin: 0px auto ;
                                 padding: 15px 0px 15px 15px;
                                 border-radius: 2em;
-                                border: 1px solid #e0e0e0;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
                             }
-    
                         }
-    
-                        button {
-                            margin: 0px auto ;
-                            padding: 15px 0px 15px 15px;
-                            border-radius: 2em;
-                            border: none;
-                            width: 100%;
-                            background-color: #0C4CAC;
-                            color: white;
-                            font-size: 15px;
-                        }
+
                     }
                 }
                 
@@ -290,7 +417,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin: 50px 20px -50px auto;
+                margin: 70px auto -50px auto;
 
                 img {
                     width: 300px;
@@ -305,54 +432,58 @@
                 // border: 1px solid red;
     
                 .form-holder {
-                    display: flex;
-                    flex-direction: column;
-                    width: 400px;
-                    // border: 1px solid red;
-                    padding: 50px 30px;
-    
-                    .headerText {
-                        margin: 20px auto ;
-                        color: #5e5e5e;
-                        span {
-                            color: #0C4CAC;
-                        }
-                    }
-    
-                    form {
+
+                    .phase1 {
                         display: flex;
                         flex-direction: column;
-                        gap: 30px;
+                        width: 400px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
     
-                        section {
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
                             display: flex;
                             flex-direction: column;
                             gap: 30px;
-    
-                            input:focus, textarea:focus, select:focus {
-                                outline: #0C4CAC;
-                                border: 1px solid #0C4CAC;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 94%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
                             }
-    
-                            .formInput {
-                                width: 94%;
+        
+                            button {
+                                margin: 0px auto ;
                                 padding: 15px 0px 15px 15px;
                                 border-radius: 2em;
-                                border: 1px solid #e0e0e0;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
                             }
-    
                         }
-    
-                        button {
-                            margin: 0px auto ;
-                            padding: 15px 0px 15px 15px;
-                            border-radius: 2em;
-                            border: none;
-                            width: 100%;
-                            background-color: #0C4CAC;
-                            color: white;
-                            font-size: 15px;
-                        }
+
                     }
                 }
                 
@@ -394,54 +525,58 @@
                 // border: 1px solid red;
     
                 .form-holder {
-                    display: flex;
-                    flex-direction: column;
-                    width: 320px;
-                    // border: 1px solid red;
-                    padding: 50px 30px;
-    
-                    .headerText {
-                        margin: 20px auto ;
-                        color: #5e5e5e;
-                        span {
-                            color: #0C4CAC;
-                        }
-                    }
-    
-                    form {
+
+                    .phase1 {
                         display: flex;
                         flex-direction: column;
-                        gap: 30px;
+                        width: 320px;
+                        // border: 1px solid red;
+                        padding: 50px 30px;
     
-                        section {
+                        .headerText {
+                            margin: 20px auto ;
+                            color: #5e5e5e;
+                            span {
+                                color: #0C4CAC;
+                            }
+                        }
+        
+                        form {
                             display: flex;
                             flex-direction: column;
                             gap: 30px;
-    
-                            input:focus, textarea:focus, select:focus {
-                                outline: #0C4CAC;
-                                border: 1px solid #0C4CAC;
+        
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 30px;
+        
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+        
+                                .formInput {
+                                    width: 97%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+        
                             }
-    
-                            .formInput {
-                                width: 97%;
+        
+                            button {
+                                margin: 0px auto ;
                                 padding: 15px 0px 15px 15px;
                                 border-radius: 2em;
-                                border: 1px solid #e0e0e0;
+                                border: none;
+                                width: 100%;
+                                background-color: #0C4CAC;
+                                color: white;
+                                font-size: 15px;
                             }
-    
                         }
-    
-                        button {
-                            margin: 0px auto ;
-                            padding: 15px 0px 15px 15px;
-                            border-radius: 2em;
-                            border: none;
-                            width: 100%;
-                            background-color: #0C4CAC;
-                            color: white;
-                            font-size: 15px;
-                        }
+
                     }
                 }
                 
