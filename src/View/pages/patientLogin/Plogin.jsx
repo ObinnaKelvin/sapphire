@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ploginbg from '../../assets/images/account.gif';
 import './plogin.scss';
 import Navbar from '../../components/navigation/Navbar';
+import message from '../../assets/images/message.png'
 
 function Plogin() {
     // const {formData, setFormData} = useState({
@@ -20,10 +21,10 @@ function Plogin() {
     <div className="plogin-container">
         <Navbar />
         <div className="plogin-wrapper">
-            <div className="plogin-wrapper-left">
+            <div className={`plogin-wrapper-left ${activeStep === 3 ? "inactive" : "active" }`}>
                 <img src={ploginbg} alt="Login BG" />
             </div>
-            <div className="plogin-wrapper-right">
+            <div className={`plogin-wrapper-right ${activeStep === 3 ? "inactive" : "active" }`}>
                 
                 <div className="form-holder">
                     <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}>
@@ -63,7 +64,7 @@ function Plogin() {
                     <div className={`phase2 ${activeStep === 2 ? "active" : "inactive" } `}>
                         <div className="headerText">
                             <h3>Reset <span>Password</span></h3>
-                            <p>Enter the email address associated with your account and we'll send you a reset password.</p>
+                            <p>Enter the email address associated with your account and we'll email you a reset password.</p>
                         </div>
                         <form action="">
                             <section>
@@ -78,14 +79,30 @@ function Plogin() {
                                 />
                             </section>
                             
-                            <button type='submit'>Send</button>
+                            {/* <button type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</button> */}
+                            <div className='submit' type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</div>
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(1)}>
-                                Have an account? <span>Sign Up</span>
+                                Have an account? <span>Sign In</span>
                             </div>
                             
                         </form>
                         
+                    </div>
+
+                </div>
+            </div>
+            <div className={`phase3 ${activeStep === 3 ? "active" : "inactive" } `}>
+                <div className="phase3-wrapper">
+                    <div className="img-holder">
+                        <img src={message} alt='Email Confirmation'/>
+                    </div>
+                    <div className="text-description">
+                        <h3>Check your email</h3>
+                        <p>We just emailed a reset password. Kindly check your email and login again.</p>
+                    </div>
+                    <div className="sub-info">
+                        <span onClick={(e)=>setActiveStep(1)}>Login now!</span> or <span onClick={(e)=>setActiveStep(2)}>Resend Password</span>
                     </div>
                 </div>
             </div>
