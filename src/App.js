@@ -8,6 +8,7 @@ import Booking from './View/pages/booking/Booking'
 import './App.scss'
 import Plogin from "./View/pages/patientLogin/Plogin";
 import Slogin from "./View/pages/staffLogin/Slogin";
+import PayLater from "./View/pages/payLater/PayLater";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/book-appointment' element={<Booking />}/>
           <Route path='/patient-login' element={<Plogin />}/>
           <Route path='/staff-login' element={<Slogin />}/>
+          <Route path='/pay-later' element={<PayLater />}/>
         </Routes>
     </Router>
   );

@@ -45,9 +45,11 @@ function Booking() {
             <div className="description">
               Temporary slot is booked but confirmed when payment is made.
             </div>
-            <div className="action-button later">
-              <MoveRight />
-            </div>
+            <Link to='/pay-later'>
+              <div className="action-button later">
+                <MoveRight />
+              </div>
+            </Link>
           </div>
             <div className="decision-item">
               <div className="icon monitor">
