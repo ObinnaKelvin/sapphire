@@ -17,11 +17,11 @@ export const clinicData =  [
     },
     {
         id: 5,
-        name:"Gastrointestinal Surgery",
+        name:"Thyroid Surgery",
     },
     {
         id: 6,
-        name:"Gastrointestinal Surgery",
+        name:"Breast Surgery",
     },
     {
         id: 7,

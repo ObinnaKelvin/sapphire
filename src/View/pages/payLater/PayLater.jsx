@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef  } from 'react'
 import Navbar from '../../components/navigation/Navbar'
 import './paylater.scss';
 import paylaterbg from '../../assets/images/booking.jpg'
 import message from '../../assets/images/message.png'
 import { clinicData } from './clinicData.jsx'
 import { Calendar } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from 'date-fns'//transform the dates to readable formats
+// import Calendar from 'react-calendar';
+// import 'react-calendar/dist/Calendar.css';
 
 function PayLater() {
 
@@ -25,22 +27,45 @@ function PayLater() {
         // console.log(format(dateSelected, 'dd/MM/yyyy'))
         setDate(format(dateSelected, 'eeee do LLLL yyyy'))
     }
+    // const [startDate, setStartDate] = useState(new Date());
+
+    //We add a listener effect that activates 'false' which 
+    // invokes the 'inactive' property to the dropdowns
+    let formRef = useRef();
+    useEffect(() => { 
+        let listener = (e) => {
+            if(!formRef.current.contains(e.target)) {
+            // setOpenOptions(false);
+            setOpenDate(false);
+            console.log(formRef.current);          
+            }
+
+        }
+
+        document.addEventListener("mousedown", listener);
+
+        return () => {
+            document.removeEventListener("mousedown", listener);
+        }
+    }, [])
+    
+
 
   return (
     <div className="paylater-container">
         <Navbar />
-        <div className="paylater-wrapper">
-            <div className={`paylater-wrapper-left ${activeStep === 3 ? "inactive" : "active" }`}>
+        <div className="paylater-wrapper" ref={formRef}>
+            <div className={`paylater-wrapper-left ${activeStep === 3 ? "inactive" : "active" }`}  ref={formRef}>
                 <img src={paylaterbg} alt="Login BG" />
             </div>
-            <div className={`paylater-wrapper-right ${activeStep === 3 ? "inactive" : "active" }`}>
+            <div className={`paylater-wrapper-right ${activeStep === 3 ? "inactive" : "active" }`}  ref={formRef}>
                 
                 <div className="form-holder">
-                    <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}>
+                    <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}  ref={formRef}>
                         <div className="headerText">
                             <h3><span>Book a Session With Us</span></h3>
                         </div>
-                        <form action="">
+                        <form action="" ref={formRef}>
                             <section>
                                 <input 
                                 type="text" 
@@ -81,7 +106,7 @@ function PayLater() {
                             </section>
                             <section>
                                 <select className = 'formSelect full' name="user_appointment_clinic" onChange={(e)=>setClinic(e.target.value)} value={clinic}>
-                                    <option>- Choose a Clinic -</option>
+                                    <option>- Choose a Surgical Procedure-</option>
                                     {
                                     clinicData.map((data)=>(
                                         <option value={data.name} key={data.id}>{data.name}</option>
@@ -91,21 +116,27 @@ function PayLater() {
                             </section>
                             <section>
                                 <input type="text" className="formInput full" name="user_appointment_date" placeholder="Select Appointment Date" value={date} onChange={(e)=> setDate(e.target.value)} onClick={()=>setOpenDate(!openDate)} />
-                                <div className={`calendar ${openDate ? 'active' : 'inactive'}`} onClick={()=>setOpenDate(false)}>
+                                {/* <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} onClick={()=>setOpenDate(false)}> */}
+                                <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef}>
                                     <Calendar
                                     onChange={onChangeDate}
-                                    // ranges={date}
                                     date={new Date()}
+                                    className='calendar'
                                     />
                                 </div>
+                                    {/* <Calendar onChange={onChangeDate} value={date} nextLabel next2Label/> */}
                             </section>
+                                    {/* <Calendar
+                                    onChange={onChangeDate}
+                                    date={new Date()}
+                                    /> */}
                             <section>
                                     <textarea className="formTextArea full" type="text"name="user_additional_info" placeholder="Are there some more information you would want the doctor to know about?"
                                     value={description} onChange={(e)=> setDescription(e.target.value)}
                                     />
                             </section>
                             
-                            <button type='submit'>Login</button>
+                            <button className="button" type='submit'>Continue</button>
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?
