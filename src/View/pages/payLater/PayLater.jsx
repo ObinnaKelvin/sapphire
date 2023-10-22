@@ -3,6 +3,10 @@ import Navbar from '../../components/navigation/Navbar'
 import './paylater.scss';
 import paylaterbg from '../../assets/images/booking.jpg'
 import message from '../../assets/images/message.png'
+import cancel from '../../assets/images/cross.png'
+import user from '../../assets/images/user.png'
+import paper from '../../assets/images/paper.png'
+import flag from '../../assets/images/flag.png'
 import { clinicData } from './clinicData.jsx'
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
@@ -61,10 +65,59 @@ function PayLater() {
             <div className={`paylater-wrapper-right ${activeStep === 3 ? "inactive" : "active" }`}  ref={formRef}>
                 
                 <div className="form-holder">
-                    <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}  ref={formRef}>
-                        <div className="headerText">
-                            <h3><span>Book a Session With Us</span></h3>
+                    <div className="headerText">
+                        <h3><span>Book a Session With Us</span></h3>
+                    </div>
+                    <div className="progress-status">
+                        <div className={`stage one ${activeStep === 1||2||3 ? "active" : "inactive" }`}>
+                            <div className="stage-icon">
+                                <img src={user} alt='user sign' />
+                            </div>
+                            <div className="stage-text">Personal</div>
+                            <div className="stage-bar"></div>
                         </div>
+                        <div className={`stage two ${activeStep === 2 ? "active" : "inactive" }`}>
+                            <div className="stage-icon">
+                                <img src={paper} alt='user sign' />
+                            </div>
+                            <div className="stage-text">Summary</div>
+                            <div className="stage-bar"></div>
+                        </div>
+                        <div className={`stage three ${activeStep === 3 ? "active" : "inactive" }`}>
+                            <div className="stage-icon">
+                                <img src={flag} alt='user sign' />
+                            </div>
+                            <div className="stage-text">Finish</div>
+                            <div className="stage-bar"></div>
+                        </div>
+                    </div>
+                    <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}  ref={formRef}>
+                        {/* <div className="headerText">
+                            <h3><span>Book a Session With Us</span></h3>
+                        </div> */}
+                        {/* <div className="progress-status">
+                            <div className="stage one">
+                                <div className="stage-icon">
+                                    <img src={user} alt='user sign' />
+                                </div>
+                                <div className="stage-text">Personal</div>
+                                <div className="stage-bar"></div>
+                            </div>
+                            <div className="stage two">
+                                <div className="stage-icon">
+                                    <img src={paper} alt='user sign' />
+                                </div>
+                                <div className="stage-text">Summary</div>
+                                <div className="stage-bar"></div>
+                            </div>
+                            <div className="stage three">
+                                <div className="stage-icon">
+                                    <img src={flag} alt='user sign' />
+                                </div>
+                                <div className="stage-text">Finish</div>
+                                <div className="stage-bar"></div>
+                            </div>
+                        </div> */}
                         <form action="" ref={formRef}>
                             <section>
                                 <input 
@@ -123,6 +176,9 @@ function PayLater() {
                                     date={new Date()}
                                     className='calendar'
                                     />
+                                    <div className="cancel-holder" onClick={()=>setOpenDate(false)}>
+                                        <img src={cancel} />
+                                    </div>
                                 </div>
                                     {/* <Calendar onChange={onChangeDate} value={date} nextLabel next2Label/> */}
                             </section>

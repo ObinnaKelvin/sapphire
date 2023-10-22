@@ -30,5 +30,9 @@ export const clinicData =  [
     {
         id: 8,
         name:"Surgical Oncology",
+    },
+    {
+        id: 9,
+        name:"Consultation",
     }
 ]
