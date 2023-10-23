@@ -26,7 +26,7 @@ function PayLater() {
     const[date, setDate] = useState()
     const [description, setDescription] = useState('');
     const[openDate, setOpenDate] = useState(false)
-    const[activeStep, setActiveStep] = useState(2)
+    const[activeStep, setActiveStep] = useState(1)
     const[clinic, setClinic] = useState('')
     const[sex, setSex] = useState('')
     const onChangeDate = (dateSelected) => {

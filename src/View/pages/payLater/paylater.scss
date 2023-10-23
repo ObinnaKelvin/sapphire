@@ -818,6 +818,7 @@
             .paylater-wrapper-left.active {
                 opacity: 1;
                 visibility: visible;
+                display: none;
                 transform: translateY(0);
                 transition: 0.5s ease;
             }
@@ -836,7 +837,7 @@
                 flex-direction: column;
                 align-items: center;
                 // justify-content: center;
-                width: 300px;
+                width: 350px;
                 border: 1px solid red;
     
                 .form-holder {
@@ -865,7 +866,7 @@
                         flex-direction: row;
                         // height: 60px;
                         height: max-content;
-                        // border: 1px solid red;
+                        border: 1px solid red;
                         margin: 0px 0px 0px 0px;
     
                         .stage {
@@ -1005,7 +1006,7 @@
                                     padding: 15px 0px 15px 15px;
                                     border-radius: 2em;
                                     border: 1px solid #e0e0e0;
-                                    margin: 0px 0px 0px -27px;
+                                    margin: 0px 0px 0px 10px;
                                 }
     
                                 .formTextArea {
