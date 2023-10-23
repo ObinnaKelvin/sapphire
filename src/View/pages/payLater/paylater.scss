@@ -44,7 +44,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            // justify-content: center;
             width: 65%;
             // border: 1px solid red;
 
@@ -55,7 +55,7 @@
                 border-radius: 10px;
 
                 .headerText {
-                    margin: 70px auto 20px auto;
+                    margin: 60px auto 10px auto;
                     padding: 0px 0px 0px 15px;
                     color: #5e5e5e;
                     // background-color:#ffd600;
@@ -164,6 +164,12 @@
 
                         .stage-bar {
                             background-color: #0C4CAC;
+                            animation: progress 2s linear forwards;
+                        }
+                        @keyframes progress {
+                            100% {
+                                width: 100%;
+                            }
                         }
 
                     }
@@ -172,10 +178,10 @@
                 .phase1 {
                     display: flex;
                     flex-direction: column;
-                    width: 450px;
+                    width: 750px;
                     // border: 1px solid red;
-                    padding: 20px 30px;
-                    margin: 0px 0px 0px 0px;
+                    padding: 0px 30px;
+                    margin: 10px 0px 0px 0px;
                     // border: 1px solid blue;
                     border-radius: 10px;
                     background-color: #fafafa;
@@ -299,7 +305,7 @@
                             flex-wrap: wrap;
                             align-items: center;
                             justify-content: center;
-                            gap: 25px;
+                            gap: 10px;
 
                             input:focus, textarea:focus, select:focus {
                                 outline: #0C4CAC;
@@ -307,13 +313,14 @@
                             }
 
                             .formInput {
-                                width: 42%;
+                                width: 30%;
                                 padding: 15px 0px 15px 15px;
                                 border-radius: 2em;
                                 border: 1px solid #e0e0e0;
                             }
 
                             .formTextArea {
+                                width: 60%;
                                 padding: 20px;
                                 border-radius: 2em;
                                 border: 1px solid #e0e0e0;
@@ -321,7 +328,7 @@
                             }
     
                             .formSelect {
-                                width: 46%;
+                                width: 32%;
                                 padding: 15px 20px 15px 15px;
                                 border-radius: 2em;
                                 border: 1px solid #e0e0e0;
@@ -337,7 +344,19 @@
                             }
     
                             .formTextArea.full {
-                                width: 86%;
+                                width: 96%;
+                            }
+    
+                            .formInput.mid {
+                                width: 48%;
+                            }
+    
+                            .formSelect.mid {
+                                width: 48%;
+                            }
+    
+                            .formTextArea.mid {
+                                width: 50%;
                             }
 
                             select {
@@ -438,7 +457,7 @@
                 .phase2 {
                     display: flex;
                     flex-direction: column;
-                    width: 350px;
+                    width: 750px;
                     // border: 1px solid red;
                     padding: 50px 30px;
                     animation-name: slideUppaylaterForm;
@@ -473,14 +492,14 @@
                             gap: 30px;
 
                             .patient-card {
-                                height: 110px;
+                                height: 125px;
                                 background-color: #e1f5fe;
                                 width: 90%;
                                 margin: -30px auto 0px auto;
                                 border-radius: 15px 15px 15px 0px;
                                 display: flex;
                                 flex-direction: column;
-                                gap: 5px;
+                                gap: 10px;
 
                                 .photo-card {
                                     display: flex;
@@ -508,7 +527,7 @@
                                     width: 70%;
                                     margin: 10px auto 0px auto;
                                     font-weight: 500;
-                                    font-size: 16px;
+                                    font-size: 18px;
                                 }
                                 .phone {
                                     display: flex;
@@ -554,7 +573,7 @@
                                 align-items: center;
                                 gap: 5px;
                                 background-color: #e1f5fe;
-                                width: 80%;
+                                width: 85%;
                                 margin: 0px auto 0px auto;
                                 padding: 15px ;
                                 border-radius: 15px 15px 15px 0px;
@@ -569,7 +588,7 @@
                                 align-items: center;
                                 gap: 5px;
                                 background-color: #e1f5fe;
-                                width: 80%;
+                                width: 85%;
                                 margin: 0px auto 0px auto;
                                 padding: 15px ;
                                 border-radius: 15px 15px 15px 0px;
@@ -584,7 +603,7 @@
                                 align-items: center;
                                 gap: 5px;
                                 background-color: #e1f5fe;
-                                width: 80%;
+                                width: 85%;
                                 height: max-content;
                                 margin: 0px auto 0px auto;
                                 padding: 15px ;
@@ -600,7 +619,7 @@
                         .button-holder {
                             display: flex;
                             flex-direction: row;
-                            justify-content: space-between;
+                            justify-content: space-around;
 
                             .previous {
                                 padding: 15px 15px 15px 15px;
@@ -676,6 +695,71 @@
                     position: absolute;
                 }
 
+                .phase3 {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    // justify-content: center;
+                    // border: 1px solid red;
+                    width: 750px;
+                    padding: 0px 30px;
+                    height: 70vh;
+                    margin: 0px 0px 0px 0px;
+
+                    .phase3-wrapper {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 750px;
+                        // border: 1px solid red;
+                        margin: 15px 0px 0px 0px;
+                        gap: 15px;
+
+                        .titleText {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            color: #0C4CAC;
+                            // color: #ffd600;
+                            font-size: 30px;
+                        }
+
+                        p {
+                            margin: 3px 0px 0px 33px;
+                            font-size: 12px;
+                        }
+
+                        .book-again {
+                            padding: 15px 15px 15px 15px;
+                            border-radius: 2em;
+                            border: none;
+                            width: max-content;
+                            background-color: #0C4CAC;
+                            color: white;
+                            font-size: 15px;
+                            text-align: center;
+                        }
+                    }
+
+        
+                }
+        
+                .phase3.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+        
+                .phase3.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
+                }
+
             }
             
         }
@@ -695,71 +779,7 @@
             position: absolute;
         }
 
-        .phase3 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            // border: 1px solid red;
-            width: 100%;
-            height: 100vh;
-            margin: 0px 0px 0px 0px;
 
-            .phase3-wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                // border: 1px solid red;
-
-                .img-holder {
-                    img {
-                        width: 270px;
-                    }
-                }
-    
-                .text-description {
-                    width: 300px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-    
-                    p{
-                        text-align: center;
-                    }
-                }
-    
-                .sub-info {
-                    span {
-                        padding: 5px 15px;
-                        background-color: #0C4CAC;
-                        color: #fff;
-                        cursor: pointer;
-                        font-size: 12px;
-                        border-radius: 20px;
-
-                    }
-                }
-            }
-
-        }
-
-        .phase3.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            transition: 0.5s ease;
-        }
-
-        .phase3.inactive {
-            opacity: 0;
-            // visibility: hidden;
-            display: none;
-            transform: translateY(-20px);
-            transition: 0.5s ease;
-            position: absolute;
-        }
 
     }
 }

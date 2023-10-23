@@ -7,6 +7,7 @@ import cancel from '../../assets/images/cross.png'
 import user from '../../assets/images/user.png'
 import paper from '../../assets/images/paper.png'
 import flag from '../../assets/images/flag.png';
+import tick from '../../assets/images/tick.png';
 import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen } from 'lucide-react';
 import { clinicData } from './clinicData.jsx'
 import { Calendar } from 'react-date-range';
@@ -61,10 +62,10 @@ function PayLater() {
     <div className="paylater-container">
         <Navbar />
         <div className="paylater-wrapper" ref={formRef}>
-            <div className={`paylater-wrapper-left ${activeStep === 3 ? "inactive" : "active" }`}  ref={formRef}>
+            <div className={`paylater-wrapper-left ${activeStep === 4 ? "inactive" : "active" }`}  ref={formRef}>
                 <img src={paylaterbg} alt="Login BG" />
             </div>
-            <div className={`paylater-wrapper-right ${activeStep === 3 ? "inactive" : "active" }`}  ref={formRef}>
+            <div className={`paylater-wrapper-right ${activeStep === 4 ? "inactive" : "active" }`}  ref={formRef}>
                 
                 <div className="form-holder">
                     <div className="headerText">
@@ -123,11 +124,15 @@ function PayLater() {
                                 onChange = {(e)=>setEmail(e.target.value)}
                                 className="formInput"
                                 />
-                                <select className = 'formSelect' name="user_sex" onChange={(e)=>setSex(e.target.value)} value={sex}>
+
+
+                                <select className = 'formSelect mid' name="user_sex" onChange={(e)=>setSex(e.target.value)} value={sex}>
                                     <option>- Choose Sex -</option>
                                     <option value={'Male'}>Male</option>
                                     <option value={'Female'}>Female</option>
                                 </select>
+
+
                                 <input 
                                 type="text" 
                                 placeholder='Phone'
@@ -135,21 +140,11 @@ function PayLater() {
                                 value={phone}
                                 // onChange={handleInputChange}
                                 onChange = {(e)=>setPhone(e.target.value)}
-                                className="formInput full"
+                                className="formInput mid"
                                 />
-                            </section>
-                            <section>
-                                <select className = 'formSelect full' name="user_appointment_clinic" onChange={(e)=>setClinic(e.target.value)} value={clinic}>
-                                    <option>- Choose a Surgical Procedure -</option>
-                                    {
-                                    clinicData.map((data)=>(
-                                        <option value={data.name} key={data.id}>{data.name}</option>
-                                    ))
-                                    }
-                                </select>
-                            </section>
-                            <section>
-                                <input type="text" className="formInput full" name="user_appointment_date" placeholder="Select Appointment Date" value={date} onChange={(e)=> setDate(e.target.value)} onClick={()=>setOpenDate(!openDate)} />
+
+
+                                <input type="text" className="formInput mid" name="user_appointment_date" placeholder="Select Appointment Date" value={date} onChange={(e)=> setDate(e.target.value)} onClick={()=>setOpenDate(!openDate)} />
                                 {/* <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} onClick={()=>setOpenDate(false)}> */}
                                 <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef}>
                                     <Calendar
@@ -161,17 +156,43 @@ function PayLater() {
                                         <img src={cancel} />
                                     </div>
                                 </div>
+
+
+                                <select className = 'formSelect mid' name="user_appointment_clinic" onChange={(e)=>setClinic(e.target.value)} value={clinic}>
+                                    <option>- Choose a Surgical Procedure -</option>
+                                    {
+                                    clinicData.map((data)=>(
+                                        <option value={data.name} key={data.id}>{data.name}</option>
+                                    ))
+                                    }
+                                </select>
+                            </section>
+                            {/* <section>
+                                <select className = 'formSelect' name="user_appointment_clinic" onChange={(e)=>setClinic(e.target.value)} value={clinic}>
+                                    <option>- Choose a Surgical Procedure -</option>
+                                    {
+                                    clinicData.map((data)=>(
+                                        <option value={data.name} key={data.id}>{data.name}</option>
+                                    ))
+                                    }
+                                </select>
+                            </section> */}
+                            <section>
+
+                                <textarea className="formTextArea full" type="text"name="user_additional_info" placeholder="Are there some more information you would want the doctor to know about?"
+                                value={description} onChange={(e)=> setDescription(e.target.value)}
+                                />
                                     {/* <Calendar onChange={onChangeDate} value={date} nextLabel next2Label/> */}
                             </section>
                                     {/* <Calendar
                                     onChange={onChangeDate}
                                     date={new Date()}
                                     /> */}
-                            <section>
-                                    <textarea className="formTextArea full" type="text"name="user_additional_info" placeholder="Are there some more information you would want the doctor to know about?"
+                            {/* <section>
+                                    <textarea className="formTextArea" type="text"name="user_additional_info" placeholder="Are there some more information you would want the doctor to know about?"
                                     value={description} onChange={(e)=> setDescription(e.target.value)}
                                     />
-                            </section>
+                            </section> */}
                             
                             {/* <button className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</button> */}
                             <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</div>
@@ -232,31 +253,18 @@ function PayLater() {
                             <h3>Reset <span>Password</span></h3>
                             <p>Enter the email address associated with your account and we'll email you a reset password.</p>
                         </div> */}
-                        <form action="">
-                            <section>
-                                <input 
-                                type="text" 
-                                placeholder='Email'
-                                name='email'
-                                value={email}
-                                // onChange={handleInputChange}
-                                onChange = {(e)=>setEmail(e.target.value)}
-                                className="formInput"
-                                />
-                            </section>
-                            
-                            {/* <button type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</button> */}
-                            <div className="button-holder">
-                                <div className="previous" onClick={(e)=>setActiveStep(1)}>Previous</div>
-                                <div className="finish" onClick={(e)=>setActiveStep(3)}>Finish</div>
+                        <div className="phase3-wrapper">
+                            <div className="icon-holder">
+                                <img src={tick} alt="success tick" />
                             </div>
-                            <div className='submit' type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</div>
-
-                            <div className="sub-info" onClick={(e)=>setActiveStep(1)}>
-                                Have an account? <span>Sign In</span>
+                            <div className="titleText">
+                                Appointment Booked!
                             </div>
-                            
-                        </form>
+                            <p>You will receive a confirmation mail shortly and an instruction on how to track your bookings.</p>
+                            <div className="book-again" onClick={(e)=>setActiveStep(1)}>
+                                Book Again
+                            </div>
+                        </div>
                         
                     </div>
 
