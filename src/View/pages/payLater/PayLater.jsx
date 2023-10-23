@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef  } from 'react'
 import Navbar from '../../components/navigation/Navbar'
 import './paylater.scss';
 import paylaterbg from '../../assets/images/booking.jpg'
-import message from '../../assets/images/message.png'
+import person from '../../assets/images/gamer.png'
 import cancel from '../../assets/images/cross.png'
 import user from '../../assets/images/user.png'
 import paper from '../../assets/images/paper.png'
-import flag from '../../assets/images/flag.png'
+import flag from '../../assets/images/flag.png';
+import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen } from 'lucide-react';
 import { clinicData } from './clinicData.jsx'
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
@@ -24,8 +25,9 @@ function PayLater() {
     const[date, setDate] = useState()
     const [description, setDescription] = useState('');
     const[openDate, setOpenDate] = useState(false)
-    const[activeStep, setActiveStep] = useState(1)
+    const[activeStep, setActiveStep] = useState(2)
     const[clinic, setClinic] = useState('')
+    const[sex, setSex] = useState('')
     const onChangeDate = (dateSelected) => {
         // console.log(dateSelected)
         // console.log(format(dateSelected, 'dd/MM/yyyy'))
@@ -92,37 +94,11 @@ function PayLater() {
                         </div>
                     </div>
                     <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}  ref={formRef}>
-                        {/* <div className="headerText">
-                            <h3><span>Book a Session With Us</span></h3>
-                        </div> */}
-                        {/* <div className="progress-status">
-                            <div className="stage one">
-                                <div className="stage-icon">
-                                    <img src={user} alt='user sign' />
-                                </div>
-                                <div className="stage-text">Personal</div>
-                                <div className="stage-bar"></div>
-                            </div>
-                            <div className="stage two">
-                                <div className="stage-icon">
-                                    <img src={paper} alt='user sign' />
-                                </div>
-                                <div className="stage-text">Summary</div>
-                                <div className="stage-bar"></div>
-                            </div>
-                            <div className="stage three">
-                                <div className="stage-icon">
-                                    <img src={flag} alt='user sign' />
-                                </div>
-                                <div className="stage-text">Finish</div>
-                                <div className="stage-bar"></div>
-                            </div>
-                        </div> */}
                         <form action="" ref={formRef}>
                             <section>
                                 <input 
                                 type="text" 
-                                placeholder='Firstname'
+                                placeholder='First name'
                                 name='firstname'
                                 value={firstname}
                                 // onChange={handleInputChange}
@@ -131,7 +107,7 @@ function PayLater() {
                                 />
                                 <input 
                                 type="text" 
-                                placeholder='Lastname'
+                                placeholder='Last name'
                                 name='lastname'
                                 value={lastname}
                                 // onChange={handleInputChange}
@@ -147,6 +123,11 @@ function PayLater() {
                                 onChange = {(e)=>setEmail(e.target.value)}
                                 className="formInput"
                                 />
+                                <select className = 'formSelect' name="user_sex" onChange={(e)=>setSex(e.target.value)} value={sex}>
+                                    <option>- Choose Sex -</option>
+                                    <option value={'Male'}>Male</option>
+                                    <option value={'Female'}>Female</option>
+                                </select>
                                 <input 
                                 type="text" 
                                 placeholder='Phone'
@@ -154,12 +135,12 @@ function PayLater() {
                                 value={phone}
                                 // onChange={handleInputChange}
                                 onChange = {(e)=>setPhone(e.target.value)}
-                                className="formInput"
+                                className="formInput full"
                                 />
                             </section>
                             <section>
                                 <select className = 'formSelect full' name="user_appointment_clinic" onChange={(e)=>setClinic(e.target.value)} value={clinic}>
-                                    <option>- Choose a Surgical Procedure-</option>
+                                    <option>- Choose a Surgical Procedure -</option>
                                     {
                                     clinicData.map((data)=>(
                                         <option value={data.name} key={data.id}>{data.name}</option>
@@ -192,19 +173,65 @@ function PayLater() {
                                     />
                             </section>
                             
-                            <button className="button" type='submit'>Continue</button>
+                            {/* <button className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</button> */}
+                            <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</div>
 
-                            <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
+                            {/* <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?
-                            </div>
+                            </div> */}
                             
                         </form>
                     </div>
                     <div className={`phase2 ${activeStep === 2 ? "active" : "inactive" } `}>
-                        <div className="headerText">
+                        {/* <div className="headerText">
                             <h3>Reset <span>Password</span></h3>
                             <p>Enter the email address associated with your account and we'll email you a reset password.</p>
-                        </div>
+                        </div> */}
+                        <form action="">
+                            <section>
+                                <div className="patient-card">
+                                    <div className="photo-card">
+                                        <img src={person} alt='User card'/>
+                                    </div>
+                                    <div className="name">
+                                        {firstname} {lastname}
+                                    </div>
+                                    <div className="phone">
+                                        <Phone size={16} /> {phone}
+                                    </div>
+                                    <div className="email">
+                                        <Mail size={16} /> {email}
+                                    </div>
+                                    <div className="sex">
+                                        <User size={16} /> {sex}
+                                    </div>
+                                </div>
+                                <div className="clinic">
+                                    <Stethoscope size={16} /> {clinic}
+                                </div>
+                                <div className="date">
+                                    <CalendarDays size={16} /> {date}
+                                </div>
+                                <div className="note">
+                                    <BookOpen size={16} /> {description}
+                                </div>
+                            </section>
+                            
+                            {/* <button type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</button> */}
+                            <div className="button-holder">
+                                <div className="previous" onClick={(e)=>setActiveStep(1)}>Previous</div>
+                                <div className="finish" onClick={(e)=>setActiveStep(3)}>Finish</div>
+                            </div>
+                           
+                            
+                        </form>
+                        
+                    </div>
+                    <div className={`phase3 ${activeStep === 3 ? "active" : "inactive" } `}>
+                        {/* <div className="headerText">
+                            <h3>Reset <span>Password</span></h3>
+                            <p>Enter the email address associated with your account and we'll email you a reset password.</p>
+                        </div> */}
                         <form action="">
                             <section>
                                 <input 
@@ -219,6 +246,10 @@ function PayLater() {
                             </section>
                             
                             {/* <button type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</button> */}
+                            <div className="button-holder">
+                                <div className="previous" onClick={(e)=>setActiveStep(1)}>Previous</div>
+                                <div className="finish" onClick={(e)=>setActiveStep(3)}>Finish</div>
+                            </div>
                             <div className='submit' type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</div>
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(1)}>
@@ -231,7 +262,7 @@ function PayLater() {
 
                 </div>
             </div>
-            <div className={`phase3 ${activeStep === 3 ? "active" : "inactive" } `}>
+            {/* <div className={`phase3 ${activeStep === 3 ? "active" : "inactive" } `}>
                 <div className="phase3-wrapper">
                     <div className="img-holder">
                         <img src={message} alt='Email Confirmation'/>
@@ -244,7 +275,7 @@ function PayLater() {
                         <span onClick={(e)=>setActiveStep(1)}>Login now!</span> or <span onClick={(e)=>setActiveStep(2)}>Resend Password</span>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     </div>
   )
