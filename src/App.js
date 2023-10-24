@@ -9,6 +9,7 @@ import './App.scss'
 import Plogin from "./View/pages/patientLogin/Plogin";
 import Slogin from "./View/pages/staffLogin/Slogin";
 import PayLater from "./View/pages/payLater/PayLater";
+import PayNow from "./View/pages/payNow/PayNow";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/patient-login' element={<Plogin />}/>
           <Route path='/staff-login' element={<Slogin />}/>
           <Route path='/pay-later' element={<PayLater />}/>
+          <Route path='/pay-now' element={<PayNow />}/>
         </Routes>
     </Router>
   );

@@ -31,9 +31,11 @@ function Booking() {
             <div className="description">
               Payment ensures that you hold down a slot.
             </div>
-            <div className="action-button now">
-              <MoveRight />
-            </div>
+            <Link to='/pay-now'>
+              <div className="action-button now">
+                <MoveRight />
+              </div>
+            </Link>
           </div>
           <div className="decision-item">
             <div className="icon later">
