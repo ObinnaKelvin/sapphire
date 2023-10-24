@@ -72,14 +72,14 @@ function PayLater() {
                         <h3><span>Book a Session With Us</span></h3>
                     </div>
                     <div className="progress-status">
-                        <div className={`stage one ${activeStep === 2 ? "active" : "inactive" }`}>
+                        <div className={`stage one ${activeStep === 2||3 ? "active" : "inactive" }`}>
                             <div className="stage-icon">
                                 <img src={user} alt='user sign' />
                             </div>
                             <div className="stage-text">Personal</div>
                             <div className="stage-bar"></div>
                         </div>
-                        <div className={`stage two ${activeStep === 2 ? "active" : "inactive" }`}>
+                        <div className={`stage two ${activeStep === 3 ? "active" : "inactive" }`}>
                             <div className="stage-icon">
                                 <img src={paper} alt='user sign' />
                             </div>
