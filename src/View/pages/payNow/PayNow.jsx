@@ -8,6 +8,7 @@ import user from '../../assets/images/user.png'
 import paper from '../../assets/images/paper.png'
 import flag from '../../assets/images/flag.png';
 import tick from '../../assets/images/tick.png';
+import naira from '../../assets/images/naira.png';
 import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen } from 'lucide-react';
 import { clinicData } from './clinicData.jsx'
 import { Calendar } from 'react-date-range';
@@ -22,6 +23,7 @@ function PayNow() {
     const [phone, setPhone] = useState('');
     const[date, setDate] = useState()
     const [description, setDescription] = useState('');
+    const [costing, setCosting] = useState('20,000');
     const[openDate, setOpenDate] = useState(false)
     const[activeStep, setActiveStep] = useState(1)
     const[clinic, setClinic] = useState('')
@@ -231,6 +233,9 @@ function PayNow() {
                                 </div>
                                 <div className="note">
                                     <BookOpen size={16} /> {description}
+                                </div>
+                                <div className="cost">
+                                    <img src={naira} alt='naira sign'/> {costing}
                                 </div>
                             </section>
                             
