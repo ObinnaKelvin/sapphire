@@ -1,0 +1,97 @@
+.pportal-container {
+    display: flex;
+    flex-direction: column;
+
+    .pportal-wrapper {
+        height: 200px;
+        margin: 60px 0px 0px 0px;
+        // border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+
+        .pportal-sidenav {
+            height: 100%;
+            width: 60px;
+            // border: 1px solid blue;
+        }
+
+        .pportal-body {
+            height: 100%;
+            width: 100%;
+            // border: 1px solid orange;
+            background-color: #fafafa;
+
+            .pportal-body-header {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+                height: 100px;
+                width: 100%;
+                margin: 0px 0px 0px 0px;
+                // border: 1px solid orange;
+
+                .name-space {
+                    color: #0C4CAC;
+                    font-size: 20px;
+
+                }
+                .search-bar {
+                    position: relative;
+
+                    .search-icon {
+                        position: absolute;
+                        margin: 12px 0px 0px 12px;
+                        color: #e0e0e0;
+                    }
+                    .formInput {
+                        width: 200px;
+                        padding: 15px 0px 15px 45px;
+                        border-radius: 2em;
+                        border: 1px solid #ececec;
+
+                    }
+                }
+                .sorting {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 20px;
+                    // align-items: center;
+                    // justify-content: center;
+                    // border: 1px solid blue;
+
+                    .sorting-grid {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 40px;
+                        width: 40px;
+                        // border: 1px solid blue;
+                        border-radius: 50%;
+                        background-color: white;
+                        color: #0C4CAC;
+                        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+                        cursor: pointer;
+                    }
+                    .sorting-list {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 40px;
+                        width: 40px;
+                        // border: 1px solid blue;
+                        border-radius: 50%;
+                        // background-color: white;
+                        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .pportal-body-body {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    }
+}

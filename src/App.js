@@ -10,6 +10,7 @@ import Plogin from "./View/pages/patientLogin/Plogin";
 import Slogin from "./View/pages/staffLogin/Slogin";
 import PayLater from "./View/pages/payLater/PayLater";
 import PayNow from "./View/pages/payNow/PayNow";
+import Pportal from "./View/pages/patientPortal/Pportal";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/staff-login' element={<Slogin />}/>
           <Route path='/pay-later' element={<PayLater />}/>
           <Route path='/pay-now' element={<PayNow />}/>
+          <Route path='/patient-portal' element={<Pportal />}/>
         </Routes>
     </Router>
   );

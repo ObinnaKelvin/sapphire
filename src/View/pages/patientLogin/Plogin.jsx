@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ploginbg from '../../assets/images/account.gif';
 import './plogin.scss';
 import Navbar from '../../components/navigation/Navbar';
@@ -53,7 +54,10 @@ function Plogin() {
                                 />
                             </section>
                             
-                            <button type='submit'>Login</button>
+                            {/* <button type='submit'>Login</button> */}
+                            <Link to="/patient-portal" className='link'>
+                                <div className='button' type='submit'>Login</div>
+                            </Link>
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?
