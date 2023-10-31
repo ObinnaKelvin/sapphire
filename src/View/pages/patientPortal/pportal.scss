@@ -3,7 +3,7 @@
     flex-direction: column;
 
     .pportal-wrapper {
-        height: 200px;
+        height: max-content;
         margin: 60px 0px 0px 0px;
         // border: 1px solid black;
         display: flex;
@@ -39,6 +39,11 @@
                 .search-bar {
                     position: relative;
 
+                    input:focus, textarea:focus, select:focus {
+                        outline: #0C4CAC;
+                        border: 1px solid #0C4CAC;
+                    }
+
                     .search-icon {
                         position: absolute;
                         margin: 12px 0px 0px 12px;
@@ -49,6 +54,7 @@
                         padding: 15px 0px 15px 45px;
                         border-radius: 2em;
                         border: 1px solid #ececec;
+
 
                     }
                 }
@@ -91,6 +97,55 @@
             .pportal-body-body {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
+                // border: 1px solid orange;
+
+                .booking-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding: 10px;
+
+                    .booking-item {
+                        border: 1px solid #EEEEEE;
+                        padding: 15px;
+                        border-radius: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                        width: 270px;
+                        height: 90px;
+                        position: relative;
+                        background-color: white;
+
+                        .booking-service {
+                            color: #0C4CAC;
+                            font-weight: 500;
+                        }
+
+                        .booking-date {
+                            color: #757575;
+                        }
+
+                        .booking-amount {
+                            position: absolute;
+                            margin: 30px auto 0px 200px;
+                            font-size: 20px;
+                        }
+
+                        .booking-status {
+                            position: absolute;
+                            margin: 65px auto 0px 205px;
+                            font-size: 12px;
+                            // border: 1px solid black;
+                            padding: 5px;
+                            border-radius: 5px;
+                            background-color: #b9f6ca;
+                            color: #00c853;
+                        }
+                    }
+
+                }
             }
         }
     }

@@ -40,7 +40,14 @@ function Pportal() {
                     </div>
                 </div>
                 <div className="pportal-body-body">
-                    
+                    <div className="booking-wrapper">
+                        <div className="booking-item">
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦30,000</div>
+                            <div className="booking-status">Successful</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
