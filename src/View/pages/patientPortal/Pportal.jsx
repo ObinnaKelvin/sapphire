@@ -42,10 +42,60 @@ function Pportal() {
                 <div className="pportal-body-body">
                     <div className="booking-wrapper">
                         <div className="booking-item">
+                            <div className="booking-orderno">#01</div>
                             <div className="booking-service">Consultation</div>
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
-                            <div className="booking-status">Successful</div>
+                            <div className="booking-status success">Success</div>
+                        </div>
+                        <div className="booking-item">
+                            <div className="booking-orderno">#02</div>
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦30,000</div>
+                            <div className="booking-status pending">Pending</div>
+                        </div>
+                        <div className="booking-item">
+                            <div className="booking-orderno">#03</div>
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦500,000</div>
+                            <div className="booking-status success">Success</div>
+                        </div>
+                        <div className="booking-item">
+                            <div className="booking-orderno">#04</div>
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦30,000</div>
+                            <div className="booking-status pending">Pending</div>
+                        </div>
+                        <div className="booking-item">
+                            <div className="booking-orderno">#05</div>
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦30,000</div>
+                            <div className="booking-status pending">Pending</div>
+                        </div>
+                        <div className="booking-item">
+                            <div className="booking-orderno">#06</div>
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦30,000</div>
+                            <div className="booking-status pending">Pending</div>
+                        </div>
+                        <div className="booking-item">
+                            <div className="booking-orderno">#07</div>
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦30,000</div>
+                            <div className="booking-status pending">Pending</div>
+                        </div>
+                        <div className="booking-item">
+                            <div className="booking-orderno">#08</div>
+                            <div className="booking-service">Consultation</div>
+                            <div className="booking-date">Oct 31st 2023, 02:34pm</div>
+                            <div className="booking-amount">₦30,000</div>
+                            <div className="booking-status pending">Pending</div>
                         </div>
                     </div>
                 </div>
