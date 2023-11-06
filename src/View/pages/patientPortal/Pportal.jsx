@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './pportal.scss';
 import Navbar from '../../components/navigation/Navbar';
-import { LayoutPanelLeft, AlignLeft, Search } from 'lucide-react'
+import { LayoutPanelLeft, AlignLeft, Search, ChevronRight } from 'lucide-react'
+import { PatientTransaction } from '../../components/modal/Modal';
 
 function Pportal() {
 
+    const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
 
     const handleGreet = () => {
@@ -70,6 +72,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status success">Success</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#02</div>
@@ -77,6 +81,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 2</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#03</div>
@@ -84,6 +90,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦500,000</div>
                             <div className="booking-status success">Success</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 3</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#04</div>
@@ -91,6 +99,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 4</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#05</div>
@@ -98,6 +108,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦900,000</div>
                             <div className="booking-status pending">Pending</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 5</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#06</div>
@@ -105,6 +117,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 6</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#07</div>
@@ -112,6 +126,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 7</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#08</div>
@@ -119,6 +135,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status success">Success</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 8</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#09</div>
@@ -126,6 +144,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦550,000</div>
                             <div className="booking-status cancel">Cancelled</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 9</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#10</div>
@@ -133,6 +153,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 10</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#11</div>
@@ -140,6 +162,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status refund">Refund</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 11</PatientTransaction>
                         </div>
                         <div className="booking-item">
                             <div className="booking-orderno">#12</div>
@@ -147,6 +171,8 @@ function Pportal() {
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
+                            <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
+                            <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 12</PatientTransaction>
                         </div>
                     </div>
                 </div>

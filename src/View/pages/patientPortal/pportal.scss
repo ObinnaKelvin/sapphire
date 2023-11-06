@@ -117,9 +117,18 @@
                         flex-direction: column;
                         gap: 8px;
                         width: 270px;
-                        height: 90px;
+                        height: 135px;
                         position: relative;
                         background-color: white;
+
+                        .booking-orderno {
+                            background-color:#0f5bce;
+                            // color: white;
+                            color: #c4dff5;
+                            width: max-content;
+                            border-radius: 20px;
+                            padding: 2px 10px;
+                        }
 
                         .booking-service {
                             color: #8f8f8f;
@@ -167,6 +176,20 @@
                         .booking-status.refund {
                             background-color: #e3f2fd;
                             color: #2196f3;
+                        }
+
+                        .booking-modal {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            padding: 5px;
+                            border: 1px solid #2196f3;
+                            color: #2196f3;
+                            position: absolute;
+                            margin: 105px auto 0px 235px;
                         }
 
                     }
