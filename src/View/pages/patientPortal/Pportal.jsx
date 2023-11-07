@@ -47,7 +47,7 @@ function Pportal() {
                         </div>
                         <input 
                             type="text" 
-                            placeholder='Search Order no. i.e #23'
+                            placeholder='Search Order no. or Service name'
                             // name='email'
                             // value={email}
                             // onChange={handleInputChange}
