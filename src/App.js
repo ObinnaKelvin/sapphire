@@ -11,6 +11,7 @@ import Slogin from "./View/pages/staffLogin/Slogin";
 import PayLater from "./View/pages/payLater/PayLater";
 import PayNow from "./View/pages/payNow/PayNow";
 import Pportal from "./View/pages/patientPortal/Pportal";
+import Sportal from "./View/pages/staffPortal/Sportal";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/pay-later' element={<PayLater />}/>
           <Route path='/pay-now' element={<PayNow />}/>
           <Route path='/patient-portal' element={<Pportal />}/>
+          <Route path='/staff-portal' element={<Sportal />}/>
         </Routes>
     </Router>
   );

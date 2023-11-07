@@ -104,7 +104,7 @@ export const PatientNavbar = () => {
                 <Link to={'/patient-portal'} className='link'>
                     <div className='patientnavbar-item'>
                         <Wallet2  size={20} />
-                        <span>Transactions</span>
+                        <span>Bookings</span>
                     </div>
                 </Link>
             </div>
@@ -120,7 +120,7 @@ export const PatientNavbarMobile = () => {
                 <Link to={'/patient-portal'} className='link'>
                     <div className='patientnavbarmobile-item'>
                         <Wallet2  size={20} />
-                        <span>Transactions</span>
+                        <span>Bookings</span>
                     </div>
                 </Link>
             </div>

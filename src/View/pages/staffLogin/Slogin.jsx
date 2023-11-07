@@ -3,6 +3,7 @@ import { Navbar } from '../../components/navigation/Navbar'
 import './slogin.scss';
 import message from '../../assets/images/message.png'
 import sloginbg from '../../assets/images/placeholder.gif';
+import { Link } from 'react-router-dom';
 
 function Slogin() {
   const [email, setEmail] = useState('');
@@ -46,7 +47,10 @@ function Slogin() {
                                 />
                             </section>
                             
-                            <button type='submit'>Login</button>
+                            {/* <button type='submit'>Login</button> */}
+                            <Link to="/staff-portal" className='link'>
+                                <div className='button' type='submit'>Login</div>
+                            </Link>
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?
