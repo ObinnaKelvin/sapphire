@@ -2,22 +2,15 @@ import React, { useState } from 'react';
 import ReactDom from 'react-dom'
 import './modal.scss'
 
-// function Modal() {
-//   return (
-//     <div>Modal</div>
-//   )
-// }
 
-// export default Modal
+export const PatientTransaction = ({children, open, onClose, id }) => {
 
-export const PatientTransaction = ({children, open, onClose }) => {
-    // const [isOpen, setIsOpen] = useState(false);
-    if(open === false) return null;
+    if(!open) return null;
 
 
     return ReactDom.createPortal (
         <>
-            <div className='ptransact-overlay'></div>
+            <div className='ptransact-overlay' />
             {/* <div className='ptransact-container'> */}
             <div className={open?`ptransact-container` : `ptransact-container inactive`}>
                 Hi Modal

@@ -115,7 +115,7 @@
                         border-radius: 5px;
                         display: flex;
                         flex-direction: column;
-                        gap: 8px;
+                        gap: 12px;
                         width: 270px;
                         height: 135px;
                         position: relative;
@@ -145,13 +145,14 @@
 
                         .booking-amount {
                             position: absolute;
-                            margin: 30px auto 0px 190px;
+                            margin: 35px auto 0px 190px;
                             font-size: 20px;
                         }
 
                         .booking-status {
                             position: absolute;
-                            margin: 65px auto 0px 205px;
+                            // margin: 65px auto 0px 205px;
+                            margin: 110px auto 0px 0px;
                             font-size: 12px;
                             // border: 1px solid black;
                             padding: 5px;
