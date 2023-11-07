@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../../components/navigation/Navbar';
+import { Navbar } from '../../components/navigation/Navbar';
 import './about.scss';
 import light from '../../assets/images/lightbulb.png';
 import value from '../../assets/images/value.png';

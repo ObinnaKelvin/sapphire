@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef  } from 'react'
-import Navbar from '../../components/navigation/Navbar'
+import { Navbar } from '../../components/navigation/Navbar'
 import './paylater.scss';
 import paylaterbg from '../../assets/images/booking.jpg'
 import person from '../../assets/images/gamer.png'

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.scss'
-import {CalendarClock} from 'lucide-react';
+import {CalendarClock, Wallet2} from 'lucide-react';
 
 // import logo from '../../assets/images/greyscopes_landscape_brand.png';
 
-const Navbar = () => {
+export const Navbar = () => {
     // const navigate = useNavigate()
     const [open, setOpen] = useState(false);    
     const[activeState, setActiveState] = useState(1)
@@ -95,4 +95,35 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+
+export const PatientNavbar = () => {
+
+    return (
+        <div className="patientnavbar-container">
+            <div className="patientnavbar-wrapper">
+                <Link to={'/patient-portal'} className='link'>
+                    <div className='patientnavbar-item'>
+                        <Wallet2  size={20} />
+                        <span>Transactions</span>
+                    </div>
+                </Link>
+            </div>
+        </div>
+    )
+}
+
+export const PatientNavbarMobile = () => {
+
+    return (
+        <div className="patientnavbarmobile-container">
+            <div className="patientnavbarmobile-wrapper">
+                <div className='patientnavbarmobile-item'>
+                    <Wallet2  size={20} />
+                    <span>Transactions</span>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// export default Navbar

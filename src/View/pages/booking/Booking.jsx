@@ -1,6 +1,6 @@
 import React from 'react';
 import './booking.scss';
-import Navbar from '../../components/navigation/Navbar'
+import { Navbar } from '../../components/navigation/Navbar'
 import {CalendarCheck, MoveRight, Hourglass, Bookmark} from 'lucide-react'
 import Footer from '../../components/footer/Footer';
 import { Link } from 'react-router-dom';

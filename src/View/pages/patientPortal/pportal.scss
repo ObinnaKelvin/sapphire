@@ -15,6 +15,10 @@
             // border: 1px solid blue;
         }
 
+        .pportal-mobile {
+            display: none;
+        }
+
         .pportal-body {
             height: 100vh;
             width: 100%;
@@ -38,6 +42,8 @@
                 }
                 .search-bar {
                     position: relative;
+                    // position: fixed;
+                    // z-index: 10;
 
                     input:focus, textarea:focus, select:focus {
                         outline: #0C4CAC;
@@ -108,6 +114,7 @@
                     gap: 15px;
                     align-items: center;
                     justify-content: center;
+                    margin-bottom: 100px;
 
                     .booking-item {
                         border: 1px solid #EEEEEE;
@@ -220,6 +227,10 @@
                 width: 60px;
                 display: none;
                 // border: 1px solid blue;
+            }
+
+            .pportal-mobile {
+                display: block;
             }
     
             .pportal-body {
@@ -433,6 +444,10 @@
                 display: none;
                 // border: 1px solid blue;
             }
+
+            .pportal-mobile {
+                display: block;
+            }
     
             .pportal-body {
                 height: 100vh;
@@ -643,6 +658,10 @@
                 width: 60px;
                 display: none;
                 // border: 1px solid blue;
+            }
+
+            .pportal-mobile {
+                display: block;
             }
     
             .pportal-body {

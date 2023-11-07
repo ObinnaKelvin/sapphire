@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ploginbg from '../../assets/images/account.gif';
 import './plogin.scss';
-import Navbar from '../../components/navigation/Navbar';
+import { Navbar } from '../../components/navigation/Navbar';
 import message from '../../assets/images/message.png'
 
 function Plogin() {

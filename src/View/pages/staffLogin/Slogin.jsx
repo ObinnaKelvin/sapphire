@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Navbar from '../../components/navigation/Navbar'
+import { Navbar } from '../../components/navigation/Navbar'
 import './slogin.scss';
 import message from '../../assets/images/message.png'
 import sloginbg from '../../assets/images/placeholder.gif';

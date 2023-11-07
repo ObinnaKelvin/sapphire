@@ -1,6 +1,6 @@
 import React from 'react'
 import "./contactUs.scss";
-import Navbar from '../../components/navigation/Navbar';
+import { Navbar } from '../../components/navigation/Navbar';
 import { MapPin,Phone,Mails } from 'lucide-react';
 import location from '../../assets/images/locationbg.png'
 import call from '../../assets/images/callbg.png'

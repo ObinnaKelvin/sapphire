@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './pportal.scss';
-import Navbar from '../../components/navigation/Navbar';
+import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/navigation/Navbar';
 import { LayoutPanelLeft, AlignLeft, Search, ChevronRight } from 'lucide-react'
 import { PatientTransaction } from '../../components/modal/Modal';
 
@@ -34,7 +34,10 @@ function Pportal() {
         <Navbar />
         <div className="pportal-wrapper">
             <div className="pportal-sidenav">
-
+                <PatientNavbar />
+            </div>
+            <div className="pportal-mobile">
+                <PatientNavbarMobile />
             </div>
             <div className="pportal-body">
                 <div className="pportal-body-header">

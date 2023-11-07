@@ -151,6 +151,84 @@
 }
 
 
+.patientnavbar-container {
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    width: 60px;
+    margin: -60px 0px 0px 0px;
+    position: fixed;
+    background-color: #0f5bce;
+
+    .patientnavbar-wrapper {
+        height: 100vh;
+        // border: 1px solid yellow;
+        z-index: 20;
+        display: flex;
+        font-size: 10px;
+        color: #c4dff5;
+        align-items: center;
+
+        .link {
+            text-decoration: none;
+            color: #c4dff5;
+            margin: 0px auto 0px auto;
+        }
+
+        .patientnavbar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // border: 1px solid white;
+            margin: 0px auto 0px auto;
+            gap: 5px;
+        }
+        
+    }
+}
+
+
+.patientnavbarmobile-container {
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    width: 99.9%;
+    // margin: 60px 0px 0px 0px;
+    position: fixed;
+    background-color: #fff;
+    justify-content:baseline;
+    border-top: 1px solid #EEEEEE;
+    bottom: 0px;
+
+    .patientnavbarmobile-wrapper {
+        height: 60px;
+        // border: 1px solid yellow;
+        z-index: 20;
+        display: flex;
+        font-size: 10px;
+        color: #0f5bce;
+        align-items: center;
+        // margin: 0px auto 0px auto;
+
+        .link {
+            text-decoration: none;
+            // color: #c4dff5;
+            margin: 0px auto 0px auto;
+        }
+
+        .patientnavbarmobile-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // border: 1px solid white;
+            margin: 0px auto 0px auto;
+            gap: 5px;
+        }
+        
+    }
+}
+
+
 @media only screen and (min-width: 320px) and (max-width: 400px){ //Mobile
 
     .navbar-container {

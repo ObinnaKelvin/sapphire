@@ -1,7 +1,7 @@
 import React from 'react'
 import './gallery.scss';
 import nopost from '../../assets/images/nopost.png'
-import Navbar from '../../components/navigation/Navbar'
+import { Navbar } from '../../components/navigation/Navbar'
 import Footer from '../../components/footer/Footer'
 
 function Gallery() {
