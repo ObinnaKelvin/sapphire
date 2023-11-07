@@ -117,10 +117,12 @@ export const PatientNavbarMobile = () => {
     return (
         <div className="patientnavbarmobile-container">
             <div className="patientnavbarmobile-wrapper">
-                <div className='patientnavbarmobile-item'>
-                    <Wallet2  size={20} />
-                    <span>Transactions</span>
-                </div>
+                <Link to={'/patient-portal'} className='link'>
+                    <div className='patientnavbarmobile-item'>
+                        <Wallet2  size={20} />
+                        <span>Transactions</span>
+                    </div>
+                </Link>
             </div>
         </div>
     )
