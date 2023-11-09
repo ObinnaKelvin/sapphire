@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import './sportal.scss';
-import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/navigation/Navbar';
+import { Navbar, PatientNavbar, PatientNavbarMobile, StaffNavbar } from '../../components/navigation/Navbar';
 import { AlignLeft, CalendarRange, LayoutPanelLeft, Phone, Search, User2 } from 'lucide-react';
 
 function Sportal() {
@@ -32,23 +32,27 @@ function Sportal() {
         <Navbar />
         <div className="sportal-wrapper">
             <div className="sportal-sidenav">
-                <PatientNavbar />
+                {/* <PatientNavbar /> */}
+                <StaffNavbar />
             </div>
             <div className="sportal-mobile">
                 <PatientNavbarMobile />
             </div>
             <div className="sportal-body">
                 <div className="sportal-body-header">
+                    <div className="page-title">
+                        Appointments
+                    </div>
                     <div className="name-space">
                         Hi Kelvin, {greet}
                     </div>
                     <div className="search-bar">
                         <div className="search-icon">
-                            <Search />
+                            <Search size={19} />
                         </div>
                         <input 
                             type="text" 
-                            placeholder='Search Order no. or Service name'
+                            placeholder='Name, Phone number, Service'
                             // name='email'
                             // value={email}
                             // onChange={handleInputChange}
@@ -56,14 +60,20 @@ function Sportal() {
                             className="formInput"
                         />
                     </div>
-                    <div className="sorting">
+                    <div className="booking-category">
+                        <div className="category-item ">All</div>
+                        <div className="category-item active">Today</div>
+                        <div className="category-item">Pending</div>
+                        <div className="category-item">Cancelled</div>
+                    </div>
+                    {/* <div className="sorting">
                         <div className="sorting-grid">
                             <LayoutPanelLeft size={17} />
                         </div>
                         <div className="sorting-list">
                             <AlignLeft size={17} />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="sportal-body-body">
                     <div className="booking-wrapper">

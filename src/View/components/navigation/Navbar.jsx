@@ -128,4 +128,36 @@ export const PatientNavbarMobile = () => {
     )
 }
 
+export const StaffNavbar = () => {
+
+    return (
+        <div className="staffnavbar-container">
+            <div className="staffnavbar-wrapper">
+                <Link to={'/patient-portal'} className='link'>
+                    <div className='staffnavbar-item'>
+                        <Wallet2  size={20} />
+                        <span>Bookings</span>
+                    </div>
+                </Link>
+            </div>
+        </div>
+    )
+}
+
+export const StaffNavbarMobile = () => {
+
+    return (
+        <div className="staffnavbarmobile-container">
+            <div className="staffnavbarmobile-wrapper">
+                <Link to={'/patient-portal'} className='link'>
+                    <div className='staffnavbarmobile-item'>
+                        <Wallet2  size={20} />
+                        <span>Bookings</span>
+                    </div>
+                </Link>
+            </div>
+        </div>
+    )
+}
+
 // export default Navbar
