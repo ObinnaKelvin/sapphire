@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import './sportal.scss';
-import { Navbar, PatientNavbar, PatientNavbarMobile, StaffNavbar } from '../../components/navigation/Navbar';
+import { Navbar, PatientNavbar, PatientNavbarMobile, StaffNavbar, StaffNavbarMobile } from '../../components/navigation/Navbar';
 import { AlignLeft, CalendarRange, LayoutPanelLeft, Phone, Search, User2 } from 'lucide-react';
 
 function Sportal() {
@@ -36,7 +36,8 @@ function Sportal() {
                 <StaffNavbar />
             </div>
             <div className="sportal-mobile">
-                <PatientNavbarMobile />
+                {/* <PatientNavbarMobile /> */}
+                <StaffNavbarMobile />
             </div>
             <div className="sportal-body">
                 <div className="sportal-body-header">
