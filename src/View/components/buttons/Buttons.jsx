@@ -6,7 +6,7 @@ import { CalendarClock } from 'lucide-react';
 export const AddButton = () => {
     return (
       <div className='add-container'>
-          <Link className="add-link" to="/create-appointment">
+          <Link className="add-link" to="/staff-portal/create-appointment">
             <div className="add-button">
                 {/* + */}
                 {/* <Camera size={12} /> */}

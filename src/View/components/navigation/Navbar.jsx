@@ -133,7 +133,7 @@ export const StaffNavbar = () => {
     return (
         <div className="staffnavbar-container">
             <div className="staffnavbar-wrapper">
-                <Link to={'/patient-portal'} className='link'>
+                <Link to={'/staff-portal'} className='link'>
                     <div className='staffnavbar-item'>
                         <Wallet2  size={20} />
                         <span>Bookings</span>
@@ -149,7 +149,7 @@ export const StaffNavbarMobile = () => {
     return (
         <div className="staffnavbarmobile-container">
             <div className="staffnavbarmobile-wrapper">
-                <Link to={'/patient-portal'} className='link'>
+                <Link to={'/staff-portal'} className='link'>
                     <div className='staffnavbarmobile-item'>
                         <Wallet2  size={20} />
                         <span>Bookings</span>
