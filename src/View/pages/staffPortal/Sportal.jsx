@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import './sportal.scss';
 import { Navbar, PatientNavbar, PatientNavbarMobile, StaffNavbar, StaffNavbarMobile } from '../../components/navigation/Navbar';
 import { AlignLeft, CalendarRange, LayoutPanelLeft, Phone, Search, User2 } from 'lucide-react';
+import { AddButton } from '../../components/buttons/Buttons';
 
 function Sportal() {
 
@@ -30,6 +31,7 @@ function Sportal() {
   return (
     <div className="sportal-container">
         <Navbar />
+        <AddButton />
         <div className="sportal-wrapper">
             <div className="sportal-sidenav">
                 {/* <PatientNavbar /> */}
