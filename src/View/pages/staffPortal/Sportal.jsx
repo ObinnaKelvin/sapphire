@@ -8,6 +8,7 @@ function Sportal() {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
+    const [categoryToggle, setCategoryToggle] = useState(1)
 
     const handleGreet = () => {
         let today = new Date()
@@ -64,10 +65,10 @@ function Sportal() {
                         />
                     </div>
                     <div className="booking-category">
-                        <div className="category-item ">All</div>
-                        <div className="category-item active">Today</div>
-                        <div className="category-item">Pending</div>
-                        <div className="category-item">Cancelled</div>
+                        <div className={`category-item ${categoryToggle === 1? "active" : "inactive"}`} onClick={()=> setCategoryToggle(1)}>All</div>
+                        <div className={`category-item ${categoryToggle === 2? "active" : "inactive"}`} onClick={()=> setCategoryToggle(2)}>Today</div>
+                        <div className={`category-item ${categoryToggle === 3? "active" : "inactive"}`} onClick={()=> setCategoryToggle(3)}>Pending</div>
+                        <div className={`category-item ${categoryToggle === 4? "active" : "inactive"}`} onClick={()=> setCategoryToggle(4)}>Cancelled</div>
                     </div>
                     {/* <div className="sorting">
                         <div className="sorting-grid">
