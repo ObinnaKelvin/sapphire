@@ -13,6 +13,7 @@ import PayNow from "./View/pages/payNow/PayNow";
 import Pportal from "./View/pages/patientPortal/Pportal";
 import Sportal from "./View/pages/staffPortal/Sportal";
 import Sappointment from "./View/pages/staffAppointment/Sappointment";
+import Patient from "./View/pages/patient/Patient";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path='/patient-portal' element={<Pportal />}/>
           <Route path='/staff-portal' element={<Sportal />}/>
           <Route path='/staff-portal/create-appointment' element={<Sappointment />}/>
+          <Route path='/staff-portal/patient' element={<Patient />}/>
         </Routes>
     </Router>
   );

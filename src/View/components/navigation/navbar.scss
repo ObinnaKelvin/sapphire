@@ -245,9 +245,12 @@
         // border: 1px solid yellow;
         z-index: 20;
         display: flex;
+        flex-direction: column;
         font-size: 10px;
         color: #c4dff5;
         align-items: center;
+        justify-content: center;
+        gap: 20px;
 
         .link {
             text-decoration: none;
@@ -286,6 +289,7 @@
         // border: 1px solid yellow;
         z-index: 20;
         display: flex;
+        flex-direction: row;
         font-size: 10px;
         color: #0f5bce;
         align-items: center;

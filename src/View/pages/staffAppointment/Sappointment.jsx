@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react'
 import './sappointment.scss';
 import { Navbar, StaffNavbar, StaffNavbarMobile } from '../../components/navigation/Navbar'
-import { AddButton } from '../../components/buttons/Buttons'
+// import { AddButton } from '../../components/buttons/Buttons'
 import { Search, UserPlus2} from 'lucide-react';
 import cancel from '../../assets/images/cross.png'
 import { doctorData } from './doctor.jsx'
@@ -25,6 +25,8 @@ const Sappointment = () => {
     const[activeStep, setActiveStep] = useState(1)
     const[doctor, setDoctor] = useState('')
     const[sex, setSex] = useState('')
+    const[paymentStatus, setPaymentStatus] = useState('Pending')
+    const[appointmentStatus, setAppointmentStatus] = useState('')
     const onChangeDate = (dateSelected) => {
         // console.log(dateSelected)
         // console.log(format(dateSelected, 'dd/MM/yyyy'))
@@ -61,7 +63,7 @@ const Sappointment = () => {
   return (
     <div className="sappointment-container">
         <Navbar />
-        <AddButton />
+        {/* <AddButton /> */}
 
         <div className="sappointment-wrapper">
             <div className="sappointment-sidenav">
@@ -81,7 +83,7 @@ const Sappointment = () => {
                         Hi Kelvin, {greet}
                     </div>
 
-                    <div className="new-user">
+                    <div className="new-patient">
                         <UserPlus2 />
                         <span>New Patient</span>
                     </div>
@@ -213,6 +215,14 @@ const Sappointment = () => {
                                             <option value={data.name} key={data.id}>{data.name}</option>
                                         ))
                                         }
+                                    </select>
+                                    
+                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setPaymentStatus(e.target.value)} value={sex}>
+                                        {/* <option>- Choose Visit Type -</option> */}
+                                        <option value={paymentStatus}>{`Payment: ${paymentStatus}`}</option>
+                                        <option value={"Success"}>Payment: Success</option>
+                                        <option value={"Refund"}>Payment: Refund</option>
+                                        <option value={"Cancelled"}>Payment: Cancelled</option>
                                     </select>
                                 </section>
                                 <section>

@@ -61,7 +61,7 @@
 
                 }
 
-                .new-user {
+                .new-patient {
                     display: flex;
                     gap: 7px;
                     align-items: center;
@@ -73,8 +73,8 @@
                     font-size: 12px;
                     background-color: orange;
                     position: absolute;
-                    right: 0px;
-                    margin: 70px 300px 0px 0px;
+                    left: 0px;
+                    margin: 70px 300px 0px 20px;
                     cursor: pointer;
                 }
 

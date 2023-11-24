@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.scss'
-import {CalendarClock, Wallet2} from 'lucide-react';
+import {CalendarClock, User2, Wallet2} from 'lucide-react';
 
 // import logo from '../../assets/images/greyscopes_landscape_brand.png';
 
@@ -139,6 +139,12 @@ export const StaffNavbar = () => {
                         <span>Bookings</span>
                     </div>
                 </Link>
+                <Link to={'/staff-portal/patient'} className='link'>
+                    <div className='staffnavbar-item'>
+                        <User2 size={20} />
+                        <span>Patient</span>
+                    </div>
+                </Link>
             </div>
         </div>
     )
@@ -153,6 +159,12 @@ export const StaffNavbarMobile = () => {
                     <div className='staffnavbarmobile-item'>
                         <Wallet2  size={20} />
                         <span>Bookings</span>
+                    </div>
+                </Link>
+                <Link to={'/staff-portal/patient'} className='link'>
+                    <div className='staffnavbarmobile-item'>
+                        <User2 size={20} />
+                        <span>Patient</span>
                     </div>
                 </Link>
             </div>

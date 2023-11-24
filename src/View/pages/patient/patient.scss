@@ -1,0 +1,143 @@
+
+.patient-container {
+    display: flex;
+    flex-direction: column;
+
+    .patient-wrapper {
+        height: max-content;
+        margin: 60px 0px 0px 0px;
+        // border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+
+        .patient-sidenav {
+            height: 100%;
+            width: 60px;
+            // border: 1px solid blue;
+        }
+
+        .patient-mobile {
+            display: none;
+        }
+
+        .patient-body {
+            // height: 100vh;
+            height: max-content;
+            width: 100%;
+            // border: 1px solid orange;
+            background-color: #fafafa;
+
+            .patient-body-header {
+                display: flex;
+                flex-direction: row;
+                // align-items: center;
+                justify-content: space-around;
+                height: 150px;
+                width: 100%;
+                margin: 0px 0px 0px 0px;
+                // border: 1px solid orange;
+                // background-color: #0f5bce;
+                background-color: #0C4CAC;
+                border-radius: 0px 0px 20px 20px;
+                position: relative;
+
+                .page-title {
+                    display: flex;
+                    position: absolute;
+                    color: #fff;
+                    margin: 10px 0px 0px 20px;
+                    // border: 1px solid white;
+                    left: 0px;
+                    top: 0px;
+                }
+
+                .name-space {
+                    display: flex;
+                    position: absolute;
+                    color: #fff;
+                    margin: 10px 20px 0px 0px;
+                    font-size: 14px;
+                    top: 0px;
+                    right: 0px;
+
+                } 
+
+                .patient-list {
+                    display: flex;
+                    gap: 7px;
+                    align-items: center;
+                    border-radius: 2em;
+                    // border: 1px solid white;
+                    padding: 10px 20px;
+                    height: 20px;
+                    color: #fff;
+                    font-size: 12px;
+                    background-color: orange;
+                    position: absolute;
+                    left: 0px;
+                    margin: 70px 300px 0px 20px;
+                    cursor: pointer;
+                }
+
+                .search-bar {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    right: 0px;
+                    margin: 70px 17px 0px 0px;
+                    // position: fixed;
+                    // z-index: 10;
+
+                    input:focus, textarea:focus, select:focus {
+                        outline: #0C4CAC;
+                        border: 1px solid #0C4CAC;
+                    }
+
+                    .search-icon {
+                        position: absolute;
+                        margin: 11px 0px 0px 12px;
+                        // margin: 12px 0px 0px 12px;
+                        color: #e0e0e0;
+                    }
+                    .formInput {
+                        width: 220px;
+                        // padding: 15px 10px 15px 45px;
+                        padding: 12px 10px 12px 39px;
+                        border-radius: 20px;
+                        // border-radius: 2em;
+                        border: 1px solid #ececec;
+
+
+                    }
+                }
+
+            }
+
+            .patient-body-body {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                // border: 1px solid orange;
+
+                .sappointment-create-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding: 10px;
+                    gap: 15px;
+                    align-items: center;
+                    justify-content: center;
+                    // margin-bottom: 300px;
+                    margin: -30px auto 150px auto;
+                    // border: 1px solid orange;
+                    width: 95%;
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
