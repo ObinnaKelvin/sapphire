@@ -17,8 +17,13 @@ const Patient = () => {
     const [dob, setDob] = useState();
     const [phone, setPhone] = useState('');
     // const[date, setDate] = useState()
-    const[sex, setSex] = useState('')
+    const[gender, setGender] = useState('')
     const[openDate, setOpenDate] = useState(false)
+    const [address, setAddress] = useState('')
+    const [city, setCity] = useState('');
+    const [maritalStatus, setMaritalStatus] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
     const[activeStep, setActiveStep] = useState(1)
 
     //We add a listener effect that activates 'false' which 
@@ -169,8 +174,8 @@ const Patient = () => {
                                     </div>
 
 
-                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setSex(e.target.value)} value={sex}>
-                                        <option>- Choose Sex -</option>
+                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                        <option>- Select Gender -</option>
                                         <option value={'Male'}>Male</option>
                                         <option value={'Female'}>Female</option>
                                     </select>
@@ -185,6 +190,34 @@ const Patient = () => {
                                     onChange = {(e)=>setPhone(e.target.value)}
                                     className="formInput sm"
                                     />
+
+                                    <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                    value={address} onChange={(e)=> setAddress(e.target.value)}
+                                    />
+
+                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
+                                        <option>- Select City -</option>
+                                        <option value={'Ogba'}>Ogba</option>
+                                        <option value={'Alimosho'}>Alimosho</option>
+                                    </select>
+                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                        <option>- Select State -</option>
+                                        <option value={'Lagos'}>Lagos</option>
+                                        <option value={'Ogun'}>Ogun</option>
+                                    </select>
+                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCountry(e.target.value)} value={country}>
+                                        <option>- Select Country -</option>
+                                        <option value={'Nigeria'}>Nigeria</option>
+                                        <option value={'Nigeria'}>Nigeria</option>
+                                    </select>
+                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
+                                        <option>- Select Marital Status -</option>
+                                        <option value={'Single'}>Single</option>
+                                        <option value={'Married'}>Married</option>
+                                        <option value={'Widowed'}>Widowed</option>
+                                        <option value={'Divorced'}>Divorced</option>
+                                        <option value={'Separated'}>Separated</option>
+                                    </select>
                                 </section>
                                 <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Create Patient</div>
                             </form>
