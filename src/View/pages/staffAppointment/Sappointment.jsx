@@ -138,7 +138,7 @@ const Sappointment = () => {
                                     name='middlename'
                                     value={middlename}
                                     // onChange={handleInputChange}
-                                    onChange = {(e)=>setLastname(e.target.value)}
+                                    onChange = {(e)=>setMiddlename(e.target.value)}
                                     className="formInput sm"
                                     />
                                     <input 
