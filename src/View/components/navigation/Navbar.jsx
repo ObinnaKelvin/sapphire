@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.scss'
 import {CalendarClock, User2, Wallet2} from 'lucide-react';
-
-// import logo from '../../assets/images/greyscopes_landscape_brand.png';
+import logo from '../../assets/images/logo.PNG';
 
 export const Navbar = () => {
     // const navigate = useNavigate()
@@ -30,8 +29,8 @@ export const Navbar = () => {
         <div className="navbar-header">
             <div className="navbar-header-logo">
                 <Link to={'/'}  className='link'>
-                {/* <img src={logo} alt="sapphire surgeons logo" className='nav-logo'/> */}
-                Logo Space
+                <img src={logo} alt="sapphire surgeons logo" className='nav-logo'/>
+                <span className='logo-text'>Sapphire Partners</span>
                 </Link>
             </div>
             <div className="navbar-header-right">
