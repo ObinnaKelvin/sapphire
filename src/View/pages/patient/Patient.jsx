@@ -3,7 +3,7 @@ import './patient.scss';
 import { Navbar, StaffNavbar, StaffNavbarMobile } from '../../components/navigation/Navbar'
 import { AddButton } from '../../components/buttons/Buttons'
 import cancel from '../../assets/images/cross.png'
-import { Search, UserPlus2, Users} from 'lucide-react';
+import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, Users, Wallet} from 'lucide-react';
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -17,14 +17,19 @@ const Patient = () => {
     const [dob, setDob] = useState();
     const [phone, setPhone] = useState('');
     // const[date, setDate] = useState()
-    const[gender, setGender] = useState('')
-    const[openDate, setOpenDate] = useState(false)
+    const [gender, setGender] = useState('')
+    const [openDate, setOpenDate] = useState(false)
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('');
     const [maritalStatus, setMaritalStatus] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const[activeStep, setActiveStep] = useState(1)
+    const [activeStep, setActiveStep] = useState(1);
+    const [kinName, setKinName] = useState('');
+    const [kinPhone, setKinPhone] = useState('');
+    const [kinAddress, setKinAddress] = useState('');
+    const [kinRelationship, setKinRelationship] = useState('');
+
 
     //We add a listener effect that activates 'false' which 
     // invokes the 'inactive' property to the dropdowns
@@ -113,119 +118,298 @@ const Patient = () => {
 
                 <div className="patient-body-body">
 
-                    <div className="patient-create-wrapper">
-                            <form action="">
-                                <section>
-                                    <input 
-                                    type="text" 
-                                    placeholder='First name'
-                                    name='firstname'
-                                    value={firstname}
-                                    // onChange={handleInputChange}
-                                    onChange = {(e)=>setFirstname(e.target.value)}
-                                    className="formInput sm"
-                                    />
-                                    <input 
-                                    type="text" 
-                                    placeholder='Middle name'
-                                    name='middlename'
-                                    value={middlename}
-                                    // onChange={handleInputChange}
-                                    onChange = {(e)=>setMiddlename(e.target.value)}
-                                    className="formInput sm"
-                                    />
-                                    <input 
-                                    type="text" 
-                                    placeholder='Last name'
-                                    name='lastname'
-                                    value={lastname}
-                                    // onChange={handleInputChange}
-                                    onChange = {(e)=>setLastname(e.target.value)}
-                                    className="formInput sm"
-                                    />
-                                    <input 
-                                    type="text" 
-                                    placeholder='Email'
-                                    name='email'
-                                    value={email}
-                                    // onChange={handleInputChange}
-                                    onChange = {(e)=>setEmail(e.target.value)}
-                                    className="formInput sm"
-                                    />
-
-                                    <input 
-                                    type="text" 
-                                    placeholder='Date of Birth'
-                                    name='dob'
-                                    value={dob}
-                                    // onChange={handleInputChange}
-                                    onChange = {(e)=>setDob(e.target.value)}
-                                    className="formInput sm"
-                                    />
-                                    <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef}>
-                                        <Calendar
-                                        onChange={onChangeDateofBirth}
-                                        date={new Date()}
-                                        className='calendar'
-                                        />
-                                        <div className="cancel-holder" onClick={()=>setOpenDate(false)}>
-                                            <img src={cancel} />
-                                        </div>
+                    {
+                        patientToggle ===  1 &&
+                        <div className="patient-create-wrapper">
+                                <form action="">
+                                    <div className="section-title">
+                                        <span>Basic Information</span>
                                     </div>
+                                    <section>
+
+                                        <div className="section-left">
+                                            <div className="photo-container">
+                                                <div className="patient-photo">
+                                                    <div className="patient-icon-frame">
+                                                    <User />
+                                                        {/* <FontAwesomeIcon className='patient-icon' icon={faUser}/> */}
+                                                    </div>
+                                                </div>
+                                                <div className="camera-frame">
+                                                    {/* <FontAwesomeIcon icon={faCamera}/> */}
+                                                    <Camera />
+                                                </div>
+                                            </div>
+                                            <input 
+                                            type="text" 
+                                            placeholder='First name'
+                                            name='firstname'
+                                            value={firstname}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setFirstname(e.target.value)}
+                                            className="formInput sm"
+                                            />
+                                            <input 
+                                            type="text" 
+                                            placeholder='Middle name'
+                                            name='middlename'
+                                            value={middlename}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setMiddlename(e.target.value)}
+                                            className="formInput sm"
+                                            />
+                                            <input 
+                                            type="text" 
+                                            placeholder='Last name'
+                                            name='lastname'
+                                            value={lastname}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setLastname(e.target.value)}
+                                            className="formInput sm"
+                                            />
+                                            <input 
+                                            type="text" 
+                                            placeholder='Email'
+                                            name='email'
+                                            value={email}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setEmail(e.target.value)}
+                                            className="formInput sm"
+                                            />
+        
+                                            <input 
+                                            type="text" 
+                                            placeholder='Date of Birth'
+                                            name='dob'
+                                            value={dob}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setDob(e.target.value)}
+                                            className="formInput sm"
+                                            />
+                                            <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef}>
+                                                <Calendar
+                                                onChange={onChangeDateofBirth}
+                                                date={new Date()}
+                                                className='calendar'
+                                                />
+                                                <div className="cancel-holder" onClick={()=>setOpenDate(false)}>
+                                                    <img src={cancel} />
+                                                </div>
+                                            </div>
 
 
-                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
-                                        <option>- Select Gender -</option>
-                                        <option value={'Male'}>Male</option>
-                                        <option value={'Female'}>Female</option>
-                                    </select>
 
+                                        </div>
+                                        <div className="section-right">
+                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                                <option>- Select Gender -</option>
+                                                <option value={'Male'}>Male</option>
+                                                <option value={'Female'}>Female</option>
+                                            </select>
+        
+        
+                                            <input 
+                                            type="text" 
+                                            placeholder='Phone'
+                                            name='phone'
+                                            value={phone}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setPhone(e.target.value)}
+                                            className="formInput sm"
+                                            />
+        
+                                            <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                            value={address} onChange={(e)=> setAddress(e.target.value)}
+                                            />
+        
+                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
+                                                <option>- Select City -</option>
+                                                <option value={'Ogba'}>Ogba</option>
+                                                <option value={'Alimosho'}>Alimosho</option>
+                                            </select>
+                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                                <option>- Select State -</option>
+                                                <option value={'Lagos'}>Lagos</option>
+                                                <option value={'Ogun'}>Ogun</option>
+                                            </select>
+                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCountry(e.target.value)} value={country}>
+                                                <option>- Select Country -</option>
+                                                <option value={'Nigeria'}>Nigeria</option>
+                                                <option value={'Nigeria'}>Nigeria</option>
+                                            </select>
+                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
+                                                <option>-  Select Marital Status  -</option>
+                                                <option value={'Single'}>Single</option>
+                                                <option value={'Married'}>Married</option>
+                                                <option value={'Widowed'}>Widowed</option>
+                                                <option value={'Divorced'}>Divorced</option>
+                                                <option value={'Separated'}>Separated</option>
+                                            </select>
 
-                                    <input 
-                                    type="text" 
-                                    placeholder='Phone'
-                                    name='phone'
-                                    value={phone}
-                                    // onChange={handleInputChange}
-                                    onChange = {(e)=>setPhone(e.target.value)}
-                                    className="formInput sm"
-                                    />
+                                        </div>
+                                    </section>
 
-                                    <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
-                                    value={address} onChange={(e)=> setAddress(e.target.value)}
-                                    />
+                                    <div className="section-title">
+                                        <span>Kin Details</span>
+                                    </div>
+                                    <section>
+                                            <input 
+                                            type="text" 
+                                            placeholder='Kin Name'
+                                            name='kinName'
+                                            value={kinName}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setKinName(e.target.value)}
+                                            className="formInput sm"
+                                            />
+                                            <input 
+                                            type="text" 
+                                            placeholder='Phone'
+                                            name='phone'
+                                            value={kinPhone}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setKinPhone(e.target.value)}
+                                            className="formInput sm"
+                                            />
+                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
+                                                <option>- Select Relationship -</option>
+                                                <option value={'Father'}>Father</option>
+                                                <option value={'Mother'}>Mother</option>
+                                                <option value={'Husband'}>Husband</option>
+                                                <option value={'Wife'}>Wife</option>
+                                                <option value={'Uncle'}>Uncle</option>
+                                                <option value={'Aunt'}>Aunt</option>
+                                                <option value={'Brother'}>Brother</option>
+                                                <option value={'Sister'}>Sister</option>
+                                                <option value={'Unknown'}>Unknown</option>
+                                            </select>
+                                            <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                            value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
+                                            />
 
-                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
-                                        <option>- Select City -</option>
-                                        <option value={'Ogba'}>Ogba</option>
-                                        <option value={'Alimosho'}>Alimosho</option>
-                                    </select>
-                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
-                                        <option>- Select State -</option>
-                                        <option value={'Lagos'}>Lagos</option>
-                                        <option value={'Ogun'}>Ogun</option>
-                                    </select>
-                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCountry(e.target.value)} value={country}>
-                                        <option>- Select Country -</option>
-                                        <option value={'Nigeria'}>Nigeria</option>
-                                        <option value={'Nigeria'}>Nigeria</option>
-                                    </select>
-                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
-                                        <option>- Select Marital Status -</option>
-                                        <option value={'Single'}>Single</option>
-                                        <option value={'Married'}>Married</option>
-                                        <option value={'Widowed'}>Widowed</option>
-                                        <option value={'Divorced'}>Divorced</option>
-                                        <option value={'Separated'}>Separated</option>
-                                    </select>
-                                </section>
-                                <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Create Patient</div>
-                            </form>
+                                    </section>
 
-                    </div>
-                    <div className="patient-list-wrapper">
+                                    <div className="section-title">
+                                        <span>Payer Info</span>
+                                    </div>
+                                    <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Create Patient</div>
+                                </form>
+    
+                        </div>
+                    }
 
-                    </div>
+                    {
+                        patientToggle ===  2 &&
+                        <div className="patient-list-wrapper">
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+    
+                        </div>
+                    }
+
 
                 </div>
 

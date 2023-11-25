@@ -27,7 +27,7 @@ export const Navbar = () => {
   return (
     <div className="navbar-container">
         <div className="navbar-header">
-            <div className="navbar-header-logo">
+            <div className="navbar-header-logo" onClick={() => switchMenu(1)}>
                 <Link to={'/'}  className='link'>
                 <img src={logo} alt="sapphire surgeons logo" className='nav-logo'/>
                 <span className='logo-text'>Sapphire Partners</span>
@@ -141,7 +141,7 @@ export const StaffNavbar = () => {
                 <Link to={'/staff-portal/patient'} className='link'>
                     <div className='staffnavbar-item'>
                         <User2 size={20} />
-                        <span>Patient</span>
+                        <span>Patients</span>
                     </div>
                 </Link>
             </div>
@@ -163,7 +163,7 @@ export const StaffNavbarMobile = () => {
                 <Link to={'/staff-portal/patient'} className='link'>
                     <div className='staffnavbarmobile-item'>
                         <User2 size={20} />
-                        <span>Patient</span>
+                        <span>Patients</span>
                     </div>
                 </Link>
             </div>

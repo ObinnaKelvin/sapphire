@@ -144,7 +144,6 @@
                     flex-direction: row;
                     flex-wrap: wrap;
                     position: relative;
-                    padding: 10px;
                     gap: 15px;
                     align-items: center;
                     justify-content: center;
@@ -153,13 +152,24 @@
                     // border: 1px solid orange;
                     width: 95%;
                     background-color: #fff;
-                    padding: 50px 0px;
+                    padding: 10px 0px;
                     border-radius: 5px;
 
                     form {
                         display: flex;
                         flex-direction: column;
                         gap: 30px;
+
+                        .section-title {
+                            display: flex;
+                            border-bottom: 1px solid #e0e0e0;
+                            font-size: 13px;
+                            span {
+                                background-color: #2196f3;
+                                color: #fff;
+                                padding: 5px 20px;
+                            }
+                        }
 
                         section {
                             display: flex;
@@ -168,6 +178,96 @@
                             align-items: center;
                             justify-content: center;
                             gap: 20px;
+
+                            .section-left {
+                                display: flex;
+                                position: relative;
+                                // border: 1px solid black;
+                                width: 47%;
+                                flex-wrap: wrap;
+                                gap: 10px;
+                                height: 290px;
+                                padding: 10px;
+
+                                .photo-container {
+
+                                    display: flex;
+                                    width: 100%;
+
+                                    .patient-photo {
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        color: #01579b;
+                                        width: 120px;
+                                        height: 120px;
+                                        border-top: 1.5px solid #01579b;
+                                        border-left: 1.5px solid #01579b;
+                                        border-bottom: 1.5px solid #01579b;
+                                        border-right: 1.5px solid #e0e0e0;
+                                        padding: 10px;
+                                        border-radius: 50%;
+                                        margin-top: 20px;
+                                        transform: rotate(-40deg);
+                                        z-index: 1;
+                                        margin-right: 200px;
+    
+                                        .patient-icon-frame {
+    
+                                            // border: 1px solid black;
+                                            background-color: white;
+                                            border-radius: 50%;
+                                            padding: 10px;
+                                            overflow: hidden;
+                                            height: 100px;
+                                            width: 100px;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            transform: rotate(40deg);
+                        
+                                            .patient-icon {
+                                                font-size: 20px;
+                                                border-radius: 50%;
+                                                opacity: 0.6;
+                                            }
+    
+                                        }
+    
+                                    }
+    
+                                    .camera-frame {
+                                        background-color: #01579b;
+                                        box-shadow: rgb(158, 158, 158) 0px 2px 20px 0px;
+                                        height: 40px;
+                                        width: 40px;
+                                        position: absolute;
+                                        transform: rotate(0deg);
+                                        border-radius: 50%;
+                                        z-index: 12;
+                                        margin: 80px 0px 0px 120px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        color: white;
+                        
+                                    }
+
+                                }
+
+                            }
+                            
+                            .section-right {
+                                display: flex;
+                                position: relative;
+                                // border: 1px solid black;
+                                width: 47%;
+                                flex-wrap: wrap;
+                                gap: 10px;
+                                height: 290px;
+                                padding: 10px;
+
+                            }
 
                             input:focus, textarea:focus, select:focus {
                                 outline: #0C4CAC;
@@ -191,7 +291,7 @@
     
                             .formSelect {
                                 width: 32%;
-                                padding: 15px 20px 15px 15px;
+                                padding: 7px 20px 7px 15px;
                                 border-radius: 2em;
                                 border: 1px solid #e0e0e0;
                                 // height: 100px;
@@ -222,14 +322,18 @@
                             }
     
                             .formInput.sm {
-                                width: 250px;
+                                height: 0px;
+                                width: 210px;
                             }
     
                             .formSelect.sm {
+                                // height: 30px;
+                                height: max-content;
                                 width: 250px;
                             }
     
                             .formTextArea.sm {
+                                height: 70px;
                                 width: 250px;
                             }
 
@@ -308,6 +412,94 @@
                         //     color: #0C4CAC;
                         //     cursor: pointer;
                         // }
+                    }
+
+                }
+
+                .patient-list-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding: 10px;
+                    gap: 15px;
+                    align-items: center;
+                    justify-content: center;
+                    // margin-bottom: 300px;
+                    margin: -30px 0px 150px 0px;
+
+                    .patient-item {
+                        border: 1px solid #EEEEEE;
+                        padding: 15px;
+                        border-radius: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 9px;
+                        width: 200px;
+                        height: 135px;
+                        position: relative;
+                        background-color: white;
+
+                        .patient-user {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+                        }
+
+                        .patient-phone {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+
+                        }
+
+                        .patient-age {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+                        }
+
+                        .patient-payer {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+                        }
+
+                        .patient-email {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+
+                        }
                     }
 
                 }
