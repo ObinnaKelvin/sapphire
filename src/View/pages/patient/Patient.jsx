@@ -3,20 +3,23 @@ import './patient.scss';
 import { Navbar, StaffNavbar, StaffNavbarMobile } from '../../components/navigation/Navbar'
 import { AddButton } from '../../components/buttons/Buttons'
 import cancel from '../../assets/images/cross.png'
+import { useNavigate } from "react-router-dom";
 import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, Users, Wallet} from 'lucide-react';
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from 'date-fns'//transform the dates to readable formats
+import axios from 'axios';
 
 const Patient = () => {
     const [firstname, setFirstname] = useState('');
     const [middlename, setMiddlename] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
-    const [dob, setDob] = useState();
+    const [dob, setDob] = useState(new Date());
     const [phone, setPhone] = useState('');
     // const[date, setDate] = useState()
+    const [age, setAge] = useState(0);
     const [gender, setGender] = useState('')
     const [openDate, setOpenDate] = useState(false)
     const [address, setAddress] = useState('')
@@ -24,12 +27,16 @@ const Patient = () => {
     const [maritalStatus, setMaritalStatus] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
+    const [encodedBy, setEncodedBy] = useState('');
+    const [encodedDate, setEncodedDate] = useState(new Date());
     const [activeStep, setActiveStep] = useState(1);
     const [kinName, setKinName] = useState('');
     const [kinPhone, setKinPhone] = useState('');
     const [kinAddress, setKinAddress] = useState('');
     const [kinRelationship, setKinRelationship] = useState('');
 
+    
+    const navigate = useNavigate();
 
     //We add a listener effect that activates 'false' which 
     // invokes the 'inactive' property to the dropdowns
@@ -43,6 +50,13 @@ const Patient = () => {
         setDob(format(dateSelected, 'eeee do LLLL yyyy'))
     }
 
+    // const calculateAge = (dateOfBirth) => {
+    //     const thisYear = new Date().getFullYear();
+    //     const dobYear = dateOfBirth.getFullYear();
+    //     setAge(thisYear - dobYear);
+    //     // return thisYear - dobYear;
+    //     //console.log(thisYear)
+    // }
 
     const handleGreet = () => {
         let today = new Date()
@@ -58,6 +72,40 @@ const Patient = () => {
             setGreet("Good Evening");
         }
     }
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+
+        // axios.post(`${process.env.PUBLIC_URL}api/patients`, {
+        await axios.post('http://localhost:9000/api/patients/', {
+            
+            firstName: firstname,
+            middleName: middlename,
+            lastName: lastname,
+            mobile: phone,
+            email: email,
+            dateOfBirth: dob,
+            maritalStatus: maritalStatus,
+            address: address,
+            state: state,
+            country: country,
+            kinName: kinName,
+            kinPhone: kinPhone,
+            kinRelationship: kinRelationship,
+            kinAddress: kinAddress,
+            encodedBy: encodedBy,
+            encodedDate: encodedDate,
+            lastUpdatedBy: encodedBy,
+            lastUpdatedDate: encodedDate
+        })
+        .then(response => console.log(response))
+        navigate("/staff-portal/patient")
+        setPatientToggle(2)
+    }
+
+    // useEffect(() => {
+    //     calculateAge(dob);
+    // }, [dob])
 
     useEffect(() => {
         handleGreet();
@@ -121,7 +169,7 @@ const Patient = () => {
                     {
                         patientToggle ===  1 &&
                         <div className="patient-create-wrapper">
-                                <form action="">
+                                <form onSubmit={handleSubmit} encType="multipart/form-data">
                                     <div className="section-title">
                                         <span>Basic Information</span>
                                     </div>
@@ -140,6 +188,7 @@ const Patient = () => {
                                                     <Camera />
                                                 </div>
                                             </div>
+
                                             <input 
                                             type="text" 
                                             placeholder='First name'
@@ -149,6 +198,7 @@ const Patient = () => {
                                             onChange = {(e)=>setFirstname(e.target.value)}
                                             className="formInput sm"
                                             />
+
                                             <input 
                                             type="text" 
                                             placeholder='Middle name'
@@ -158,6 +208,7 @@ const Patient = () => {
                                             onChange = {(e)=>setMiddlename(e.target.value)}
                                             className="formInput sm"
                                             />
+
                                             <input 
                                             type="text" 
                                             placeholder='Last name'
@@ -167,6 +218,7 @@ const Patient = () => {
                                             onChange = {(e)=>setLastname(e.target.value)}
                                             className="formInput sm"
                                             />
+
                                             <input 
                                             type="text" 
                                             placeholder='Email'
@@ -177,12 +229,11 @@ const Patient = () => {
                                             className="formInput sm"
                                             />
         
-                                            <input 
+                                            {/* <input 
                                             type="text" 
                                             placeholder='Date of Birth'
                                             name='dob'
                                             value={dob}
-                                            // onChange={handleInputChange}
                                             onChange = {(e)=>setDob(e.target.value)}
                                             className="formInput sm"
                                             />
@@ -195,7 +246,29 @@ const Patient = () => {
                                                 <div className="cancel-holder" onClick={()=>setOpenDate(false)}>
                                                     <img src={cancel} />
                                                 </div>
-                                            </div>
+                                            </div> */}
+
+                                            
+                                            <input 
+                                            type="date" 
+                                            placeholder='Age'
+                                            name='dob'
+                                            value={dob}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setDob(e.target.value)}
+                                            className="formInput sm"
+                                            />
+
+                                            {/* <input 
+                                            type="text" 
+                                            placeholder='Age'
+                                            name='dob'
+                                            value={age}
+                                            onChange = {(e)=>setAge(e.target.value)}
+                                            className="formInput sm"
+                                            /> */}
+
+                                            {/* <h2>{age > 0 ? `${age}` : ''}</h2> */}
 
 
 
@@ -292,7 +365,8 @@ const Patient = () => {
                                     <div className="section-title">
                                         <span>Payer Info</span>
                                     </div>
-                                    <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Create Patient</div>
+                                    <button>Create Patient</button>
+                                    {/* <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Create Patient</div> */}
                                 </form>
     
                         </div>

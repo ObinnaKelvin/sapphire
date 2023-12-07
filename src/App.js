@@ -14,6 +14,7 @@ import Pportal from "./View/pages/patientPortal/Pportal";
 import Sportal from "./View/pages/staffPortal/Sportal";
 import Sappointment from "./View/pages/staffAppointment/Sappointment";
 import Patient from "./View/pages/patient/Patient";
+import AuthOTP from "./View/pages/auth/AuthOTP";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path='/pay-later' element={<PayLater />}/>
           <Route path='/pay-now' element={<PayNow />}/>
           <Route path='/patient-portal' element={<Pportal />}/>
+          <Route path='/patient-portal/auth/:userId' element={<AuthOTP />}/>
           <Route path='/staff-portal' element={<Sportal />}/>
           <Route path='/staff-portal/create-appointment' element={<Sappointment />}/>
           <Route path='/staff-portal/patient' element={<Patient />}/>

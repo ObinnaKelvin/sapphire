@@ -30,7 +30,7 @@ function AboutUs() {
                     </div>
                     <div className="aboutUs-who-we-are-content">
                         <p>
-                            Sapphire Partners Ltd is a healthcare solutions 
+                            Sapphire Partners is a healthcare solutions 
                             company leveraging on many years of international 
                             and local experience in the healthcare industry, 
                             including extensive experience in the UK and South 

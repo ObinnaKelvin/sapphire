@@ -4,8 +4,10 @@ import ploginbg from '../../assets/images/account.gif';
 import './plogin.scss';
 import { Navbar } from '../../components/navigation/Navbar';
 import message from '../../assets/images/message.png'
+import { useNavigate } from 'react-router-dom';
 
 function Plogin() {
+    const navigate = useNavigate();
     // const {formData, setFormData} = useState({
     //     email: "",
     //     password: ""
@@ -13,6 +15,10 @@ function Plogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const[activeStep, setActiveStep] = useState(1)
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+    }
 
     // const handleInputChange = e => {
     //     setFormData({...formData, [e.target.value]:e.target.value});
@@ -55,7 +61,10 @@ function Plogin() {
                             </section>
                             
                             {/* <button type='submit'>Login</button> */}
-                            <Link to="/patient-portal" className='link'>
+                            {/* <Link to="/patient-portal" className='link'>
+                                <div className='button' type='submit'>Login</div>
+                            </Link> */}
+                            <Link to="/patient-portal/auth" className='link'>
                                 <div className='button' type='submit'>Login</div>
                             </Link>
 

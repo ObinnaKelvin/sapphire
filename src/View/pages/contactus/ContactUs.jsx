@@ -30,7 +30,7 @@ function ContactUs() {
               Address
             </div>
             <div className="item-description">
-              16 Adeyemo Alakija Street,
+              7B Oju Olobun Street,
               Victoria Island Lagos.
             </div>
             <div className="overlay-image">
@@ -45,7 +45,7 @@ function ContactUs() {
               Phone
             </div>
             <div className="item-description">
-              +234 705656565656
+              +234 9010002302
             </div>
             <div className="overlay-image">
               <img src={call} alt='call Alt'/>
@@ -59,7 +59,7 @@ function ContactUs() {
               Email
             </div>
             <div className="item-description">
-              sapphire@gmail.com
+              info@sapphiresurgeons.com
             </div>
             <div className="overlay-image">
               <img src={email} alt='call Alt'/>
