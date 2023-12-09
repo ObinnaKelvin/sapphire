@@ -1,28 +1,72 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import ploginbg from '../../assets/images/account.gif';
 import './plogin.scss';
 import { Navbar } from '../../components/navigation/Navbar';
 import message from '../../assets/images/message.png'
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import axios from 'axios';
+//import { useLogin } from '../../hooks/useLogin';
 
-function Plogin() {
-    const navigate = useNavigate();
-    // const {formData, setFormData} = useState({
-    //     email: "",
-    //     password: ""
-    // });
+const Plogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const[activeStep, setActiveStep] = useState(1)
+    const [activeStep, setActiveStep] = useState(1)
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
+    const { dispatch } = useAuthContext();
+    const navigate = useNavigate();
+
+
+    //const { login, error, isLoading } = useLogin();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-    }
 
-    // const handleInputChange = e => {
-    //     setFormData({...formData, [e.target.value]:e.target.value});
-    // }
+        
+        setIsLoading(true);
+        setError(null)
+        try {
+            const response = await axios.post("http://localhost:9000/api/auth/login", {email, password}) 
+
+            //const json = await response.data.details
+            const json = await response.data.details
+            const status = await response.statusText
+            // if(status !== 'OK') {
+            //     //setIsLoading(false);
+            //     console.log("!json");
+            //     // setError(json.error)
+            // }
+
+            // if(status === 'OK') {
+                if(json) {
+
+                // save the user to local storage
+                localStorage.setItem('user', JSON.stringify(json));
+
+                // update the auth context
+               dispatch({type: 'LOGIN', payload: json})
+                console.log("response.data", json);
+                //console.log("json", json)
+
+                // update loading state
+                setIsLoading(false);
+                setError(null)
+
+                navigate(`/patient-portal/auth/${json._id}`) //1. navigate to otp page
+            }
+
+        } catch (error) {
+            setIsLoading(false)
+            setError(error.response.data)
+            setTimeout(() => {
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            console.log(error)
+        }
+
+        //await login(email, password)
+    }
 
   return (
     <div className="plogin-container">
@@ -35,6 +79,11 @@ function Plogin() {
                 
                 <div className="form-holder">
                     <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}>
+
+                        {
+                           error && <div className="error">{error}</div>
+                        }   
+                        
                         <div className="headerText">
                             <h3>Hello! <span>Welcome</span> Back</h3>
                         </div>
@@ -64,9 +113,9 @@ function Plogin() {
                             {/* <Link to="/patient-portal" className='link'>
                                 <div className='button' type='submit'>Login</div>
                             </Link> */}
-                            <Link to="/patient-portal/auth" className='link'>
-                                <div className='button' type='submit'>Login</div>
-                            </Link>
+                            {/* <Link to="/patient-portal/auth" className='link'> */}
+                                <button className='button'  disabled={isLoading} type='submit' onClick={handleLogin}>Login</button>
+                            {/* </Link> */}
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?

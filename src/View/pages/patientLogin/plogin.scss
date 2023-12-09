@@ -53,6 +53,14 @@
                     animation-duration: 1s;
                     animation-timing-function: ease-out;
 
+                    .error {
+                        // border: 1px solid red;
+                        background-color: #ffcdd2;
+                        color: red;
+                        padding: 10px;
+                        text-align: center;
+                    }
+
                     .headerText {
                         margin: 20px auto ;
                         color: #5e5e5e;
