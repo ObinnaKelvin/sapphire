@@ -57,7 +57,8 @@
             justify-content: center;
 
             .otp-field {
-                width: 35px;
+                // width: 35px;
+                width: max-content;
                 height: 35px;
                 text-align: center;
                 font-size: 20px;
@@ -97,12 +98,13 @@
                 align-items: center;
                 justify-content: center;
                 padding: 10px;
-                height: 30px;
+                height: 50px;
                 width: 100px;
                 background-color: #0C4CAC;
                 color: white;
                 border-radius: 3px;
                 cursor: pointer;
+                border: none;
             }
 
         }
