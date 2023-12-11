@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './authotp.scss';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.PNG'
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 
 const AuthOTP = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [otpVal, setOtpVal] = useState(new Array(6).fill(""))
     const [otp, setOtp] = useState("")
     const { user } = useAuthContext();
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
 
 
@@ -54,17 +57,41 @@ const AuthOTP = () => {
         e.preventDefault();
         setIsLoading(true);
         setError(null)
+        setSuccess(null)
         setEmail(currentUser.email);
         //console.log(email);
 
         try {
             
             const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp})
+            
+            if (response.status === 200) {
+                setSuccess(response.data.message);
+                setError(null); //set error to null after 5 seconds
+                console.log(response.data.message);
+                setTimeout(() => {
+                    navigate("/patient-portal"); //2. Then navigate to dashboard
+                  }, 5000);
+            } 
+            if (response.status === 400) {
+                setSuccess(null);
+                setError(response.data.message); //set error to null after 5 seconds
+                console.log(response.data.message);
+            } 
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            setIsLoading(false);
             console.log(response);
         } catch (error) {
             setIsLoading(false)
-            setError(error)
-            console.log(error)
+            setError(error.response.data)
+            console.log(error.response.data)
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
             
         }
     }
@@ -77,7 +104,16 @@ const AuthOTP = () => {
         try {
             
             const response = await axios.post("http://localhost:9000/api/auth/login/generate-new", {email})
-            console.log(response);
+            if (response.status === 200) {
+                setSuccess(response.data);
+                setError(null); //set error to null after 5 seconds
+                console.log(response.data);
+            }
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            setIsLoading(false);
         } catch (error) {
             setIsLoading(false)
             setError(error)
@@ -95,6 +131,14 @@ const AuthOTP = () => {
             <div className="logo-holder">
                 <img src={logo} alt='logo screenshot'/>
             </div>
+            {
+                success && <div className={"otp-success"}>{success}</div>
+            }
+
+            {
+                error && <div className="otp-error">{error}</div>
+            }
+            
             <div className="auth-description">
                 <span>2-Step Verification</span>
                 <p>To help keep your account safe, Sapphire wants to make sure 

@@ -25,6 +25,22 @@
             }
         }
 
+        .otp-success {
+            background-color: #b9f6ca;
+            color: #00c853;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .otp-error {
+            // border: 1px solid red;
+            background-color: #ffcdd2;
+            color: red;
+            padding: 10px;
+            text-align: center;
+
+        }
+
         .auth-description {
             margin: 10px 0px 0px 0px;
 
