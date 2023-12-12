@@ -6,6 +6,7 @@ import { PatientTransaction } from '../../components/modal/Modal';
 
 function Pportal() {
 
+    const currentUser = JSON.parse(localStorage.getItem('user'));
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
 
@@ -42,7 +43,7 @@ function Pportal() {
             <div className="pportal-body">
                 <div className="pportal-body-header">
                     <div className="name-space">
-                        Hi Kelvin, {greet}
+                        Hi {currentUser.firstname}, {greet}
                     </div>
                     <div className="search-bar">
                         <div className="search-icon">

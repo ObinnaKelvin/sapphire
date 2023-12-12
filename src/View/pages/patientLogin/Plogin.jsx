@@ -13,6 +13,7 @@ const Plogin = () => {
     const [password, setPassword] = useState('');
     const [activeStep, setActiveStep] = useState(1)
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
@@ -66,6 +67,35 @@ const Plogin = () => {
         }
 
         //await login(email, password)
+    }
+
+    const handlePasswordResetOTP = async (e) => {
+        e.preventDefault();
+
+        
+        setIsLoading(true);
+        setError(null)
+
+        try {
+            const response = await axios.post("http://localhost:9000/api/auth/login/generate-new-password-reset", {email})             
+            if (response.status === 200) {
+                //setIsLoading(true)
+                setSuccess(response.data.message);
+                setError(null); //set error to null after 5 seconds
+                console.log(response.data.message);
+                // setTimeout(() => {
+                //     navigate("/patient-portal"); //2. Then navigate to dashboard
+                //   }, 5000);
+            } 
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            setIsLoading(false);
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 
   return (
@@ -141,8 +171,8 @@ const Plogin = () => {
                                 />
                             </section>
                             
-                            {/* <button type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</button> */}
-                            <div className='submit' type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</div>
+                            <button  className='submit' type='submit' onClick={handlePasswordResetOTP}>Reset Password</button>
+                            {/* <div className='submit' type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</div> */}
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(1)}>
                                 Have an account? <span>Sign In</span>

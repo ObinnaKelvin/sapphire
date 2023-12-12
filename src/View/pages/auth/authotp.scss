@@ -122,6 +122,13 @@
                 cursor: pointer;
                 border: none;
             }
+        
+            button[disabled] {
+                background-color: #0C4CAC;
+                opacity: 0.7;
+                color: white;
+                cursor: not-allowed;
+            }
 
         }
 

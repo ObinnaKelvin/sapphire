@@ -59,13 +59,12 @@ const AuthOTP = () => {
         setError(null)
         setSuccess(null)
         setEmail(currentUser.email);
-        //console.log(email);
 
         try {
-            
             const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp})
             
             if (response.status === 200) {
+                //setIsLoading(true)
                 setSuccess(response.data.message);
                 setError(null); //set error to null after 5 seconds
                 console.log(response.data.message);
@@ -141,7 +140,7 @@ const AuthOTP = () => {
             
             <div className="auth-description">
                 <span>2-Step Verification</span>
-                <p>To help keep your account safe, Sapphire wants to make sure 
+                <p>Hi {currentUser.firstname}, to help keep your account safe, Sapphire wants to make sure 
                     it's really you trying to sign in.
                 </p>
                 We emailed a code to 
@@ -184,7 +183,8 @@ const AuthOTP = () => {
             <div className="otp-buttons">
                 {/* <div className="otp-clear" onClick={ e => setOtp([...otp.map(data => "")])}>Clear</div> */}
                 <div className="otp-clear" onClick={() => setOtp("")}>Clear</div>
-                <button className="otp-verify" onClick={handleVerifyOTP}>Verity OTP</button>
+                <button className="otp-verify" disabled={isLoading} onClick={handleVerifyOTP}>Verity OTP</button>
+                {/* <button disabled={isLoading}>Disabled</button> */}
                 
             </div>
 
