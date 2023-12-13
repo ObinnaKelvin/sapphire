@@ -67,6 +67,7 @@
                         span {
                             color: #0C4CAC;
                         }
+
                     }
 
                     form {
@@ -161,6 +162,21 @@
                         color: #5e5e5e;
                         // border: 1px solid red;
 
+                        .otp-success {
+                            background-color: #b9f6ca;
+                            color: #00c853;
+                            padding: 10px;
+                            text-align: center;
+                        }
+
+                        .otp-error {
+                            background-color: #ffcdd2;
+                            color: red;
+                            padding: 10px;
+                            text-align: center;
+                
+                        }
+
                         p{
                             text-align: center;
                         }
@@ -204,6 +220,13 @@
                             color: white;
                             font-size: 15px;
                         }
+        
+                        button[disabled] {
+                            background-color: #0C4CAC;
+                            opacity: 0.7;
+                            color: white;
+                            cursor: not-allowed;
+                        }
 
                         .submit {
                             margin: 0px auto ;
@@ -231,6 +254,272 @@
                     }
 
                 }
+
+                .phase4 {
+                    display: flex;
+                    flex-direction: column;
+                    width: 350px;
+                    // border: 1px solid red;
+                    padding: 50px 30px;
+                    animation-name: slideUpPloginForm;
+                    animation-duration: 1s;
+                    animation-timing-function: ease-out;
+
+                    .authotp-wrapper {
+                        // display: flex;
+                        border: 1px solid #cfcfcf;
+                        border-radius: 7px;
+                        width: 300px;
+                        height: max-content;
+                        padding: 40px;
+                        align-items: center;
+                        margin: 60px 0px 0px 0px;
+                
+                        .logo-holder {
+                            // border: 1px solid black;
+                            width: max-content;
+                            margin: 0px auto;
+                            img {
+                                width: 40px;
+                                height: 40px;
+                            }
+                        }
+                
+                        .otp-success {
+                            background-color: #b9f6ca;
+                            color: #00c853;
+                            padding: 10px;
+                            text-align: center;
+                        }
+                
+                        .otp-error {
+                            // border: 1px solid red;
+                            background-color: #ffcdd2;
+                            color: red;
+                            padding: 10px;
+                            text-align: center;
+                
+                        }
+                
+                        .auth-description {
+                            margin: 10px 0px 0px 0px;
+                
+                            span {
+                                font-size: 20px;
+                                font-weight: 400;
+                            }
+                
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            text-align: center;
+                            p {color: #707070;}
+                
+                            .auth-email {
+                                margin: 5px 0px 5px 0px;
+                                border: 1px solid #c5c5c5;
+                                padding: 4px 10px;
+                                border-radius: 20px;
+                            }
+                        }
+                
+                        .otpHolder {
+                            width: 100%;
+                            margin: 20px auto 0px auto;
+                            display: flex;
+                            gap: 5px;
+                            // border: 1px solid #c5c5c5;
+                            align-items: center;
+                            justify-content: center;
+                
+                            .otp-field {
+                                // width: 35px;
+                                width: max-content;
+                                height: 35px;
+                                text-align: center;
+                                font-size: 20px;
+                                border: 1px solid #c5c5c5;
+                            }
+                            .otp-field:focus-visible {
+                                outline: 1px solid #0C4CAC;
+                                border: none;
+                            }
+                        }
+                
+                        .otp-buttons {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: center;
+                            // border: 1px solid #c5c5c5;
+                            gap: 10px;
+                            margin: 20px auto 0px auto;
+                            font-size: 12px;
+                
+                            .otp-clear {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 10px;
+                                height: 30px;
+                                width: 50px;
+                                background-color: #707070;
+                                color: white;
+                                border-radius: 3px;
+                                cursor: pointer;
+                            }
+                
+                            .otp-verify {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 10px;
+                                height: 50px;
+                                width: 100px;
+                                background-color: #0C4CAC;
+                                color: white;
+                                border-radius: 3px;
+                                cursor: pointer;
+                                border: none;
+                            }
+                        
+                            button[disabled] {
+                                background-color: #0C4CAC;
+                                opacity: 0.7;
+                                color: white;
+                                cursor: not-allowed;
+                            }
+                
+                        }
+                
+                        .otp-remark {
+                            font-size: 13px;
+                            text-align: center;
+                
+                            .otp-resend {
+                                color: #0C4CAC;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                }
+
+                .phase5 {
+                    display: flex;
+                    flex-direction: column;
+                    width: 350px;
+                    // border: 1px solid red;
+                    padding: 50px 30px;
+                    animation-name: slideUpPloginForm;
+                    animation-duration: 1s;
+                    animation-timing-function: ease-out;
+
+                    .reset-wrapper {
+                        display: flex;
+                        flex-direction: column;
+
+                        .logo-holder {
+                            // border: 1px solid black;
+                            width: max-content;
+                            margin: 0px auto;
+                            img {
+                                width: 40px;
+                                height: 40px;
+                            }
+                        }
+                
+                        .reset-success {
+                            background-color: #b9f6ca;
+                            color: #00c853;
+                            padding: 10px;
+                            text-align: center;
+                        }
+                
+                        .reset-error {
+                            // border: 1px solid red;
+                            background-color: #ffcdd2;
+                            color: red;
+                            padding: 10px;
+                            text-align: center;
+                        }
+
+                        .reset-description {
+                            margin: 10px 0px 30px 0px;
+                
+                            span {
+                                font-size: 20px;
+                                font-weight: 400;
+                            }
+                
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            text-align: center;
+                            p {color: #707070;}
+                        }
+
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 40px;
+
+                            section {
+                                display: flex;
+                                flex-direction: column;
+                                position: relative;
+
+                                label {
+                                    position: absolute;
+                                    margin: -21px 0px 0px 3px;
+                                    font-size: 12px;
+                                    // color: white;
+                                    color: #0C4CAC;
+                                    font-weight: 500;
+                                    // background-color: #0C4CAC;
+                                    // padding: 3px 7px;
+                                    // border-radius: 2em;
+                                }
+
+                                input:focus, textarea:focus, select:focus {
+                                    outline: #0C4CAC;
+                                    border: 1px solid #0C4CAC;
+                                }
+    
+                                .formInput {
+                                    width: 97%;
+                                    padding: 15px 0px 15px 15px;
+                                    border-radius: 2em;
+                                    border: 1px solid #e0e0e0;
+                                }
+
+                                .visibility_icon {
+                                    // border: 1px solid red;
+                                    width: max-content;
+                                    position: absolute;
+                                    margin: 10px;
+                                    right: 0;
+                                    color: #5e5e5e;
+                                }
+                            }
+                            .button {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 10px 50px;
+                                height: 50px;
+                                width: max-content;
+                                background-color: #0C4CAC;
+                                color: white;
+                                border-radius: 2em;
+                                cursor: pointer;
+                                border: none;
+                                margin: 0px auto;
+                            }
+                        }
+
+                    }
+                }
     
                 @keyframes slideUpPloginForm {
                     from {
@@ -252,6 +541,22 @@
                 }
 
                 .phase2.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
+                }
+
+                .phase4.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+
+                .phase4.inactive {
                     opacity: 0;
                     // visibility: hidden;
                     display: none;

@@ -6,17 +6,25 @@ import message from '../../assets/images/message.png'
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
+import logo from '../../assets/images/logo.PNG'
+import {Eye, EyeOff} from 'lucide-react'
 //import { useLogin } from '../../hooks/useLogin';
 
 const Plogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [activeStep, setActiveStep] = useState(1)
+    const [activeStep, setActiveStep] = useState(6) //1 normally
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const recoveryEmail = JSON.parse(localStorage.getItem('recovery email'));
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
+    const [otp, setOtp] = useState("")
+    const [resetPassword, setResetPassword] = useState('');
+    const [confirmResetPassword, setConfirmResetPassword] = useState('');
+    const [visiblePassword, setVisiblePassword] = useState(false); 
 
 
     //const { login, error, isLoading } = useLogin();
@@ -71,7 +79,6 @@ const Plogin = () => {
 
     const handlePasswordResetOTP = async (e) => {
         e.preventDefault();
-
         
         setIsLoading(true);
         setError(null)
@@ -80,12 +87,15 @@ const Plogin = () => {
             const response = await axios.post("http://localhost:9000/api/auth/login/generate-new-password-reset", {email})             
             if (response.status === 200) {
                 //setIsLoading(true)
-                setSuccess(response.data.message);
+                setSuccess(response.data);
                 setError(null); //set error to null after 5 seconds
-                console.log(response.data.message);
-                // setTimeout(() => {
+                // save the user to local storage
+                localStorage.setItem('recovery email', JSON.stringify(email));
+                console.log(response.data);
+                 setTimeout(() => {
+                        setActiveStep(4) //2. Then navigate to slide 4
                 //     navigate("/patient-portal"); //2. Then navigate to dashboard
-                //   }, 5000);
+                  }, 5000);
             } 
             setTimeout(() => {
                 setSuccess(null); //set success to null after 5 seconds
@@ -96,6 +106,100 @@ const Plogin = () => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const handleOTPChange = (e) => {
+        if(isNaN(e.target.value)) return false;
+        setOtp(e.target.value);
+
+    }
+
+    const handleVerifyOTP = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null)
+        setSuccess(null)
+        setEmail(currentUser.email);
+
+        try {
+            const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp})
+            
+            if (response.status === 200) {
+                //setIsLoading(true)
+                setSuccess(response.data.message);
+                setError(null); //set error to null after 5 seconds
+                console.log(response.data.message);
+                setTimeout(() => {
+                    navigate("/patient-portal"); //2. Then navigate to dashboard
+                  }, 5000);
+            } 
+            if (response.status === 400) {
+                setSuccess(null);
+                setError(response.data.message); //set error to null after 5 seconds
+                console.log(response.data.message);
+            } 
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            setIsLoading(false);
+            console.log(response);
+        } catch (error) {
+            setIsLoading(false)
+            setError(error.response.data)
+            console.log(error.response.data)
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            
+        }
+    }
+
+    const generateNewOTP = async () => {
+        setIsLoading(true);
+        setError(null)
+        setEmail(currentUser.email);
+
+        try {
+            
+            const response = await axios.post("http://localhost:9000/api/auth/login/generate-new", {email})
+            if (response.status === 200) {
+                setSuccess(response.data);
+                setError(null); //set error to null after 5 seconds
+                console.log(response.data);
+            }
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false)
+            setError(error)
+            console.log(error)
+            
+        }
+
+    }
+    
+    const toggleVisibility = () => {
+        setVisiblePassword(!visiblePassword)
+    }
+
+    const handleChangePassword = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null)
+
+        try {
+            
+        } catch (error) {
+            setIsLoading(false)
+            setError(error)
+            console.log(error)
+        }
+
     }
 
   return (
@@ -155,7 +259,17 @@ const Plogin = () => {
                     </div>
                     <div className={`phase2 ${activeStep === 2 ? "active" : "inactive" } `}>
                         <div className="headerText">
-                            <h3>Reset <span>Password</span></h3>
+                            <h3>Forgot <span>Password</span></h3>
+
+                                {
+                                    success && <div className={"otp-success"}>{success}</div>
+                                }
+
+                                {
+                                    error && <div className="otp-error">{error}</div>
+                                }
+
+
                             <p>Enter the email address associated with your account and we'll email you a reset password.</p>
                         </div>
                         <form action="">
@@ -171,7 +285,7 @@ const Plogin = () => {
                                 />
                             </section>
                             
-                            <button  className='submit' type='submit' onClick={handlePasswordResetOTP}>Reset Password</button>
+                            <button  className='submit' type='submit' disabled={isLoading} onClick={handlePasswordResetOTP}>Continue</button>
                             {/* <div className='submit' type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</div> */}
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(1)}>
@@ -179,6 +293,111 @@ const Plogin = () => {
                             </div>
                             
                         </form>
+                        
+                    </div>
+
+                    <div className={`phase4 ${activeStep === 4 ? "active" : "inactive" } `}>
+
+                        <div className="authotp-wrapper">
+
+                            <div className="logo-holder">
+                                <img src={logo} alt='logo screenshot'/>
+                            </div>
+                            {
+                                success && <div className={"otp-success"}>{success}</div>
+                            }
+
+                            {
+                                error && <div className="otp-error">{error}</div>
+                            }
+                            
+                            <div className="auth-description">
+                                <span>2-Step Verification</span>
+                                <p>Hi {recoveryEmail}, to help keep your account safe, Sapphire wants to make sure 
+                                    it's really you.
+                                </p>
+                                We emailed a code to 
+                                <div className="auth-email"><em>{recoveryEmail}</em></div>
+                                Please enter the code to reset your password.
+                            </div>
+                            <div className="otpHolder">
+
+                                <input 
+                                    className='otp-field'
+                                    type='text'
+                                    name='otp'
+                                    maxLength="6"
+                                    value={otp}
+                                    onChange={handleOTPChange}
+                                
+                                />
+
+                            </div>
+                            <div className="otp-buttons">
+                                <div className="otp-clear" onClick={() => setOtp("")}>Clear</div>
+                                <button className="otp-verify" disabled={isLoading} onClick={handleVerifyOTP}>Verity OTP</button>
+                                
+                            </div>
+
+                            <div className="otp-remark">
+                                <p>Didn't receive the verification code? It could take a bit of time. <span className="otp-resend" onClick={generateNewOTP}>Request a new OTP code</span></p>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                    <div className={`phase5 ${activeStep === 5 ? "active" : "inactive" } `}>
+
+                        <div className="reset-wrapper">
+
+                            <div className="logo-holder">
+                                <img src={logo} alt='logo screenshot'/>
+                            </div>
+                            {
+                                success && <div className="reset-success">{success}</div>
+                            }
+
+                            {
+                                error && <div className="reset-error">{error}</div>
+                            }
+                            
+                            <div className="reset-description">
+                                <span>Reset Password</span>
+                                <p>Set the new password for your account so you can login and access Sapphire.
+                                </p>
+                            </div>
+                            <form action="">
+                                <section>
+                                    <label>New Password</label>
+                                    <input 
+                                    type={visiblePassword ? "text" : "password"}
+                                    placeholder='New Password'
+                                    name='resetPassword'
+                                    value={resetPassword}
+                                    onChange = {(e)=>setResetPassword(e.target.value)}
+                                    className="formInput"
+                                    />
+                                    { visiblePassword ? <div className="visibility_icon" onClick={toggleVisibility}><Eye /></div> : <div className="visibility_icon" onClick={toggleVisibility}><EyeOff /></div>} 
+                                </section>
+
+                                <section>
+                                    <label>Confirm New Password</label>
+                                    <input 
+                                    type={visiblePassword ? "text" : "password"}
+                                    placeholder='Confirm New Password'
+                                    name='password'
+                                    value={confirmResetPassword}
+                                    onChange = {(e)=>setConfirmResetPassword(e.target.value)}
+                                    className="formInput"
+                                    />
+                                    { visiblePassword ? <div className="visibility_icon" onClick={toggleVisibility}><Eye /></div> : <div className="visibility_icon" onClick={toggleVisibility}><EyeOff /></div>} 
+                                </section>
+                                
+                                    <button className='button'  disabled={isLoading} type='submit' onClick={handleChangePassword}>Reset Password</button>
+                                
+                            </form>
+
+                        </div>
                         
                     </div>
 
@@ -200,40 +419,6 @@ const Plogin = () => {
             </div>
         </div>
     </div>
-    // <div className='px-5 lg:px-0'>
-    //     <div className="w-full max-w-[570px] mx-auto rouded-lg shadow-md md:p-10">
-    //         <h3 className='text-headingColor text-[22px] leading-9 font-bold mb-10'>
-    //             Hello! <span className='text-primaryColor'>Welcome</span> Back
-    //         </h3>
-
-    //         <form action="" className='py-4 md:py-0'>
-    //             <div className="mb-5">
-    //                 <input 
-    //                     type="text" 
-    //                     placeholder='Email'
-    //                     name='email'
-    //                     value={FormData.email}
-    //                     onChange={handleInputChange}
-    //                     className='w-full px-4 py-23 border-b border-solid border-[#0066ff61]'
-    //                 />
-    //             </div>
-    //             <div className="mb-5">
-    //                 <input 
-    //                     type="password" 
-    //                     placeholder='Password'
-    //                     name='password'
-    //                     value={FormData.password}
-    //                     onChange={handleInputChange}
-    //                     className='w-full px-4 py-23 border-b border-solid border-[#0066ff61]'
-    //                 />
-    //             </div>
-
-    //             <div className="mt-7">
-    //                 <button type='submit' className='cd '>Login</button>
-    //             </div>
-    //         </form>
-    //     </div>
-    // </div>
   )
 }
 
