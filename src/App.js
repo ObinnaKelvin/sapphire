@@ -31,6 +31,7 @@ function App() {
           <Route path='/pay-later' element={<PayLater />}/>
           <Route path='/pay-now' element={<PayNow />}/>
           <Route path='/patient-portal' element={<Pportal />}/>
+          <Route path='/patient-portal/profile' element={<Pportal />}/>
           <Route path='/patient-portal/auth/:userId' element={<AuthOTP />}/>
           <Route path='/staff-portal' element={<Sportal />}/>
           <Route path='/staff-portal/create-appointment' element={<Sappointment />}/>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.scss'
-import {CalendarClock, LogOut, User2, Wallet2} from 'lucide-react';
+import {CalendarClock, Contact2, LogOut, User2, Wallet2} from 'lucide-react';
 import logo from '../../assets/images/logo.PNG';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -113,6 +113,12 @@ export const PatientNavbar = () => {
                         <div className='patientnavbar-item'>
                             <Wallet2  size={20} />
                             <span>Bookings</span>
+                        </div>
+                    </Link>
+                    <Link to={'/patient-portal/profile'} className='link'>
+                        <div className='patientnavbar-item'>
+                            <Contact2 size={20} />
+                            <span>Profile</span>
                         </div>
                     </Link>
                 </div>
