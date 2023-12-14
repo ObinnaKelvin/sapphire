@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ploginbg from '../../assets/images/account.gif';
 import './plogin.scss';
 import { Navbar } from '../../components/navigation/Navbar';
@@ -13,7 +13,7 @@ import {Eye, EyeOff} from 'lucide-react'
 const Plogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [activeStep, setActiveStep] = useState(6) //1 normally
+    const [activeStep, setActiveStep] = useState(1) //1 normally
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const recoveryEmail = JSON.parse(localStorage.getItem('recovery email'));
     const [error, setError] = useState(null);
@@ -28,6 +28,12 @@ const Plogin = () => {
 
 
     //const { login, error, isLoading } = useLogin();
+
+    useEffect(() => {
+        console.log("recoveryEmail:", recoveryEmail)
+        recoveryEmail ? setEmail(recoveryEmail) : setEmail('')
+        console.log("Email:", email)
+    }, [])
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -119,7 +125,7 @@ const Plogin = () => {
         setIsLoading(true);
         setError(null)
         setSuccess(null)
-        setEmail(currentUser.email);
+        //setEmail(currentUser.email);
 
         try {
             const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp})
@@ -130,7 +136,8 @@ const Plogin = () => {
                 setError(null); //set error to null after 5 seconds
                 console.log(response.data.message);
                 setTimeout(() => {
-                    navigate("/patient-portal"); //2. Then navigate to dashboard
+                    setActiveStep(5) //2. Then navigate to slide 5 Reset Password
+                    //navigate("/patient-portal"); //2. Then navigate to dashboard
                   }, 5000);
             } 
             if (response.status === 400) {
@@ -193,7 +200,65 @@ const Plogin = () => {
         setError(null)
 
         try {
-            
+
+            if(!resetPassword && !confirmResetPassword) {
+                setError("Password fields should not be empty");
+                setTimeout(() => {
+                    setSuccess(null); //set success to null after 5 seconds
+                    setError(null); //set error to null after 5 seconds
+                  }, 5000);
+                setIsLoading(false);
+                return;
+            }
+            if(resetPassword !== confirmResetPassword) {
+                setError("Password fields do not match");
+                setTimeout(() => {
+                    setSuccess(null); //set success to null after 5 seconds
+                    setError(null); //set error to null after 5 seconds
+                  }, 5000);
+                setIsLoading(false);
+                return;
+            }
+            if(!resetPassword) {
+                setError("Password field should not be empty");
+                setTimeout(() => {
+                    setSuccess(null); //set success to null after 5 seconds
+                    setError(null); //set error to null after 5 seconds
+                  }, 5000);
+                setIsLoading(false);
+                return;
+            }
+            if(!confirmResetPassword) {
+                setError("Confirm password field should not be empty");
+                setTimeout(() => {
+                    setSuccess(null); //set success to null after 5 seconds
+                    setError(null); //set error to null after 5 seconds
+                  }, 5000);
+                setIsLoading(false);
+                return;
+            }
+
+            console.log("Hey!")
+            const response = await axios.put("http://localhost:9000/api/auth/login/password-reset", {email, resetPassword})
+            console.log(response)
+            setSuccess("Password changed successfully!");
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+                setActiveStep(3)
+              }, 5000);
+            setIsLoading(false);
+            return;
+            // if (response.status === 200) {
+            //     setSuccess(response.data);
+            //     setError(null); //set error to null after 5 seconds
+            //     console.log(response.data);
+            // }
+            // setTimeout(() => {
+            //     setSuccess(null); //set success to null after 5 seconds
+            //     setError(null); //set error to null after 5 seconds
+            //   }, 5000);
+            // setIsLoading(false);
         } catch (error) {
             setIsLoading(false)
             setError(error)
@@ -371,7 +436,7 @@ const Plogin = () => {
                                     <label>New Password</label>
                                     <input 
                                     type={visiblePassword ? "text" : "password"}
-                                    placeholder='New Password'
+                                    placeholder='••••••••'
                                     name='resetPassword'
                                     value={resetPassword}
                                     onChange = {(e)=>setResetPassword(e.target.value)}
@@ -384,7 +449,7 @@ const Plogin = () => {
                                     <label>Confirm New Password</label>
                                     <input 
                                     type={visiblePassword ? "text" : "password"}
-                                    placeholder='Confirm New Password'
+                                    placeholder='••••••••'
                                     name='password'
                                     value={confirmResetPassword}
                                     onChange = {(e)=>setConfirmResetPassword(e.target.value)}
@@ -393,7 +458,7 @@ const Plogin = () => {
                                     { visiblePassword ? <div className="visibility_icon" onClick={toggleVisibility}><Eye /></div> : <div className="visibility_icon" onClick={toggleVisibility}><EyeOff /></div>} 
                                 </section>
                                 
-                                    <button className='button'  disabled={isLoading} type='submit' onClick={handleChangePassword}>Reset Password</button>
+                                <button className='button'  disabled={isLoading} type='submit' onClick={handleChangePassword}>Reset Password</button>
                                 
                             </form>
 
@@ -409,11 +474,12 @@ const Plogin = () => {
                         <img src={message} alt='Email Confirmation'/>
                     </div>
                     <div className="text-description">
-                        <h3>Check your email</h3>
-                        <p>We just emailed you a reset password. Kindly check your email and login again.</p>
+                        <h3>Password Changed!</h3>
+                        <p>Your password has been changed successfully.</p>
                     </div>
                     <div className="sub-info">
-                        <span onClick={(e)=>setActiveStep(1)}>Login now!</span> or <span onClick={(e)=>setActiveStep(2)}>Resend Password</span>
+                        <span onClick={(e)=>setActiveStep(1)}>Login now!</span>
+                        {/*  or <span onClick={(e)=>setActiveStep(2)}>Resend Password</span> */}
                     </div>
                 </div>
             </div>

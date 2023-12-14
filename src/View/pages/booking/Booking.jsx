@@ -67,8 +67,8 @@ function Booking() {
               </div>
               
 
-              {/* <Link to={currentUser ? "/patient-portal" : '/patient-login'}> */}
-              <Link to='/patient-login'>
+              <Link to={currentUser ? "/patient-portal" : '/patient-login'}>
+              {/* <Link to='/patient-login'> */}
                 <div className="action-button monitor">
                   <MoveRight />
                 </div>

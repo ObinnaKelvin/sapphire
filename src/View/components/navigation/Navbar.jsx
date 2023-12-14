@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.scss'
-import {CalendarClock, User2, Wallet2} from 'lucide-react';
+import {CalendarClock, LogOut, User2, Wallet2} from 'lucide-react';
 import logo from '../../assets/images/logo.PNG';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export const Navbar = () => {
     // const navigate = useNavigate()
@@ -97,15 +98,32 @@ export const Navbar = () => {
 
 export const PatientNavbar = () => {
 
+    const { dispatch } = useAuthContext();
+
+    const handleLogout = () => {
+        localStorage.removeItem('user')
+        dispatch({type: 'LOGOUT'})
+    }
+
     return (
         <div className="patientnavbar-container">
             <div className="patientnavbar-wrapper">
-                <Link to={'/patient-portal'} className='link'>
-                    <div className='patientnavbar-item'>
-                        <Wallet2  size={20} />
-                        <span>Bookings</span>
-                    </div>
-                </Link>
+                <div className="step1">
+                    <Link to={'/patient-portal'} className='link'>
+                        <div className='patientnavbar-item'>
+                            <Wallet2  size={20} />
+                            <span>Bookings</span>
+                        </div>
+                    </Link>
+                </div>
+                <div className="step2">
+                    <Link to={'/patient-login'} className='link'>
+                        <div className='patientnavbar-item' onClick={handleLogout}>
+                            <LogOut size={20} />
+                            <span>Log Out</span>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </div>
     )
