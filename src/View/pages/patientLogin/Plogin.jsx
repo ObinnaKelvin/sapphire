@@ -294,16 +294,16 @@ const Plogin = () => {
                                 name='email'
                                 value={email}
                                 // onChange={handleInputChange}
-                                onChange = {(e)=>setEmail(e.target.value)}
+                                onChange = {(e)=>setEmail(e.target.value.trim())}
                                 className="formInput"
                                 />
                                 <input 
                                 type="password" 
                                 placeholder='Password'
                                 name='password'
-                                value={password}
+                                value={password.trim()}
                                 // onChange={handleInputChange}
-                                onChange = {(e)=>setPassword(e.target.value)}
+                                onChange = {(e)=>setPassword(e.target.value.trim())}
                                 className="formInput"
                                 />
                             </section>
@@ -345,7 +345,7 @@ const Plogin = () => {
                                 name='email'
                                 value={email}
                                 // onChange={handleInputChange}
-                                onChange = {(e)=>setEmail(e.target.value)}
+                                onChange = {(e)=>setEmail(e.target.value.trim())}
                                 className="formInput"
                                 />
                             </section>
@@ -439,7 +439,7 @@ const Plogin = () => {
                                     placeholder='••••••••'
                                     name='resetPassword'
                                     value={resetPassword}
-                                    onChange = {(e)=>setResetPassword(e.target.value)}
+                                    onChange = {(e)=>setResetPassword(e.target.value.trim())}
                                     className="formInput"
                                     />
                                     { visiblePassword ? <div className="visibility_icon" onClick={toggleVisibility}><Eye /></div> : <div className="visibility_icon" onClick={toggleVisibility}><EyeOff /></div>} 
@@ -452,7 +452,7 @@ const Plogin = () => {
                                     placeholder='••••••••'
                                     name='password'
                                     value={confirmResetPassword}
-                                    onChange = {(e)=>setConfirmResetPassword(e.target.value)}
+                                    onChange = {(e)=>setConfirmResetPassword(e.target.value.trim())}
                                     className="formInput"
                                     />
                                     { visiblePassword ? <div className="visibility_icon" onClick={toggleVisibility}><Eye /></div> : <div className="visibility_icon" onClick={toggleVisibility}><EyeOff /></div>} 
