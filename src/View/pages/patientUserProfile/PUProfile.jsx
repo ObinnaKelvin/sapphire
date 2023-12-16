@@ -211,7 +211,7 @@ const PUProfile = () => {
                             <div className='body-body'>
                                 <form action="">
                                     <section>
-                                        <label>Gender</label>
+                                        <label>Kin Name</label>
                                             <input 
                                                 type="text" 
                                                 placeholder='Kin Name'
@@ -223,7 +223,7 @@ const PUProfile = () => {
                                             />
                                     </section>
                                     <section>
-                                        <label>Gender</label>
+                                        <label>Kin Phone</label>
                                             <input 
                                             type="text" 
                                             placeholder='Phone'
@@ -235,7 +235,7 @@ const PUProfile = () => {
                                             />
                                     </section>
                                     <section>
-                                        <label>Gender</label>
+                                        <label>Relationship</label>
                                             <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
                                                 <option>- Select Relationship -</option>
                                                 <option value={'Father'}>Father</option>
@@ -250,17 +250,17 @@ const PUProfile = () => {
                                             </select>
                                     </section>
                                     <section>
-                                        <label>Gender</label>
+                                        <label>Kin Address</label>
                                             <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
                                             value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
                                             />
                                     </section>
-                                    <section>
+                                    {/* <section>
                                         <label>Gender</label>
                                     </section>
                                     <section>
                                         <label>Gender</label>
-                                    </section>
+                                    </section> */}
 
                                 </form>
                                 
