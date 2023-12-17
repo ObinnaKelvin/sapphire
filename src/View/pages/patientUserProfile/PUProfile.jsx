@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/navigation/Navbar'
 import './puprofile.scss';
 import { ClipboardList, Users, Wallet } from 'lucide-react';
+import man from '../../assets/images/man1.png'
 
 const PUProfile = () => {
 
@@ -44,7 +45,9 @@ const PUProfile = () => {
 
                 <div className="puprofile-body-header">
                     <div className="left-info">
-
+                        <div className="pic-holder">
+                            <img src={man} alt="" />
+                        </div>
                     </div>
                     <div className="right-info">Obinna Okere Kelvin</div>
                 </div>
