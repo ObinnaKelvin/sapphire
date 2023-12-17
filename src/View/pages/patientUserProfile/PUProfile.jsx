@@ -203,7 +203,7 @@ const PUProfile = () => {
                     </div>
                     <div className="right-items">
                         <div className="body-item">
-                            <div className='header-section'>
+                             <div className='header-section'>
                                 <div className="icon-holder">
                                     <Users />
                                 </div>
@@ -281,6 +281,10 @@ const PUProfile = () => {
                             <div></div>
                         </div>
                     </div>
+                </div>
+
+                <div className="puprofile-button-holder">
+                    <button>Save</button>
                 </div>
 
             </div>
