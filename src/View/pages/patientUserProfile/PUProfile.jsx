@@ -3,6 +3,8 @@ import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/nav
 import './puprofile.scss';
 import { ClipboardList, Users, Wallet } from 'lucide-react';
 import man from '../../assets/images/man1.png'
+import phoneRec from '../../assets/images/phonerecord.gif';
+import personalRec from '../../assets/images/personal.PNG'
 
 const PUProfile = () => {
 
@@ -39,6 +41,206 @@ const PUProfile = () => {
             </div>
             <div className="puprofile-mobile">
                 <PatientNavbarMobile />
+            </div>
+
+            <div className="puprofile-modal-container">
+                {/* Hey hey */}
+                <div className="puprofile-modal-items">
+
+                    <div className="puprofile-modal-item">
+                        <div className="modal-header"><h2>Incomplete Registration</h2></div>
+                        <div className="modal-icon">
+                            <img src={phoneRec}/>
+                        </div>
+                        <div className="modal-description">
+                            <p>We want to ensure that you have a smooth patient experience.</p>
+                            <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
+                        </div>
+                        <div className="modal-buttons">
+                            <button className='passive'>Not now</button>
+                            <button>Next</button>
+                        </div>
+                    </div>
+                    <div className="puprofile-modal-item">
+                        <div className="modal-header"><h2>Personal Information</h2></div>
+                        <div className="modal-icon">
+                            <img src={personalRec}/>
+                        </div>
+                        <div className="modal-description">
+                            {/* <p>We want to ensure that you have a smooth patient experience.</p>
+                            <p>Please follow the next few steps to complete your profile details in 5 minutes.</p> */}
+                                <form action="">
+                                    <section>
+                                        <label>Title</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setTitle(e.target.value)} value={title}>
+                                            <option>- Select Title -</option>
+                                            <option value={'Master'}>Master</option>
+                                            <option value={'Mr'}>Mr</option>
+                                            <option value={'Miss'}>Miss</option>
+                                            <option value={'Mrs'}>Mrs</option>
+                                            <option value={'Ms'}>Ms</option>
+                                            <option value={'Dr.'}>Dr.</option>
+                                            <option value={'Prof.'}>Prof.</option>
+                                            <option value={'Revd.'}>Revd.</option>
+                                        </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>First Name</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='First name'
+                                            name='firstname'
+                                            value={firstname}
+                                            onChange = {(e)=>setFirstname(e.target.value)}
+                                            className="formInput sm"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Middle Name</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Middle name'
+                                            name='middlename'
+                                            value={middlename}
+                                            onChange = {(e)=>setMiddlename(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Last Name</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Last name'
+                                            name='lastname'
+                                            value={lastname}
+                                            onChange = {(e)=>setLastname(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Email</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Email'
+                                            name='email'
+                                            value={email}
+                                            onChange = {(e)=>setEmail(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Phone</label>       
+                                        <input 
+                                            type="text" 
+                                            placeholder='Phone'
+                                            name='phone'
+                                            value={phone}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setPhone(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Gender</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                            <option>- Select Gender -</option>
+                                            <option value={'Male'}>Male</option>
+                                            <option value={'Female'}>Female</option>
+                                        </select>
+                                    </section>
+
+
+                                    <section>
+                                        <label>City</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
+                                            <option>- Select City -</option>
+                                            <option value={'Ogba'}>Ogba</option>
+                                            <option value={'Alimosho'}>Alimosho</option>
+                                        </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>State</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                            <option>- Select State -</option>
+                                            <option value={'Lagos'}>Lagos</option>
+                                            <option value={'Ogun'}>Ogun</option>
+                                        </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Country</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCountry(e.target.value)} value={country}>
+                                            <option>- Select Country -</option>
+                                            <option value={'Nigeria'}>Nigeria</option>
+                                            <option value={'Nigeria'}>Nigeria</option>
+                                        </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Marital Status</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
+                                            <option>-  Select Marital Status  -</option>
+                                            <option value={'Single'}>Single</option>
+                                            <option value={'Married'}>Married</option>
+                                            <option value={'Widowed'}>Widowed</option>
+                                            <option value={'Divorced'}>Divorced</option>
+                                            <option value={'Separated'}>Separated</option>
+                                        </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Address</label>
+                                        <textarea className="formTextArea md" type="text"name="user_additional_info" placeholder="Address here..."
+                                        value={address} onChange={(e)=> setAddress(e.target.value)}
+                                        />
+                                    </section>
+
+                                </form>
+                        </div>
+                        <div className="modal-buttons">
+                            <button className='passive'>Back</button>
+                            <button>Save and Continue</button>
+                        </div>
+                    </div>
+                    <div className="puprofile-modal-item">
+                        <div className="modal-header"><h2>Emergency Contact</h2></div>
+                        <div className="modal-icon">
+                            <img src={phoneRec}/>
+                        </div>
+                        <div className="modal-description">
+                            <p>We want to ensure that you have a smooth patient experience.</p>
+                            <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
+                        </div>
+                        <div className="modal-buttons">
+                            <button className='passive'>Back</button>
+                            <button>Save and Continue</button>
+                        </div>
+
+                    </div>
+                    <div className="puprofile-modal-item">
+                        <div className="modal-header"><h2>Next of Kin</h2></div>
+                        <div className="modal-icon">
+                            <img src={phoneRec}/>
+                        </div>
+                        <div className="modal-description">
+                            <p>We want to ensure that you have a smooth patient experience.</p>
+                            <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
+                        </div>
+                        <div className="modal-buttons">
+                            <button className='passive'>Back</button>
+                            <button>Finish</button>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
 
             <div className="puprofile-body">
