@@ -18,6 +18,7 @@ const PUProfile = () => {
     // const[date, setDate] = useState()
     const [age, setAge] = useState(0);
     const [gender, setGender] = useState('')
+    const [religion, setReligion] = useState('')
     const [openDate, setOpenDate] = useState(false)
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('');
@@ -31,6 +32,10 @@ const PUProfile = () => {
     const [kinPhone, setKinPhone] = useState('');
     const [kinAddress, setKinAddress] = useState('');
     const [kinRelationship, setKinRelationship] = useState('');
+    const [emName, setEmName] = useState('');
+    const [emPhone, setEmPhone] = useState('');
+    const [emAddress, setEmAddress] = useState('');
+    const [emRelationship, setEmRelationship] = useState('');
 
   return (
     <div className='puprofile-container'>
@@ -55,6 +60,7 @@ const PUProfile = () => {
                         <div className="modal-description">
                             <p>We want to ensure that you have a smooth patient experience.</p>
                             <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
+                            <p>You will only fill this information once.</p>
                         </div>
                         <div className="modal-buttons">
                             <button className='passive'>Not now</button>
@@ -194,6 +200,16 @@ const PUProfile = () => {
                                             <option value={'Separated'}>Separated</option>
                                         </select>
                                     </section>
+                                    <section>
+                                        <label>Religion</label>
+                                        <select className = 'formSelect sm' name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
+                                            <option>-  Select Religion  -</option>
+                                            <option value={'Christianity'}>Christianity</option>
+                                            <option value={'Islam'}>Islam</option>
+                                            <option value={'Traditional'}>Traditional</option>
+                                            <option value={'Unknown'}>Unknown</option>
+                                        </select>
+                                    </section>
                                     
                                     <section>
                                         <label>Address</label>
@@ -217,6 +233,60 @@ const PUProfile = () => {
                         <div className="modal-description">
                             <p>We want to ensure that you have a smooth patient experience.</p>
                             <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
+                                <form action="">
+                                    <section>
+                                        <label>Full Name</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Kin Name'
+                                                name='kinName'
+                                                value={emName}
+                                                // onChange={handleInputChange}
+                                                onChange = {(e)=>setEmName(e.target.value)}
+                                                className="formInput lg"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label> Phone</label>
+                                            <input 
+                                            type="text" 
+                                            placeholder='Phone'
+                                            name='phone'
+                                            value={emPhone}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setEmPhone(e.target.value)}
+                                            className="formInput lg"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label>Relationship</label>
+                                            <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setEmRelationship(e.target.value)} value={emRelationship}>
+                                                <option>- Select Relationship -</option>
+                                                <option value={'Father'}>Father</option>
+                                                <option value={'Mother'}>Mother</option>
+                                                <option value={'Husband'}>Husband</option>
+                                                <option value={'Wife'}>Wife</option>
+                                                <option value={'Uncle'}>Uncle</option>
+                                                <option value={'Aunt'}>Aunt</option>
+                                                <option value={'Brother'}>Brother</option>
+                                                <option value={'Sister'}>Sister</option>
+                                                <option value={'Unknown'}>Unknown</option>
+                                            </select>
+                                    </section>
+                                    <section>
+                                        <label>Address</label>
+                                            <textarea className="formTextArea md" type="text"name="user_additional_info" placeholder="Address here..."
+                                            value={emAddress} onChange={(e)=> setEmAddress(e.target.value)}
+                                            />
+                                    </section>
+                                    {/* <section>
+                                        <label>Gender</label>
+                                    </section>
+                                    <section>
+                                        <label>Gender</label>
+                                    </section> */}
+
+                                </form>
                         </div>
                         <div className="modal-buttons">
                             <button className='passive'>Back</button>
@@ -232,6 +302,60 @@ const PUProfile = () => {
                         <div className="modal-description">
                             <p>We want to ensure that you have a smooth patient experience.</p>
                             <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
+                                <form action="">
+                                    <section>
+                                        <label>Kin Name</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Name'
+                                                name='kinName'
+                                                value={kinName}
+                                                // onChange={handleInputChange}
+                                                onChange = {(e)=>setKinName(e.target.value)}
+                                                className="formInput lg"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label>Kin Phone</label>
+                                            <input 
+                                            type="text" 
+                                            placeholder='Phone'
+                                            name='phone'
+                                            value={kinPhone}
+                                            // onChange={handleInputChange}
+                                            onChange = {(e)=>setKinPhone(e.target.value)}
+                                            className="formInput lg"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label>Relationship</label>
+                                            <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
+                                                <option>- Select Relationship -</option>
+                                                <option value={'Father'}>Father</option>
+                                                <option value={'Mother'}>Mother</option>
+                                                <option value={'Husband'}>Husband</option>
+                                                <option value={'Wife'}>Wife</option>
+                                                <option value={'Uncle'}>Uncle</option>
+                                                <option value={'Aunt'}>Aunt</option>
+                                                <option value={'Brother'}>Brother</option>
+                                                <option value={'Sister'}>Sister</option>
+                                                <option value={'Unknown'}>Unknown</option>
+                                            </select>
+                                    </section>
+                                    <section>
+                                        <label>Kin Address</label>
+                                            <textarea className="formTextArea md" type="text"name="user_additional_info" placeholder="Address here..."
+                                            value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
+                                            />
+                                    </section>
+                                    {/* <section>
+                                        <label>Gender</label>
+                                    </section>
+                                    <section>
+                                        <label>Gender</label>
+                                    </section> */}
+
+                                </form>
                         </div>
                         <div className="modal-buttons">
                             <button className='passive'>Back</button>
@@ -388,6 +512,17 @@ const PUProfile = () => {
                                             <option value={'Widowed'}>Widowed</option>
                                             <option value={'Divorced'}>Divorced</option>
                                             <option value={'Separated'}>Separated</option>
+                                        </select>
+                                    </section>
+
+                                    <section>
+                                        <label>Religion</label>
+                                        <select className = 'formSelect sm' name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
+                                            <option>-  Select Religion  -</option>
+                                            <option value={'Christianity'}>Christianity</option>
+                                            <option value={'Islam'}>Islam</option>
+                                            <option value={'Traditional'}>Traditional</option>
+                                            <option value={'Unknown'}>Unknown</option>
                                         </select>
                                     </section>
                                     

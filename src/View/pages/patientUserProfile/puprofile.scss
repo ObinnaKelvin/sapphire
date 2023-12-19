@@ -42,7 +42,7 @@
                 height: 550px;
                 width: 500px;
                 margin: -360px 0px 0px 0px;
-                border: 1px solid blue;
+                // border: 1px solid blue;
 
                 .puprofile-modal-item {
                     border: 1px solid orange;
@@ -147,6 +147,14 @@
 
                                 .formTextArea.md {
                                     width: 365px;
+                                }
+
+                                .formInput.lg {
+                                    width: 365px;
+                                }
+
+                                .formSelect.lg {
+                                    width: 395px;
                                 }
                             }
                         }
