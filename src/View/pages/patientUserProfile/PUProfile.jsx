@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/navigation/Navbar'
 import './puprofile.scss';
-import { ClipboardList, Users, Wallet } from 'lucide-react';
+import { ClipboardList, Siren, Users, Wallet } from 'lucide-react';
 import man from '../../assets/images/man1.png'
 import phoneRec from '../../assets/images/phonerecord.gif';
 import personalRec from '../../assets/images/personal.PNG'
@@ -36,6 +36,12 @@ const PUProfile = () => {
     const [emPhone, setEmPhone] = useState('');
     const [emAddress, setEmAddress] = useState('');
     const [emRelationship, setEmRelationship] = useState('');
+    const [modalStep, setModalStep] = useState(1);
+
+    const handleNext = async (step) => {
+       // e.preventDefault();
+        return setModalStep(step);
+    }
 
   return (
     <div className='puprofile-container'>
@@ -52,22 +58,22 @@ const PUProfile = () => {
                 {/* Hey hey */}
                 <div className="puprofile-modal-items">
 
-                    <div className="puprofile-modal-item">
-                        <div className="modal-header"><h2>Incomplete Registration</h2></div>
+                    <div className={`puprofile-modal-item ${modalStep === 1 ? "active" : "inactive"}`}>
+                        <div className="modal-header"><h2>We want to know you better...</h2></div>
                         <div className="modal-icon">
                             <img src={phoneRec}/>
                         </div>
                         <div className="modal-description">
                             <p>We want to ensure that you have a smooth patient experience.</p>
-                            <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
-                            <p>You will only fill this information once.</p>
+                            <p>Please follow the next 3 steps to complete your profile details in 5 minutes.</p>
+                            <p>You only need to complete this process once.</p>
                         </div>
                         <div className="modal-buttons">
                             <button className='passive'>Not now</button>
-                            <button>Next</button>
+                            <button onClick={(e) => handleNext(2)}>Next</button>
                         </div>
                     </div>
-                    <div className="puprofile-modal-item">
+                    <div className={`puprofile-modal-item ${modalStep === 2 ? "active" : "inactive"}`}>
                         <div className="modal-header"><h2>Personal Information</h2></div>
                         <div className="modal-icon">
                             <img src={personalRec}/>
@@ -221,18 +227,16 @@ const PUProfile = () => {
                                 </form>
                         </div>
                         <div className="modal-buttons">
-                            <button className='passive'>Back</button>
-                            <button>Save and Continue</button>
+                            <button onClick={(e) => handleNext(1)} className='passive'>Back</button>
+                            <button onClick={(e) => handleNext(3)}>Save and Continue</button>
                         </div>
                     </div>
-                    <div className="puprofile-modal-item">
+                    <div className={`puprofile-modal-item ${modalStep === 3 ? "active" : "inactive"}`}>
                         <div className="modal-header"><h2>Emergency Contact</h2></div>
                         <div className="modal-icon">
                             <img src={phoneRec}/>
                         </div>
                         <div className="modal-description">
-                            <p>We want to ensure that you have a smooth patient experience.</p>
-                            <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
                                 <form action="">
                                     <section>
                                         <label>Full Name</label>
@@ -241,7 +245,6 @@ const PUProfile = () => {
                                                 placeholder='Kin Name'
                                                 name='kinName'
                                                 value={emName}
-                                                // onChange={handleInputChange}
                                                 onChange = {(e)=>setEmName(e.target.value)}
                                                 className="formInput lg"
                                             />
@@ -253,7 +256,6 @@ const PUProfile = () => {
                                             placeholder='Phone'
                                             name='phone'
                                             value={emPhone}
-                                            // onChange={handleInputChange}
                                             onChange = {(e)=>setEmPhone(e.target.value)}
                                             className="formInput lg"
                                             />
@@ -270,6 +272,7 @@ const PUProfile = () => {
                                                 <option value={'Aunt'}>Aunt</option>
                                                 <option value={'Brother'}>Brother</option>
                                                 <option value={'Sister'}>Sister</option>
+                                                <option value={'Friend'}>Friend</option>
                                                 <option value={'Unknown'}>Unknown</option>
                                             </select>
                                     </section>
@@ -289,19 +292,17 @@ const PUProfile = () => {
                                 </form>
                         </div>
                         <div className="modal-buttons">
-                            <button className='passive'>Back</button>
-                            <button>Save and Continue</button>
+                            <button onClick={(e) => handleNext(2)} className='passive'>Back</button>
+                            <button onClick={(e) => handleNext(4)}>Save and Continue</button>
                         </div>
 
                     </div>
-                    <div className="puprofile-modal-item">
+                    <div className={`puprofile-modal-item ${modalStep === 4 ? "active" : "inactive"}`}>
                         <div className="modal-header"><h2>Next of Kin</h2></div>
                         <div className="modal-icon">
                             <img src={phoneRec}/>
                         </div>
                         <div className="modal-description">
-                            <p>We want to ensure that you have a smooth patient experience.</p>
-                            <p>Please follow the next few steps to complete your profile details in 5 minutes.</p>
                                 <form action="">
                                     <section>
                                         <label>Kin Name</label>
@@ -339,6 +340,7 @@ const PUProfile = () => {
                                                 <option value={'Aunt'}>Aunt</option>
                                                 <option value={'Brother'}>Brother</option>
                                                 <option value={'Sister'}>Sister</option>
+                                                <option value={'Friend'}>Friend</option>
                                                 <option value={'Unknown'}>Unknown</option>
                                             </select>
                                     </section>
@@ -358,8 +360,8 @@ const PUProfile = () => {
                                 </form>
                         </div>
                         <div className="modal-buttons">
-                            <button className='passive'>Back</button>
-                            <button>Finish</button>
+                            <button onClick={(e) => handleNext(3)} className='passive'>Back</button>
+                            <button onClick={(e) => handleNext(5)}>Finish</button>
                         </div>
 
                     </div>
@@ -536,6 +538,70 @@ const PUProfile = () => {
                                 </form>
                             </div>
                         </div>
+                        
+                        <div className="body-item">
+                            <div className='header-section'>
+                                <div className="icon-holder">
+                                    <Siren />
+                                </div>
+                                <div className="section-title">
+                                    Emergency Contact
+                                </div>
+                            </div>
+                            <div className='body-body'>
+                                <form action="">
+                                    
+                                    <section>
+                                        <label>Name</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Name'
+                                            name='name'
+                                            value={emName}
+                                            onChange = {(e)=>setEmName(e.target.value)}
+                                            className="formInput sm"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Phone</label>       
+                                        <input 
+                                            type="text" 
+                                            placeholder='Phone'
+                                            name='phone'
+                                            value={emPhone}
+                                            onChange = {(e)=>setEmPhone(e.target.value)}
+                                            className="formInput sm"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Relationship</label>
+                                            <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setEmRelationship(e.target.value)} value={emRelationship}>
+                                                <option>- Select Relationship -</option>
+                                                <option value={'Father'}>Father</option>
+                                                <option value={'Mother'}>Mother</option>
+                                                <option value={'Husband'}>Husband</option>
+                                                <option value={'Wife'}>Wife</option>
+                                                <option value={'Uncle'}>Uncle</option>
+                                                <option value={'Aunt'}>Aunt</option>
+                                                <option value={'Brother'}>Brother</option>
+                                                <option value={'Sister'}>Sister</option>
+                                                <option value={'Friend'}>Friend</option>
+                                                <option value={'Unknown'}>Unknown</option>
+                                            </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Address</label>
+                                        <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                        value={emAddress} onChange={(e)=> setEmAddress(e.target.value)}
+                                        />
+                                    </section>
+
+                                </form>
+                            </div>
+                        </div>
 
                     </div>
                     <div className="right-items">
@@ -586,6 +652,7 @@ const PUProfile = () => {
                                                 <option value={'Aunt'}>Aunt</option>
                                                 <option value={'Brother'}>Brother</option>
                                                 <option value={'Sister'}>Sister</option>
+                                                <option value={'Friend'}>Friend</option>
                                                 <option value={'Unknown'}>Unknown</option>
                                             </select>
                                     </section>

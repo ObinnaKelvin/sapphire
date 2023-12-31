@@ -22,8 +22,8 @@
         }
 
         .puprofile-modal-container {
-            //display: none;
-            display: flex;
+            display: none;
+            //display: flex;
             justify-content: center;
             align-items: center;
             position: absolute;
@@ -41,11 +41,11 @@
             .puprofile-modal-items {
                 height: 550px;
                 width: 500px;
-                margin: -360px 0px 0px 0px;
+                margin: -890px 0px 0px 0px;
                 // border: 1px solid blue;
 
                 .puprofile-modal-item {
-                    border: 1px solid orange;
+                    //border: 1px solid orange;
                     min-height: 550px;
                     display: flex;
                     flex-direction: column;
@@ -193,6 +193,22 @@
                         }
                     }
 
+                }
+
+                .puprofile-modal-item.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+
+                .puprofile-modal-item.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
                 }
             }
         }
