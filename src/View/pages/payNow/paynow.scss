@@ -736,6 +736,105 @@
                         margin: 15px 0px 0px 0px;
                         gap: 15px;
 
+                        .amount-holder {
+                            border: 1px solid #c5c5c5;
+                            padding: 15px 50px;
+                            border-radius: 2em;
+                            font-size: 25px;
+                            color: #757575;
+                            img {
+                                width: 17px;
+                            }
+                        }
+
+                        .titleText {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            color: #0C4CAC;
+                            // color: #ffd600;
+                            font-size: 30px;
+                        }
+
+                        p {
+                            margin: 3px 0px 0px 33px;
+                            font-size: 15px;
+                        }
+
+                        .payment-platforms {
+
+                            .payment-item {
+                                padding: 20px;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: space-between;
+                                border: 1px solid #c5c5c5;
+                                border-radius: 10px;
+                                // gap: 50px;
+                                width: 400px;
+                                height: 50px;
+                                cursor: pointer;
+
+                                .right {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                }
+                            }
+                        }
+
+                        .book-again {
+                            padding: 15px 15px 15px 15px;
+                            border-radius: 2em;
+                            border: none;
+                            width: max-content;
+                            background-color: #0C4CAC;
+                            color: white;
+                            font-size: 15px;
+                            text-align: center;
+                        }
+                    }
+
+        
+                }
+        
+                .phase3.active {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    transition: 0.5s ease;
+                }
+        
+                .phase3.inactive {
+                    opacity: 0;
+                    // visibility: hidden;
+                    display: none;
+                    transform: translateY(-20px);
+                    transition: 0.5s ease;
+                    position: absolute;
+                }
+
+                .phase4 {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    // justify-content: center;
+                    // border: 1px solid red;
+                    width: 750px;
+                    padding: 0px 30px;
+                    height: 70vh;
+                    margin: 0px 0px 0px 0px;
+
+                    .phase4-wrapper {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 750px;
+                        // border: 1px solid red;
+                        margin: 15px 0px 0px 0px;
+                        gap: 15px;
+
                         .titleText {
                             display: flex;
                             align-items: center;
@@ -765,14 +864,14 @@
         
                 }
         
-                .phase3.active {
+                .phase4.active {
                     opacity: 1;
                     visibility: visible;
                     transform: translateY(0);
                     transition: 0.5s ease;
                 }
         
-                .phase3.inactive {
+                .phase4.inactive {
                     opacity: 0;
                     // visibility: hidden;
                     display: none;
