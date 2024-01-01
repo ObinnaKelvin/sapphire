@@ -762,6 +762,9 @@
                         }
 
                         .payment-platforms {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 20px;
 
                             .payment-item {
                                 padding: 20px;
