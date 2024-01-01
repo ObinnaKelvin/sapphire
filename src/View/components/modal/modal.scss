@@ -24,3 +24,97 @@
     display: none;
     background-color: aqua;
 }
+
+
+
+.pappointments-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    //opacity: 0;
+    transition: opacity .2s ease;
+    height: 120%;
+    z-index: 20;
+    margin: -90px 0px 0px 3px;
+
+    .pappointments-item {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        height: max-content;
+        background-color: #c5c5c5;
+        align-items: center;
+        padding: 20px 10px;
+        gap: 20px;
+
+        .pappointments-item-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 350px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+
+            .tariff {
+                font-size: 35px;
+                font-weight: bold;
+            }
+        }
+        .pappointments-item-description {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 350px;
+            min-height: 100px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+
+            .pappointments-item-description-item {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                // border: 1px solid black;
+                height: 20px;
+
+                .left {
+                    display: flex;
+                    align-items: center;
+                    width: 47%;
+                    //border: 1px solid #cfcfcf;
+                    font-size: 13px;
+                    color: #757575;
+                }
+                .right {
+                    display: flex;
+                    align-items: center;
+                    justify-content: right;
+                    width: 47%;
+                    //border: 1px solid #cfcfcf;
+                    font-size: 13px;
+                    color: #757575;
+                    font-weight: 500;
+                    height: max-content;
+                }
+
+                .central {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    //border: 1px solid #cfcfcf;
+                    font-size: 15px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

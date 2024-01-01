@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './pportal.scss';
 import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/navigation/Navbar';
 import { LayoutPanelLeft, AlignLeft, Search, ChevronRight } from 'lucide-react'
-import { PatientTransaction } from '../../components/modal/Modal';
+import { PatientAppointments, PatientTransaction } from '../../components/modal/Modal';
+import axios from 'axios';
 
 function Pportal() {
 
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
+    const [appointments, setAppointments] = useState()
 
     const handleGreet = () => {
         let today = new Date()
@@ -27,7 +29,15 @@ function Pportal() {
 
     useEffect(() => {
         handleGreet();
+        loadAppointmentData()
     }, [])
+
+
+    const loadAppointmentData = async() => {
+        await axios.get(`http://localhost:9000/api/appointments/findByEmail/${currentUser.email}`)
+        //.then(response => console.log(response.data))
+        .then(response => setAppointments(response.data))
+    }
 
 
   return (
@@ -178,6 +188,8 @@ function Pportal() {
                             <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
                             <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 12</PatientTransaction>
                         </div>
+
+                        <PatientAppointments />
                     </div>
                 </div>
             </div>
