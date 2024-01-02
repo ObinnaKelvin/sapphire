@@ -25,11 +25,11 @@ export const PatientTransaction = ({children, open, onClose, id }) => {
     )
 }
 
-export const PatientAppointments = ({item}) => {
+export const PatientAppointments = ({item, onClose}) => {
 
     return (
         item &&
-        <div className={ item ? `pappointments-container` : `pappointments-container inactive`}>
+        <div className={ item ? `pappointments-container` : `pappointments-container inactive`} onClick={onClose}>
             <div className="pappointments-item">
 
                 <div className="pappointments-item-header">
