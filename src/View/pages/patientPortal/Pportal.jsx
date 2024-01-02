@@ -4,13 +4,75 @@ import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/nav
 import { LayoutPanelLeft, AlignLeft, Search, ChevronRight } from 'lucide-react'
 import { PatientAppointments, PatientTransaction } from '../../components/modal/Modal';
 import axios from 'axios';
+import numeral, { Numeral } from 'numeral';
 
 function Pportal() {
 
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
-    const [appointments, setAppointments] = useState()
+    const [appointments, setAppointments] = useState([
+        {
+            "_id": "65931728012c4956644df995",
+            "appointmentId": 5,
+            "patientId": 2,
+            "patientNo": 1011000001,
+            "staffId": null,
+            "firstname": "Obinna",
+            "lastname": "Okere",
+            "gender": "Male",
+            "mobile": 7035858557,
+            "email": "okereobinna11@gmail.com",
+            "notes": "I have headaches.",
+            "referralTypeId": null,
+            "referToDoctor": null,
+            "authorizationNo": null,
+            "service": "Bariatric Surgery",
+            "tariff": 2000000,
+            "appointmentDate": "2024-01-01T23:00:00.000Z",
+            "appointmentStatus": 9,
+            "paymentStatus": "Pending",
+            "active": 1,
+            "encodedDate": "2024-01-01T18:24:57.211Z",
+            "invoiceId": null,
+            "payerId": 1,
+            "payerCategoryId": 1,
+            "createdAt": "2024-01-01T19:48:56.020Z",
+            "updatedAt": "2024-01-01T19:48:56.020Z",
+            "__v": 0
+        }
+    ])
+    const [currentAppt, setCurrentAppt] = useState(
+    //     {
+    //     "_id": "65931728012c4956644df995",
+    //     "appointmentId": 5,
+    //     "patientId": 2,
+    //     "patientNo": 1011000001,
+    //     "staffId": null,
+    //     "firstname": "Obinna",
+    //     "lastname": "Okere",
+    //     "gender": "Male",
+    //     "mobile": "07035858557",
+    //     "email": "okereobinna11@gmail.com",
+    //     "notes": "I have headaches.",
+    //     "referralTypeId": null,
+    //     "referToDoctor": null,
+    //     "authorizationNo": null,
+    //     "service": "Bariatric Surgery",
+    //     "tariff": 2000000,
+    //     "appointmentDate": "2024-01-01T23:00:00.000Z",
+    //     "appointmentStatus": 9,
+    //     "paymentStatus": "Pending",
+    //     "active": 1,
+    //     "encodedDate": "2024-01-01T18:24:57.211Z",
+    //     "invoiceId": null,
+    //     "payerId": 1,
+    //     "payerCategoryId": 1,
+    //     "createdAt": "2024-01-01T19:48:56.020Z",
+    //     "updatedAt": "2024-01-01T19:48:56.020Z",
+    //     "__v": 0
+    // }
+    )
 
     const handleGreet = () => {
         let today = new Date()
@@ -26,6 +88,14 @@ function Pportal() {
             setGreet("Good Evening");
         }
     }
+    
+    const displayAppointment = (item) => {
+        setCurrentAppt(item);
+    }   
+
+    const closeAppointment = () => {
+        setCurrentAppt('');
+    }
 
     useEffect(() => {
         handleGreet();
@@ -36,7 +106,7 @@ function Pportal() {
     const loadAppointmentData = async() => {
         await axios.get(`http://localhost:9000/api/appointments/findByEmail/${currentUser.email}`)
         //.then(response => console.log(response.data))
-        .then(response => setAppointments(response.data))
+        //.then(response => setAppointments(response.data))
     }
 
 
@@ -89,7 +159,28 @@ function Pportal() {
                             <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
                             <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction>
                         </div>
-                        <div className="booking-item">
+                        {
+                            //console.log(appointments)
+                            // appointments.map((data)=>(
+                            //     console.log(data)
+                            // ))
+                            appointments.map(data=>{
+                                return (
+                                        <div className="booking-item" key={data.appointmentId}>
+                                            <div className="booking-orderno">#{data.appointmentId}</div>
+                                            <div className="booking-service">{data.service}</div>
+                                            <div className="booking-date">{data.appointmentDate}</div>
+                                            <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
+                                            <div className="booking-status success">{data.paymentStatus}</div>
+                                            <div className="booking-modal" onClick={() => displayAppointment(data)}><ChevronRight size={15} /></div>
+                                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 3</PatientTransaction> */}
+                                        </div>
+                                        )
+
+                                }
+                            )
+                        }
+                        {/* <div className="booking-item">
                             <div className="booking-orderno">#02</div>
                             <div className="booking-service">Consultation</div>
                             <div className="booking-date">Oct 31st 2023, 02:34pm</div>
@@ -187,9 +278,9 @@ function Pportal() {
                             <div className="booking-status pending">Pending</div>
                             <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div>
                             <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 12</PatientTransaction>
-                        </div>
+                        </div> */}
 
-                        <PatientAppointments />
+                        <PatientAppointments item={currentAppt} />
                     </div>
                 </div>
             </div>

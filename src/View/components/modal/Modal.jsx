@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactDom from 'react-dom'
 import './modal.scss'
+import naira from '../../assets/images/naira-black.png'
+import numeral from "numeral";
 
 
 export const PatientTransaction = ({children, open, onClose, id }) => {
@@ -23,13 +25,15 @@ export const PatientTransaction = ({children, open, onClose, id }) => {
     )
 }
 
-export const PatientAppointments = () => {
+export const PatientAppointments = ({item}) => {
+
     return (
-        <div className={"pappointments-container"}>
+        item &&
+        <div className={ item ? `pappointments-container` : `pappointments-container inactive`}>
             <div className="pappointments-item">
 
                 <div className="pappointments-item-header">
-                    <div className="tariff">500,000</div>
+                    <div className="tariff"><img src={naira}/>{numeral(item.tariff).format()}</div>
                     <div className="appt-status"></div>
                 </div>
 
@@ -39,23 +43,39 @@ export const PatientAppointments = () => {
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Appointment ID</div>
-                            <div className="right">1</div>
+                            <div className="right">{item.appointmentId}</div>
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Service</div>
-                            <div className="right">Thyroid Surgery</div>
+                            <div className="right">{item.service}</div>
                         </div>
                         <div className="pappointments-item-description-item">
-                            <div className="left">Date</div>
-                            <div className="right">Oct 31st 2023, 02:34pm</div>
+                            <div className="left">Appointment Date</div>
+                            <div className="right">{item.appointmentDate}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
+                            <div className="left">First Name</div>
+                            <div className="right">{item.firstname}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
+                            <div className="left">Last Name</div>
+                            <div className="right">{item.lastname}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
+                            <div className="left">Gender</div>
+                            <div className="right">{item.gender}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
+                            <div className="left">Mobile</div>
+                            <div className="right">{item.mobile}</div>
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Appointment Status</div>
-                            <div className="right"></div>
+                            <div className="right">{item.appointmentStatus}</div>
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Notes</div>
-                            <div className="right"></div>
+                            <div className="right"><em>{item.notes}</em></div>
                         </div>
                 </div>
 
