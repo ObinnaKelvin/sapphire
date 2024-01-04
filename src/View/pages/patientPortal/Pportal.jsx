@@ -157,9 +157,9 @@ function Pportal() {
                             appointments.map(data=>{
                                 return (
                                         <div className="booking-item" key={data.appointmentId}>
-                                            <div className="booking-orderno">#{data.appointmentId}</div>
+                                            <div className="booking-orderno">SAPP-{data.appointmentId}</div>
                                             <div className="booking-service">{data.service}</div>
-                                            <div className="booking-date">{`${format(new Date(data.appointmentDate), "MMM do yyy")}`}</div>
+                                            <div className="booking-date">{`${format(new Date(data.appointmentDate), "MMM do, yyy")}`}</div>
                                             <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
                                             <div className="booking-status success">{data.paymentStatus}</div>
                                             <div className="booking-modal" onClick={() => displayAppointment(data)}><ChevronRight size={15} /></div>

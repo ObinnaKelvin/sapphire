@@ -3,6 +3,7 @@ import ReactDom from 'react-dom'
 import './modal.scss'
 import naira from '../../assets/images/naira-black.png'
 import numeral from "numeral";
+import { format } from 'date-fns'//transform the dates to readable formats
 
 
 export const PatientTransaction = ({children, open, onClose, id }) => {
@@ -43,7 +44,7 @@ export const PatientAppointments = ({item, onClose}) => {
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Appointment ID</div>
-                            <div className="right">{item.appointmentId}</div>
+                            <div className="right">SAPP-{item.appointmentId}</div>
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Service</div>
@@ -51,7 +52,7 @@ export const PatientAppointments = ({item, onClose}) => {
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Appointment Date</div>
-                            <div className="right">{item.appointmentDate}</div>
+                            <div className="right">{`${format(new Date(item.appointmentDate), "MMM do, yyy")}`}</div>
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">First Name</div>

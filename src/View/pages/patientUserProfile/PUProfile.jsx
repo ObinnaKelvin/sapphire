@@ -5,15 +5,19 @@ import { ClipboardList, Siren, Users, Wallet } from 'lucide-react';
 import man from '../../assets/images/man1.png'
 import phoneRec from '../../assets/images/phonerecord.gif';
 import personalRec from '../../assets/images/personal.PNG'
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom'
+import { format } from 'date-fns'//transform the dates to readable formats
 
 const PUProfile = () => {
-
+    // const { patientId } = useParams();
+    const [patientId, setPatientId] = useState('');
     const [title, setTitle] = useState('');
     const [firstname, setFirstname] = useState('');
     const [middlename, setMiddlename] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
-    const [dob, setDob] = useState(new Date());
+    const [dob, setDob] = useState(new Date().toISOString().slice(0, 10));
     const [phone, setPhone] = useState('');
     // const[date, setDate] = useState()
     const [age, setAge] = useState(0);
@@ -37,10 +41,87 @@ const PUProfile = () => {
     const [emAddress, setEmAddress] = useState('');
     const [emRelationship, setEmRelationship] = useState('');
     const [modalStep, setModalStep] = useState(1);
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const [isFullyRegistered, setIsFullyRegistered] = useState();
+
+    // console.log(patientId)
 
     const handleNext = async (step) => {
        // e.preventDefault();
         return setModalStep(step);
+    }
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        // await axios.put(`http://localhost:9000/api/patients/find/${currentUser.email}`, {
+            await axios.put(`http://localhost:9000/api/patients/${patientId}`, {
+                title:title,
+                firstName:firstname,
+                lastName:lastname,
+                middleName:middlename,
+                email:email,
+                gender:gender,
+                mobile:phone,
+                dateOfBirth:dob,
+                city:city,
+                country:country,
+                state:state,
+                maritalStatus:maritalStatus,
+                religion:religion,
+                address:address,
+                kinName:kinName,
+                kinPhone:kinPhone,
+                kinRelationship:kinRelationship,
+                kinAddress:kinAddress,
+                emergencyName:emName,
+                emergencyPhone:emPhone,
+                emergencyRelationship:emRelationship,
+                emergencyAddress:emAddress
+        })
+        .then(response => console.log(response))
+
+
+    }
+
+    useEffect(() => {
+        loadPatientRecord()
+    }, [])
+
+    const loadPatientRecord = async () => {
+        try {
+
+            await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`)
+            //.then(response => console.log(response.data[0].firstName))
+            .then(response => {
+                setPatientId(response.data[0]._id)
+                setTitle(response.data[0].title)
+                setFirstname(response.data[0].firstName)
+                setLastname(response.data[0].lastName)
+                setMiddlename(response.data[0].middleName)
+                setEmail(response.data[0].email)
+                setGender(response.data[0].gender)
+                setPhone(response.data[0].mobile)
+                setDob(format(new Date(response.data[0].dateOfBirth), "yyyy-MM-dd"))
+                setCity(response.data[0].city)
+                setCountry(response.data[0].country)
+                setState(response.data[0].state)
+                setMaritalStatus(response.data[0].maritalStatus)
+                setReligion(response.data[0].religion)
+                setAddress(response.data[0].address)
+                setKinName(response.data[0].kinName)
+                setKinPhone(response.data[0].kinPhone)
+                setKinRelationship(response.data[0].kinRelationship)
+                setKinAddress(response.data[0].kinAddress)
+                setEmName(response.data[0].emergencyName)
+                setEmPhone(response.data[0].emergencyPhone)
+                setEmRelationship(response.data[0].emergencyRelationship)
+                setEmAddress(response.data[0].emergencyAddress)
+                setIsFullyRegistered(response.data[0].isFullyRegistered)
+            })
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 
   return (
@@ -54,6 +135,9 @@ const PUProfile = () => {
                 <PatientNavbarMobile />
             </div>
 
+            {/* { isFullyRegistered == 0
+
+            } */}
             <div className="puprofile-modal-container">
                 {/* Hey hey */}
                 <div className="puprofile-modal-items">
@@ -146,6 +230,15 @@ const PUProfile = () => {
                                     </section>
 
                                     <section>
+                                        <label>Gender</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                            <option>- Select Gender -</option>
+                                            <option value={'Male'}>Male</option>
+                                            <option value={'Female'}>Female</option>
+                                        </select>
+                                    </section>
+
+                                    <section>
                                         <label>Phone</label>       
                                         <input 
                                             type="text" 
@@ -159,12 +252,16 @@ const PUProfile = () => {
                                     </section>
 
                                     <section>
-                                        <label>Gender</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
-                                            <option>- Select Gender -</option>
-                                            <option value={'Male'}>Male</option>
-                                            <option value={'Female'}>Female</option>
-                                        </select>
+                                        <label>Date Of Birth</label>
+                                        <input 
+                                        type="date" 
+                                        placeholder='Date Of Birth'
+                                        name='dob'
+                                        value={dob}
+                                        // onChange={handleInputChange}
+                                        onChange = {(e)=>setDob(e.target.value)}
+                                        className="formInput md"
+                                        />
                                     </section>
 
 
@@ -206,6 +303,7 @@ const PUProfile = () => {
                                             <option value={'Separated'}>Separated</option>
                                         </select>
                                     </section>
+
                                     <section>
                                         <label>Religion</label>
                                         <select className = 'formSelect sm' name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
@@ -377,7 +475,7 @@ const PUProfile = () => {
                             <img src={man} alt="" />
                         </div>
                     </div>
-                    <div className="right-info">Obinna Okere Kelvin</div>
+                    <div className="right-info">{`${currentUser.firstname} ${currentUser.lastname}`}</div>
                 </div>
 
                 <div className="puprofile-body-body">
@@ -475,6 +573,19 @@ const PUProfile = () => {
                                             // onChange={handleInputChange}
                                             onChange = {(e)=>setPhone(e.target.value)}
                                             className="formInput sm"
+                                        />
+                                    </section>
+
+                                    <section>
+                                        <label>Date Of Birth</label>
+                                        <input 
+                                        type="date" 
+                                        placeholder='Date Of Birth'
+                                        name='dob'
+                                        value={dob}
+                                        // onChange={handleInputChange}
+                                        onChange = {(e)=>setDob(e.target.value)}
+                                        className="formInput sm"
                                         />
                                     </section>
 
@@ -688,7 +799,7 @@ const PUProfile = () => {
                 </div>
 
                 <div className="puprofile-button-holder">
-                    <button>Save</button>
+                    <button onClick={handleUpdate}>Save</button>
                 </div>
 
             </div>

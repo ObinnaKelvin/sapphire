@@ -15,6 +15,7 @@ const AuthOTP = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
+    const [isFullyRegistered, setIsFullyRegistered] = useState();
 
 
     const handleChange = (element, index) => {
@@ -44,7 +45,14 @@ const AuthOTP = () => {
 
         setEmail(currentUser.email);
       //loadFacilityIncidenceData() //This runs again to update the update state
+        loadRegStatus()
     }, [])
+
+    const loadRegStatus = async () => {
+        await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`)
+        //.then(response => console.log(response.data[0].isFullyRegistered))
+        .then(response => setIsFullyRegistered(response.data[0].isFullyRegistered))
+    }
   
     // const fetchEmail = async() => {
     //   //await axios.get('http://localhost:3005/api/facility/') //local
@@ -68,9 +76,17 @@ const AuthOTP = () => {
                 setSuccess(response.data.message);
                 setError(null); //set error to null after 5 seconds
                 console.log(response.data.message);
-                setTimeout(() => {
-                    navigate("/patient-portal"); //2. Then navigate to dashboard
-                  }, 5000);
+
+                //Next Check if fully registered, if not navigate to profile page and reveal the modal.
+                if(isFullyRegistered == 0) {
+                    setTimeout(() => {
+                        navigate("/patient-portal/profile"); //Navigate to Profile
+                      }, 5000);
+                } else {
+                    setTimeout(() => {
+                        navigate("/patient-portal"); //Navigate to Dashboard
+                      }, 5000);
+                }
             } 
             if (response.status === 400) {
                 setSuccess(null);
