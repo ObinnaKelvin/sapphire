@@ -213,6 +213,28 @@
             }
         }
 
+        .puprofile-modal-container.active {
+            display: flex;
+            animation-name: modalSlideDownUp;
+            animation-duration: 1.5s;
+
+        }
+        .puprofile-modal-container.inactive {
+            display: none;
+        }
+
+        @keyframes modalSlideDownUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+
         .puprofile-body {
             // height: 100vh;
             height: max-content;

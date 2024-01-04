@@ -5,6 +5,7 @@ import { ClipboardList, Siren, Users, Wallet } from 'lucide-react';
 import man from '../../assets/images/man1.png'
 import phoneRec from '../../assets/images/phonerecord.gif';
 import personalRec from '../../assets/images/personal.PNG'
+import success from '../../assets/images/sss.PNG'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
 import { format } from 'date-fns'//transform the dates to readable formats
@@ -79,7 +80,38 @@ const PUProfile = () => {
                 emergencyAddress:emAddress
         })
         .then(response => console.log(response))
+    }
 
+    const handleComplete = async (e) => {
+        e.preventDefault();
+        let completed = 1;
+            await axios.put(`http://localhost:9000/api/patients/${patientId}`, {
+                title:title,
+                firstName:firstname,
+                lastName:lastname,
+                middleName:middlename,
+                email:email,
+                gender:gender,
+                mobile:phone,
+                dateOfBirth:dob,
+                city:city,
+                country:country,
+                state:state,
+                maritalStatus:maritalStatus,
+                religion:religion,
+                address:address,
+                kinName:kinName,
+                kinPhone:kinPhone,
+                kinRelationship:kinRelationship,
+                kinAddress:kinAddress,
+                emergencyName:emName,
+                emergencyPhone:emPhone,
+                emergencyRelationship:emRelationship,
+                emergencyAddress:emAddress,
+                isFullyRegistered:completed
+        })
+        .then(response => console.log(response))
+        setIsFullyRegistered(1);
 
     }
 
@@ -138,7 +170,7 @@ const PUProfile = () => {
             {/* { isFullyRegistered == 0
 
             } */}
-            <div className="puprofile-modal-container">
+            <div className={`puprofile-modal-container ${isFullyRegistered == 0 ? "active" : "inactive"}`}>
                 {/* Hey hey */}
                 <div className="puprofile-modal-items">
 
@@ -154,7 +186,7 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button className='passive'>Not now</button>
-                            <button onClick={(e) => handleNext(2)}>Next</button>
+                            <button onClick={(e) => { handleNext(2); handleUpdate(e)}}>Next</button>
                         </div>
                     </div>
                     <div className={`puprofile-modal-item ${modalStep === 2 ? "active" : "inactive"}`}>
@@ -326,7 +358,7 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button onClick={(e) => handleNext(1)} className='passive'>Back</button>
-                            <button onClick={(e) => handleNext(3)}>Save and Continue</button>
+                            <button onClick={(e) => {handleNext(3); handleUpdate(e)}}>Save and Continue</button>
                         </div>
                     </div>
                     <div className={`puprofile-modal-item ${modalStep === 3 ? "active" : "inactive"}`}>
@@ -391,7 +423,7 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button onClick={(e) => handleNext(2)} className='passive'>Back</button>
-                            <button onClick={(e) => handleNext(4)}>Save and Continue</button>
+                            <button onClick={(e) => {handleNext(4); handleUpdate(e)}}>Save and Continue</button>
                         </div>
 
                     </div>
@@ -459,7 +491,67 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button onClick={(e) => handleNext(3)} className='passive'>Back</button>
-                            <button onClick={(e) => handleNext(5)}>Finish</button>
+                            <button onClick={(e) => {handleNext(5); handleUpdate(e)}}>Finish</button>
+                        </div>
+
+                    </div>
+                    <div className={`puprofile-modal-item ${modalStep === 5 ? "active" : "inactive"}`}>
+                        <div className="modal-header"><h2>You're all set!</h2></div>
+                        <div className="modal-icon">
+                            <img src={success}/>
+                        </div>
+                        <div className="modal-description">
+                                {/* <form action="">
+                                    <section>
+                                        <label>Kin Name</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Name'
+                                                name='kinName'
+                                                value={kinName}
+                                                onChange = {(e)=>setKinName(e.target.value)}
+                                                className="formInput lg"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label>Kin Phone</label>
+                                            <input 
+                                            type="text" 
+                                            placeholder='Phone'
+                                            name='phone'
+                                            value={kinPhone}
+                                            onChange = {(e)=>setKinPhone(e.target.value)}
+                                            className="formInput lg"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label>Relationship</label>
+                                            <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
+                                                <option>- Select Relationship -</option>
+                                                <option value={'Father'}>Father</option>
+                                                <option value={'Mother'}>Mother</option>
+                                                <option value={'Husband'}>Husband</option>
+                                                <option value={'Wife'}>Wife</option>
+                                                <option value={'Uncle'}>Uncle</option>
+                                                <option value={'Aunt'}>Aunt</option>
+                                                <option value={'Brother'}>Brother</option>
+                                                <option value={'Sister'}>Sister</option>
+                                                <option value={'Friend'}>Friend</option>
+                                                <option value={'Unknown'}>Unknown</option>
+                                            </select>
+                                    </section>
+                                    <section>
+                                        <label>Kin Address</label>
+                                            <textarea className="formTextArea md" type="text"name="user_additional_info" placeholder="Address here..."
+                                            value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
+                                            />
+                                    </section>
+
+                                </form> */}
+                        </div>
+                        <div className="modal-buttons">
+                            {/* <button onClick={(e) => handleNext(3)} className='passive'>Back</button> */}
+                            <button onClick={(e) => handleComplete(e)}>Done</button>
                         </div>
 
                     </div>
