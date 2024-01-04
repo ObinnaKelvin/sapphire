@@ -358,7 +358,14 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button onClick={(e) => handleNext(1)} className='passive'>Back</button>
-                            <button onClick={(e) => {handleNext(3); handleUpdate(e)}}>Save and Continue</button>
+                            <button onClick={(e) => {
+                                if(title&&firstname&&middlename&&lastname&&email&&gender&&phone&&dob&&city&&state&&country&&maritalStatus&&religion&&address){
+                                    handleNext(3); handleUpdate(e)
+                                } else {
+                                    alert("Please fill all fields in this section")
+                                }
+                            }}
+                            >Save and Continue</button>
                         </div>
                     </div>
                     <div className={`puprofile-modal-item ${modalStep === 3 ? "active" : "inactive"}`}>
@@ -423,7 +430,14 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button onClick={(e) => handleNext(2)} className='passive'>Back</button>
-                            <button onClick={(e) => {handleNext(4); handleUpdate(e)}}>Save and Continue</button>
+                            <button onClick={(e) => {
+                                if(emName&&emPhone&&emRelationship&&emAddress) {
+                                    handleNext(4); handleUpdate(e)
+                                } else {
+                                    alert("Please fill all fields in this section")
+                                }
+                            }}
+                            >Save and Continue</button>
                         </div>
 
                     </div>
@@ -480,18 +494,19 @@ const PUProfile = () => {
                                             value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
                                             />
                                     </section>
-                                    {/* <section>
-                                        <label>Gender</label>
-                                    </section>
-                                    <section>
-                                        <label>Gender</label>
-                                    </section> */}
 
                                 </form>
                         </div>
                         <div className="modal-buttons">
                             <button onClick={(e) => handleNext(3)} className='passive'>Back</button>
-                            <button onClick={(e) => {handleNext(5); handleUpdate(e)}}>Finish</button>
+                            <button onClick={(e) => {
+                                if (kinName&&kinPhone&&kinAddress&&kinRelationship) {
+                                    handleNext(5); handleUpdate(e)
+                                } else {
+                                    alert("Please fill all fields in this section")
+                                }
+                            }}
+                            >Finish</button>
                         </div>
 
                     </div>
