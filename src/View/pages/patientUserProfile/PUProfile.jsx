@@ -77,7 +77,11 @@ const PUProfile = () => {
                 emergencyName:emName,
                 emergencyPhone:emPhone,
                 emergencyRelationship:emRelationship,
-                emergencyAddress:emAddress
+                emergencyAddress:emAddress,
+                encodedBy: patientId,
+                encodedDate,
+
+
         })
         .then(response => console.log(response))
     }
@@ -108,6 +112,8 @@ const PUProfile = () => {
                 emergencyPhone:emPhone,
                 emergencyRelationship:emRelationship,
                 emergencyAddress:emAddress,
+                encodedBy: patientId,
+                encodedDate,
                 isFullyRegistered:completed
         })
         .then(response => console.log(response))
