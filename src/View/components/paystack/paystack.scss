@@ -1,5 +1,5 @@
 
-.payment-item {
+.payment-item-paystack {
     padding: 20px;
     display: flex;
     flex-direction: row;
@@ -11,10 +11,35 @@
     width: 400px;
     height: 50px;
     cursor: pointer;
+    background-color: #fff;
 
-    .right {
+    .payment-item-paystack-button {
+        padding: 20px;
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
+        // border: 1px solid #c5c5c5;
+        border: none;
+        border-radius: 10px;
+        // gap: 50px;
+        width: 400px;
+        height: 50px;
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+
+    .left {
+        position: absolute;
+        // border: 1px solid #c5c5c5;
+    }
+
+    .right {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0px 0px 0px 250px;
     }
 }

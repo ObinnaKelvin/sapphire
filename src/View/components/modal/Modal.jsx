@@ -75,6 +75,10 @@ export const PatientAppointments = ({item, onClose}) => {
                             <div className="right">{item.appointmentStatus}</div>
                         </div>
                         <div className="pappointments-item-description-item">
+                            <div className="left">Reference Number</div>
+                            <div className="right">{item.referenceNo}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
                             <div className="left">Notes</div>
                             <div className="right"><em>{item.notes}</em></div>
                         </div>

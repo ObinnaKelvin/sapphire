@@ -19,6 +19,9 @@ import numeral from "numeral";
 import axios from 'axios';
 import Flutterwave from '../../components/flutterwave/Flutterwave.jsx';
 import PaystackIntegration from '../../components/paystack/Paystack.jsx';
+import { usePaystackPayment } from 'react-paystack';
+
+
 
 function PayNow() {
     const [firstname, setFirstname] = useState('');
@@ -50,6 +53,8 @@ function PayNow() {
     const [tariff, setTariff] = useState('');
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
+    const [referenceNo, setReferenceNo] = useState('');
+    const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
     // const [startDate, setStartDate] = useState(new Date());
 
     //We add a listener effect that activates 'false' which 
@@ -81,6 +86,11 @@ function PayNow() {
         loadTariffData()
     }, [service])
 
+    useEffect(() => {
+        setReferenceNo(currentReferenceNo);
+    console.log("isPaySuccessRef:", referenceNo);
+    },[currentReferenceNo])
+
     const loadServiceData = async() => {
         await axios.get("http://localhost:9000/api/service/")
         //.then(response => console.log(response.data))
@@ -97,7 +107,7 @@ function PayNow() {
     }
 
     const loadStatusData = async() => {
-        await axios.get("http://localhost:9000/api/status/find/2")
+        await axios.get("http://localhost:9000/api/status/find/1")
         //.then(response => console.log(response.data.description))
         .then(response => setPaymentStatus(response.data.description))
         //.then(console.log("Status Data >>>>", paymentStatus))
@@ -110,14 +120,14 @@ function PayNow() {
         console.log(idChosen)
     }
 
-    const handleSubmit = async(e) => {
+    const handlePaySubmit = async(e) => {
         e.preventDefault();
         setIsLoading(true);
         setError(null)
 
         try {
             const response = await axios.post("http://localhost:9000/api/appointments/", 
-            {firstname, lastname, email, gender, mobile, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}) 
+            {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}) 
 
             if (response.status === 200) {
                 setSuccess(response.data);
@@ -134,6 +144,11 @@ function PayNow() {
         }
 
     }
+    // const reference = new Date().getTime().toString()
+    // console.log("reference:", reference)
+
+    // console.log("isPaySuccess:", isPaySuccess);
+
     
 
   return (
@@ -345,16 +360,22 @@ function PayNow() {
                             </div> */}
                             <p>Select payment method</p>
 
+                            {/* {currentReferenceNo} */}
+
                             <div className="payment-platforms">
 
-                                <PaystackIntegration cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/>
+                                <PaystackIntegration cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service} reference={referenceNo}/>
                                 
-                                {/* <Flutterwave cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/> */}
-                                <Flutterwave cost={500000} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/>
+                                <Flutterwave cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/>
+                                {/* <Flutterwave cost={500000} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/> */}
                             </div>
-                            {/* <div className="book-again" onClick={(e)=>setActiveStep(1)}>
-                                Book Again
-                            </div> */}
+
+                            {
+                                currentReferenceNo &&
+                                <div className="book-again" onClick={(e)=>{setActiveStep(4); handlePaySubmit(e)}}>
+                                    Generate Receipt
+                                </div>
+                            }
                         </div>
                     </div>
                     
