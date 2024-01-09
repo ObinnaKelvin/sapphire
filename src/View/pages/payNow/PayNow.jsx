@@ -7,8 +7,9 @@ import cancel from '../../assets/images/cross.png'
 import user from '../../assets/images/user.png'
 import paper from '../../assets/images/paper.png'
 import flag from '../../assets/images/flag.png';
-import tick from '../../assets/images/tick.png';
+import logo from '../../assets/images/logo.PNG';
 import naira from '../../assets/images/naira.png';
+import pay from '../../assets/images/wallet.png';
 import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen } from 'lucide-react';
 import { clinicData } from './clinicData.jsx'
 import { Calendar } from 'react-date-range';
@@ -20,6 +21,7 @@ import axios from 'axios';
 import Flutterwave from '../../components/flutterwave/Flutterwave.jsx';
 import PaystackIntegration from '../../components/paystack/Paystack.jsx';
 import { usePaystackPayment } from 'react-paystack';
+import Interswitch from '../../components/interswitch/Interswitch.jsx';
 
 
 
@@ -32,9 +34,8 @@ function PayNow() {
     const[showAppointmentDate, setShowAppointmentDate] = useState('')
     const [notes, setNotes] = useState('');
     const[date, setDate] = useState()
-    const [costing, setCosting] = useState('20,000');
     const[openDate, setOpenDate] = useState(false)
-    const[activeStep, setActiveStep] = useState(1) //1
+    const[activeStep, setActiveStep] = useState(4) //1
     const[service, setService] = useState('')
     const[serviceData, setServiceData] = useState([])
     const[serviceId, setServiceId] = useState('')
@@ -155,10 +156,10 @@ function PayNow() {
     <div className="paynow-container">
         <Navbar />
         <div className="paynow-wrapper" ref={formRef}>
-            <div className={`paynow-wrapper-left ${activeStep === 4 ? "inactive" : "active" }`}  ref={formRef}>
+            <div className={`paynow-wrapper-left ${activeStep === 4 ? "active" : "inactive" }`}  ref={formRef}>
                 <img src={paynowbg} alt="Login BG" />
             </div>
-            <div className={`paynow-wrapper-right ${activeStep === 4 ? "inactive" : "active" }`}  ref={formRef}>
+            <div className={`paynow-wrapper-right ${activeStep === 4 ? "active" : "inactive" }`}  ref={formRef}>
                 
                 <div className="form-holder">
                     <div className="headerText">
@@ -177,6 +178,13 @@ function PayNow() {
                                 <img src={paper} alt='user sign' />
                             </div>
                             <div className="stage-text">Summary</div>
+                            <div className="stage-bar"></div>
+                        </div>
+                        <div className={`stage two ${activeStep === 3 ? "active" : "inactive" }`}>
+                            <div className="stage-icon">
+                                <img src={pay} alt='user sign' />
+                            </div>
+                            <div className="stage-text">Pay</div>
                             <div className="stage-bar"></div>
                         </div>
                         <div className={`stage three ${activeStep === 3 ? "active" : "inactive" }`}>
@@ -368,6 +376,7 @@ function PayNow() {
                                 
                                 <Flutterwave cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/>
                                 {/* <Flutterwave cost={500000} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/> */}
+                                <Interswitch />
                             </div>
 
                             {
@@ -382,16 +391,65 @@ function PayNow() {
                     <div className={`phase4 ${activeStep === 4 ? "active" : "inactive" } `}>
                         <div className="phase4-wrapper">
                             <div className="icon-holder">
-                                <img src={tick} alt="success tick" />
+                                <img src={logo} alt="success tick" />
+                                Sapphire Partners
+                            </div>
+                            <div className="titleText">
+                                Transaction Receipt
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Transaction Amount</div>
+                                <div className="right">5,000</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Transaction Date</div>
+                                <div className="right">10th Jan 2024</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Appointment ID</div>
+                                <div className="right">SAPP-</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Service</div>
+                                <div className="right">SAPP-</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Appointment Date</div>
+                                <div className="right">SAPP-</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Customer</div>
+                                <div className="right">Obinna Okere Kelvin</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Mobile</div>
+                                <div className="right">07035858557</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Reference Number</div>
+                                <div className="right">17123242333535</div>
+                            </div>
+                            <div className="phase4-body-item">
+                                <div className="left">Transaction Status</div>
+                                <div className="right">Success</div>
+                            </div>
+                            {/* <div className="phase4-body-item">
+                                <div className="left">Appointment ID</div>
+                                <div className="right">SAPP-</div>
                             </div>
                             <div className="titleText">
                                 Appointment Booked!
-                            </div>
-                            <p>You will receive a confirmation mail shortly and an instruction on how to track your bookings.</p>
-                            <div className="book-again" onClick={(e)=>setActiveStep(1)}>
-                                Book Again
-                            </div>
+                            </div> */}
+                            <p>You will receive a confirmation mail shortly and an instruction on how to track your bookings.
+                                If you have any questions or would like more information, please call our 24-hour Contact Centre
+                                on +2349010002302 or send an email to info@sapphiresurgeons.com. <br/>
+                                Thank you for choosing Sapphire Partners.
+                            </p>
                         </div>
+                    </div>
+
+                    <div className="book-again" onClick={(e)=>setActiveStep(1)}>
+                        Finish
                     </div>
 
                 </div>
