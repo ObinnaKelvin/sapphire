@@ -940,6 +940,38 @@
         
                 }
 
+                .functions-box {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    // border: 1px solid red;
+                    margin: 15px 0px;
+                    gap: 10px;
+
+                    button {
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                        padding: 5px 15px;
+                        outline: none;
+                        border: 1px solid #c5c5c5;
+                        background-color: white;
+                        border-radius: 13px;
+
+                        span {
+                            color: #757575;
+                        }
+
+                        .box1 {
+                            color: #46bc63;
+                        }
+
+                        .box3 {
+                            color: #907c12;
+                        }
+                    }
+                }
+
                 .book-again {
                     padding: 15px 15px 15px 15px;
                     border-radius: 2em;

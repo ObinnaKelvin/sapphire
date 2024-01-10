@@ -10,8 +10,7 @@ import flag from '../../assets/images/flag.png';
 import logo from '../../assets/images/logo.PNG';
 import naira from '../../assets/images/naira.png';
 import pay from '../../assets/images/wallet.png';
-import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen } from 'lucide-react';
-import { clinicData } from './clinicData.jsx'
+import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen, DownloadCloud } from 'lucide-react';
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -20,8 +19,9 @@ import numeral from "numeral";
 import axios from 'axios';
 import Flutterwave from '../../components/flutterwave/Flutterwave.jsx';
 import PaystackIntegration from '../../components/paystack/Paystack.jsx';
-import { usePaystackPayment } from 'react-paystack';
+// import { usePaystackPayment } from 'react-paystack';
 import Interswitch from '../../components/interswitch/Interswitch.jsx';
+import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
 
 
 
@@ -145,6 +145,8 @@ function PayNow() {
         }
 
     }
+
+    const printComponentRef = useRef()
     // const reference = new Date().getTime().toString()
     // console.log("reference:", reference)
 
@@ -389,7 +391,7 @@ function PayNow() {
                     </div>
                     
                     <div className={`phase4 ${activeStep === 4 ? "active" : "inactive" } `}>
-                        <div className="phase4-wrapper">
+                        <div className="phase4-wrapper"  ref={printComponentRef}>
                             <div className="icon-holder">
                                 <img src={logo} alt="success tick" />
                                 Sapphire Partners
@@ -447,7 +449,18 @@ function PayNow() {
                             </p>
                         </div>
                     </div>
-
+                    
+                    <div className="functions-box">
+                        <button onClick={() => exportComponentAsJPEG(printComponentRef)}>
+                            <span className='box1'>JPEG</span><DownloadCloud className='box1' />
+                        </button>
+                        {/* <button onClick={() => exportComponentAsPDF(printComponentRef)}>
+                            <span className='box2'>PDF</span><DownloadCloud className='box2' />
+                        </button> */}
+                        <button onClick={() => exportComponentAsPNG(printComponentRef)}>
+                            <span className='box3'>PNG</span><DownloadCloud className='box3' />
+                        </button>
+                    </div>
                     <div className="book-again" onClick={(e)=>setActiveStep(1)}>
                         Finish
                     </div>
