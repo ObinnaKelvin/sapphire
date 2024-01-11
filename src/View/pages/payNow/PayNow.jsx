@@ -35,7 +35,7 @@ function PayNow() {
     const [notes, setNotes] = useState('');
     const[date, setDate] = useState()
     const[openDate, setOpenDate] = useState(false)
-    const[activeStep, setActiveStep] = useState(4) //1
+    const[activeStep, setActiveStep] = useState(1) //1
     const[service, setService] = useState('')
     const[serviceData, setServiceData] = useState([])
     const[serviceId, setServiceId] = useState('')
@@ -55,7 +55,8 @@ function PayNow() {
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
     const [referenceNo, setReferenceNo] = useState('');
-    const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
+    let currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
+    let receipt = JSON.parse(localStorage.getItem('Receipt'));
     // const [startDate, setStartDate] = useState(new Date());
 
     //We add a listener effect that activates 'false' which 
@@ -89,7 +90,8 @@ function PayNow() {
 
     useEffect(() => {
         setReferenceNo(currentReferenceNo);
-    console.log("isPaySuccessRef:", referenceNo);
+        console.log("isPaySuccessRef:", currentReferenceNo);
+        // console.log("isPaySuccessRef:", referenceNo);
     },[currentReferenceNo])
 
     const loadServiceData = async() => {
@@ -134,8 +136,11 @@ function PayNow() {
                 setSuccess(response.data);
                 setError(null); //set error to null after 5 seconds
                 setTimeout(() => {
-                    setActiveStep(3); //set ActiveStep to 3 after 5 seconds
+                    setActiveStep(4); //set ActiveStep to 3 after 5 seconds
                   }, 5000);
+                  
+                // save the Response to local storage
+                localStorage.setItem('Receipt', JSON.stringify(response.data));
                 console.log(response.data);
             }
             setIsLoading(false);
@@ -144,6 +149,21 @@ function PayNow() {
             console.log(error)
         }
 
+    }
+
+    const handleFinish = () => {
+        localStorage.setItem('Receipt', JSON.stringify({}));
+        localStorage.setItem('RefNo', JSON.stringify(''));
+        setActiveStep(1);
+        firstname = '';
+        lastname = '';
+        email = '';
+        mobile = '';
+        appointmentDate = ''
+        notes = '';
+        // date = useState()
+        service = ''
+        gender = ''
     }
 
     const printComponentRef = useRef()
@@ -158,10 +178,10 @@ function PayNow() {
     <div className="paynow-container">
         <Navbar />
         <div className="paynow-wrapper" ref={formRef}>
-            <div className={`paynow-wrapper-left ${activeStep === 4 ? "active" : "inactive" }`}  ref={formRef}>
+            <div className={`paynow-wrapper-left ${activeStep === 5 ? "inactive" : "active" }`}  ref={formRef}>
                 <img src={paynowbg} alt="Login BG" />
             </div>
-            <div className={`paynow-wrapper-right ${activeStep === 4 ? "active" : "inactive" }`}  ref={formRef}>
+            <div className={`paynow-wrapper-right ${activeStep === 5 ? "inactive" : "active" }`}  ref={formRef}>
                 
                 <div className="form-holder">
                     <div className="headerText">
@@ -383,7 +403,7 @@ function PayNow() {
 
                             {
                                 currentReferenceNo &&
-                                <div className="book-again" onClick={(e)=>{setActiveStep(4); handlePaySubmit(e)}}>
+                                <div className="book-again" onClick={(e)=>{ handlePaySubmit(e)}}>
                                     Generate Receipt
                                 </div>
                             }
@@ -401,39 +421,39 @@ function PayNow() {
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Transaction Amount</div>
-                                <div className="right">5,000</div>
+                                <div className="right">{receipt&&receipt.tariff}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Transaction Date</div>
-                                <div className="right">10th Jan 2024</div>
+                                <div className="right">{receipt&&receipt.encodedDate}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Appointment ID</div>
-                                <div className="right">SAPP-</div>
+                                <div className="right">SAPP-{receipt&&receipt.appointmentId}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Service</div>
-                                <div className="right">SAPP-</div>
+                                <div className="right">{receipt&&receipt.service}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Appointment Date</div>
-                                <div className="right">SAPP-</div>
+                                <div className="right">{receipt&&receipt.appointmentDate}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Customer</div>
-                                <div className="right">Obinna Okere Kelvin</div>
+                                <div className="right">{receipt&&receipt.firstname} {receipt&&receipt.lastname}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Mobile</div>
-                                <div className="right">07035858557</div>
+                                <div className="right">{receipt&&receipt.mobile}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Reference Number</div>
-                                <div className="right">17123242333535</div>
+                                <div className="right">{receipt&&receipt.referenceNo}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Transaction Status</div>
-                                <div className="right">Success</div>
+                                <div className="right">{receipt&&receipt.paymentStatus}</div>
                             </div>
                             {/* <div className="phase4-body-item">
                                 <div className="left">Appointment ID</div>
@@ -449,21 +469,25 @@ function PayNow() {
                             </p>
                         </div>
                     </div>
-                    
-                    <div className="functions-box">
-                        <button onClick={() => exportComponentAsJPEG(printComponentRef)}>
-                            <span className='box1'>JPEG</span><DownloadCloud className='box1' />
-                        </button>
-                        {/* <button onClick={() => exportComponentAsPDF(printComponentRef)}>
-                            <span className='box2'>PDF</span><DownloadCloud className='box2' />
-                        </button> */}
-                        <button onClick={() => exportComponentAsPNG(printComponentRef)}>
-                            <span className='box3'>PNG</span><DownloadCloud className='box3' />
-                        </button>
-                    </div>
-                    <div className="book-again" onClick={(e)=>setActiveStep(1)}>
-                        Finish
-                    </div>
+                    {
+                        activeStep === 4 &&
+                        <>
+                            <div className="functions-box">
+                                <button onClick={() => exportComponentAsJPEG(printComponentRef)}>
+                                    <span className='box1'>JPEG</span><DownloadCloud className='box1' />
+                                </button>
+                                {/* <button onClick={() => exportComponentAsPDF(printComponentRef)}>
+                                    <span className='box2'>PDF</span><DownloadCloud className='box2' />
+                                </button> */}
+                                <button onClick={() => exportComponentAsPNG(printComponentRef)}>
+                                    <span className='box3'>PNG</span><DownloadCloud className='box3' />
+                                </button>
+                            </div>
+                            <div className="book-again" onClick={handleFinish}>
+                                Finish
+                            </div>
+                        </>
+                    }
 
                 </div>
             </div>
