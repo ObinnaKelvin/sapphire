@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef  } from 'react'
+import React, { useState, useEffect, useRef, useReducer  } from 'react'
 import { Navbar } from '../../components/navigation/Navbar'
 import './paynow.scss';
 import paynowbg from '../../assets/images/booking.jpg'
@@ -54,10 +54,11 @@ function PayNow() {
     const [tariff, setTariff] = useState('');
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
-    const [referenceNo, setReferenceNo] = useState('');
-    let currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
-    let receipt = JSON.parse(localStorage.getItem('Receipt'));
+    const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
+    const [referenceNo, setReferenceNo] = useState(currentReferenceNo);
+    const receipt = JSON.parse(localStorage.getItem('Receipt'));
     // const [startDate, setStartDate] = useState(new Date());
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
     //We add a listener effect that activates 'false' which 
     // invokes the 'inactive' property to the dropdowns
@@ -88,11 +89,30 @@ function PayNow() {
         loadTariffData()
     }, [service])
 
+    
+    // setTimeout(() => {
+    //     reloadPage()
+    // }, 1000);
+
+      
     useEffect(() => {
-        setReferenceNo(currentReferenceNo);
-        console.log("isPaySuccessRef:", currentReferenceNo);
-        // console.log("isPaySuccessRef:", referenceNo);
-    },[currentReferenceNo])
+        forceUpdate();
+        // reloadPage()
+        //const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
+        if(referenceNo !== ""){
+            setReferenceNo(currentReferenceNo);
+            //console.log("isPaySuccessRef:", currentReferenceNo);
+            console.log("isPaySuccessRef:", referenceNo);
+        }
+    },[referenceNo])
+
+
+    // const reloadPage = () => {
+    //     // window.location.reload(false);
+    //     const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
+    //     //setReferenceNo(...referenceNo, currentReferenceNo);
+    //     console.log("isPaySuccessRef:", currentReferenceNo);
+    // }
 
     const loadServiceData = async() => {
         await axios.get("http://localhost:9000/api/service/")
@@ -127,8 +147,10 @@ function PayNow() {
         e.preventDefault();
         setIsLoading(true);
         setError(null)
+        forceUpdate();
 
         try {
+            setReferenceNo(currentReferenceNo)
             const response = await axios.post("http://localhost:9000/api/appointments/", 
             {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}) 
 
@@ -137,7 +159,7 @@ function PayNow() {
                 setError(null); //set error to null after 5 seconds
                 setTimeout(() => {
                     setActiveStep(4); //set ActiveStep to 3 after 5 seconds
-                  }, 5000);
+                  }, 2000);
                   
                 // save the Response to local storage
                 localStorage.setItem('Receipt', JSON.stringify(response.data));
@@ -154,16 +176,16 @@ function PayNow() {
     const handleFinish = () => {
         localStorage.setItem('Receipt', JSON.stringify({}));
         localStorage.setItem('RefNo', JSON.stringify(''));
-        setActiveStep(1);
-        firstname = '';
-        lastname = '';
-        email = '';
-        mobile = '';
-        appointmentDate = ''
-        notes = '';
+        setFirstname('');
+        setLastname('');
+        setEmail('');
+        setMobile('');
+        setShowAppointmentDate('')
+        setNotes('');
         // date = useState()
-        service = ''
-        gender = ''
+        setService('')
+        setGender('')
+        setActiveStep(1);
     }
 
     const printComponentRef = useRef()
@@ -253,6 +275,7 @@ function PayNow() {
                                     <option>- Choose Sex -</option>
                                     <option value={'Male'}>Male</option>
                                     <option value={'Female'}>Female</option>
+                                    <option value={'Others'}>Other</option>
                                 </select>
 
 
@@ -401,11 +424,17 @@ function PayNow() {
                                 <Interswitch />
                             </div>
 
+                            <button onClick={(e)=>{ handlePaySubmit(e)}}>Generate Receipt</button>
                             {
-                                currentReferenceNo &&
-                                <div className="book-again" onClick={(e)=>{ handlePaySubmit(e)}}>
-                                    Generate Receipt
-                                </div>
+                                //currentReferenceNo && 
+                                //<button onClick={(e)=>{ handlePaySubmit(e)}}>Generate Receipt</button>
+                               
+                                // <div className="book-again" onClick={(e)=>{ handlePaySubmit(e)}}>
+                                //     {`${isLoading ? "Loading" : "Generate Receipt"} `}
+                                // </div>
+                            }
+                            {
+                                 //console.log(currentReferenceNo)
                             }
                         </div>
                     </div>

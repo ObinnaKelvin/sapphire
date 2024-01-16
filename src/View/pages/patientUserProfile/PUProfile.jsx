@@ -18,7 +18,8 @@ const PUProfile = () => {
     const [middlename, setMiddlename] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
-    const [dob, setDob] = useState(new Date().toISOString().slice(0, 10));
+    const [dob, setDob] = useState(new Date());
+    // const [dob, setDob] = useState(new Date().toISOString().slice(0, 10));
     const [phone, setPhone] = useState('');
     // const[date, setDate] = useState()
     const [age, setAge] = useState(0);
@@ -46,6 +47,7 @@ const PUProfile = () => {
     const [isFullyRegistered, setIsFullyRegistered] = useState();
 
     // console.log(patientId)
+    console.log("isFullyRegistered",isFullyRegistered)
 
     const handleNext = async (step) => {
        // e.preventDefault();
@@ -54,7 +56,7 @@ const PUProfile = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        // await axios.put(`http://localhost:9000/api/patients/find/${currentUser.email}`, {
+        //await axios.put(`http://localhost:9000/api/patients/find/${currentUser.email}`, {
             await axios.put(`http://localhost:9000/api/patients/${patientId}`, {
                 title:title,
                 firstName:firstname,
@@ -129,7 +131,7 @@ const PUProfile = () => {
         try {
 
             await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`)
-            //.then(response => console.log(response.data[0].firstName))
+            // .then(response => console.log(response.data[0]))
             .then(response => {
                 setPatientId(response.data[0]._id)
                 setTitle(response.data[0].title)
@@ -139,7 +141,7 @@ const PUProfile = () => {
                 setEmail(response.data[0].email)
                 setGender(response.data[0].gender)
                 setPhone(response.data[0].mobile)
-                setDob(format(new Date(response.data[0].dateOfBirth), "yyyy-MM-dd"))
+                // setDob(format(new Date(response.data[0].dateOfBirth), "yyyy-MM-dd"))
                 setCity(response.data[0].city)
                 setCountry(response.data[0].country)
                 setState(response.data[0].state)
@@ -156,6 +158,8 @@ const PUProfile = () => {
                 setEmAddress(response.data[0].emergencyAddress)
                 setIsFullyRegistered(response.data[0].isFullyRegistered)
             })
+
+        
             
         } catch (error) {
             console.log(error)
@@ -192,7 +196,7 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button className='passive'>Not now</button>
-                            <button onClick={(e) => { handleNext(2); handleUpdate(e)}}>Next</button>
+                            <button onClick={(e) => { handleNext(2)}}>Next</button>
                         </div>
                     </div>
                     <div className={`puprofile-modal-item ${modalStep === 2 ? "active" : "inactive"}`}>
@@ -273,6 +277,7 @@ const PUProfile = () => {
                                             <option>- Select Gender -</option>
                                             <option value={'Male'}>Male</option>
                                             <option value={'Female'}>Female</option>
+                                            <option value={'Other'}>Other</option>
                                         </select>
                                     </section>
 
@@ -366,7 +371,7 @@ const PUProfile = () => {
                             <button onClick={(e) => handleNext(1)} className='passive'>Back</button>
                             <button onClick={(e) => {
                                 if(title&&firstname&&middlename&&lastname&&email&&gender&&phone&&dob&&city&&state&&country&&maritalStatus&&religion&&address){
-                                    handleNext(3); handleUpdate(e)
+                                    handleUpdate(e); handleNext(3); 
                                 } else {
                                     alert("Please fill all fields in this section")
                                 }
@@ -438,7 +443,7 @@ const PUProfile = () => {
                             <button onClick={(e) => handleNext(2)} className='passive'>Back</button>
                             <button onClick={(e) => {
                                 if(emName&&emPhone&&emRelationship&&emAddress) {
-                                    handleNext(4); handleUpdate(e)
+                                   handleUpdate(e); handleNext(4)
                                 } else {
                                     alert("Please fill all fields in this section")
                                 }

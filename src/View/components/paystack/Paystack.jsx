@@ -12,9 +12,9 @@ export default function PaystackIntegration ({cost, email, mobile, name, title})
     const onSuccess = ({reference}) => {
         // Implementation for whatever you want to do with reference and after success call.
         //console.log(reference);
-        alert(
-            `Your booking was successful! Transaction reference: ${reference}`
-          )
+        // alert(
+        //     `Your booking was successful! Transaction reference: ${reference}`
+        //   )
         
         // save the Reference No. to local storage
         localStorage.setItem('RefNo', JSON.stringify(reference));
