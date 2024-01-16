@@ -54,6 +54,10 @@ const PUProfile = () => {
         return setModalStep(step);
     }
 
+    const handleNotNow = () => {
+        setIsFullyRegistered(1);
+    }
+
     const handleUpdate = async (e) => {
         e.preventDefault();
         //await axios.put(`http://localhost:9000/api/patients/find/${currentUser.email}`, {
@@ -195,7 +199,7 @@ const PUProfile = () => {
                             <p>You only need to complete this process once.</p>
                         </div>
                         <div className="modal-buttons">
-                            <button className='passive'>Not now</button>
+                            <button className='passive' onClick={handleNotNow}>Not now</button>
                             <button onClick={(e) => { handleNext(2)}}>Next</button>
                         </div>
                     </div>

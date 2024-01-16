@@ -161,7 +161,7 @@ function Pportal() {
                                             <div className="booking-service">{data.service}</div>
                                             <div className="booking-date">{`${format(new Date(data.appointmentDate), "MMM do, yyy")}`}</div>
                                             <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
-                                            <div className="booking-status success">{data.paymentStatus}</div>
+                                            <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
                                             <div className="booking-modal" onClick={() => displayAppointment(data)}><ChevronRight size={15} /></div>
                                             {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 3</PatientTransaction> */}
                                         </div>
