@@ -137,15 +137,44 @@ export const PatientNavbar = () => {
 
 export const PatientNavbarMobile = () => {
 
+    const { dispatch } = useAuthContext();
+
+    const handleLogout = () => {
+        localStorage.removeItem('user')
+        dispatch({type: 'LOGOUT'})
+    }
+
     return (
         <div className="patientnavbarmobile-container">
             <div className="patientnavbarmobile-wrapper">
-                <Link to={'/patient-portal'} className='link'>
-                    <div className='patientnavbarmobile-item'>
-                        <Wallet2  size={20} />
-                        <span>Bookings</span>
-                    </div>
-                </Link>
+                <div className="step1">
+                    <Link to={'/patient-portal'} className='link'>
+                        <div className='patientnavbarmobile-item'>
+                            <Wallet2  size={20} />
+                            <span>Bookings</span>
+                        </div>
+                    </Link>
+                    <Link to={'/patient-portal/profile'} className='link'>
+                        <div className='patientnavbarmobile-item'>
+                            <Contact2 size={20} />
+                            <span>Profile</span>
+                        </div>
+                    </Link>
+                    <Link to={'/patient-login'} className='link'>
+                        <div className='patientnavbarmobile-item' onClick={handleLogout}>
+                            <LogOut size={20} />
+                            <span>Log Out</span>
+                        </div>
+                    </Link>
+                </div>
+                {/* <div className="step2">
+                    <Link to={'/patient-login'} className='link'>
+                        <div className='patientnavbarmobile-item' onClick={handleLogout}>
+                            <LogOut size={20} />
+                            <span>Log Out</span>
+                        </div>
+                    </Link>
+                </div> */}
             </div>
         </div>
     )

@@ -258,23 +258,55 @@
         font-size: 10px;
         color: #0f5bce;
         align-items: center;
+        flex-direction: row;
         // margin: 0px auto 0px auto;
 
-        .link {
-            text-decoration: none;
-            color: #0f5bce;
-            margin: 0px auto 0px auto;
+        .step1 {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            // border: 1px solid red;
+            gap: 30px;
+            padding: 10px 0px 10px 0px;
+            // width: 90%; //Uncomment this if you need to use Step 2
+            width: 100%;
+
+            .link {
+                text-decoration: none;
+                color: #0f5bce;
+                margin: 0px auto 0px auto;
+            }
+
+            .patientnavbarmobile-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                // border: 1px solid white;
+                margin: 0px auto 0px auto;
+                gap: 5px;
+            }
         }
 
-        .patientnavbarmobile-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            // border: 1px solid white;
-            margin: 0px auto 0px auto;
-            gap: 5px;
-        }
-        
+        // .step2 {
+        //     display: flex;
+        //     align-items: center;
+        //     width: 20%;
+
+        //     .link {
+        //         text-decoration: none;
+        //         color: #0f5bce;
+        //         margin: 0px auto 0px auto;
+        //     }
+
+        //     .patientnavbarmobile-item {
+        //         display: flex;
+        //         flex-direction: column;
+        //         align-items: center;
+        //         // border: 1px solid white;
+        //         margin: 0px auto 0px auto;
+        //         gap: 5px;
+        //     }
+        // }
     }
 }
 
