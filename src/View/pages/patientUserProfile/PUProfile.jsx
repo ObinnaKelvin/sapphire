@@ -181,9 +181,10 @@ const PUProfile = () => {
                 <PatientNavbarMobile />
             </div>
 
-            {/* { isFullyRegistered == 0
-
+            {/* { 
+                isFullyRegistered == 0
             } */}
+            
             <div className={`puprofile-modal-container ${isFullyRegistered == 0 ? "active" : "inactive"}`}>
                 {/* Hey hey */}
                 <div className="puprofile-modal-items">
