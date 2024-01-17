@@ -184,7 +184,7 @@ const PUProfile = () => {
             {/* { 
                 isFullyRegistered == 0
             } */}
-            
+
             <div className={`puprofile-modal-container ${isFullyRegistered == 0 ? "active" : "inactive"}`}>
                 {/* Hey hey */}
                 <div className="puprofile-modal-items">
@@ -365,7 +365,7 @@ const PUProfile = () => {
                                     
                                     <section>
                                         <label>Address</label>
-                                        <textarea className="formTextArea md" type="text"name="user_additional_info" placeholder="Address here..."
+                                        <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
                                         value={address} onChange={(e)=> setAddress(e.target.value)}
                                         />
                                     </section>
@@ -399,7 +399,7 @@ const PUProfile = () => {
                                                 name='kinName'
                                                 value={emName}
                                                 onChange = {(e)=>setEmName(e.target.value)}
-                                                className="formInput lg"
+                                                className="formInput md"
                                             />
                                     </section>
                                     <section>
@@ -410,12 +410,12 @@ const PUProfile = () => {
                                             name='phone'
                                             value={emPhone}
                                             onChange = {(e)=>setEmPhone(e.target.value)}
-                                            className="formInput lg"
+                                            className="formInput md"
                                             />
                                     </section>
                                     <section>
                                         <label>Relationship</label>
-                                            <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setEmRelationship(e.target.value)} value={emRelationship}>
+                                            <select className = 'formSelect md' name="user_sex" onChange={(e)=>setEmRelationship(e.target.value)} value={emRelationship}>
                                                 <option>- Select Relationship -</option>
                                                 <option value={'Father'}>Father</option>
                                                 <option value={'Mother'}>Mother</option>
@@ -431,7 +431,7 @@ const PUProfile = () => {
                                     </section>
                                     <section>
                                         <label>Address</label>
-                                            <textarea className="formTextArea md" type="text"name="user_additional_info" placeholder="Address here..."
+                                            <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
                                             value={emAddress} onChange={(e)=> setEmAddress(e.target.value)}
                                             />
                                     </section>
@@ -473,7 +473,7 @@ const PUProfile = () => {
                                                 value={kinName}
                                                 // onChange={handleInputChange}
                                                 onChange = {(e)=>setKinName(e.target.value)}
-                                                className="formInput lg"
+                                                className="formInput md"
                                             />
                                     </section>
                                     <section>
@@ -485,12 +485,12 @@ const PUProfile = () => {
                                             value={kinPhone}
                                             // onChange={handleInputChange}
                                             onChange = {(e)=>setKinPhone(e.target.value)}
-                                            className="formInput lg"
+                                            className="formInput md"
                                             />
                                     </section>
                                     <section>
                                         <label>Relationship</label>
-                                            <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
+                                            <select className = 'formSelect md' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
                                                 <option>- Select Relationship -</option>
                                                 <option value={'Father'}>Father</option>
                                                 <option value={'Mother'}>Mother</option>
@@ -506,7 +506,7 @@ const PUProfile = () => {
                                     </section>
                                     <section>
                                         <label>Kin Address</label>
-                                            <textarea className="formTextArea md" type="text"name="user_additional_info" placeholder="Address here..."
+                                            <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
                                             value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
                                             />
                                     </section>

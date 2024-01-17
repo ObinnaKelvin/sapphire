@@ -144,6 +144,10 @@
                                 .formInput.md {
                                     width: 165px;
                                 }
+    
+                                .formTextArea.sm {
+                                    width: 350px;
+                                }
 
                                 .formTextArea.md {
                                     width: 365px;
@@ -555,19 +559,19 @@
                 background-color: rgba(0, 0, 0, .5);
                 //opacity: 0;
                 transition: opacity .2s ease;
-                height: 106%;
+                height: 105%;
                 z-index: 20;
                 margin: -60px 0px 0px 0px;
     
                 .puprofile-modal-items {
                     height: 550px;
-                    width: 500px;
-                    margin: -890px 0px 0px 0px;
+                    width: 400px;
+                    margin: -1290px 0px 0px 0px;
                     // border: 1px solid blue;
     
                     .puprofile-modal-item {
                         //border: 1px solid orange;
-                        min-height: 550px;
+                        min-height: 500px;
                         display: flex;
                         flex-direction: column;
                         position: relative;
@@ -577,6 +581,7 @@
                             //border: 1px solid orange;
                             text-align: center;
                             color: #5f5f5f;
+                            font-size: 12px;
                         }
     
                         .modal-icon {
@@ -595,20 +600,21 @@
                         .modal-description {
                             padding: 20px;
                             color: #5f5f5f;
+                            font-size: 12px;
     
     
                             form {
                                 display: flex;
                                 flex-direction: row;
                                 flex-wrap: wrap;
-                                padding: 30px;
+                                padding: 15px;
                                 gap: 7px;
                                 //background-color: #fff;
     
                                 section {
                                     display: flex;
                                     position: relative;
-                                    margin-bottom: 25px;
+                                    margin-bottom: 35px;
                                     width: max-content;
                                     // border: 1px solid orange;
     
@@ -646,11 +652,11 @@
                                         padding: 12px 12px;
                                         cursor: pointer;
                                         border: 1px solid #e6e6e6;
-                                        width: 260px;
+                                        width: 170px;
                                     }
     
                                     .formTextArea {
-                                        width: 700px;
+                                        width: 280px;
                                         padding: 20px;
                                         border-radius: 2em;
                                         border: 1px solid #e0e0e0;
@@ -662,8 +668,16 @@
                                         border: 1px solid #2196f3;
                                     }
     
-                                    .formInput.md {
+                                    .formInput.sm {
                                         width: 165px;
+                                    }
+    
+                                    .formInput.md {
+                                        width: 280px;
+                                    }
+    
+                                    .formTextArea.sm {
+                                        width: 280px;
                                     }
     
                                     .formTextArea.md {
@@ -672,6 +686,14 @@
     
                                     .formInput.lg {
                                         width: 365px;
+                                    }
+    
+                                    .formSelect.sm {
+                                        width: 100px;
+                                    }
+    
+                                    .formSelect.md {
+                                        width: 305px;
                                     }
     
                                     .formSelect.lg {
