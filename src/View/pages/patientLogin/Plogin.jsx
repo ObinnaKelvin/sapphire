@@ -8,6 +8,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 import logo from '../../assets/images/logo.PNG'
 import {Eye, EyeOff} from 'lucide-react'
+import HashLoader from 'react-spinners/HashLoader';
 //import { useLogin } from '../../hooks/useLogin';
 
 const Plogin = () => {
@@ -313,8 +314,10 @@ const Plogin = () => {
                                 <div className='button' type='submit'>Login</div>
                             </Link> */}
                             {/* <Link to="/patient-portal/auth" className='link'> */}
-                                <button className='button'  disabled={isLoading} type='submit' onClick={handleLogin}>Login</button>
+                                <button className='button'  disabled={isLoading} type='submit' onClick={handleLogin}>{ isLoading ? <HashLoader size={30} cssOverride={{ margin: '0px auto 0px auto'}} color="#fff" /> : `Login`}</button>
                             {/* </Link> */}
+
+                            {/* <HashLoader size={30} cssOverride={{position:'absolute', left:'190px', bottom:'13px',  margin: '0px auto 80px auto'}} color="#fff" />  */}
 
                             <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?

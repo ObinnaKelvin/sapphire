@@ -435,13 +435,6 @@ const PUProfile = () => {
                                             value={emAddress} onChange={(e)=> setEmAddress(e.target.value)}
                                             />
                                     </section>
-                                    {/* <section>
-                                        <label>Gender</label>
-                                    </section>
-                                    <section>
-                                        <label>Gender</label>
-                                    </section> */}
-
                                 </form>
                         </div>
                         <div className="modal-buttons">
@@ -471,7 +464,6 @@ const PUProfile = () => {
                                                 placeholder='Name'
                                                 name='kinName'
                                                 value={kinName}
-                                                // onChange={handleInputChange}
                                                 onChange = {(e)=>setKinName(e.target.value)}
                                                 className="formInput md"
                                             />
@@ -483,7 +475,6 @@ const PUProfile = () => {
                                             placeholder='Phone'
                                             name='phone'
                                             value={kinPhone}
-                                            // onChange={handleInputChange}
                                             onChange = {(e)=>setKinPhone(e.target.value)}
                                             className="formInput md"
                                             />
@@ -693,7 +684,6 @@ const PUProfile = () => {
                                             placeholder='Phone'
                                             name='phone'
                                             value={phone}
-                                            // onChange={handleInputChange}
                                             onChange = {(e)=>setPhone(e.target.value)}
                                             className="formInput sm"
                                         />
@@ -706,7 +696,6 @@ const PUProfile = () => {
                                         placeholder='Date Of Birth'
                                         name='dob'
                                         value={dob}
-                                        // onChange={handleInputChange}
                                         onChange = {(e)=>setDob(e.target.value)}
                                         className="formInput sm"
                                         />
@@ -857,7 +846,6 @@ const PUProfile = () => {
                                                 placeholder='Kin Name'
                                                 name='kinName'
                                                 value={kinName}
-                                                // onChange={handleInputChange}
                                                 onChange = {(e)=>setKinName(e.target.value)}
                                                 className="formInput sm"
                                             />
@@ -869,7 +857,6 @@ const PUProfile = () => {
                                             placeholder='Phone'
                                             name='phone'
                                             value={kinPhone}
-                                            // onChange={handleInputChange}
                                             onChange = {(e)=>setKinPhone(e.target.value)}
                                             className="formInput sm"
                                             />
@@ -896,12 +883,6 @@ const PUProfile = () => {
                                             value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
                                             />
                                     </section>
-                                    {/* <section>
-                                        <label>Gender</label>
-                                    </section>
-                                    <section>
-                                        <label>Gender</label>
-                                    </section> */}
 
                                 </form>
                                 
