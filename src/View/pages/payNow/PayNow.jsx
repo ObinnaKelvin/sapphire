@@ -14,7 +14,7 @@ import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen, DownloadCloud }
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format } from 'date-fns'//transform the dates to readable formats
+import { format, parseISO } from 'date-fns'//transform the dates to readable formats
 import numeral from "numeral";
 import axios from 'axios';
 import Flutterwave from '../../components/flutterwave/Flutterwave.jsx';
@@ -46,17 +46,17 @@ function PayNow() {
         // console.log(format(dateSelected, 'dd/MM/yyyy'))
         // setDate(format(dateSelected, 'eeee do LLLL yyyy'))
         setShowAppointmentDate(format(dateSelected, 'eeee do LLLL yyyy'))
-        setAppointmentDate(dateSelected)
+        setAppointmentDate(format(dateSelected, 'eeee do LLLL yyyy'))
+        // setAppointmentDate(dateSelected)
     }
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
-    const [encodedDate, setEncodedDate] = useState(new Date());
+    // const [encodedDate, setEncodedDate] = useState(new Date());
+    const [encodedDate, setEncodedDate] = useState(format(new Date(), 'eeee do LLLL yyyy'));
     const [tariff, setTariff] = useState('');
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
-    const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
-    // const [referenceNo, setReferenceNo] = useState(currentReferenceNo);
     const receipt = JSON.parse(localStorage.getItem('Receipt'));
     // const [startDate, setStartDate] = useState(new Date());
 
@@ -294,9 +294,17 @@ function PayNow() {
                                 />
 
 
+                                {/* <input 
+                                    type="date" 
+                                    placeholder='Select Appointment Date'
+                                    name='showAppointmentDate'
+                                    value={showAppointmentDate}
+                                    onChange = {(e)=>setAppointmentDate(e.target.value)}
+                                    className="formInput mid"
+                                /> */}
+
                                 <input type="text" className="formInput mid" name="user_appointment_date" placeholder="Select Appointment Date" value={showAppointmentDate} onChange={(e)=> setAppointmentDate(e.target.value)} onClick={()=>setOpenDate(!openDate)} />
-                                {/* <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} onClick={()=>setOpenDate(false)}> */}
-                                <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef}>
+                                <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef} >
                                     <Calendar
                                     onChange={onChangeDate}
                                     date={new Date()}
@@ -449,7 +457,9 @@ function PayNow() {
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Transaction Date</div>
-                                <div className="right">{receipt&&receipt.encodedDate}</div>
+                                {/* <div className="right">{receipt&&  format(`${receipt.encodedDate}`, 'eeee do LLLL yyyy')}</div> */}
+                                {/* <div className="right">{receipt&&  parseISO(receipt.encodedDate)}</div> */}
+                                <div className="right">{receipt&&  receipt.encodedDate}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Appointment ID</div>

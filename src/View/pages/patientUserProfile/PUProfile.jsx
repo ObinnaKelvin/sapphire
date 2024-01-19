@@ -8,7 +8,7 @@ import personalRec from '../../assets/images/personal.PNG'
 import success from '../../assets/images/sss.PNG'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
-import { format } from 'date-fns'//transform the dates to readable formats
+import { format, parseISO } from 'date-fns'//transform the dates to readable formats
 
 const PUProfile = () => {
     // const { patientId } = useParams();
@@ -18,7 +18,7 @@ const PUProfile = () => {
     const [middlename, setMiddlename] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
-    const [dob, setDob] = useState(new Date());
+    const [dob, setDob] = useState('');
     // const [dob, setDob] = useState(new Date().toISOString().slice(0, 10));
     const [phone, setPhone] = useState('');
     // const[date, setDate] = useState()
@@ -46,8 +46,17 @@ const PUProfile = () => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const [isFullyRegistered, setIsFullyRegistered] = useState();
 
-    // console.log(patientId)
+    console.log("dob", parseISO(dob))
     console.log("isFullyRegistered",isFullyRegistered)
+
+    // const formatDate = (dob) => {
+    //     const getDay = dob.getDate() < 10 ? `0${dob.getDate()}` : dob.getDate();
+    //     const getMonth = dob.getMonth() < 10 ? `0${dob.getMonth()}` : dob.getMonth();
+    //     const getYear = dob.getFullYear();
+    //     const formattedDate = [getDay, getMonth, getYear].join('-')
+    //     console.log(formattedDate)
+    //     return formattedDate;
+    // }
 
     const handleNext = async (step) => {
        // e.preventDefault();
@@ -145,6 +154,7 @@ const PUProfile = () => {
                 setEmail(response.data[0].email)
                 setGender(response.data[0].gender)
                 setPhone(response.data[0].mobile)
+                setDob(response.data[0].dateOfBirth)
                 // setDob(format(new Date(response.data[0].dateOfBirth), "yyyy-MM-dd"))
                 setCity(response.data[0].city)
                 setCountry(response.data[0].country)
