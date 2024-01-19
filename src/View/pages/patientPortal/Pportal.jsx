@@ -6,12 +6,14 @@ import { PatientAppointments, PatientTransaction } from '../../components/modal/
 import axios from 'axios';
 import numeral from 'numeral';
 import { format } from 'date-fns'//transform the dates to readable formats
+import { ReceiptSkeletonLoading } from '../../components/loading/Loading';
 
 function Pportal() {
 
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
+    const [isLoading, setIsLoading] = useState(null);
     const [appointments, setAppointments] = useState([
         // {
         //     "_id": "65931728012c4956644df995",
@@ -105,10 +107,12 @@ function Pportal() {
 
 
     const loadAppointmentData = async() => {
+        setIsLoading(true);
         await axios.get(`http://localhost:9000/api/appointments/findByEmail/${currentUser.email}`)
         //.then(response => console.log(response.data))
         .then(response => setAppointments(response.data))
         //console.log(appointments)
+        setIsLoading(false);
     }
 
 
@@ -152,6 +156,10 @@ function Pportal() {
                 </div>
                 <div className="pportal-body-body">
                     <div className="booking-wrapper">
+
+                        {
+                            isLoading && <ReceiptSkeletonLoading cards={12} />
+                        }
                         
                         {
                             appointments.map(data=>{

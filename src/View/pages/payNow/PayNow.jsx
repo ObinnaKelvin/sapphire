@@ -22,6 +22,7 @@ import PaystackIntegration from '../../components/paystack/Paystack.jsx';
 // import { usePaystackPayment } from 'react-paystack';
 import Interswitch from '../../components/interswitch/Interswitch.jsx';
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
+import HashLoader from 'react-spinners/HashLoader';
 
 
 
@@ -55,10 +56,16 @@ function PayNow() {
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
     const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
-    const [referenceNo, setReferenceNo] = useState(currentReferenceNo);
+    // const [referenceNo, setReferenceNo] = useState(currentReferenceNo);
     const receipt = JSON.parse(localStorage.getItem('Receipt'));
     // const [startDate, setStartDate] = useState(new Date());
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
+    const referenceNo =  JSON.parse(localStorage.getItem('RefNo'))
+    console.log("newRef",referenceNo)
+
+    //Force Reference Update
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
     //We add a listener effect that activates 'false' which 
     // invokes the 'inactive' property to the dropdowns
@@ -94,17 +101,6 @@ function PayNow() {
     //     reloadPage()
     // }, 1000);
 
-      
-    useEffect(() => {
-        forceUpdate();
-        // reloadPage()
-        //const currentReferenceNo = JSON.parse(localStorage.getItem('RefNo'));
-        if(referenceNo !== ""){
-            setReferenceNo(currentReferenceNo);
-            //console.log("isPaySuccessRef:", currentReferenceNo);
-            console.log("isPaySuccessRef:", referenceNo);
-        }
-    },[referenceNo])
 
 
     // const reloadPage = () => {
@@ -148,22 +144,30 @@ function PayNow() {
         setIsLoading(true);
         setError(null)
         forceUpdate();
+        // setTimeout(() => {
+        //     forceUpdate(); //set ActiveStep to 3 after 5 seconds
+        //     }, 2000);
 
         try {
-            setReferenceNo(currentReferenceNo)
-            const response = await axios.post("http://localhost:9000/api/appointments/", 
-            {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}) 
+            const referenceNo =  await JSON.parse(localStorage.getItem('RefNo'))
+            if (referenceNo) {
+                const response = await axios.post("http://localhost:9000/api/appointments/", 
+                {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}) 
+    
+                if (response.status === 200) {
+                    setSuccess(response.data);
+                    setError(null); //set error to null after 5 seconds
+                    setTimeout(() => {
+                        setActiveStep(4); //set ActiveStep to 3 after 5 seconds
+                      }, 2000);
+                      
+                    // save the Response to local storage
+                    localStorage.setItem('Receipt', JSON.stringify(response.data));
+                    console.log(response.data);
+                }
 
-            if (response.status === 200) {
-                setSuccess(response.data);
-                setError(null); //set error to null after 5 seconds
-                setTimeout(() => {
-                    setActiveStep(4); //set ActiveStep to 3 after 5 seconds
-                  }, 2000);
-                  
-                // save the Response to local storage
-                localStorage.setItem('Receipt', JSON.stringify(response.data));
-                console.log(response.data);
+            } else {
+                alert("You need to make payment first!")
             }
             setIsLoading(false);
             
@@ -424,18 +428,9 @@ function PayNow() {
                                 <Interswitch />
                             </div>
 
-                            <button onClick={(e)=>{ handlePaySubmit(e)}}>Generate Receipt</button>
-                            {
-                                //currentReferenceNo && 
-                                //<button onClick={(e)=>{ handlePaySubmit(e)}}>Generate Receipt</button>
-                               
-                                // <div className="book-again" onClick={(e)=>{ handlePaySubmit(e)}}>
-                                //     {`${isLoading ? "Loading" : "Generate Receipt"} `}
-                                // </div>
-                            }
-                            {
-                                 //console.log(currentReferenceNo)
-                            }
+                            <button className="book-again" onClick={(e)=>{ forceUpdate(); handlePaySubmit(e)}}>{isLoading ? 
+                                    <HashLoader size={30} cssOverride={{ margin: '0px auto 0px auto'}} color="#fff" /> : `Generate Receipt`}
+                            </button>
                         </div>
                     </div>
                     

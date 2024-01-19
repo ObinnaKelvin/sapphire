@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.PNG'
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
+import HashLoader from 'react-spinners/HashLoader';
 
 const AuthOTP = () => {
     const navigate = useNavigate()
@@ -199,7 +200,8 @@ const AuthOTP = () => {
             <div className="otp-buttons">
                 {/* <div className="otp-clear" onClick={ e => setOtp([...otp.map(data => "")])}>Clear</div> */}
                 <div className="otp-clear" onClick={() => setOtp("")}>Clear</div>
-                <button className="otp-verify" disabled={isLoading} onClick={handleVerifyOTP}>Verity OTP</button>
+                <button className="otp-verify" disabled={isLoading} onClick={handleVerifyOTP}>{isLoading ? 
+                    <HashLoader size={30} cssOverride={{ margin: '0px auto 0px auto'}} color="#fff" /> : `Verity OTP`}</button>
                 {/* <button disabled={isLoading}>Disabled</button> */}
                 
             </div>

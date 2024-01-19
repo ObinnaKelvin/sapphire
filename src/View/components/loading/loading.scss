@@ -1,10 +1,10 @@
-.incidence-skeleton-wrapper {
+.receipt-skeleton-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
 
-    .incidence-skeleton {
+    .receipt-skeleton {
         width: 270px;
         gap: 10px;
         border: 1px solid #EEEEEE;
@@ -14,20 +14,20 @@
         border-radius: 5px;
         z-index: 0;
 
-        .incidence-skeleton-title {
+        .receipt-skeleton-title {
             width: 50%;
         }
 
-        .incidence-skeleton-tags {
+        .receipt-skeleton-tags {
             display: flex;
             flex-direction: column;
         }
     }
 }
 @media screen and (max-width: 480px) {
-    .incidence-skeleton-wrapper {
+    .receipt-skeleton-wrapper {
 
-        .incidence-skeleton {
+        .receipt-skeleton {
             width: 100%;
         }
 

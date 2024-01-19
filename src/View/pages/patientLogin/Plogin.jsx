@@ -403,7 +403,10 @@ const Plogin = () => {
                             </div>
                             <div className="otp-buttons">
                                 <div className="otp-clear" onClick={() => setOtp("")}>Clear</div>
-                                <button className="otp-verify" disabled={isLoading} onClick={handleVerifyOTP}>Verity OTP</button>
+                                <button className="otp-verify" disabled={isLoading} onClick={handleVerifyOTP}>
+                                    {isLoading ? 
+                                    <HashLoader size={30} cssOverride={{ margin: '0px auto 0px auto'}} color="#fff" /> : `Verity OTP`}
+                                </button>
                                 
                             </div>
 
