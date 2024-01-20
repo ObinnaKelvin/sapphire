@@ -2,6 +2,7 @@ import React from 'react';
 import './loading.scss';
 // import trakaImage from '../../assets/images/traka_logo.gif'
 import Skeleton from 'react-loading-skeleton';
+import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 
 
 
@@ -22,6 +23,15 @@ export const ReceiptSkeletonLoading = ({cards}) => {
                     </div>
                 </div>)
             }
+        </div>
+    )
+}
+
+
+export const ClimbingBoxLoading = () => {
+    return (
+        <div className="climbingBox-wrapper">
+            <ClimbingBoxLoader color="#36d7b7" size={22} />
         </div>
     )
 }

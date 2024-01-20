@@ -6,7 +6,7 @@ import { PatientAppointments, PatientTransaction } from '../../components/modal/
 import axios from 'axios';
 import numeral from 'numeral';
 import { format } from 'date-fns'//transform the dates to readable formats
-import { ReceiptSkeletonLoading } from '../../components/loading/Loading';
+import { ClimbingBoxLoading, ReceiptSkeletonLoading } from '../../components/loading/Loading';
 
 function Pportal() {
 
@@ -155,19 +155,22 @@ function Pportal() {
                     </div>
                 </div>
                 <div className="pportal-body-body">
+                    
+                        {
+                            isLoading && <ClimbingBoxLoading />
+                        }
                     <div className="booking-wrapper">
 
-                        {
-                            isLoading && <ReceiptSkeletonLoading cards={12} />
-                        }
                         
                         {
+                            
                             appointments.map(data=>{
                                 return (
                                         <div className="booking-item" key={data.appointmentId}>
                                             <div className="booking-orderno">SAPP-{data.appointmentId}</div>
                                             <div className="booking-service">{data.service}</div>
-                                            <div className="booking-date">{`${format(new Date(data.appointmentDate), "MMM do, yyy")}`}</div>
+                                            <div className="booking-date">{data.appointmentDate}</div>
+                                            {/* <div className="booking-date">{`${format(new Date(data.appointmentDate), "MMM do, yyy")}`}</div> */}
                                             <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
                                             <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
                                             <div className="booking-modal" onClick={() => displayAppointment(data)}><ChevronRight size={15} /></div>
