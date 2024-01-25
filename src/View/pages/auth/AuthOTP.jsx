@@ -9,6 +9,7 @@ import HashLoader from 'react-spinners/HashLoader';
 const AuthOTP = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [otpVal, setOtpVal] = useState(new Array(6).fill(""))
     const [otp, setOtp] = useState("")
     const { user } = useAuthContext();
@@ -123,6 +124,34 @@ const AuthOTP = () => {
             
             //const response = await axios.post("http://localhost:9000/api/auth/login/generate-new", {email}) //LOCAL
             const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/generate-new", {email}) //PRODUCTION
+            if (response.status === 200) {
+                setSuccess(response.data);
+                setError(null); //set error to null after 5 seconds
+                console.log(response.data);
+            }
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false)
+            setError(error)
+            console.log(error)
+            
+        }
+
+    }
+
+    const generateNewOTPViaSms = async () => {
+        setIsLoading(true);
+        setError(null)
+        setPhone(currentUser.phone);
+
+        try {
+            
+            //const response = await axios.post("http://localhost:9000/api/auth/login/generate-new-sms", {email, phone}) //LOCAL
+            const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/generate-new-sms", {email, phone}) //PRODUCTION
             if (response.status === 200) {
                 setSuccess(response.data);
                 setError(null); //set error to null after 5 seconds
