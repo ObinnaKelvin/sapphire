@@ -27,6 +27,9 @@ import HashLoader from 'react-spinners/HashLoader';
 
 
 function PayNow() {
+
+    const PUBLIC_URL = "https://sapphire-api.onrender.com/";
+
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -111,7 +114,8 @@ function PayNow() {
     // }
 
     const loadServiceData = async() => {
-        await axios.get("http://localhost:9000/api/service/")
+        // await axios.get("http://localhost:9000/api/service/") //LOCAL
+        await axios.get(`${PUBLIC_URL}api/service/`) //PRODUCTION
         //.then(response => console.log(response.data))
         .then(response => setServiceData(response.data))
         //.then(console.log("Services Data >>>>", serviceData))
@@ -119,14 +123,16 @@ function PayNow() {
 
     const loadTariffData = async() => {
        serviceId &&
-        await axios.get(`http://localhost:9000/api/tariff/find/${serviceId}`)
+       //await axios.get(`http://localhost:9000/api/tariff/find/${serviceId}`) //LOCAL
+        await axios.get(`${PUBLIC_URL}api/tariff/find/${serviceId}`) //PRODUCTION
         //.then(response => console.log(response.data.cost))
         //.then(response => setTariffData(response.data.cost))
         .then(response => setTariff(response.data.cost))
     }
 
     const loadStatusData = async() => {
-        await axios.get("http://localhost:9000/api/status/find/1")
+        //await axios.get("http://localhost:9000/api/status/find/1") //LOCAL
+        await axios.get(`${PUBLIC_URL}api/status/find/1`) //PRODUCTION
         //.then(response => console.log(response.data.description))
         .then(response => setPaymentStatus(response.data.description))
         //.then(console.log("Status Data >>>>", paymentStatus))
@@ -151,7 +157,8 @@ function PayNow() {
         try {
             const referenceNo =  await JSON.parse(localStorage.getItem('RefNo'))
             if (referenceNo) {
-                const response = await axios.post("http://localhost:9000/api/appointments/", 
+               // const response = await axios.post("http://localhost:9000/api/appointments/", //LOCAL
+                const response = await axios.post(`${PUBLIC_URL}api/appointments/`, //PRODUCTION
                 {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}) 
     
                 if (response.status === 200) {
@@ -204,38 +211,38 @@ function PayNow() {
     <div className="paynow-container">
         <Navbar />
         <div className="paynow-wrapper" ref={formRef}>
-            <div className={`paynow-wrapper-left ${activeStep === 5 ? "inactive" : "active" }`}  ref={formRef}>
+            <div className={`paynow-wrapper-left ${activeStep == 5 ? "inactive" : "active" }`}  ref={formRef}>
                 <img src={paynowbg} alt="Login BG" />
             </div>
-            <div className={`paynow-wrapper-right ${activeStep === 5 ? "inactive" : "active" }`}  ref={formRef}>
+            <div className={`paynow-wrapper-right ${activeStep == 5 ? "inactive" : "active" }`}  ref={formRef}>
                 
                 <div className="form-holder">
                     <div className="headerText">
                         <h3><span>Book a Session With Us</span></h3>
                     </div>
                     <div className="progress-status">
-                        <div className={`stage one ${activeStep === 2||3 ? "active" : "inactive" }`}>
+                        <div className={`stage one ${activeStep == 2||3 ? "active" : "inactive" }`}>
                             <div className="stage-icon">
                                 <img src={user} alt='user sign' />
                             </div>
                             <div className="stage-text">Personal</div>
                             <div className="stage-bar"></div>
                         </div>
-                        <div className={`stage two ${activeStep === 3 ? "active" : "inactive" }`}>
+                        <div className={`stage two ${activeStep == 3 ? "active" : "inactive" }`}>
                             <div className="stage-icon">
                                 <img src={paper} alt='user sign' />
                             </div>
                             <div className="stage-text">Summary</div>
                             <div className="stage-bar"></div>
                         </div>
-                        <div className={`stage two ${activeStep === 3 ? "active" : "inactive" }`}>
+                        <div className={`stage two ${activeStep == 3 ? "active" : "inactive" }`}>
                             <div className="stage-icon">
                                 <img src={pay} alt='user sign' />
                             </div>
                             <div className="stage-text">Pay</div>
                             <div className="stage-bar"></div>
                         </div>
-                        <div className={`stage three ${activeStep === 3 ? "active" : "inactive" }`}>
+                        <div className={`stage three ${activeStep == 3 ? "active" : "inactive" }`}>
                             <div className="stage-icon">
                                 <img src={flag} alt='user sign' />
                             </div>

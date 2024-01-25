@@ -76,8 +76,8 @@ const Patient = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
 
-        // axios.post(`${process.env.PUBLIC_URL}api/patients`, {
-        await axios.post('http://localhost:9000/api/patients/', {
+        //await axios.post('http://localhost:9000/api/patients/', { //LOCAL
+        await axios.post('https://sapphire-api.onrender.com/api/patients/', {  //PRODUCTION
             
             firstName: firstname,
             middleName: middlename,

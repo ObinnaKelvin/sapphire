@@ -50,7 +50,8 @@ const AuthOTP = () => {
     }, [])
 
     const loadRegStatus = async () => {
-        await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`)
+        //await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`) //LOCAL
+        await axios.get(`https://sapphire-api.onrender.com/api/patients/find/${currentUser.email}`) //PRODUCTION
         //.then(response => console.log(response.data[0].isFullyRegistered))
         .then(response => setIsFullyRegistered(response.data[0].isFullyRegistered))
     }
@@ -70,7 +71,8 @@ const AuthOTP = () => {
         setEmail(currentUser.email);
 
         try {
-            const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp})
+            //const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp}) //LOCAL
+            const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/verify", {email, otp}) //PRODUCTION
             
             if (response.status === 200) {
                 //setIsLoading(true)
@@ -119,7 +121,8 @@ const AuthOTP = () => {
 
         try {
             
-            const response = await axios.post("http://localhost:9000/api/auth/login/generate-new", {email})
+            //const response = await axios.post("http://localhost:9000/api/auth/login/generate-new", {email}) //LOCAL
+            const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/generate-new", {email}) //PRODUCTION
             if (response.status === 200) {
                 setSuccess(response.data);
                 setError(null); //set error to null after 5 seconds

@@ -22,6 +22,8 @@ import numeral from "numeral";
 
 function PayLater() {
 
+    const PUBLIC_URL = "https://sapphire-api.onrender.com/";
+
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -80,7 +82,8 @@ function PayLater() {
     }, [service])
 
     const loadServiceData = async() => {
-        await axios.get("http://localhost:9000/api/service/")
+        // await axios.get("http://localhost:9000/api/service/") //LOCAL
+        await axios.get(`${PUBLIC_URL}api/service/`) //PRODUCTION
         //.then(response => console.log(response.data))
         .then(response => setServiceData(response.data))
         //.then(console.log("Services Data >>>>", serviceData))
@@ -88,14 +91,16 @@ function PayLater() {
 
     const loadTariffData = async() => {
        serviceId &&
-        await axios.get(`http://localhost:9000/api/tariff/find/${serviceId}`)
+        // await axios.get(`http://localhost:9000/api/tariff/find/${serviceId}`)  //LOCAL
+        await axios.get(`${PUBLIC_URL}api/tariff/find/${serviceId}`) //PRODUCTION
         //.then(response => console.log(response.data.cost))
         //.then(response => setTariffData(response.data.cost))
         .then(response => setTariff(response.data.cost))
     }
 
     const loadStatusData = async() => {
-        await axios.get("http://localhost:9000/api/status/find/2")
+        // await axios.get("http://localhost:9000/api/status/find/2")  //LOCAL
+        await axios.get(`${PUBLIC_URL}api/status/find/2`) //PRODUCTION
         //.then(response => console.log(response.data.description))
         .then(response => setPaymentStatus(response.data.description))
         //.then(console.log("Status Data >>>>", paymentStatus))
@@ -114,7 +119,8 @@ function PayLater() {
         setError(null)
 
         try {
-            const response = await axios.post("http://localhost:9000/api/appointments/", 
+            // const response = await axios.post("http://localhost:9000/api/appointments/", //LOCAL
+            const response = await axios.post(`${PUBLIC_URL}api/appointments/`, 
             {firstname, lastname, email, gender, mobile, service, notes, service, tariff, encodedDate, appointmentDate, paymentStatus}) 
 
             if (response.status === 200) {

@@ -77,6 +77,7 @@ function Pportal() {
     // }
     )
 
+
     const handleGreet = () => {
         let today = new Date()
         let getCurrentHour = today.getHours() 
@@ -108,7 +109,8 @@ function Pportal() {
 
     const loadAppointmentData = async() => {
         setIsLoading(true);
-        await axios.get(`http://localhost:9000/api/appointments/findByEmail/${currentUser.email}`)
+        //await axios.get(`http://localhost:9000/api/appointments/findByEmail/${currentUser.email}`) //LOCAL ENVIRONMENT
+        await axios.get(`https://sapphire-api.onrender.com/api/appointments/findByEmail/${currentUser.email}`) //PRODUCTION
         //.then(response => console.log(response.data))
         .then(response => setAppointments(response.data))
         //console.log(appointments)

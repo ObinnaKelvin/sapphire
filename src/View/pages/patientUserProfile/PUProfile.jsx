@@ -69,8 +69,9 @@ const PUProfile = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        //await axios.put(`http://localhost:9000/api/patients/find/${currentUser.email}`, {
-            await axios.put(`http://localhost:9000/api/patients/${patientId}`, {
+        
+            //await axios.put(`http://localhost:9000/api/patients/${patientId}`, { //LOCAL 
+            await axios.put(`https://sapphire-api.onrender.com/api/patients/${patientId}`, {  //PRODUCTION
                 title:title,
                 firstName:firstname,
                 lastName:lastname,
@@ -104,7 +105,9 @@ const PUProfile = () => {
     const handleComplete = async (e) => {
         e.preventDefault();
         let completed = 1;
-            await axios.put(`http://localhost:9000/api/patients/${patientId}`, {
+        
+            // await axios.put(`http://localhost:9000/api/patients/${patientId}`, {  //LOCAL
+            await axios.put(`https://sapphire-api.onrender.com/api/patients/${patientId}`, {  //PRODUCTION
                 title:title,
                 firstName:firstname,
                 lastName:lastname,
@@ -142,8 +145,9 @@ const PUProfile = () => {
 
     const loadPatientRecord = async () => {
         try {
-
-            await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`)
+            
+            // await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`) //LOCAL
+            await axios.get(`https://sapphire-api.onrender.com/api/patients/find/${currentUser.email}`)  //PRODUCTION
             // .then(response => console.log(response.data[0]))
             .then(response => {
                 setPatientId(response.data[0]._id)

@@ -43,7 +43,8 @@ const Plogin = () => {
         setIsLoading(true);
         setError(null)
         try {
-            const response = await axios.post("http://localhost:9000/api/auth/login", {email, password}) 
+            //const response = await axios.post("http://localhost:9000/api/auth/login", {email, password}) //LOCAL
+            const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login", {email, password})  //PRODUCTION
 
             //const json = await response.data.details
             const json = await response.data.details
@@ -91,7 +92,8 @@ const Plogin = () => {
         setError(null)
 
         try {
-            const response = await axios.post("http://localhost:9000/api/auth/login/generate-new-password-reset", {email})             
+            //const response = await axios.post("http://localhost:9000/api/auth/login/generate-new-password-reset", {email}) //LOCAL
+            const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/generate-new-password-reset", {email})  //PRODUCTION                 
             if (response.status === 200) {
                 //setIsLoading(true)
                 setSuccess(response.data);
@@ -129,7 +131,8 @@ const Plogin = () => {
         //setEmail(currentUser.email);
 
         try {
-            const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp})
+            //const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp}) //LOCAL
+            const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/verify", {email, otp}) //PRODUCTION
             
             if (response.status === 200) {
                 //setIsLoading(true)
@@ -171,7 +174,8 @@ const Plogin = () => {
 
         try {
             
-            const response = await axios.post("http://localhost:9000/api/auth/login/generate-new", {email})
+            //const response = await axios.post("http://localhost:9000/api/auth/login/generate-new", {email}) //LOCAL
+            const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/generate-new", {email}) //PRODUCTION
             if (response.status === 200) {
                 setSuccess(response.data);
                 setError(null); //set error to null after 5 seconds
@@ -240,7 +244,8 @@ const Plogin = () => {
             }
 
             console.log("Hey!")
-            const response = await axios.put("http://localhost:9000/api/auth/login/password-reset", {email, resetPassword})
+            //const response = await axios.put("http://localhost:9000/api/auth/login/password-reset", {email, resetPassword}) //LOCAL
+            const response = await axios.put("https://sapphire-api.onrender.com/api/auth/login/password-reset", {email, resetPassword}) //PRODUCTION
             console.log(response)
             setSuccess("Password changed successfully!");
             setTimeout(() => {
