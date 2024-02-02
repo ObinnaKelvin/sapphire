@@ -14,6 +14,8 @@ const AuthOTP = () => {
     const [otp, setOtp] = useState("")
     const { user } = useAuthContext();
     const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentStaff = JSON.parse(localStorage.getItem('staff'));
+    const accessMode = JSON.parse(localStorage.getItem('access mode'));
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
@@ -81,15 +83,25 @@ const AuthOTP = () => {
                 setError(null); //set error to null after 5 seconds
                 console.log(response.data.message);
 
-                //Next Check if fully registered, if not navigate to profile page and reveal the modal.
-                if(isFullyRegistered == 0) {
+                if (accessMode == "staff") {
                     setTimeout(() => {
-                        navigate("/patient-portal/profile"); //Navigate to Profile
-                      }, 5000);
-                } else {
-                    setTimeout(() => {
-                        navigate("/patient-portal"); //Navigate to Dashboard
-                      }, 5000);
+                        navigate("/staff-portal"); //Navigate to Profile
+                      }, 2000);
+                }
+
+                if (accessMode == "patient") {
+
+                    //Next Check if fully registered, if not navigate to profile page and reveal the modal.
+                    if(isFullyRegistered == 0) {
+                        setTimeout(() => {
+                            navigate("/patient-portal/profile"); //Navigate to Profile
+                          }, 5000);
+                    } else {
+                        setTimeout(() => {
+                            navigate("/patient-portal"); //Navigate to Dashboard
+                          }, 5000);
+                    }
+                    
                 }
             } 
             if (response.status === 400) {

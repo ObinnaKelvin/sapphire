@@ -33,7 +33,7 @@ function App() {
           <Route path='/pay-now' element={<PayNow />}/>
           <Route path='/patient-portal' element={<Pportal />}/>
           <Route path='/patient-portal/profile' element={<PUProfile />}/>
-          <Route path='/patient-portal/auth/:userId' element={<AuthOTP />}/>
+          <Route path='/portal/auth/:userId' element={<AuthOTP />}/>
           <Route path='/staff-portal' element={<Sportal />}/>
           <Route path='/staff-portal/create-appointment' element={<Sappointment />}/>
           <Route path='/staff-portal/patient' element={<Patient />}/>

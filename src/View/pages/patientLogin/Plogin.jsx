@@ -61,6 +61,9 @@ const Plogin = () => {
                 // save the user to local storage
                 localStorage.setItem('user', JSON.stringify(json));
 
+                // set Access Mode to local storage
+                localStorage.setItem('access mode', JSON.stringify("patient"));
+
                 // update the auth context
                dispatch({type: 'LOGIN', payload: json})
                 console.log("response.data", json);
@@ -70,7 +73,7 @@ const Plogin = () => {
                 setIsLoading(false);
                 setError(null)
 
-                navigate(`/patient-portal/auth/${json._id}`) //1. navigate to otp page
+                navigate(`/portal/auth/${json._id}`) //1. navigate to otp page
             }
 
         } catch (error) {
