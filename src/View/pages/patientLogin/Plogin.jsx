@@ -43,7 +43,7 @@ const Plogin = () => {
         setIsLoading(true);
         setError(null)
         try {
-            //const response = await axios.post("http://localhost:9000/api/auth/login", {email, password}) //LOCAL
+            // const response = await axios.post("http://localhost:9000/api/auth/login", {email, password}) //LOCAL
             const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login", {email, password})  //PRODUCTION
 
             //const json = await response.data.details
@@ -92,7 +92,7 @@ const Plogin = () => {
         setError(null)
 
         try {
-            //const response = await axios.post("http://localhost:9000/api/auth/login/generate-new-password-reset", {email}) //LOCAL
+            // const response = await axios.post("http://localhost:9000/api/auth/login/generate-new-password-reset", {email}) //LOCAL
             const response = await axios.post("https://sapphire-api.onrender.com/api/auth/login/generate-new-password-reset", {email})  //PRODUCTION                 
             if (response.status === 200) {
                 //setIsLoading(true)

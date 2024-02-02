@@ -17,6 +17,8 @@ import { format } from 'date-fns'//transform the dates to readable formats
 import axios from 'axios';
 import naira from '../../assets/images/naira.png';
 import numeral from "numeral";
+import HashLoader from 'react-spinners/HashLoader';
+
 // import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 
@@ -128,7 +130,7 @@ function PayLater() {
                 setError(null); //set error to null after 5 seconds
                 setTimeout(() => {
                     setActiveStep(3); //set ActiveStep to 3 after 5 seconds
-                  }, 5000);
+                  }, 2000);
                 console.log(response.data);
             }
             setIsLoading(false);
@@ -137,6 +139,22 @@ function PayLater() {
             console.log(error)
         }
 
+    }
+
+
+    const handleFinish = () => {
+        localStorage.setItem('Receipt', JSON.stringify({}));
+        localStorage.setItem('RefNo', JSON.stringify(''));
+        setFirstname('');
+        setLastname('');
+        setEmail('');
+        setMobile('');
+        setShowAppointmentDate('')
+        setNotes('');
+        // date = useState()
+        setService('')
+        setGender('')
+        setActiveStep(1);
     }
     
 
@@ -332,9 +350,18 @@ function PayLater() {
                             
                             {/* <button type='submit' onClick={(e)=>setActiveStep(3)}>Reset Password</button> */}
                             <div className="button-holder">
-                                <div className="previous" onClick={(e)=>setActiveStep(1)}>Previous</div>
+                                {/* <div className="previous" onClick={(e)=>setActiveStep(1)}>Previous</div> */}
+                                <button  className="previous" onClick={(e)=>setActiveStep(1)}>
+                                    Previous
+                                </button>
                                 {/* <div className="finish" onClick={(e)=>setActiveStep(3)}>Finish</div> */}
-                                <div className="finish" onClick={handleSubmit}>Finish</div>
+                                {/* <div className="finish" onClick={handleSubmit}>Finish</div> */}
+                                <button  className="finish" onClick={handleSubmit}>
+                                    {
+                                        isLoading ? 
+                                        <HashLoader size={30} cssOverride={{ margin: '0px auto 0px auto'}} color="#fff" /> : `Finish`
+                                    }
+                                </button>
                             </div>
                            
                             
@@ -354,7 +381,7 @@ function PayLater() {
                                 Appointment Booked!
                             </div>
                             <p>You will receive a confirmation mail shortly and an instruction on how to track your bookings.</p>
-                            <div className="book-again" onClick={(e)=>setActiveStep(1)}>
+                            <div className="book-again" onClick={handleFinish}>
                                 Book Again
                             </div>
                         </div>

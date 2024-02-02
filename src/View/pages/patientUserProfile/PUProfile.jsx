@@ -9,6 +9,7 @@ import success from '../../assets/images/sss.PNG'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'//transform the dates to readable formats
+import { Country, State, City }  from 'country-state-city';
 
 const PUProfile = () => {
     // const { patientId } = useParams();
@@ -141,6 +142,9 @@ const PUProfile = () => {
 
     useEffect(() => {
         loadPatientRecord()
+        loadCountryData()
+        loadStateData()
+        loadCityData()
     }, [])
 
     const loadPatientRecord = async () => {
@@ -179,6 +183,31 @@ const PUProfile = () => {
 
         
             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const loadCountryData = async () => {
+        try {
+            const ctry = await Country.getAllCountries()
+            console.log(ctry)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const loadStateData = async () => {
+        try {
+            const state = await State.getStatesOfCountry('NG')
+            console.log(state)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const loadCityData = async () => {
+        try {
+            const city = await City.getCitiesOfState('NG', 'LA')
+            console.log(city)
         } catch (error) {
             console.log(error)
         }
