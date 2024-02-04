@@ -101,15 +101,31 @@ function Slogin() {
                         <div className="headerText">
                             <h3><span>Sapphire Staff Portal</span></h3>
                         </div>
+
+                        {
+                            success && <div className={"success"}>{success}</div>
+                        }
+
+                        {
+                            error && <div className="error">{error}</div>
+                        }
+
                         <form action="">
                             <section>
-                                <input 
+                                {/* <input 
                                 type="text" 
                                 placeholder='Username'
                                 name='username'
                                 value={username}
-                                // onChange={handleInputChange}
                                 onChange = {(e)=>setUsername(e.target.value)}
+                                className="formInput"
+                                /> */}
+                                <input 
+                                type="text" 
+                                placeholder='Email'
+                                name='email'
+                                value={email}
+                                onChange = {(e)=>setEmail(e.target.value)}
                                 className="formInput"
                                 />
                                 <input 
@@ -117,7 +133,6 @@ function Slogin() {
                                 placeholder='Password'
                                 name='password'
                                 value={password}
-                                // onChange={handleInputChange}
                                 onChange = {(e)=>setPassword(e.target.value)}
                                 className="formInput"
                                 />

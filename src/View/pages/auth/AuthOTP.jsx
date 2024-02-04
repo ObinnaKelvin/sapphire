@@ -47,13 +47,15 @@ const AuthOTP = () => {
 
     useEffect(() => {
 
-        setEmail(currentUser.email);
+        currentUser ?
+        setEmail(currentUser.email) : setEmail(currentStaff.email);
       //loadFacilityIncidenceData() //This runs again to update the update state
         loadRegStatus()
     }, [])
 
     const loadRegStatus = async () => {
         //await axios.get(`http://localhost:9000/api/patients/find/${currentUser.email}`) //LOCAL
+        currentUser &&
         await axios.get(`https://sapphire-api.onrender.com/api/patients/find/${currentUser.email}`) //PRODUCTION
         //.then(response => console.log(response.data[0].isFullyRegistered))
         .then(response => setIsFullyRegistered(response.data[0].isFullyRegistered))
@@ -71,7 +73,7 @@ const AuthOTP = () => {
         setIsLoading(true);
         setError(null)
         setSuccess(null)
-        setEmail(currentUser.email);
+        currentUser ? setEmail(currentUser.email) : setEmail(currentStaff.email);
 
         try {
             //const response = await axios.post("http://localhost:9000/api/auth/login/verify", {email, otp}) //LOCAL
@@ -130,7 +132,7 @@ const AuthOTP = () => {
     const generateNewOTP = async () => {
         setIsLoading(true);
         setError(null)
-        setEmail(currentUser.email);
+        currentUser ? setEmail(currentUser.email) : setEmail(currentStaff.email);
 
         try {
             
@@ -201,11 +203,11 @@ const AuthOTP = () => {
             
             <div className="auth-description">
                 <span>2-Step Verification</span>
-                <p>Hi {currentUser.firstname}, to help keep your account safe, Sapphire wants to make sure 
+                <p>Hi { currentUser ? currentUser.firstname : currentStaff.firstname}, to help keep your account safe, Sapphire wants to make sure 
                     it's really you trying to sign in.
                 </p>
                 We emailed a code to 
-                <div className="auth-email"><em>{currentUser.email}</em></div>
+                <div className="auth-email"><em>{ currentUser ? currentUser.email : currentStaff.email}</em></div>
                 {/* <div className="auth-email"><em>{user.email}</em></div> */}
                 Please enter the code to sign in.
                 {/* {otp.join("")}

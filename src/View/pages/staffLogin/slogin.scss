@@ -61,6 +61,23 @@
                         }
                     }
 
+                    .success {
+                        background-color: #b9f6ca;
+                        color: #00c853;
+                        padding: 10px;
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+
+                    .error {
+                        background-color: #ffcdd2;
+                        color: red;
+                        padding: 10px;
+                        text-align: center;
+                        margin-bottom: 20px;
+            
+                    }
+
                     form {
                         display: flex;
                         flex-direction: column;

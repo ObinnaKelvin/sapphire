@@ -10,7 +10,7 @@ import { ClimbingBoxLoading } from '../../components/loading/Loading';
 
 function Sportal() {
 
-    const staffUser = JSON.parse(localStorage.getItem('user'));
+    const staffUser = JSON.parse(localStorage.getItem('staff'));
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
     const [categoryToggle, setCategoryToggle] = useState(1)
