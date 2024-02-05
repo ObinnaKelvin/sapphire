@@ -182,21 +182,38 @@ export const PatientNavbarMobile = () => {
 
 export const StaffNavbar = () => {
 
+    const { dispatch } = useAuthContext();
+
+    const handleLogout = () => {
+        localStorage.removeItem('staff')
+        dispatch({type: 'LOGOUT'})
+    }
+
     return (
         <div className="staffnavbar-container">
             <div className="staffnavbar-wrapper">
-                <Link to={'/staff-portal'} className='link'>
-                    <div className='staffnavbar-item'>
-                        <Wallet2  size={20} />
-                        <span>Bookings</span>
-                    </div>
-                </Link>
-                <Link to={'/staff-portal/patient'} className='link'>
-                    <div className='staffnavbar-item'>
-                        <User2 size={20} />
-                        <span>Patients</span>
-                    </div>
-                </Link>
+                <div className="step1">
+                    <Link to={'/staff-portal'} className='link'>
+                        <div className='staffnavbar-item'>
+                            <Wallet2  size={20} />
+                            <span>Bookings</span>
+                        </div>
+                    </Link>
+                    <Link to={'/staff-portal/patient'} className='link'>
+                        <div className='staffnavbar-item'>
+                            <User2 size={20} />
+                            <span>Patients</span>
+                        </div>
+                    </Link>
+                </div>
+                <div className="step2">
+                    <Link to={'/staff-login'} className='link'>
+                        <div className='staffnavbar-item' onClick={handleLogout}>
+                            <LogOut size={20} />
+                            <span>Log Out</span>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </div>
     )
@@ -204,21 +221,36 @@ export const StaffNavbar = () => {
 
 export const StaffNavbarMobile = () => {
 
+    const { dispatch } = useAuthContext();
+
+    const handleLogout = () => {
+        localStorage.removeItem('staff')
+        dispatch({type: 'LOGOUT'})
+    }
+
     return (
         <div className="staffnavbarmobile-container">
             <div className="staffnavbarmobile-wrapper">
-                <Link to={'/staff-portal'} className='link'>
-                    <div className='staffnavbarmobile-item'>
-                        <Wallet2  size={20} />
-                        <span>Bookings</span>
-                    </div>
-                </Link>
-                <Link to={'/staff-portal/patient'} className='link'>
-                    <div className='staffnavbarmobile-item'>
-                        <User2 size={20} />
-                        <span>Patients</span>
-                    </div>
-                </Link>
+                <div className="step1">
+                    <Link to={'/staff-portal'} className='link'>
+                        <div className='staffnavbarmobile-item'>
+                            <Wallet2  size={20} />
+                            <span>Bookings</span>
+                        </div>
+                    </Link>
+                    <Link to={'/staff-portal/patient'} className='link'>
+                        <div className='staffnavbarmobile-item'>
+                            <User2 size={20} />
+                            <span>Patients</span>
+                        </div>
+                    </Link>
+                    <Link to={'/staff-login'} className='link'>
+                        <div className='staffnavbarmobile-item' onClick={handleLogout}>
+                            <LogOut size={20} />
+                            <span>Log Out</span>
+                        </div>
+                    </Link>
+                </div>
             </div>
         </div>
     )
