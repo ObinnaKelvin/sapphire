@@ -29,9 +29,15 @@ const PUProfile = () => {
     const [openDate, setOpenDate] = useState(false)
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('');
+    const [cityDataList, setCityDataList] = useState([]);
     const [maritalStatus, setMaritalStatus] = useState('');
     const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
+    const [stateData, setStateData] = useState([]);
+    const [stateDataDetails, setStateDataDetails] = useState('')
+    const [country, setCountry] = useState([]);
+    const [countryData, setCountryData] = useState([]);
+    const [countryDataAbbrv, setCountryDataAbbrv] = useState('');
+    const [countryDataDetails, setCountryDataDetails] = useState('')
     const [encodedBy, setEncodedBy] = useState('');
     const [encodedDate, setEncodedDate] = useState(new Date());
     const [activeStep, setActiveStep] = useState(1);
@@ -46,6 +52,9 @@ const PUProfile = () => {
     const [modalStep, setModalStep] = useState(1);
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const [isFullyRegistered, setIsFullyRegistered] = useState();
+    const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
+    const currentState = JSON.parse(localStorage.getItem('currentState'));
+    const cityData = JSON.parse(localStorage.getItem('cityData'));
 
     console.log("dob", parseISO(dob))
     console.log("isFullyRegistered",isFullyRegistered)
@@ -139,11 +148,41 @@ const PUProfile = () => {
         setIsFullyRegistered(1);
 
     }
-
     useEffect(() => {
         loadPatientRecord()
+        // loadCountryData()
+        loadStateData()
+        // loadCityData()
+    }, [])
+
+    useEffect(() => {
         loadCountryData()
         loadStateData()
+        // loadCityData()
+    }, [countryData])
+
+    useEffect(() => {
+        loadCountryDataDetails()
+    }, [])
+
+    useEffect(() => {
+        loadStateData()
+    }, [countryDataAbbrv])
+
+    // useEffect(() => {
+    //     loadStateData()
+    // }, [])
+
+    useEffect(() => {
+        loadStateDataDetails(stateData)
+    }, [])
+
+    // useEffect(() => {
+    //     loadStateDataDetails(stateData)
+    // }, [countryDataDetails])
+
+
+    useEffect(() => {
         loadCityData()
     }, [])
 
@@ -190,26 +229,106 @@ const PUProfile = () => {
 
     const loadCountryData = async () => {
         try {
-            const ctry = await Country.getAllCountries()
-            console.log(ctry)
+            const ctry = Country.getAllCountries()
+            setCountryData(ctry)
+            //console.log("countryData", countryData)
         } catch (error) {
             console.log(error)
         }
     }
-    const loadStateData = async () => {
-        try {
-            const state = await State.getStatesOfCountry('NG')
-            console.log(state)
-        } catch (error) {
-            console.log(error)
+
+    const getCountryValue = (e) => {
+        const countryChosen = e.target.children[e.target.selectedIndex].getAttribute('item-abbrv')
+        setCountryDataAbbrv(countryChosen)
+        setCountry(e.target.value);
+        //console.log("countryChosen", countryChosen)
+    }
+
+    const loadCountryDataDetails = () => {  
+        //This function takes in a parameter(country json), runs a loop and then matches it with saved country name
+        //It then sets the details of saved country unto 'countryDataDetails'
+        for(let i = 0; i < countryData.length; i++) {
+            if(country == countryData[i].name) {
+                setCountryDataDetails(countryData[i])
+                localStorage.setItem('currentCountry', JSON.stringify(countryData[i]));
+                console.log("currentCountry", countryData[i])
+            }
         }
     }
+
+    // const loadCountryData = async () => {
+    //     await axios.get('https://restcountries.com/v3.1/all?')
+    //     .then(response => console.log(response))
+    // }
+    console.log("countryDataDetails", countryDataDetails)
+    console.log("countryData", countryData)
+    console.log("cityData2", cityData.data)
+    const cityDataFull = cityData.data
+
+    const loadStateData = async() => {
+        if(countryDataAbbrv) {//This runs when country is selected. 
+            try {
+                const stateRec = await State.getStatesOfCountry(`${countryDataAbbrv}`)
+                setStateData(stateRec)
+                console.log(stateRec)
+            } catch (error) {
+                console.log(error)
+            }
+        } 
+        else { //This runs when country is not selected. Loads up from saved country
+            try {
+                const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
+                const countryCode = await currentCountry.isoCode //currentCountry is from local storage
+                const stateRec = await State.getStatesOfCountry(`${countryCode}`)
+                setStateData(stateRec)
+                console.log("stateRec", stateRec)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    //console.log(state)
+    const loadStateDataDetails = (item) => {  
+        //This function takes in a parameter(country json), runs a loop and then matches it with saved country name
+        //It then sets the details of saved country unto 'countryDataDetails'
+        for(let i = 0; i < item.length; i++) {
+            if(state == item[i].name) {
+                //setStateDataDetails(stateData[i])
+                localStorage.setItem('currentState', JSON.stringify(stateData[i]));
+                console.log('State Details', stateData[i])
+            }
+        }
+    }
+
     const loadCityData = async () => {
-        try {
-            const city = await City.getCitiesOfState('NG', 'LA')
-            console.log(city)
-        } catch (error) {
-            console.log(error)
+        if(currentCountry.name == 'Nigeria') {
+            try {
+                // const city = await City.getCitiesOfState('NG', 'FC')
+                //const upperCaseState = state.toUpperCase()
+                // const upperCaseState = stateDataDetails.name.toUpperCase()
+                const upperCaseState = currentState.name.toUpperCase()
+                const city = await axios.get(`https://nigeria-states-towns-lga.onrender.com/api/${state == "Abuja Federal Capital Territory"? "FCT" : upperCaseState}/towns`)
+                setCityDataList(city.data)
+                localStorage.setItem('cityData', JSON.stringify(city));
+                console.log("city", city.data)
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            try {
+                const city = City.getCitiesOfState(`${currentCountry.isoCode}`, `${currentState.isoCode}`)
+                setCityDataList(city)
+                //const city = City.getCitiesOfState(`${countryDataDetails.isoCode}`, `${stateDataDetails.isoCode}`)
+                //setCityData(city);
+                localStorage.setItem('cityData', JSON.stringify(city.data));
+                //const upperCaseState = state.toUpperCase()
+                //const upperCaseState = stateDataDetails.name.toUpperCase()
+                //const city = await axios.get(`https://nigeria-states-towns-lga.onrender.com/api/${state == "Abuja Federal Capital Territory"? "FCT" : upperCaseState}/towns`)
+                console.log("city", city)
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
@@ -354,14 +473,20 @@ const PUProfile = () => {
                                         className="formInput md"
                                         />
                                     </section>
-
-
+                                    
                                     <section>
-                                        <label>City</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
-                                            <option>- Select City -</option>
-                                            <option value={'Ogba'}>Ogba</option>
-                                            <option value={'Alimosho'}>Alimosho</option>
+                                        <label>Country</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={getCountryValue} value={country}>
+                                            <option>- Select Country -</option>
+                                            {/* <option value={'Nigeria'}>Nigeria</option> */}
+                                            {
+                                                countryData.map(item=>{
+                                                    return (
+                                                            <option value={item.name} item-abbrv={item.isoCode}>{item.name}</option>
+                                                    )
+                                                })
+                                            
+                                            }
                                         </select>
                                     </section>
                                     
@@ -369,17 +494,29 @@ const PUProfile = () => {
                                         <label>State</label>
                                         <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
                                             <option>- Select State -</option>
-                                            <option value={'Lagos'}>Lagos</option>
-                                            <option value={'Ogun'}>Ogun</option>
+                                            {
+                                                stateData.map(item => {
+                                                    return (
+                                                        <option value={item.name}>{item.name}</option>
+                                                    )
+                                                })
+                                            }
                                         </select>
                                     </section>
-                                    
+
                                     <section>
-                                        <label>Country</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCountry(e.target.value)} value={country}>
-                                            <option>- Select Country -</option>
-                                            <option value={'Nigeria'}>Nigeria</option>
-                                            <option value={'Nigeria'}>Nigeria</option>
+                                        <label>City</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
+                                            <option>- Select City -</option>
+                                            <option value={'Ogba'}>Ogba</option>
+                                            <option value={'Alimosho'}>Alimosho</option>
+                                            {
+                                                cityDataFull.map(item => {
+                                                    return (
+                                                        <option value={item.name}>{item.name}</option>
+                                                    )
+                                                })
+                                            }
                                         </select>
                                     </section>
                                     
@@ -743,33 +880,6 @@ const PUProfile = () => {
                                         className="formInput sm"
                                         />
                                     </section>
-
-                                    <section>
-                                        <label>City</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
-                                            <option>- Select City -</option>
-                                            <option value={'Ogba'}>Ogba</option>
-                                            <option value={'Alimosho'}>Alimosho</option>
-                                        </select>
-                                    </section>
-                                    
-                                    <section>
-                                        <label>State</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
-                                            <option>- Select State -</option>
-                                            <option value={'Lagos'}>Lagos</option>
-                                            <option value={'Ogun'}>Ogun</option>
-                                        </select>
-                                    </section>
-                                    
-                                    <section>
-                                        <label>Country</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCountry(e.target.value)} value={country}>
-                                            <option>- Select Country -</option>
-                                            <option value={'Nigeria'}>Nigeria</option>
-                                            <option value={'Nigeria'}>Nigeria</option>
-                                        </select>
-                                    </section>
                                     
                                     <section>
                                         <label>Marital Status</label>
@@ -780,6 +890,51 @@ const PUProfile = () => {
                                             <option value={'Widowed'}>Widowed</option>
                                             <option value={'Divorced'}>Divorced</option>
                                             <option value={'Separated'}>Separated</option>
+                                        </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Country</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={getCountryValue} value={country}>
+                                            <option>- Select Country -</option>
+                                            {
+                                                countryData.map(item=>{
+                                                    return (
+                                                            <option value={item.name} item-abbrv={item.isoCode}>{item.name}</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>State</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                            <option>- Select State -</option>
+                                            {/* <option value={'Lagos'}>Lagos</option> */}
+                                            {
+                                                stateData.map(item => {
+                                                    return (
+                                                        <option value={item.name}>{item.name}</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    </section>
+
+                                    <section>
+                                        <label>City</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
+                                            <option>- Select City -</option>
+                                            {/* <option value={'Ogba'}>Ogba</option>
+                                            <option value={'Alimosho'}>Alimosho</option> */}
+                                            {
+                                                cityDataFull.map((item, index) => {
+                                                    return (
+                                                        <option value={item.name}>{item.name}</option>
+                                                    )
+                                                })
+                                            }
                                         </select>
                                     </section>
 

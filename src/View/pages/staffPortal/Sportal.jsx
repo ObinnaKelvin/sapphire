@@ -96,6 +96,7 @@ function Sportal() {
                         <div className={`category-item ${categoryToggle === 2? "active" : "inactive"}`} onClick={()=> setCategoryToggle(2)}>Today</div>
                         <div className={`category-item ${categoryToggle === 3? "active" : "inactive"}`} onClick={()=> setCategoryToggle(3)}>Pending</div>
                         <div className={`category-item ${categoryToggle === 4? "active" : "inactive"}`} onClick={()=> setCategoryToggle(4)}>Cancelled</div>
+                        <div className={`category-item ${categoryToggle === 5? "active" : "inactive"}`} onClick={()=> setCategoryToggle(5)}>My Clinic</div>
                     </div>
                     {/* <div className="sorting">
                         <div className="sorting-grid">

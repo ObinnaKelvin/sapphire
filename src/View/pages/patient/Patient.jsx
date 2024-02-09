@@ -107,8 +107,14 @@ const Patient = () => {
     //     calculateAge(dob);
     // }, [dob])
 
+    const loadCountryData = async () => {
+        await axios.get('http://battuta.medunes.net/api/country/all/?key=00000000000000000000000000000000')
+        .then(response => console.log(response))
+    }
+
     useEffect(() => {
         handleGreet();
+        loadCountryData()
     }, [])
 
   return (
