@@ -7,6 +7,8 @@ import { PatientAppointments } from '../../components/modal/Modal';
 import axios from 'axios';
 import numeral from 'numeral';
 import { ClimbingBoxLoading } from '../../components/loading/Loading';
+import { format } from 'date-fns'//transform the dates to readable formats
+import { NoRecords } from '../../components/404/404';
 
 function Sportal() {
 
@@ -17,6 +19,8 @@ function Sportal() {
     const [appointments, setAppointments] = useState([])
     const [currentAppt, setCurrentAppt] = useState()
     const [isLoading, setIsLoading] = useState(null);
+    const [query, setQuery] = useState("");
+    // const [tab, setTab] = useState("");
 
     const handleGreet = () => {
         let today = new Date()
@@ -56,6 +60,23 @@ function Sportal() {
         setIsLoading(false);
     }    
 
+    const search = (data) => {
+        return data.filter((item) => item.service.toLowerCase().includes(query))
+    }
+
+    const allPending = appointments.filter(item => item.paymentStatus.includes("Pending"))
+    const allCancelled = appointments.filter(item => item.paymentStatus.includes("Cancelled"))
+    const allAppt = console.log(appointments)
+    //const todayAppointmentDate = new Date(appointments[1].appointmentDate).getDate()
+    const today = new Date('2024-02-28T23:00:00.000Z').getDate() //1
+    console.log(today) //2
+    //console.log(new Date(appointments[9].appointmentDate).getDate())// this works
+    //console.log(appointments.filter(item => new Date(item.appointmentDate).getDate().includes(today)))
+    //const allToday = console.log(appointments.filter(item => item.appointmentDate.getDate().includes(Date().getDate())))
+    //format(appointments[13].appointmentDate, 'eeee do LLLL yyyy')
+   // console.log(new Date().getDate())
+    //onsole.log(new Date(appointments[1].appointmentDate).getDate())
+
   return (
     <div className="sportal-container">
         <Navbar />
@@ -83,11 +104,12 @@ function Sportal() {
                         </div>
                         <input 
                             type="text" 
-                            placeholder='Name, Phone number, Service'
+                            // placeholder='Name, Phone number, Service'
+                            placeholder='Search Name'
                             // name='email'
                             // value={email}
                             // onChange={handleInputChange}
-                            // onChange = {(e)=>setEmail(e.target.value)}
+                            onChange = {(e)=>setQuery(e.target.value)}
                             className="formInput"
                         />
                     </div>
@@ -113,8 +135,12 @@ function Sportal() {
                         isLoading && <ClimbingBoxLoading />
                     }
                     <div className="booking-wrapper">
-                        {
-                             appointments.map(data=>{
+                        {/* {
+                            isLoading && <ClimbingBoxLoading />
+                        } */}
+                        { categoryToggle === 1 &&
+                            // appointments.map(data=>{
+                            search(appointments).map(data=>{
                                 return (
                                     <div className="booking-item">
                                         {/* <div className="booking-orderno"></div> */}
@@ -128,8 +154,59 @@ function Sportal() {
                                 )
                              })
                         }
-                        <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
+
+                        {
+                            !isLoading && appointments.length === 0 && <NoRecords />
+                        }
+
+                        {/* {
+                            !isLoading && appointments.length === 0 && <h2>No Records Found.</h2>
+                        } */}
+
+                        { categoryToggle === 3 &&
+                            // appointments.map(data=>{
+                            search(allPending).map(data=>{
+                                return (
+                                    <div className="booking-item">
+                                        {/* <div className="booking-orderno"></div> */}
+                                        <div className="booking-service">{data.service}</div>
+                                        <div className="booking-user"><span><User2 size={16} /></span>{data.firstname} {data.lastname}</div>
+                                        <div className="booking-phone"><span><Phone size={16} /></span>{data.mobile}</div>
+                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{data.appointmentDate}</div>
+                                        <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
+                                        <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
+                                    </div>
+                                )
+                             })
+                        }
+
+                        {
+                            !isLoading && allPending.length === 0 && <NoRecords />
+                        }
+
+                        { categoryToggle === 4 && //allCancelled &&
+                            
+                            // appointments.map(data=>{
+                            search(allCancelled).map(data=>{
+                                return (
+                                    <div className="booking-item">
+                                        {/* <div className="booking-orderno"></div> */}
+                                        <div className="booking-service">{data.service}</div>
+                                        <div className="booking-user"><span><User2 size={16} /></span>{data.firstname} {data.lastname}</div>
+                                        <div className="booking-phone"><span><Phone size={16} /></span>{data.mobile}</div>
+                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{data.appointmentDate}</div>
+                                        <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
+                                        <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
+                                    </div>
+                                )
+                            })
+                        }
+
+                        {
+                          !isLoading && allCancelled.length === 0 && <NoRecords />
+                        }
+
+                        {/* <div className="booking-item">
                             <div className="booking-service">Consultation</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Nina Austin</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
@@ -138,7 +215,6 @@ function Sportal() {
                             <div className="booking-status success">Success</div>
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Gastrointestinal Surgery</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Kabaye Perry</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
@@ -147,115 +223,85 @@ function Sportal() {
                             <div className="booking-status pending">Pending</div>
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Surgical Oncology</div>
                             <div className="booking-user"><span><User2 size={16} /></span>John Norton</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦1,000,000</div>
                             <div className="booking-status success">Success</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Consultation</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Christopher Tyler</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦250,000</div>
                             <div className="booking-status refund">Refund</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Thyroid Surgery</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Damian Ngure</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦500,000</div>
                             <div className="booking-status cancel">Cancelled</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Breast Surgery</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Felicia Chuka</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦130,000</div>
                             <div className="booking-status refund">Refund</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Minimal Access Surgery</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Angela George</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Consultation</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Esther Zhen</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status pending">Pending</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Urological Surgery</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Tyler Perry</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status cancel">Cancelled</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Consultation</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Shullamite Jadon</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status cancel">Cancelled</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Diagnostic and Therapeutic Endoscopy</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Glen Johnson</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦30,000</div>
                             <div className="booking-status refund">Refund</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
                         </div>
                         <div className="booking-item">
-                            {/* <div className="booking-orderno"></div> */}
                             <div className="booking-service">Consultation</div>
                             <div className="booking-user"><span><User2 size={16} /></span>Sean Kingston</div>
                             <div className="booking-phone"><span><Phone size={16} /></span>07023113345</div>
                             <div className="booking-date"><span><CalendarRange size={16}/></span> Oct 31st 2023</div>
                             <div className="booking-amount">₦650,000</div>
                             <div className="booking-status success">Success</div>
-                            {/* <div className="booking-modal" onClick={() => setModalOpen(true)}><ChevronRight size={15} /></div> */}
-                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 1</PatientTransaction> */}
-                        </div>
+                        </div> */}
                         
                         <PatientAppointments item={currentAppt} onClose={()=>closeAppointment()} />
                     </div>

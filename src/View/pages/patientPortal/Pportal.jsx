@@ -14,6 +14,7 @@ function Pportal() {
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
     const [isLoading, setIsLoading] = useState(null);
+    const [query, setQuery] = useState("");
     const [appointments, setAppointments] = useState([
         // {
         //     "_id": "65931728012c4956644df995",
@@ -117,6 +118,10 @@ function Pportal() {
         setIsLoading(false);
     }
 
+    const search = (data) => {
+        return data.filter((item) => item.service.toLowerCase().includes(query))
+    }
+
 
   return (
     <div className="pportal-container">
@@ -139,11 +144,12 @@ function Pportal() {
                         </div>
                         <input 
                             type="text" 
-                            placeholder='Search Order no. or Service name'
+                            // placeholder='Search Order no. or Service name'
+                            placeholder='Search Service name'
                             // name='email'
                             // value={email}
                             // onChange={handleInputChange}
-                            // onChange = {(e)=>setEmail(e.target.value)}
+                            onChange = {(e)=>setQuery(e.target.value)}
                             className="formInput"
                         />
                     </div>
@@ -166,7 +172,8 @@ function Pportal() {
                         
                         {
                             
-                            appointments.map(data=>{
+                            // appointments.map(data=>{
+                            search(appointments).map(data=>{
                                 return (
                                         <div className="booking-item" key={data.appointmentId}>
                                             <div className="booking-orderno">SAPP-{data.appointmentId}</div>
