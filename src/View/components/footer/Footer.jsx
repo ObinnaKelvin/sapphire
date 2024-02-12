@@ -5,6 +5,7 @@ import './footer.scss'
 function Footer() {
 
     const currentYear = new Date().getFullYear();
+    const currentStaff = JSON.parse(localStorage.getItem('staff'));
 
   return (
     <div className="footer-container">
@@ -36,7 +37,7 @@ function Footer() {
                     <Link to={'/contact-us'} className='link'>
                         <div>CONTACT</div>
                     </Link>
-                    <Link to={'/staff-login'} className='link mysapphire'>
+                    <Link to={currentStaff ? '/staff-portal' : '/staff-login'} className='link mysapphire'>
                         <div>MY SAPPHIRE</div>
                     </Link>
                 </div>

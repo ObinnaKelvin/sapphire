@@ -23,6 +23,7 @@ import PaystackIntegration from '../../components/paystack/Paystack.jsx';
 import Interswitch from '../../components/interswitch/Interswitch.jsx';
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
 import HashLoader from 'react-spinners/HashLoader';
+import { formatDate } from '../../utils/formatDate.js';
 
 
 
@@ -56,7 +57,7 @@ function PayNow() {
     const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     // const [encodedDate, setEncodedDate] = useState(new Date());
-    const [encodedDate, setEncodedDate] = useState(format(new Date(), 'eeee do LLLL yyyy'));
+    const [encodedDate, setEncodedDate] = useState(new Date());
     const [tariff, setTariff] = useState('');
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
@@ -466,7 +467,7 @@ function PayNow() {
                                 <div className="left">Transaction Date</div>
                                 {/* <div className="right">{receipt&&  format(`${receipt.encodedDate}`, 'eeee do LLLL yyyy')}</div> */}
                                 {/* <div className="right">{receipt&&  parseISO(receipt.encodedDate)}</div> */}
-                                <div className="right">{receipt&&  receipt.encodedDate}</div>
+                                <div className="right">{receipt&&  formatDate(receipt.encodedDate)}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Appointment ID</div>
