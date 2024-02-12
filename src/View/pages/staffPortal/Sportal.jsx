@@ -9,6 +9,7 @@ import numeral from 'numeral';
 import { ClimbingBoxLoading } from '../../components/loading/Loading';
 import { format } from 'date-fns'//transform the dates to readable formats
 import { NoRecords } from '../../components/404/404';
+import { formatDate } from '../../utils/formatDate.js'
 
 function Sportal() {
 
@@ -70,6 +71,8 @@ function Sportal() {
     //const todayAppointmentDate = new Date(appointments[1].appointmentDate).getDate()
     const today = new Date('2024-02-28T23:00:00.000Z').getDate() //1
     console.log(today) //2
+    const trythis = formatDate(new Date()) //1
+    console.log(trythis) //2
     //console.log(new Date(appointments[9].appointmentDate).getDate())// this works
     //console.log(appointments.filter(item => new Date(item.appointmentDate).getDate().includes(today)))
     //const allToday = console.log(appointments.filter(item => item.appointmentDate.getDate().includes(Date().getDate())))
@@ -147,7 +150,7 @@ function Sportal() {
                                         <div className="booking-service">{data.service}</div>
                                         <div className="booking-user"><span><User2 size={16} /></span>{data.firstname} {data.lastname}</div>
                                         <div className="booking-phone"><span><Phone size={16} /></span>{data.mobile}</div>
-                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{data.appointmentDate}</div>
+                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{formatDate(data.appointmentDate)}</div>
                                         <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
                                         <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
                                     </div>
@@ -172,7 +175,7 @@ function Sportal() {
                                         <div className="booking-service">{data.service}</div>
                                         <div className="booking-user"><span><User2 size={16} /></span>{data.firstname} {data.lastname}</div>
                                         <div className="booking-phone"><span><Phone size={16} /></span>{data.mobile}</div>
-                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{data.appointmentDate}</div>
+                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{formatDate(data.appointmentDate)}</div>
                                         <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
                                         <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
                                     </div>

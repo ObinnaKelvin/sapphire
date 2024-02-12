@@ -5,17 +5,17 @@
     // border: 1px solid red;
     width: 90vw;
     height: 60vh;
-    margin: 20px 0px;
+    margin: 35px 0px;
 
     .noRecords-wrapper {
         display: flex;
         align-items: center;
         flex-direction: column;
         // border: 1px solid blue;
-        gap: 10px;
+        gap: 30px;
 
         img {
-            width: 250px;
+            width: 230px;
             animation: move 2s infinite ease alternate;
         }
 
