@@ -50,7 +50,7 @@ function PayNow() {
         // console.log(format(dateSelected, 'dd/MM/yyyy'))
         // setDate(format(dateSelected, 'eeee do LLLL yyyy'))
         setShowAppointmentDate(format(dateSelected, 'eeee do LLLL yyyy'))
-        setAppointmentDate(format(dateSelected, 'eeee do LLLL yyyy'))
+        setAppointmentDate(dateSelected)
         // setAppointmentDate(dateSelected)
     }
     const [error, setError] = useState(null);
