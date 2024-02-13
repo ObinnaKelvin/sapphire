@@ -479,7 +479,7 @@ function PayNow() {
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Appointment Date</div>
-                                <div className="right">{receipt&&receipt.appointmentDate}</div>
+                                <div className="right">{receipt&& formatDate(receipt.appointmentDate)}</div>
                             </div>
                             <div className="phase4-body-item">
                                 <div className="left">Customer</div>
