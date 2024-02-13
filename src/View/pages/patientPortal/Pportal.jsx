@@ -7,6 +7,7 @@ import axios from 'axios';
 import numeral from 'numeral';
 import { format } from 'date-fns'//transform the dates to readable formats
 import { ClimbingBoxLoading, ReceiptSkeletonLoading } from '../../components/loading/Loading';
+import { formatDate } from '../../utils/formatDate';
 
 function Pportal() {
 
@@ -178,7 +179,7 @@ function Pportal() {
                                         <div className="booking-item" key={data.appointmentId}>
                                             <div className="booking-orderno">SAPP-{data.appointmentId}</div>
                                             <div className="booking-service">{data.service}</div>
-                                            <div className="booking-date">{data.appointmentDate}</div>
+                                            <div className="booking-date">{formatDate(data.appointmentDate)}</div>
                                             {/* <div className="booking-date">{`${format(new Date(data.appointmentDate), "MMM do, yyy")}`}</div> */}
                                             <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
                                             <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>

@@ -4,6 +4,7 @@ import './modal.scss'
 import naira from '../../assets/images/naira-black.png'
 import numeral from "numeral";
 import { format } from 'date-fns'//transform the dates to readable formats
+import { formatDate } from '../../utils/formatDate';
 
 
 export const PatientTransaction = ({children, open, onClose, id }) => {
@@ -43,6 +44,14 @@ export const PatientAppointments = ({item, onClose}) => {
                             <div className="central">Appointment Details</div>
                         </div>
                         <div className="pappointments-item-description-item">
+                            <div className="left">Transaction Amount</div>
+                            <div className="right">{item.tariff}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
+                            <div className="left">Transaction Date</div>
+                            <div className="right">{formatDate(item.encodedDate)}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
                             <div className="left">Appointment ID</div>
                             <div className="right">SAPP-{item.appointmentId}</div>
                         </div>
@@ -55,12 +64,8 @@ export const PatientAppointments = ({item, onClose}) => {
                             <div className="right">{`${format(new Date(item.appointmentDate), "MMM do, yyy")}`}</div>
                         </div>
                         <div className="pappointments-item-description-item">
-                            <div className="left">First Name</div>
-                            <div className="right">{item.firstname}</div>
-                        </div>
-                        <div className="pappointments-item-description-item">
-                            <div className="left">Last Name</div>
-                            <div className="right">{item.lastname}</div>
+                            <div className="left">Customer</div>
+                            <div className="right">{item.firstname} {item.lastname}</div>
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Gender</div>
@@ -77,6 +82,10 @@ export const PatientAppointments = ({item, onClose}) => {
                         <div className="pappointments-item-description-item">
                             <div className="left">Reference Number</div>
                             <div className="right">{item.referenceNo}</div>
+                        </div>
+                        <div className="pappointments-item-description-item">
+                            <div className="left">Transaction Status</div>
+                            <div className="right">{item.paymentStatus}</div>
                         </div>
                         <div className="pappointments-item-description-item">
                             <div className="left">Notes</div>
