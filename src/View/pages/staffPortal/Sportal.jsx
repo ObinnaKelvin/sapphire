@@ -62,7 +62,12 @@ function Sportal() {
     }    
 
     const search = (data) => {
-        return data.filter((item) => item.service.toLowerCase().includes(query))
+        return data.filter(
+            (item) => item.service.toLowerCase().includes(query)  || 
+            `${item.firstname} ${item.lastname}`.toLowerCase().includes(query) || 
+            item.lastname.toLowerCase().includes(query) || 
+            item.mobile.includes(query)
+        )
     }
 
     const allPending = appointments.filter(item => item.paymentStatus.includes("Pending"))
@@ -110,7 +115,7 @@ function Sportal() {
                         <input 
                             type="text" 
                             // placeholder='Name, Phone number, Service'
-                            placeholder='Search Name'
+                            placeholder='Search Name, Phone, Service'
                             // name='email'
                             // value={email}
                             // onChange={handleInputChange}
