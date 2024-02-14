@@ -8,7 +8,7 @@ import user from '../../assets/images/user.png'
 import paper from '../../assets/images/paper.png'
 import flag from '../../assets/images/flag.png';
 import tick from '../../assets/images/tick.png';
-import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen } from 'lucide-react';
+import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen, AlertCircle } from 'lucide-react';
 import { clinicData } from './clinicData.jsx'
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
@@ -48,6 +48,7 @@ function PayLater() {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
+    const [isRequired, setIsRequired] = useState(false);
     const [encodedDate, setEncodedDate] = useState(new Date());
     const [tariff, setTariff] = useState('');
     //const [tariffData, setTariffData] = useState('');
@@ -196,6 +197,9 @@ function PayLater() {
                         </div>
                     </div>
                     <div className={`phase1 ${activeStep === 1 ? "active" : "inactive" }`}  ref={formRef}>
+                        { isRequired && <div className="error_msg">
+                            <AlertCircle /> Mandatory fields are required!
+                        </div>}
                         <form action="" ref={formRef}>
                             <section>
                                 <input 
@@ -205,7 +209,7 @@ function PayLater() {
                                 value={firstname}
                                 // onChange={handleInputChange}
                                 onChange = {(e)=>setFirstname(e.target.value)}
-                                className="formInput"
+                                className={`formInput ${isRequired && "required"}`}
                                 />
                                 <input 
                                 type="text" 
@@ -214,7 +218,7 @@ function PayLater() {
                                 value={lastname}
                                 // onChange={handleInputChange}
                                 onChange = {(e)=>setLastname(e.target.value)}
-                                className="formInput"
+                                className={`formInput ${isRequired && "required"}`}
                                 />
                                 <input 
                                 type="text" 
@@ -223,11 +227,11 @@ function PayLater() {
                                 value={email}
                                 // onChange={handleInputChange}
                                 onChange = {(e)=>setEmail(e.target.value)}
-                                className="formInput"
+                                className={`formInput ${isRequired && "required"}`}
                                 />
 
 
-                                <select className = 'formSelect mid' name="user_gender" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                <select className = {`formSelect mid ${isRequired && "required"}`} name="user_gender" onChange={(e)=>setGender(e.target.value)} value={gender}>
                                     <option>- Choose Gender -</option>
                                     <option value={'Male'}>Male</option>
                                     <option value={'Female'}>Female</option>
@@ -242,11 +246,11 @@ function PayLater() {
                                 value={mobile}
                                 // onChange={handleInputChange}
                                 onChange = {(e)=>setMobile(e.target.value)}
-                                className="formInput mid"
+                                className={`formInput mid ${isRequired && "required"}`}
                                 />
 
 
-                                <input type="text" className="formInput mid" name="user_appointment_date" placeholder="Select Appointment Date" value={showAppointmentDate} onChange={(e)=> setAppointmentDate(e.target.value)} onClick={()=>setOpenDate(!openDate)} />
+                                <input type="text" className={`formInput mid ${isRequired && "required"}`} name="user_appointment_date" placeholder="Select Appointment Date" value={showAppointmentDate} onChange={(e)=> setAppointmentDate(e.target.value)} onClick={()=>setOpenDate(!openDate)} />
                                 {/* <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} onClick={()=>setOpenDate(false)}> */}
                                 <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef}>
                                     <Calendar
@@ -261,7 +265,7 @@ function PayLater() {
 
 
                                 {/* <select className = 'formSelect mid' name="user_appointment_clinic" onChange={(e)=>{setService(e.target.value); console.log(e.target.value)}} value={service}> */}
-                                <select className = 'formSelect mid' name="user_appointment_clinic" onChange={getValue} value={service}>
+                                <select className = {`formSelect mid ${isRequired && "required"} `} name="user_appointment_clinic" onChange={getValue} value={service}>
                                     <option>- Choose a Surgical Procedure -</option>
                                     {
                                     // clinicData.map((data)=>(
@@ -302,7 +306,17 @@ function PayLater() {
                             </section> */}
                             
                             {/* <button className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</button> */}
-                            <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</div>
+                            <div className="button" type='submit' onClick={(e)=> {
+                                if(firstname && lastname && email && mobile && showAppointmentDate && service && gender) {
+                                    setActiveStep(2);
+                                    setIsRequired(false)
+                                } else {
+                                    setIsRequired(true)
+                                }
+                            
+                                }}
+                            
+                                >Continue</div>
 
                             {/* <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?
