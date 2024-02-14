@@ -69,12 +69,14 @@ function Sportal() {
     const allCancelled = appointments.filter(item => item.paymentStatus.includes("Cancelled"))
     const allAppt = console.log(appointments)
     //const todayAppointmentDate = new Date(appointments[1].appointmentDate).getDate()
-    const today = new Date('2024-02-28T23:00:00.000Z').getDate() //1
+    //const today = new Date('2024-02-28T23:00:00.000Z').getDate() //1
+    const today = formatDate(new Date()) //1
     console.log(today) //2
     const trythis = formatDate(new Date()) //1
     console.log(trythis) //2
     //console.log(new Date(appointments[9].appointmentDate).getDate())// this works
     //console.log(appointments.filter(item => new Date(item.appointmentDate).getDate().includes(today)))
+    const allToday = appointments.filter(item => formatDate(new Date(item.appointmentDate)).includes(today))
     //const allToday = console.log(appointments.filter(item => item.appointmentDate.getDate().includes(Date().getDate())))
     //format(appointments[13].appointmentDate, 'eeee do LLLL yyyy')
    // console.log(new Date().getDate())
@@ -141,9 +143,31 @@ function Sportal() {
                         {/* {
                             isLoading && <ClimbingBoxLoading />
                         } */}
-                        { categoryToggle === 1 &&
+                        { categoryToggle === 1 && 
                             // appointments.map(data=>{
                             search(appointments).map(data=>{
+                                return (
+                                    <div className="booking-item">
+                                        {/* <div className="booking-orderno"></div> */}
+                                        <div className="booking-service">{data.service}</div>
+                                        <div className="booking-user"><span><User2 size={16} /></span>{data.firstname} {data.lastname}</div>
+                                        <div className="booking-phone"><span><Phone size={16} /></span>{data.mobile}</div>
+                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{formatDate(data.appointmentDate)}</div>
+                                        <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
+                                        <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
+                                    </div>
+                                )
+                             })
+                             
+                        }
+
+                        {
+                            !isLoading && appointments.length === 0 && categoryToggle === 1 && <NoRecords />
+                        }
+
+                        { categoryToggle === 2 &&
+                            // appointments.map(data=>{
+                            search(allToday).map(data=>{
                                 return (
                                     <div className="booking-item">
                                         {/* <div className="booking-orderno"></div> */}
@@ -159,12 +183,8 @@ function Sportal() {
                         }
 
                         {
-                            !isLoading && appointments.length === 0 && <NoRecords />
+                            !isLoading && allToday.length === 0 && categoryToggle === 2 && <NoRecords />
                         }
-
-                        {/* {
-                            !isLoading && appointments.length === 0 && <h2>No Records Found.</h2>
-                        } */}
 
                         { categoryToggle === 3 &&
                             // appointments.map(data=>{
@@ -184,7 +204,7 @@ function Sportal() {
                         }
 
                         {
-                            !isLoading && allPending.length === 0 && <NoRecords />
+                            !isLoading && allPending.length === 0 && categoryToggle === 3 && <NoRecords />
                         }
 
                         { categoryToggle === 4 && //allCancelled &&
@@ -206,7 +226,7 @@ function Sportal() {
                         }
 
                         {
-                          !isLoading && allCancelled.length === 0 && <NoRecords />
+                          !isLoading && allCancelled.length === 0 && categoryToggle === 4 && <NoRecords />
                         }
 
                         {/* <div className="booking-item">
