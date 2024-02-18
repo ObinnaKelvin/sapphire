@@ -472,7 +472,7 @@ function PayNow() {
                         <div className="phase4-wrapper"  ref={printComponentRef}>
                             <div className="icon-holder">
                                 <img src={logo} alt="success tick" />
-                                Sapphire Partners
+                                Sapphire Surgical Center
                             </div>
                             <div className="titleText">
                                 Transaction Receipt

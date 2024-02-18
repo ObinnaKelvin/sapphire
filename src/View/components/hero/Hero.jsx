@@ -13,9 +13,8 @@ function Hero() {
               </div>
               <div className="hero-description">
                   <p>
-                    We have implemented a number of protocols 
-                    and measures to ensure the safety and quick recovery
-                    of our patients.
+                  We are passionate about quality, built on excellence. 
+                  Setting new standards for safe surgical care.
                   </p>
               </div>
                 <Link to={'/book-appointment'} className='link'>

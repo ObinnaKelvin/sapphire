@@ -262,8 +262,8 @@ const PUProfile = () => {
     // }
     console.log("countryDataDetails", countryDataDetails)
     console.log("countryData", countryData)
-    console.log("cityData2", cityData.data)
-    const cityDataFull = cityData.data
+    //console.log("cityData2", cityData.data) //comment
+    //const cityDataFull = cityData.data //comment
 
     const loadStateData = async() => {
         if(countryDataAbbrv) {//This runs when country is selected. 
@@ -510,13 +510,13 @@ const PUProfile = () => {
                                             <option>- Select City -</option>
                                             <option value={'Ogba'}>Ogba</option>
                                             <option value={'Alimosho'}>Alimosho</option>
-                                            {
+                                            {/* {
                                                 cityDataFull.map(item => {
                                                     return (
                                                         <option value={item.name}>{item.name}</option>
                                                     )
                                                 })
-                                            }
+                                            } */}
                                         </select>
                                     </section>
                                     
@@ -926,15 +926,16 @@ const PUProfile = () => {
                                         <label>City</label>
                                         <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
                                             <option>- Select City -</option>
-                                            {/* <option value={'Ogba'}>Ogba</option>
-                                            <option value={'Alimosho'}>Alimosho</option> */}
-                                            {
+                                            <option value={'Ogba'}>Ogba</option>
+                                            <option value={'Alimosho'}>Alimosho</option>
+                                            <option value={'Alimosho'}>Ikeja</option>
+                                            {/* {
                                                 cityDataFull.map((item, index) => {
                                                     return (
                                                         <option value={item.name}>{item.name}</option>
                                                     )
                                                 })
-                                            }
+                                            } */}
                                         </select>
                                     </section>
 

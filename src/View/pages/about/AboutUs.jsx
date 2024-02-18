@@ -48,10 +48,9 @@ function AboutUs() {
                     <div className="aboutUs-action-content">
                         <p>
                             To make specialized, world-class 
-                            surgical services available to the 
-                            greatest number of Nigerians
+                            surgical services available to everyone.
                         </p>
-                        <p>
+                        {/* <p>
                             To ease local access to these 
                             services
                         </p>
@@ -59,39 +58,10 @@ function AboutUs() {
                             To stimulate a systemic shift 
                             towards quality improvement in 
                             the Nigerian healthcare space
-                        </p>
+                        </p> */}
 
                     </div>
 
-                </div>
-                <div className="aboutUs-action values">
-                    <div className="top-tag">
-                        <img src={value} alt='Values'/>
-                    </div>
-                    <div className="aboutUs-action-headerText value">VALUES</div>
-                    <div className="aboutUs-action-content">
-                        <p>
-                            <strong>Excellence</strong>
-                            <br/>The best care possible, at all times
-                        </p>
-                        <p>
-                            <strong>Safety</strong>
-                            <br/>Strict adherence to international 
-                            standards of injury prevention in the 
-                            patient and care providers
-                        </p>
-                        <p>
-                            <strong>Patient-centered care</strong>
-                            <br/>The best interests of the the patient 
-                            will always be our goal
-                        </p>
-                        <p>
-                            <strong>Integrity</strong>
-                            <br/>Honesty, transparent and trustworthy
-                            interactions
-                        </p>
-
-                    </div>
                 </div>
                 <div className="aboutUs-action mission">
                     <div className="top-tag">
@@ -100,14 +70,29 @@ function AboutUs() {
                     <div className="aboutUs-action-headerText mission">MISSION</div>
                     <div className="aboutUs-action-content">
                         <p>
-                            <strong>Excellence</strong>
-                            <br/>The best care possible, at all times
+                            To domesticate minimal access surgery and facilitate
+                            systemic changes towards healthcare quality improvement
+                            in Nigeria.
+                            {/* <strong>Excellence</strong>
+                            <br/>The best care possible, at all times */}
                         </p>
+                    </div>
+                </div>
+                <div className="aboutUs-action values">
+                    <div className="top-tag">
+                        <img src={value} alt='Values'/>
+                    </div>
+                    <div className="aboutUs-action-headerText value">VALUES</div>
+                    <div className="aboutUs-action-content">
                         <p>
                             <strong>Safety</strong>
                             <br/>Strict adherence to international 
                             standards of injury prevention in the 
                             patient and care providers
+                        </p>
+                        <p>
+                            <strong>Excellence</strong>
+                            <br/>The best care possible, at all times
                         </p>
                         <p>
                             <strong>Patient-centered care</strong>
@@ -119,6 +104,7 @@ function AboutUs() {
                             <br/>Honesty, transparent and trustworthy
                             interactions
                         </p>
+
                     </div>
                 </div>
 
