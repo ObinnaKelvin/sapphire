@@ -16,6 +16,7 @@ import Sappointment from "./View/pages/staffAppointment/Sappointment";
 import Patient from "./View/pages/patient/Patient";
 import AuthOTP from "./View/pages/auth/AuthOTP";
 import PUProfile from "./View/pages/patientUserProfile/PUProfile";
+import Notifications from "./View/pages/notifications/Notifications";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path='/staff-portal' element={<Sportal />}/>
           <Route path='/staff-portal/create-appointment' element={<Sappointment />}/>
           <Route path='/staff-portal/patient' element={<Patient />}/>
+          <Route path='/staff-portal/notifications' element={<Notifications />}/>
         </Routes>
     </Router>
   );

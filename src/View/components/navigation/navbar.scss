@@ -361,6 +361,24 @@
                 // border: 1px solid white;
                 margin: 0px auto 0px auto;
                 gap: 5px;
+                position: relative;
+            }
+
+            .staffnavbar-item.notifications {
+                .stats {
+                    height: 15px;
+                    width: 15px;
+                    background-color: red;
+                    border-radius: 50%;
+                    position: absolute;
+                    right: 17px;
+                    bottom: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+
+                }
             }
         }
 

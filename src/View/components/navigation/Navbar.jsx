@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.scss'
-import {CalendarClock, Contact2, LogOut, User2, Wallet2} from 'lucide-react';
+import {Bell, CalendarClock, Contact2, LogOut, User2, Wallet2} from 'lucide-react';
 import logo from '../../assets/images/logo.PNG';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -199,10 +199,17 @@ export const StaffNavbar = () => {
                             <span>Bookings</span>
                         </div>
                     </Link>
-                    <Link to={'/staff-portal/patient'} className='link'>
+                    {/* <Link to={'/staff-portal/patient'} className='link'>
                         <div className='staffnavbar-item'>
                             <User2 size={20} />
                             <span>Patients</span>
+                        </div>
+                    </Link> */}
+                    <Link to={'/staff-portal/notifications'} className='link'>
+                        <div className='staffnavbar-item notifications'>
+                            <Bell size={20} />
+                            <span>Notifications</span>
+                            <div className="stats">4</div>
                         </div>
                     </Link>
                 </div>
@@ -242,6 +249,13 @@ export const StaffNavbarMobile = () => {
                         <div className='staffnavbarmobile-item'>
                             <User2 size={20} />
                             <span>Patients</span>
+                        </div>
+                    </Link>
+                    <Link to={'/staff-portal/notifications'} className='link'>
+                        <div className='staffnavbarmobile-item notifications'>
+                            <Bell size={20} />
+                            <span>Notifications</span>
+                            <div className="stats">3</div>
                         </div>
                     </Link>
                     <Link to={'/staff-login'} className='link'>

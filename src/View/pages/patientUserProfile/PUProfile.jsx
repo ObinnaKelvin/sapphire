@@ -362,7 +362,7 @@ const PUProfile = () => {
                             <p>You only need to complete this process once.</p>
                         </div>
                         <div className="modal-buttons">
-                            <button className='passive' onClick={handleNotNow}>Not now</button>
+                            {/* <button className='passive' onClick={handleNotNow}>Not now</button> */}
                             <button onClick={(e) => { handleNext(2)}}>Next</button>
                         </div>
                     </div>

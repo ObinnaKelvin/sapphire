@@ -1,0 +1,150 @@
+.notifications-container {
+    display: flex;
+    flex-direction: column;
+
+    .notifications-wrapper {
+        height: max-content;
+        margin: 60px 0px 0px 0px;
+        // border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+
+        .notifications-sidenav {
+            height: 100%;
+            width: 60px;
+            // border: 1px solid blue;
+        }
+
+        .notifications-mobile {
+            display: none;
+        }
+
+        .notifications-body {
+            // height: 100vh;
+            height: max-content;
+            width: 100%;
+            // border: 1px solid orange;
+            background-color: #fafafa;
+
+            .notifications-body-header {
+                display: flex;
+                flex-direction: row;
+                // align-items: center;
+                justify-content: space-around;
+                height: 150px;
+                width: 100%;
+                margin: 0px 0px 0px 0px;
+                // border: 1px solid orange;
+                // background-color: #0f5bce;
+                background-color: #0C4CAC;
+                border-radius: 0px 0px 20px 20px;
+                position: relative;
+
+                .page-title {
+                    display: flex;
+                    position: absolute;
+                    color: #fff;
+                    margin: 10px 0px 0px 20px;
+                    // border: 1px solid white;
+                    left: 0px;
+                    top: 0px;
+                }
+
+                .name-space {
+                    display: flex;
+                    position: absolute;
+                    color: #fff;
+                    margin: 10px 20px 0px 0px;
+                    font-size: 14px;
+                    top: 0px;
+                    right: 0px;
+
+                }
+
+            }
+
+            .notifications-body-body {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                .notifications-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding: 10px;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    // margin-bottom: 300px;
+                    margin: -30px 0px 150px 0px;
+                    // border: 1px solid red;
+                    width: 100%;
+                    height: max-content;
+                    z-index: 2;
+
+                    .notifications-item {
+                        border: 1px solid #EEEEEE;
+                        padding: 15px;
+                        border-radius: 5px;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 18px;
+                        width: 90%;
+                        height: 65px;
+                        position: relative;
+                        background-color: white;
+                        justify-content: space-between;
+
+                        .left {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 15px;
+
+                            .notification-tag {
+                                // border: 1px solid #000;
+                                width: max-content;
+                                padding: 2px 10px;
+                                border-radius: 20px;
+                                font-size: 12px;
+                                height: 20px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+    
+                            }
+    
+                            .notification-tag.appointment {
+                                background-color: #00C851;
+                                color: white;
+                            }
+
+                        }
+
+                        .right {
+                            display: flex;
+                            // height: 100px;
+                            width: max-content;
+                            // border: 1px solid black;
+                            align-items: center;
+
+                            .notification-date {
+                                display: flex;
+                                align-items: center;
+                                font-size: 12px;
+                                gap: 10px;
+                                color: #757575;
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
