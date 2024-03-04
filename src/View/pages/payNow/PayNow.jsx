@@ -65,6 +65,11 @@ function PayNow() {
     const [paymentStatus, setPaymentStatus] = useState('');
     const receipt = JSON.parse(localStorage.getItem('Receipt'));
     // const [startDate, setStartDate] = useState(new Date());
+    //For Notification >>
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('')
+    const [type, setType] = useState('')
+    const [destination, setDestination] = useState('')
     // const [socket, setSocket] = useState(null);
     
     // const socket = sessionStorage.getItem("socket");
@@ -159,9 +164,20 @@ function PayNow() {
         console.log(idChosen)
     }
 
-    // const handleContinue = () => {
+    const handleContinue = () => {
+        if(firstname && lastname && email && mobile && showAppointmentDate && service && gender) {
+            setActiveStep(2);
+            setIsRequired(false)
 
-    // }
+            //This enhances the notification handle
+            setTitle(`${firstname} ${lastname} has just booked an appointment for ${service}`);
+            setType(`Appointment`)
+            setDestination(`staff`)
+        } else {
+            setIsRequired(true)
+        }
+    
+    }
 
     const handlePaySubmit = async(e) => {
         e.preventDefault();
@@ -177,19 +193,33 @@ function PayNow() {
             const referenceNo =  await JSON.parse(localStorage.getItem('RefNo'))
             if (referenceNo) {
                // const response = await axios.post("http://localhost:9000/api/appointments/", //LOCAL
-                const response = await axios.post(`${PUBLIC_URL}api/appointments/`, //PRODUCTION
-                {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}) 
+                // const response = await axios.post(`${PUBLIC_URL}api/appointments/`, //PRODUCTION
+                // {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus})
+                
+                const response = await axios.all([
+                    axios.post(`${PUBLIC_URL}api/appointments/`, //PRODUCTION
+                    {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}), 
+                    axios.post(`${PUBLIC_URL}api/notifications/`, 
+                    {title, body, type, destination, encodedDate}) 
+                ]);
     
-                if (response.status === 200) {
-                    setSuccess(response.data);
+                if (response[0].status === 200) {
+                    setSuccess(response[0].data);
                     setError(null); //set error to null after 5 seconds
                     setTimeout(() => {
                         setActiveStep(4); //set ActiveStep to 3 after 5 seconds
                       }, 2000);
                       
                     // save the Response to local storage
-                    localStorage.setItem('Receipt', JSON.stringify(response.data));
-                    console.log(response.data);
+                    localStorage.setItem('Receipt', JSON.stringify(response[0].data));
+                    console.log(response[0].data);
+                }
+
+                if (response[1].status === 200) {
+                    console.log(response[1].data);
+                    console.log(title);
+                    console.log(type);
+                    console.log(destination);
                 }
 
                 //Send Notications
@@ -395,15 +425,17 @@ function PayNow() {
                             </section> */}
                             
                             {/* <button className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</button> */}
-                            <div className="button" type='submit' onClick={(e)=> {
-                                if(firstname && lastname && email && mobile && showAppointmentDate && service && gender) {
-                                    setActiveStep(2);
-                                    setIsRequired(false)
-                                } else {
-                                    setIsRequired(true)
-                                }
+                            <div className="button" type='submit' onClick={
+                                handleContinue}
+                                // (e)=> {
+                                // if(firstname && lastname && email && mobile && showAppointmentDate && service && gender) {
+                                //     setActiveStep(2);
+                                //     setIsRequired(false)
+                                // } else {
+                                //     setIsRequired(true)
+                                // }
                             
-                                }}
+                                // }}
                             
                                 >Continue</div>
 

@@ -121,6 +121,21 @@ function PayLater({socket}) {
         console.log(idChosen)
     }
 
+    const handleContinue = () => {
+        if(firstname && lastname && email && mobile && showAppointmentDate && service && gender) {
+            setActiveStep(2);
+            setIsRequired(false)
+
+            //This enhances the notification handle
+            setTitle(`${firstname} ${lastname} has just booked an appointment for ${service}`);
+            setType(`Appointment`)
+            setDestination(`staff`)
+        } else {
+            setIsRequired(true)
+        }
+    
+    }
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -128,17 +143,24 @@ function PayLater({socket}) {
 
         try {
             // const response = await axios.post("http://localhost:9000/api/appointments/", //LOCAL
-            const response = await axios.post(`${PUBLIC_URL}api/appointments/`, 
-            {firstname, lastname, email, gender, mobile, service, notes, service, tariff, encodedDate, appointmentDate, paymentStatus}) 
+            // const response = await axios.post(`${PUBLIC_URL}api/appointments/`, 
+            // {firstname, lastname, email, gender, mobile, service, notes, service, tariff, encodedDate, appointmentDate, paymentStatus})
+            
+            const response = await axios.all([
+                axios.post(`${PUBLIC_URL}api/appointments/`, 
+                {firstname, lastname, email, gender, mobile, service, notes, service, tariff, encodedDate, appointmentDate, paymentStatus}),
+                axios.post(`${PUBLIC_URL}api/notifications/`, 
+                {title, body, type, destination, encodedDate}) 
+            ]);
 
-            if (response.status === 200) {
-                setSuccess(response.data);
+            if (response[0].status === 200) {
+                setSuccess(response[0].data);
                 setError(null); //set error to null after 5 seconds
                 setTimeout(() => {
                     setActiveStep(3); //set ActiveStep to 3 after 5 seconds
                   }, 2000);
-                sessionStorage.setItem("receipt", JSON.stringify(response.data))
-                console.log(response.data);
+                sessionStorage.setItem("receipt", JSON.stringify(response[0].data))
+                console.log(response[0].data);
                 // const socket = io("https://sapphire-api.onrender.com:10000", {transports: ["websocket"]});
                 //const socket = io("http://localhost:4000");
                 socket.emit("sendNotification", 
@@ -149,6 +171,13 @@ function PayLater({socket}) {
                     }
                 )
                 console.log("Alert!!")
+            }
+
+            if (response[1].status === 200) {
+                console.log(response[1].data);
+                console.log(title);
+                console.log(type);
+                console.log(destination);
             }
             setIsLoading(false);
             
@@ -195,9 +224,9 @@ function PayLater({socket}) {
         setIsLoading(true);
         setError(null)
 
-        setTitle(`${firstname} ${lastname} has just booked an appointment for ${service}`);
-        setType(`Appointment`)
-        setDestination(`staff`)
+        // setTitle(`${firstname} ${lastname} has just booked an appointment for ${service}`);
+        // setType(`Appointment`)
+        // setDestination(`staff`)
 
 
         try {
@@ -221,7 +250,7 @@ function PayLater({socket}) {
 
             
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
@@ -398,19 +427,9 @@ function PayLater({socket}) {
                             </section> */}
                             
                             {/* <button className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Continue</button> */}
-                            <div className="button" type='submit' onClick={(e)=> {
-                                if(firstname && lastname && email && mobile && showAppointmentDate && service && gender) {
-                                    setActiveStep(2);
-                                    setIsRequired(false)
-                                } else {
-                                    setIsRequired(true)
-                                }
-                            
-                                }}
-                            
-                                >Continue</div>
+                            <div className="button" type='submit' onClick={handleContinue}>Continue</div>
 
-                                <div className="button" onClick={() => runNotificationAlert(firstname, appointmentDate, service)}>Run Socket</div>
+                                {/* <div className="button" onClick={() => runNotificationAlert(firstname, appointmentDate, service)}>Run Socket</div> */}
 
                             {/* <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?
@@ -465,7 +484,7 @@ function PayLater({socket}) {
                                 {/* <div className="finish" onClick={(e)=>setActiveStep(3)}>Finish</div> */}
                                 {/* <div className="finish" onClick={handleSubmit}>Finish</div> */}
                                 {/* <button  className="finish" onClick={() => {handleSubmit(); runNotificationAlert(firstname, appointmentDate, service)}}> */}
-                                <button  className="finish" onClick={(e) => {handleSubmit(e); handleNotification(e)}}>
+                                <button  className="finish" onClick={(e) => {handleSubmit(e);}}>
                                     {
                                         isLoading ? 
                                         <HashLoader size={30} cssOverride={{ margin: '0px auto 0px auto'}} color="#fff" /> : `Finish`
