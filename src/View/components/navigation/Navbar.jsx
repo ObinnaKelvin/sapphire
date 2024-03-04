@@ -180,7 +180,7 @@ export const PatientNavbarMobile = () => {
     )
 }
 
-export const StaffNavbar = () => {
+export const StaffNavbar = ({socket}) => {
 
     const { dispatch } = useAuthContext();
 

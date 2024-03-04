@@ -9,7 +9,7 @@ function Hero() {
         <div className="hero-left">
           <div className="hero-left-wrapper">
               <div className="hero-caption">
-                <p>It is <span>Safer</span> with Us</p>
+                <p>You are in <span>Safe</span> hands</p>
               </div>
               <div className="hero-description">
                   <p>

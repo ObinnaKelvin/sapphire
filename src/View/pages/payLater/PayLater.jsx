@@ -18,11 +18,12 @@ import axios from 'axios';
 import naira from '../../assets/images/naira.png';
 import numeral from "numeral";
 import HashLoader from 'react-spinners/HashLoader';
+import { io } from 'socket.io-client';
 
 // import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 
-function PayLater() {
+function PayLater({socket}) {
 
     const PUBLIC_URL = "https://sapphire-api.onrender.com/";
 
@@ -54,6 +55,10 @@ function PayLater() {
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
     // const [startDate, setStartDate] = useState(new Date());
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('')
+    const [type, setType] = useState('')
+    const [destination, setDestination] = useState('')
 
     //We add a listener effect that activates 'false' which 
     // invokes the 'inactive' property to the dropdowns
@@ -132,7 +137,18 @@ function PayLater() {
                 setTimeout(() => {
                     setActiveStep(3); //set ActiveStep to 3 after 5 seconds
                   }, 2000);
+                sessionStorage.setItem("receipt", JSON.stringify(response.data))
                 console.log(response.data);
+                // const socket = io("https://sapphire-api.onrender.com:10000", {transports: ["websocket"]});
+                //const socket = io("http://localhost:4000");
+                socket.emit("sendNotification", 
+                    {
+                        firstname,
+                        appointmentDate,
+                        service
+                    }
+                )
+                console.log("Alert!!")
             }
             setIsLoading(false);
             
@@ -157,6 +173,82 @@ function PayLater() {
         setGender('')
         setActiveStep(1);
     }
+
+    //Everything Sockets
+
+    const runNotificationAlert = (patientName, bookingDate, service) => {
+        // const socket = io("https://sapphire-api.onrender.com:10000", {transports: ["websocket"]});
+        const socket = io("http://localhost:4000");
+        socket.emit("new_booking", {message: "User booking confirmed"})
+        socket.emit("sendNotification", 
+            {
+                patientName,
+                bookingDate,
+                service
+            }
+        )
+        console.log("Alert!!")
+    }
+
+    const handleNotification = async(e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null)
+
+        setTitle(`${firstname} ${lastname} has just booked an appointment for ${service}`);
+        setType(`Appointment`)
+        setDestination(`staff`)
+
+
+        try {
+            const response = await axios.post(`${PUBLIC_URL}api/notifications/`, 
+            {title, body, type, destination, encodedDate})
+
+            if (response.status === 200) {
+                console.log(response.data);
+                console.log(title);
+                console.log(type);
+                console.log(destination);
+                // setSuccess(response.data);
+                // setError(null); //set error to null after 5 seconds
+                // setTimeout(() => {
+                //     setActiveStep(3); //set ActiveStep to 3 after 5 seconds
+                //   }, 2000);
+                // sessionStorage.setItem("receipt", JSON.stringify(response.data))
+                // console.log(response.data);
+            }
+            setIsLoading(false);
+
+            
+        } catch (error) {
+            
+        }
+    }
+
+    //const receipt = sessionStorage.getItem("receipt")
+
+    useEffect(() => {
+
+        //const socket = io("https://sapphire-api.onrender.com:10000", {transports: ["websocket"]});
+        //const socket = io("http://localhost:4000");
+        socket&&
+        socket?.on("connection", () => {
+            console.log("Connected to socket io")
+        });
+
+        socket&&
+        socket.on("new_booking", (data) => {
+            console.log("New booking confirmed", data.message)
+        });
+        
+        socket&&
+        socket.on("sendNotification", ({firstname, appointmentDate, service}) => {
+           console.log("sendNotification", {firstname, appointmentDate, service})
+        })
+
+        // runNotificationAlert(firstname, appointmentDate, service)
+
+    }, [socket])
     
 
 
@@ -318,6 +410,8 @@ function PayLater() {
                             
                                 >Continue</div>
 
+                                <div className="button" onClick={() => runNotificationAlert(firstname, appointmentDate, service)}>Run Socket</div>
+
                             {/* <div className="sub-info" onClick={(e)=>setActiveStep(2)}>
                                 Forgot Password?
                             </div> */}
@@ -370,7 +464,8 @@ function PayLater() {
                                 </button>
                                 {/* <div className="finish" onClick={(e)=>setActiveStep(3)}>Finish</div> */}
                                 {/* <div className="finish" onClick={handleSubmit}>Finish</div> */}
-                                <button  className="finish" onClick={handleSubmit}>
+                                {/* <button  className="finish" onClick={() => {handleSubmit(); runNotificationAlert(firstname, appointmentDate, service)}}> */}
+                                <button  className="finish" onClick={(e) => {handleSubmit(e); handleNotification(e)}}>
                                     {
                                         isLoading ? 
                                         <HashLoader size={30} cssOverride={{ margin: '0px auto 0px auto'}} color="#fff" /> : `Finish`

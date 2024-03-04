@@ -24,6 +24,7 @@ import Interswitch from '../../components/interswitch/Interswitch.jsx';
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
 import HashLoader from 'react-spinners/HashLoader';
 import { formatDate } from '../../utils/formatDate.js';
+import { io } from "socket.io-client";
 
 
 
@@ -64,6 +65,9 @@ function PayNow() {
     const [paymentStatus, setPaymentStatus] = useState('');
     const receipt = JSON.parse(localStorage.getItem('Receipt'));
     // const [startDate, setStartDate] = useState(new Date());
+    // const [socket, setSocket] = useState(null);
+    
+    // const socket = sessionStorage.getItem("socket");
 
     const referenceNo =  JSON.parse(localStorage.getItem('RefNo'))
     console.log("newRef",referenceNo)
@@ -101,6 +105,14 @@ function PayNow() {
         loadTariffData()
     }, [service])
 
+    
+    // useEffect(() => {
+
+    //     setSocket(io("http://localhost:4000"));
+        
+    //     // sessionStorage.setItem("socket", io("http://localhost:4000"));
+    //     console.log(socket)
+    // }, [])
     
     // setTimeout(() => {
     //     reloadPage()
@@ -161,6 +173,7 @@ function PayNow() {
         //     }, 2000);
 
         try {
+
             const referenceNo =  await JSON.parse(localStorage.getItem('RefNo'))
             if (referenceNo) {
                // const response = await axios.post("http://localhost:9000/api/appointments/", //LOCAL
@@ -178,6 +191,14 @@ function PayNow() {
                     localStorage.setItem('Receipt', JSON.stringify(response.data));
                     console.log(response.data);
                 }
+
+                //Send Notications
+                // socket?.emit("sendNotification", {
+                //     patientName: `${receipt.firstname} ${receipt.lastname}`,
+                //     bookindDate :  `${receipt.encodedDate}`,
+                //     service: receipt.service
+
+                // })
 
             } else {
                 alert("You need to make payment first!")

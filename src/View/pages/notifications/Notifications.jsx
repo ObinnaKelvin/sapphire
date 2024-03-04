@@ -3,11 +3,18 @@ import { Navbar, StaffNavbar, StaffNavbarMobile } from '../../components/navigat
 import './notifications.scss'
 import { Clock8 } from 'lucide-react';
 import { NotificationBot } from '../../components/buttons/Buttons';
+import { io } from "socket.io-client";
+import axios from 'axios';
+import { ClimbingBoxLoading } from '../../components/loading/Loading';
+import { formatDate } from '../../utils/formatDate.js'
 
-function Notifications() {
+function Notifications({socket}) {
 
+    const [notifications, setNotifications] = useState([]);
+    const [notificationsData, setNotificationsData] = useState([]);
     const staffUser = JSON.parse(localStorage.getItem('staff'));
     const [greet, setGreet] = useState('');
+    const [isLoading, setIsLoading] = useState(null);
     const handleGreet = () => {
         let today = new Date()
         let getCurrentHour = today.getHours() 
@@ -26,21 +33,47 @@ function Notifications() {
     
     useEffect(() => {
         handleGreet();
-    }, [])
+       loadNotificationsData();
+
+    }, [])    
+
+    useEffect(() => {
+
+        socket?.on("getNotification", (data) => {
+            setNotifications((prev) => [...prev, data])
+        });
+    }, [socket])
+
+    console.log(notifications)
+    console.log(notificationsData)
+    //console.log(socket.id)
+
+    const loadNotificationsData = async() => {
+        setIsLoading(true);
+        //await axios.get(`http://localhost:9000/api/notifications/`) //LOCAL
+        await axios.get(`https://sapphire-api.onrender.com/api/notifications/`) //PRODUCTION
+        //.then(response => console.log(response.data))
+        .then(response => setNotificationsData(response.data))
+        //console.log(notifications)
+        setIsLoading(false);
+
+    }
+
+
 
   return (
     <div className='notifications-container'>
         <Navbar />
-        <NotificationBot />
+        {/* <NotificationBot /> */}
         
         <div className="notifications-wrapper">
             <div className="notifications-sidenav">
                 {/* <PatientNavbar /> */}
-                <StaffNavbar />
+                <StaffNavbar socket={socket}  />
             </div>
             <div className="notifications-mobile">
                 {/* <PatientNavbarMobile /> */}
-                <StaffNavbarMobile />
+                <StaffNavbarMobile socket={socket}  />
             </div>
 
             <div className="notifications-body">
@@ -56,14 +89,55 @@ function Notifications() {
                 <div className="notifications-body-body">
 
                     <div className="notifications-wrapper">
+
+                        {
+                            notificationsData.map((data)=> {
+                                return (
+                                    <div className="notifications-item">
+                                        <div className="left">
+                                            <div className="notification-tag appointment">
+                                                {data.type}
+                                            </div>
+                                            <div className="details">
+                                                {data.title}
+                                            </div>
+                                        </div>
+                                        <div className="right">
+                                            <div className="notification-date">
+                                                <span><Clock8 size={18} /></span>
+                                                <span>{formatDate(data.encodedDate)}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                )
+                            })
+
+                        }
                         
-                        <div className="notifications-item">
+                        {/* <div className="notifications-item">
                             <div className="left">
                                 <div className="notification-tag appointment">
                                     Appointment
                                 </div>
                                 <div className="details">
                                     Abike Dabiri has just booked an appointment
+                                </div>
+                            </div>
+                            <div className="right">
+                                <div className="notification-date">
+                                    <span><Clock8 size={18} /></span>
+                                    <span>February 28, 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="notifications-item">
+                            <div className="left">
+                                <div className="notification-tag appointment">
+                                    Appointment
+                                </div>
+                                <div className="details">
+                                    Paul Ike has just booked an appointment
                                 </div>
                             </div>
                             <div className="right">
@@ -120,7 +194,7 @@ function Notifications() {
                                     <span>February 28, 2024</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
