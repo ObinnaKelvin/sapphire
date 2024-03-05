@@ -55,6 +55,8 @@ const PUProfile = () => {
     const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
     const currentState = JSON.parse(localStorage.getItem('currentState'));
     const cityData = JSON.parse(localStorage.getItem('cityData'));
+    const [loading, setLoading] = useState(null);
+    
 
     console.log("dob", parseISO(dob))
     console.log("isFullyRegistered",isFullyRegistered)
@@ -302,7 +304,8 @@ const PUProfile = () => {
     }
 
     const loadCityData = async () => {
-        if(`${currentCountry} ? ${currentCountry.name =='Nigeria'} `) {
+        setLoading(true)
+        if(`${currentCountry} && ${currentCountry?.name ==='Nigeria'} `) {
             try {
                 // const city = await City.getCitiesOfState('NG', 'FC')
                 //const upperCaseState = state.toUpperCase()
@@ -329,6 +332,7 @@ const PUProfile = () => {
             } catch (error) {
                 console.log(error)
             }
+            setLoading(false)
         }
     }
 
