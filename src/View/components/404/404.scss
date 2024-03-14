@@ -36,3 +36,42 @@
 
     }
 }
+
+.noAppointments-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // border: 1px solid red;
+    width: 90vw;
+    height: 60vh;
+    margin: 35px 0px;
+
+    .noAppointments-wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        // border: 1px solid blue;
+        gap: 30px;
+
+        img {
+            width: 230px;
+            animation: move 2s infinite ease alternate;
+        }
+
+        span {
+            font-size: 17px;
+            color: #757575;
+            font-weight: 500;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateY(-15px);
+            }
+            to{
+                transform: translateY(0px) scale(1.03);
+            }
+        }
+
+    }
+}

@@ -305,7 +305,8 @@ const PUProfile = () => {
 
     const loadCityData = async () => {
         setLoading(true)
-        if(`${currentCountry} && ${currentCountry?.name ==='Nigeria'} `) {
+        // if(`${currentCountry} && ${currentCountry?.name ==='Nigeria'} `) {
+        if(`${currentCountry?.name ==='Nigeria'} `) {
             try {
                 // const city = await City.getCitiesOfState('NG', 'FC')
                 //const upperCaseState = state.toUpperCase()

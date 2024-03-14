@@ -510,9 +510,9 @@ function PayNow() {
 
                                 <PaystackIntegration cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service} reference={referenceNo}/>
                                 
-                                <Flutterwave cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/>
-                                {/* <Flutterwave cost={500000} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/> */}
-                                <Interswitch />
+                                {/* <Flutterwave cost={tariff} email={email} mobile={mobile} name={`${firstname} ${lastname}`} title={service}/> */}
+                                
+                                {/* <Interswitch /> */}
                             </div>
 
                             <button className="book-again" onClick={(e)=>{ forceUpdate(); handlePaySubmit(e)}}>{isLoading ? 

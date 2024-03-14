@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './pportal.scss';
 import { Navbar, PatientNavbar, PatientNavbarMobile } from '../../components/navigation/Navbar';
-import { LayoutPanelLeft, AlignLeft, Search, ChevronRight } from 'lucide-react'
+import { LayoutPanelLeft, AlignLeft, Search, ChevronRight, History } from 'lucide-react'
 import { PatientAppointments, PatientTransaction } from '../../components/modal/Modal';
 import axios from 'axios';
 import numeral from 'numeral';
 import { format } from 'date-fns'//transform the dates to readable formats
 import { ClimbingBoxLoading, ReceiptSkeletonLoading } from '../../components/loading/Loading';
 import { formatDate } from '../../utils/formatDate';
+import { NoAppointments } from '../../components/404/404';
 
 function Pportal() {
 
@@ -16,6 +17,7 @@ function Pportal() {
     const [greet, setGreet] = useState('');
     const [isLoading, setIsLoading] = useState(null);
     const [query, setQuery] = useState("");
+    const [tab, setTab] = useState("upcoming");
     const [appointments, setAppointments] = useState([
         // {
         //     "_id": "65931728012c4956644df995",
@@ -163,6 +165,13 @@ function Pportal() {
                         </div>
                     </div>
                 </div>
+                <div className="pportal-tabs">
+                    <div className="pportal-tabs-wrapper">
+                        <div className={`pportal-tabs-item ${tab == "upcoming" && "active"}`} onClick={() => setTab("upcoming")}>Upcoming</div>
+                        <div className={`pportal-tabs-item ${tab == "past" && "active"}`} onClick={() => setTab("past")}><History size={20} />Past</div>
+                    </div>
+
+                </div>
                 <div className="pportal-body-body">
                     
                         {
@@ -170,8 +179,13 @@ function Pportal() {
                         }
                     <div className="booking-wrapper">
 
-                        
                         {
+                            tab == "upcoming" &&
+                            <NoAppointments />
+                        }
+
+                        
+                        { tab == "past" &&
                             
                             // appointments.map(data=>{
                             search(appointments).map(data=>{
