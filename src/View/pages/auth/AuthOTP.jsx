@@ -58,7 +58,7 @@ const AuthOTP = () => {
         currentUser &&
         await axios.get(`https://sapphire-api.onrender.com/api/patients/find/${currentUser.email}`) //PRODUCTION
         //.then(response => console.log(response.data[0].isFullyRegistered))
-        .then(response => setIsFullyRegistered(response.data[0].isFullyRegistered))
+        .then(response => setIsFullyRegistered(response.data[0]?.isFullyRegistered))
     }
   
     // const fetchEmail = async() => {

@@ -80,6 +80,9 @@ function Pportal() {
     //     "__v": 0
     // }
     )
+    
+    const [upcomingAppointments, setUpcomingAppointments] = useState([])
+    const [pastAppointments, setPastAppointments] = useState([])
 
 
     const handleGreet = () => {
@@ -108,6 +111,8 @@ function Pportal() {
     useEffect(() => {
         handleGreet();
         loadAppointmentData()
+        loadUpcomingAppointmentData()
+        loadPastAppointmentData()
     }, [])
 
 
@@ -123,6 +128,26 @@ function Pportal() {
 
     const search = (data) => {
         return data.filter((item) => item.service.toLowerCase().includes(query))
+    }
+
+    const loadUpcomingAppointmentData = async() => {
+        setIsLoading(true);
+        //await axios.get(`http://localhost:9000/api/appointments/findByEmail/${currentUser.email}`) //LOCAL ENVIRONMENT
+        await axios.get(`https://sapphire-api.onrender.com/api/appointments/findByEmailByAppointDateGTE/${currentUser.email}`) //PRODUCTION
+        //.then(response => console.log(response.data))
+        .then(response => setUpcomingAppointments(response.data))
+        //console.log(appointments)
+        setIsLoading(false);
+    }
+
+    const loadPastAppointmentData = async() => {
+        setIsLoading(true);
+        //await axios.get(`http://localhost:9000/api/appointments/findByEmail/${currentUser.email}`) //LOCAL ENVIRONMENT
+        await axios.get(`https://sapphire-api.onrender.com/api/appointments/findByEmailByAppointDateLT/${currentUser.email}`) //PRODUCTION
+        //.then(response => console.log(response.data))
+        .then(response => setPastAppointments(response.data))
+        //console.log(appointments)
+        setIsLoading(false);
     }
 
 

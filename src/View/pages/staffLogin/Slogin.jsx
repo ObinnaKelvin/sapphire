@@ -76,7 +76,11 @@ function Slogin() {
 
         } catch (error) {
             setIsLoading(false)
-            setError(error.response.data)
+            //error.response? setError(error.response.data) : setError("You seem to be having poor network. You can try again in 10 minutes")
+            error.response && setError(error.response.data)
+            error.code == 'ERR_NETWORK' && setError("You seem to be having poor network. You can try again in 10 minutes")
+            //setError(error.response.data)
+            //console.log(error.code)
             setTimeout(() => {
                 setError(null); //set error to null after 5 seconds
             }, 5000);
