@@ -30,7 +30,7 @@ function ContactUs() {
               Address
             </div>
             <div className="item-description">
-              7B Oju Olobun Street,
+              7B Oju Olobun Close,
               Victoria Island Lagos.
             </div>
             <div className="overlay-image">

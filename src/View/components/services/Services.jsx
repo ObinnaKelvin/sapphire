@@ -20,7 +20,7 @@ const Services = () => {
                     <div className="spike spikeThree"></div>
                 </div>
                 <div className="services-header-text">
-                    Our Special Services
+                    Our Specialist Services
                 </div>
             </div>
             <div className="services-items">

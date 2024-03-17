@@ -206,14 +206,34 @@ function Pportal() {
 
                         {
                             tab == "upcoming" &&
-                            <NoAppointments />
+                            search(upcomingAppointments).map(data=>{
+                                return (
+                                        <div className="booking-item" key={data.appointmentId}>
+                                            <div className="booking-orderno">SAPP-{data.appointmentId}</div>
+                                            <div className="booking-service">{data.service}</div>
+                                            <div className="booking-date">{formatDate(data.appointmentDate)}</div>
+                                            {/* <div className="booking-date">{`${format(new Date(data.appointmentDate), "MMM do, yyy")}`}</div> */}
+                                            <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
+                                            <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
+                                            <div className="booking-modal" onClick={() => displayAppointment(data)}><ChevronRight size={15} /></div>
+                                            {/* <PatientTransaction open={modalOpen} onClose={() => {setModalOpen(false); console.log(modalOpen)}}>Hey! I'm inside 3</PatientTransaction> */}
+                                        </div>
+                                        )
+
+                                }
+                            )
                         }
+
+                        {/* {
+                            tab == "upcoming" &&
+                            <NoAppointments />
+                        } */}
 
                         
                         { tab == "past" &&
                             
                             // appointments.map(data=>{
-                            search(appointments).map(data=>{
+                            search(pastAppointments).map(data=>{
                                 return (
                                         <div className="booking-item" key={data.appointmentId}>
                                             <div className="booking-orderno">SAPP-{data.appointmentId}</div>
