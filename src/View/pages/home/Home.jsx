@@ -17,7 +17,7 @@ function Home() {
         <Services/>
         <Stats/>
         <WhyUs />
-        <Review />
+        {/*<Review />*/}   {/*Put on hold by Sapphire Partners*/}
         {/* <ReviewForm /> */}
         <Footer />
     </div>

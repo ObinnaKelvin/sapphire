@@ -261,7 +261,7 @@ function AboutUs() {
                         <p>
                             <strong>
                                 Dr. Jerome Eyaofun OHENE FWACS (General Surgery)
-                                Consultant General and Minimally Ivasive Surgeon with Sapphire Partners.
+                                Consultant General and Minimally Invasive Surgeon with Sapphire Partners.
                             </strong>
                         </p>
                         <p>
