@@ -199,12 +199,12 @@ export const StaffNavbar = ({socket}) => {
                             <span>Bookings</span>
                         </div>
                     </Link>
-                    {/* <Link to={'/staff-portal/patient'} className='link'>
+                    <Link to={'/staff-portal/patient'} className='link'>
                         <div className='staffnavbar-item'>
                             <User2 size={20} />
                             <span>Patients</span>
                         </div>
-                    </Link> */}
+                    </Link>
                     <Link to={'/staff-portal/notifications'} className='link'>
                         <div className='staffnavbar-item notifications'>
                             <Bell size={20} />

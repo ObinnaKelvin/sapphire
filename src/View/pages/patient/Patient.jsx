@@ -4,14 +4,16 @@ import { Navbar, StaffNavbar, StaffNavbarMobile } from '../../components/navigat
 import { AddButton } from '../../components/buttons/Buttons'
 import cancel from '../../assets/images/cross.png'
 import { useNavigate } from "react-router-dom";
-import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, Users, Wallet} from 'lucide-react';
+import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, ClipboardList, Siren, Users, Wallet} from 'lucide-react';
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from 'date-fns'//transform the dates to readable formats
 import axios from 'axios';
+import { Country, State, City }  from 'country-state-city';
 
 const Patient = () => {
+    const [title, setTitle] = useState('');
     const [firstname, setFirstname] = useState('');
     const [middlename, setMiddlename] = useState('');
     const [lastname, setLastname] = useState('');
@@ -21,12 +23,17 @@ const Patient = () => {
     // const[date, setDate] = useState()
     const [age, setAge] = useState(0);
     const [gender, setGender] = useState('')
+    const [religion, setReligion] = useState('')
     const [openDate, setOpenDate] = useState(false)
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('');
+    const [cityDataList, setCityDataList] = useState([]);
     const [maritalStatus, setMaritalStatus] = useState('');
     const [state, setState] = useState('');
+    const [stateData, setStateData] = useState([]);
     const [country, setCountry] = useState('');
+    const [countryData, setCountryData] = useState([]);
+    const [countryDataAbbrv, setCountryDataAbbrv] = useState('');
     const [encodedBy, setEncodedBy] = useState('');
     const [encodedDate, setEncodedDate] = useState(new Date());
     const [activeStep, setActiveStep] = useState(1);
@@ -34,6 +41,13 @@ const Patient = () => {
     const [kinPhone, setKinPhone] = useState('');
     const [kinAddress, setKinAddress] = useState('');
     const [kinRelationship, setKinRelationship] = useState('');
+    const [emName, setEmName] = useState('');
+    const [emPhone, setEmPhone] = useState('');
+    const [emAddress, setEmAddress] = useState('');
+    const [emRelationship, setEmRelationship] = useState('');
+    const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
+    const currentState = JSON.parse(localStorage.getItem('currentState'));
+    const [loading, setLoading] = useState(null);
 
     
     const navigate = useNavigate();
@@ -107,15 +121,106 @@ const Patient = () => {
     //     calculateAge(dob);
     // }, [dob])
 
+    // const loadCountryData = async () => {
+    //     await axios.get('http://battuta.medunes.net/api/country/all/?key=00000000000000000000000000000000')
+    //     .then(response => console.log(response))
+    // }
+    
     const loadCountryData = async () => {
-        await axios.get('http://battuta.medunes.net/api/country/all/?key=00000000000000000000000000000000')
-        .then(response => console.log(response))
+        try {
+            const ctry = Country.getAllCountries()
+            setCountryData(ctry)
+            //console.log("countryData", countryData)
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+    const getCountryValue = (e) => {
+        const countryChosen = e.target.children[e.target.selectedIndex].getAttribute('item-abbrv')
+        setCountryDataAbbrv(countryChosen)
+        setCountry(e.target.value);
+        //console.log("countryChosen", countryChosen)
+    }
+
+    const loadStateData = async() => {
+        if(countryDataAbbrv) {//This runs when country is selected. 
+            try {
+                const stateRec = await State.getStatesOfCountry(`${countryDataAbbrv}`)
+                setStateData(stateRec)
+                console.log(stateRec)
+            } catch (error) {
+                console.log(error)
+            }
+        } 
+        else { //This runs when country is not selected. Loads up from saved country
+            try {
+                const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
+                const countryCode = await currentCountry.isoCode //currentCountry is from local storage
+                const stateRec = await State.getStatesOfCountry(`${countryCode}`)
+                setStateData(stateRec)
+                console.log("stateRec", stateRec)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    const loadCityData = async () => {
+        setLoading(true)
+        // if(`${currentCountry} && ${currentCountry?.name ==='Nigeria'} `) {
+        if(`${currentCountry?.name ==='Nigeria'} `) {
+            try {
+                // const city = await City.getCitiesOfState('NG', 'FC')
+                //const upperCaseState = state.toUpperCase()
+                // const upperCaseState = stateDataDetails.name.toUpperCase()
+                const upperCaseState = currentState.name.toUpperCase()
+                const city = await axios.get(`https://nigeria-states-towns-lga.onrender.com/api/${state == "Abuja Federal Capital Territory"? "FCT" : upperCaseState}/towns`)
+                setCityDataList(city.data)
+                localStorage.setItem('cityData', JSON.stringify(city));
+                console.log("city", city.data)
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            try {
+                const city = City.getCitiesOfState(`${currentCountry.isoCode}`, `${currentState.isoCode}`)
+                setCityDataList(city)
+                //const city = City.getCitiesOfState(`${countryDataDetails.isoCode}`, `${stateDataDetails.isoCode}`)
+                //setCityData(city);
+                localStorage.setItem('cityData', JSON.stringify(city.data));
+                //const upperCaseState = state.toUpperCase()
+                //const upperCaseState = stateDataDetails.name.toUpperCase()
+                //const city = await axios.get(`https://nigeria-states-towns-lga.onrender.com/api/${state == "Abuja Federal Capital Territory"? "FCT" : upperCaseState}/towns`)
+                console.log("city", city)
+            } catch (error) {
+                console.log(error)
+            }
+            setLoading(false)
+        }
+    }
+
 
     useEffect(() => {
         handleGreet();
-        loadCountryData()
+        //loadCountryData()
     }, [])
+
+    useEffect(() => {
+        loadCountryData()
+        loadStateData()
+    }, [countryData])
+
+
+    useEffect(() => {
+        loadStateData()
+    }, [countryDataAbbrv])
+
+    useEffect(() => {
+        loadCityData()
+    }, [])
+
+    
 
   return (
     <div className='patient-container'>
@@ -175,206 +280,332 @@ const Patient = () => {
                     {
                         patientToggle ===  1 &&
                         <div className="patient-create-wrapper">
-                                <form onSubmit={handleSubmit} encType="multipart/form-data">
-                                    <div className="section-title">
-                                        <span>Basic Information</span>
+                            <div className="left-items">
+                                <div className="body-item">
+                                    <div className='header-section'>
+                                        <div className="icon-holder">
+                                            <ClipboardList />
+                                        </div>
+                                        <div className="section-title">
+                                            Basic Information
+                                        </div>
                                     </div>
-                                    <section>
-
-                                        <div className="section-left">
-                                            <div className="photo-container">
-                                                <div className="patient-photo">
-                                                    <div className="patient-icon-frame">
-                                                    <User />
-                                                        {/* <FontAwesomeIcon className='patient-icon' icon={faUser}/> */}
-                                                    </div>
-                                                </div>
-                                                <div className="camera-frame">
-                                                    {/* <FontAwesomeIcon icon={faCamera}/> */}
-                                                    <Camera />
-                                                </div>
-                                            </div>
-
-                                            <input 
-                                            type="text" 
-                                            placeholder='First name'
-                                            name='firstname'
-                                            value={firstname}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setFirstname(e.target.value)}
-                                            className="formInput sm"
-                                            />
-
-                                            <input 
-                                            type="text" 
-                                            placeholder='Middle name'
-                                            name='middlename'
-                                            value={middlename}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setMiddlename(e.target.value)}
-                                            className="formInput sm"
-                                            />
-
-                                            <input 
-                                            type="text" 
-                                            placeholder='Last name'
-                                            name='lastname'
-                                            value={lastname}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setLastname(e.target.value)}
-                                            className="formInput sm"
-                                            />
-
-                                            <input 
-                                            type="text" 
-                                            placeholder='Email'
-                                            name='email'
-                                            value={email}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setEmail(e.target.value)}
-                                            className="formInput sm"
-                                            />
-        
-                                            {/* <input 
-                                            type="text" 
-                                            placeholder='Date of Birth'
-                                            name='dob'
-                                            value={dob}
-                                            onChange = {(e)=>setDob(e.target.value)}
-                                            className="formInput sm"
-                                            />
-                                            <div className={`calendar-backdrop ${openDate ? 'active' : 'inactive'}`} ref={formRef}>
-                                                <Calendar
-                                                onChange={onChangeDateofBirth}
-                                                date={new Date()}
-                                                className='calendar'
-                                                />
-                                                <div className="cancel-holder" onClick={()=>setOpenDate(false)}>
-                                                    <img src={cancel} />
-                                                </div>
-                                            </div> */}
-
+                                    <div className='body-body'>
+                                        <form action="">
+                                            <section>
+                                                <label>Title</label>
+                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setTitle(e.target.value)} value={title}>
+                                                    <option>- Select Title -</option>
+                                                    <option value={'Master'}>Master</option>
+                                                    <option value={'Mr'}>Mr</option>
+                                                    <option value={'Miss'}>Miss</option>
+                                                    <option value={'Mrs'}>Mrs</option>
+                                                    <option value={'Ms'}>Ms</option>
+                                                    <option value={'Dr.'}>Dr.</option>
+                                                    <option value={'Prof.'}>Prof.</option>
+                                                    <option value={'Revd.'}>Revd.</option>
+                                                </select>
+                                            </section>
                                             
-                                            <input 
-                                            type="date" 
-                                            placeholder='Age'
-                                            name='dob'
-                                            value={dob}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setDob(e.target.value)}
-                                            className="formInput sm"
-                                            />
-
-                                            {/* <input 
-                                            type="text" 
-                                            placeholder='Age'
-                                            name='dob'
-                                            value={age}
-                                            onChange = {(e)=>setAge(e.target.value)}
-                                            className="formInput sm"
-                                            /> */}
-
-                                            {/* <h2>{age > 0 ? `${age}` : ''}</h2> */}
-
-
-
-                                        </div>
-                                        <div className="section-right">
-                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
-                                                <option>- Select Gender -</option>
-                                                <option value={'Male'}>Male</option>
-                                                <option value={'Female'}>Female</option>
-                                            </select>
+                                            <section>
+                                                <label>First Name</label>
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='First name'
+                                                    name='firstname'
+                                                    value={firstname}
+                                                    onChange = {(e)=>setFirstname(e.target.value)}
+                                                    className="formInput sm"
+                                                />
+                                            </section>
         
+                                            <section>
+                                                <label>Middle Name</label>
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='Middle name'
+                                                    name='middlename'
+                                                    value={middlename}
+                                                    onChange = {(e)=>setMiddlename(e.target.value)}
+                                                    className="formInput sm"
+                                                />
+                                            </section>
         
-                                            <input 
-                                            type="text" 
-                                            placeholder='Phone'
-                                            name='phone'
-                                            value={phone}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setPhone(e.target.value)}
-                                            className="formInput sm"
-                                            />
+                                            <section>
+                                                <label>Last Name</label>
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='Last name'
+                                                    name='lastname'
+                                                    value={lastname}
+                                                    onChange = {(e)=>setLastname(e.target.value)}
+                                                    className="formInput sm"
+                                                />
+                                            </section>
         
-                                            <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
-                                            value={address} onChange={(e)=> setAddress(e.target.value)}
-                                            />
+                                            <section>
+                                                <label>Email</label>
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='Email'
+                                                    name='email'
+                                                    value={email}
+                                                    onChange = {(e)=>setEmail(e.target.value)}
+                                                    className="formInput sm"
+                                                />
+                                            </section>
         
-                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
-                                                <option>- Select City -</option>
-                                                <option value={'Ogba'}>Ogba</option>
-                                                <option value={'Alimosho'}>Alimosho</option>
-                                            </select>
-                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
-                                                <option>- Select State -</option>
-                                                <option value={'Lagos'}>Lagos</option>
-                                                <option value={'Ogun'}>Ogun</option>
-                                            </select>
-                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCountry(e.target.value)} value={country}>
-                                                <option>- Select Country -</option>
-                                                <option value={'Nigeria'}>Nigeria</option>
-                                                <option value={'Nigeria'}>Nigeria</option>
-                                            </select>
-                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
-                                                <option>-  Select Marital Status  -</option>
-                                                <option value={'Single'}>Single</option>
-                                                <option value={'Married'}>Married</option>
-                                                <option value={'Widowed'}>Widowed</option>
-                                                <option value={'Divorced'}>Divorced</option>
-                                                <option value={'Separated'}>Separated</option>
-                                            </select>
-
-                                        </div>
-                                    </section>
-
-                                    <div className="section-title">
-                                        <span>Kin Details</span>
+                                            <section>
+                                                <label>Gender</label>
+                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                                    <option>- Select Gender -</option>
+                                                    <option value={'Male'}>Male</option>
+                                                    <option value={'Female'}>Female</option>
+                                                </select>
+                                            </section>
+        
+                                            <section>
+                                                <label>Phone</label>       
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='Phone'
+                                                    name='phone'
+                                                    value={phone}
+                                                    onChange = {(e)=>setPhone(e.target.value)}
+                                                    className="formInput sm"
+                                                />
+                                            </section>
+        
+                                            <section>
+                                                <label>Date Of Birth</label>
+                                                <input 
+                                                type="date" 
+                                                placeholder='Date Of Birth'
+                                                name='dob'
+                                                value={dob}
+                                                onChange = {(e)=>setDob(e.target.value)}
+                                                className="formInput sm"
+                                                />
+                                            </section>
+                                            
+                                            <section>
+                                                <label>Marital Status</label>
+                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
+                                                    <option>-  Select Marital Status  -</option>
+                                                    <option value={'Single'}>Single</option>
+                                                    <option value={'Married'}>Married</option>
+                                                    <option value={'Widowed'}>Widowed</option>
+                                                    <option value={'Divorced'}>Divorced</option>
+                                                    <option value={'Separated'}>Separated</option>
+                                                </select>
+                                            </section>
+                                            
+                                            <section>
+                                                <label>Country</label>
+                                                <select className = 'formSelect sm' name="user_sex" onChange={getCountryValue} value={country}>
+                                                    <option>- Select Country -</option>
+                                                    {
+                                                        countryData.map(item=>{
+                                                            return (
+                                                                    <option value={item.name} item-abbrv={item.isoCode}>{item.name}</option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </section>
+                                            
+                                            <section>
+                                                <label>State</label>
+                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                                    <option>- Select State -</option>
+                                                    {/* <option value={'Lagos'}>Lagos</option> */}
+                                                    {
+                                                        stateData.map(item => {
+                                                            return (
+                                                                <option value={item.name}>{item.name}</option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </section>
+        
+                                            <section>
+                                                <label>City</label>
+                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
+                                                    <option>- Select City -</option>
+                                                    <option value={'Ogba'}>Ogba</option>
+                                                    <option value={'Alimosho'}>Alimosho</option>
+                                                    <option value={'Alimosho'}>Ikeja</option>
+                                                    {/* {
+                                                        cityDataFull.map((item, index) => {
+                                                            return (
+                                                                <option value={item.name}>{item.name}</option>
+                                                            )
+                                                        })
+                                                    } */}
+                                                </select>
+                                            </section>
+        
+                                            <section>
+                                                <label>Religion</label>
+                                                <select className = 'formSelect sm' name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
+                                                    <option>-  Select Religion  -</option>
+                                                    <option value={'Christianity'}>Christianity</option>
+                                                    <option value={'Islam'}>Islam</option>
+                                                    <option value={'Traditional'}>Traditional</option>
+                                                    <option value={'Unknown'}>Unknown</option>
+                                                </select>
+                                            </section>
+                                            
+                                            <section>
+                                                <label>Address</label>
+                                                <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                                value={address} onChange={(e)=> setAddress(e.target.value)}
+                                                />
+                                            </section>
+        
+                                        </form>
                                     </div>
-                                    <section>
-                                            <input 
-                                            type="text" 
-                                            placeholder='Kin Name'
-                                            name='kinName'
-                                            value={kinName}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setKinName(e.target.value)}
-                                            className="formInput sm"
-                                            />
-                                            <input 
-                                            type="text" 
-                                            placeholder='Phone'
-                                            name='phone'
-                                            value={kinPhone}
-                                            // onChange={handleInputChange}
-                                            onChange = {(e)=>setKinPhone(e.target.value)}
-                                            className="formInput sm"
-                                            />
-                                            <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
-                                                <option>- Select Relationship -</option>
-                                                <option value={'Father'}>Father</option>
-                                                <option value={'Mother'}>Mother</option>
-                                                <option value={'Husband'}>Husband</option>
-                                                <option value={'Wife'}>Wife</option>
-                                                <option value={'Uncle'}>Uncle</option>
-                                                <option value={'Aunt'}>Aunt</option>
-                                                <option value={'Brother'}>Brother</option>
-                                                <option value={'Sister'}>Sister</option>
-                                                <option value={'Unknown'}>Unknown</option>
-                                            </select>
-                                            <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
-                                            value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
-                                            />
-
-                                    </section>
-
-                                    <div className="section-title">
-                                        <span>Payer Info</span>
+                                </div>
+                                
+                                <div className="body-item">
+                                    <div className='header-section'>
+                                        <div className="icon-holder">
+                                            <Siren />
+                                        </div>
+                                        <div className="section-title">
+                                            Emergency Contact
+                                        </div>
                                     </div>
-                                    <button>Create Patient</button>
-                                    {/* <div className="button" type='submit' onClick={(e)=>setActiveStep(2)}>Create Patient</div> */}
-                                </form>
-    
+                                    <div className='body-body'>
+                                        <form action="">
+                                            
+                                            <section>
+                                                <label>Name</label>
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='Name'
+                                                    name='name'
+                                                    value={emName}
+                                                    onChange = {(e)=>setEmName(e.target.value)}
+                                                    className="formInput sm"
+                                                />
+                                            </section>
+        
+                                            <section>
+                                                <label>Phone</label>       
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='Phone'
+                                                    name='phone'
+                                                    value={emPhone}
+                                                    onChange = {(e)=>setEmPhone(e.target.value)}
+                                                    className="formInput sm"
+                                                />
+                                            </section>
+        
+                                            <section>
+                                                <label>Relationship</label>
+                                                    <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setEmRelationship(e.target.value)} value={emRelationship}>
+                                                        <option>- Select Relationship -</option>
+                                                        <option value={'Father'}>Father</option>
+                                                        <option value={'Mother'}>Mother</option>
+                                                        <option value={'Husband'}>Husband</option>
+                                                        <option value={'Wife'}>Wife</option>
+                                                        <option value={'Uncle'}>Uncle</option>
+                                                        <option value={'Aunt'}>Aunt</option>
+                                                        <option value={'Brother'}>Brother</option>
+                                                        <option value={'Sister'}>Sister</option>
+                                                        <option value={'Friend'}>Friend</option>
+                                                        <option value={'Unknown'}>Unknown</option>
+                                                    </select>
+                                            </section>
+                                            
+                                            <section>
+                                                <label>Address</label>
+                                                <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                                value={emAddress} onChange={(e)=> setEmAddress(e.target.value)}
+                                                />
+                                            </section>
+        
+                                        </form>
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div className="right-items">
+                                <div className="body-item">
+                                    <div className='header-section'>
+                                        <div className="icon-holder">
+                                            <Users />
+                                        </div>
+                                        <div className="section-title">
+                                            Kin Details
+                                        </div>
+                                    </div>
+                                    <div className='body-body'>
+                                        <form action="">
+                                            <section>
+                                                <label>Kin Name</label>
+                                                    <input 
+                                                        type="text" 
+                                                        placeholder='Kin Name'
+                                                        name='kinName'
+                                                        value={kinName}
+                                                        onChange = {(e)=>setKinName(e.target.value)}
+                                                        className="formInput sm"
+                                                    />
+                                            </section>
+                                            <section>
+                                                <label>Kin Phone</label>
+                                                    <input 
+                                                    type="text" 
+                                                    placeholder='Phone'
+                                                    name='phone'
+                                                    value={kinPhone}
+                                                    onChange = {(e)=>setKinPhone(e.target.value)}
+                                                    className="formInput sm"
+                                                    />
+                                            </section>
+                                            <section>
+                                                <label>Relationship</label>
+                                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
+                                                        <option>- Select Relationship -</option>
+                                                        <option value={'Father'}>Father</option>
+                                                        <option value={'Mother'}>Mother</option>
+                                                        <option value={'Husband'}>Husband</option>
+                                                        <option value={'Wife'}>Wife</option>
+                                                        <option value={'Uncle'}>Uncle</option>
+                                                        <option value={'Aunt'}>Aunt</option>
+                                                        <option value={'Brother'}>Brother</option>
+                                                        <option value={'Sister'}>Sister</option>
+                                                        <option value={'Friend'}>Friend</option>
+                                                        <option value={'Unknown'}>Unknown</option>
+                                                    </select>
+                                            </section>
+                                            <section>
+                                                <label>Kin Address</label>
+                                                    <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                                    value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
+                                                    />
+                                            </section>
+        
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                                <div className="body-item">
+                                    <div className='header-section'>
+                                        <div className="icon-holder">
+                                            <Wallet />
+                                        </div>
+                                        <div className="section-title">
+                                            Payer Information
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
                         </div>
                     }
 
