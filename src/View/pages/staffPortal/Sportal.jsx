@@ -53,8 +53,8 @@ function Sportal() {
 
     const loadAppointmentData = async() => {
         setIsLoading(true);
-        await axios.get(`http://localhost:9000/api/appointments/`) //LOCAL
-        //await axios.get(`https://sapphire-api.onrender.com/api/appointments/`) //PRODUCTION
+        //await axios.get(`http://localhost:9000/api/appointments/`) //LOCAL
+        await axios.get(`https://sapphire-api.onrender.com/api/appointments/`) //PRODUCTION
         //.then(response => console.log(response.data))
         .then(response => setAppointments(response.data))
         //console.log(appointments)
@@ -90,7 +90,8 @@ function Sportal() {
   return (
     <div className="sportal-container">
         <Navbar />
-        <AddButton />
+        {/* <AddButton />  */}
+        {/* AddButton Disabled so that staffs can't initiate an appointment but encourage the user to do so. */}
         <div className="sportal-wrapper">
             <div className="sportal-sidenav">
                 {/* <PatientNavbar /> */}
@@ -128,7 +129,10 @@ function Sportal() {
                         <div className={`category-item ${categoryToggle === 2? "active" : "inactive"}`} onClick={()=> setCategoryToggle(2)}>Today</div>
                         <div className={`category-item ${categoryToggle === 3? "active" : "inactive"}`} onClick={()=> setCategoryToggle(3)}>Pending</div>
                         <div className={`category-item ${categoryToggle === 4? "active" : "inactive"}`} onClick={()=> setCategoryToggle(4)}>Cancelled</div>
-                        <div className={`category-item ${categoryToggle === 5? "active" : "inactive"}`} onClick={()=> setCategoryToggle(5)}>My Clinic</div>
+                        {
+                            staffUser.role == "doctor" &&
+                            <div className={`category-item ${categoryToggle === 5? "active" : "inactive"}`} onClick={()=> setCategoryToggle(5)}>My Clinic</div>
+                        }
                     </div>
                     {/* <div className="sorting">
                         <div className="sorting-grid">

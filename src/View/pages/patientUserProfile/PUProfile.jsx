@@ -82,8 +82,8 @@ const PUProfile = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         
-            await axios.put(`http://localhost:9000/api/patients/${patientId}`, { //LOCAL 
-            //await axios.put(`https://sapphire-api.onrender.com/api/patients/${patientId}`, {  //PRODUCTION
+            // await axios.put(`http://localhost:9000/api/patients/${patientId}`, { //LOCAL 
+            await axios.put(`https://sapphire-api.onrender.com/api/patients/${patientId}`, {  //PRODUCTION
                 title:title,
                 firstName:firstname,
                 lastName:lastname,

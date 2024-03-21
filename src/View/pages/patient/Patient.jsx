@@ -11,6 +11,9 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from 'date-fns'//transform the dates to readable formats
 import axios from 'axios';
 import { Country, State, City }  from 'country-state-city';
+import { ClimbingBoxLoading } from '../../components/loading/Loading';
+import CountUp from 'react-countup'
+import { NoRecords } from '../../components/404/404';
 
 const Patient = () => {
     const [title, setTitle] = useState('');
@@ -45,12 +48,13 @@ const Patient = () => {
     const [emPhone, setEmPhone] = useState('');
     const [emAddress, setEmAddress] = useState('');
     const [emRelationship, setEmRelationship] = useState('');
-    const [isRequired, setIsRequired] = useState(true);
+    const [isRequired, setIsRequired] = useState(false);
     const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
     const currentState = JSON.parse(localStorage.getItem('currentState'));
     const [loading, setLoading] = useState(null);
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const currentStaff = JSON.parse(localStorage.getItem('staff'));
+    const [patientList, setPatientList] = useState([]);
     
     const navigate = useNavigate();
 
@@ -60,6 +64,7 @@ const Patient = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [greet, setGreet] = useState('');
     const [patientToggle, setPatientToggle] = useState(1);
+    const [query, setQuery] = useState("");
     const onChangeDateofBirth = (dateSelected) => {
         // console.log(dateSelected)
         // console.log(format(dateSelected, 'dd/MM/yyyy'))
@@ -95,8 +100,8 @@ const Patient = () => {
             dob && maritalStatus && religion && country && state && address && kinName &&
             kinPhone && kinRelationship && kinAddress && emName && emPhone && emRelationship &&
             emAddress) {
-                await axios.post('http://localhost:9000/api/patients/', { //LOCAL
-                //await axios.post('https://sapphire-api.onrender.com/api/patients/', {  //PRODUCTION
+                //await axios.post('http://localhost:9000/api/patients/', { //LOCAL
+                await axios.post('https://sapphire-api.onrender.com/api/patients/', {  //PRODUCTION
                 title:title,
                 firstName: firstname,
                 middleName: middlename,
@@ -217,6 +222,20 @@ const Patient = () => {
         }
     }
 
+    const loadPatientList = async() => {
+        setLoading(true)
+        //await axios.get(`http://localhost:9000/api/patients/`) //LOCAL ENVIRONMENT
+        await axios.get(`https://sapphire-api.onrender.com/api/patients/`) //PRODUCTION
+        .then(response => setPatientList(response.data))
+        //.then(response => console.log(response.data))
+        setLoading(false);
+
+    }
+
+    const search = (data) => {
+        return data.filter((item) => item.firstName.toLowerCase().includes(query))
+    }
+
 
     useEffect(() => {
         handleGreet();
@@ -235,6 +254,10 @@ const Patient = () => {
 
     useEffect(() => {
         loadCityData()
+    }, [])
+
+    useEffect(() => {
+        loadPatientList()
     }, [])
 
     
@@ -269,7 +292,7 @@ const Patient = () => {
                         </div>
                         <div className={`patient-item ${patientToggle === 2 ? "active" : "inactive"}`} onClick={() => setPatientToggle(2)}>
                             <Users />
-                            <span>Patient List</span>
+                            <span>Patient List (<CountUp end={patientList?.length} />)</span>
                         </div>
 
                     </div>
@@ -281,11 +304,11 @@ const Patient = () => {
                             </div>
                             <input 
                                 type="text" 
-                                placeholder='Name, Phone number, Email'
+                                placeholder='Search First Name'
                                 // name='email'
                                 // value={email}
                                 // onChange={handleInputChange}
-                                // onChange = {(e)=>setEmail(e.target.value)}
+                                onChange = {(e)=>setQuery(e.target.value)}
                                 className="formInput"
                             />
                         </div>
@@ -635,8 +658,29 @@ const Patient = () => {
 
                     {
                         patientToggle ===  2 &&
-                        <div className="patient-list-wrapper">
-                            <div className="patient-item">
+                        <div className="patient-list-wrapper"> 
+                    
+                                {
+                                    loading && <ClimbingBoxLoading />
+                                }
+
+                                {
+                                    search(patientList).map(data => {
+                                        return(  
+                                            <div className="patient-item">
+                                                <div className="patient-user"><span><User2 size={16} /></span>{data.firstName} {data.lastName} <em>({data.gender})</em></div>
+                                                <div className="patient-phone"><span><Phone size={16} /></span>{data.mobile}</div>
+                                                <div className="patient-age"><span><CalendarRange size={16}/></span>?? Years</div>
+                                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                                <div className="patient-email"><span><AtSign size={16}/></span>{data.email}</div>
+                                            </div>
+                                        )
+                                    })
+                                }   
+                                {
+                                    !loading && patientList.length === 0 && patientToggle ===  2 && <NoRecords />
+                                } 
+                            {/* <div className="patient-item">
                                 <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
                                 <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
                                 <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
@@ -740,7 +784,7 @@ const Patient = () => {
                                 <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
                                 <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
                                 <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
+                            </div> */}
     
                         </div>
                     }
