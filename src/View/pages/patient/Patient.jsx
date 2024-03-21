@@ -4,7 +4,7 @@ import { Navbar, StaffNavbar, StaffNavbarMobile } from '../../components/navigat
 import { AddButton } from '../../components/buttons/Buttons'
 import cancel from '../../assets/images/cross.png'
 import { useNavigate } from "react-router-dom";
-import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, ClipboardList, Siren, Users, Wallet} from 'lucide-react';
+import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, ClipboardList, Siren, Users, Wallet, AlertCircle} from 'lucide-react';
 import { Calendar } from 'react-date-range';
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -18,7 +18,7 @@ const Patient = () => {
     const [middlename, setMiddlename] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
-    const [dob, setDob] = useState(new Date());
+    const [dob, setDob] = useState('');
     const [phone, setPhone] = useState('');
     // const[date, setDate] = useState()
     const [age, setAge] = useState(0);
@@ -45,10 +45,12 @@ const Patient = () => {
     const [emPhone, setEmPhone] = useState('');
     const [emAddress, setEmAddress] = useState('');
     const [emRelationship, setEmRelationship] = useState('');
+    const [isRequired, setIsRequired] = useState(true);
     const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
     const currentState = JSON.parse(localStorage.getItem('currentState'));
     const [loading, setLoading] = useState(null);
-
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentStaff = JSON.parse(localStorage.getItem('staff'));
     
     const navigate = useNavigate();
 
@@ -89,32 +91,47 @@ const Patient = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        if (title && firstname && middlename && lastname && phone && email && gender && 
+            dob && maritalStatus && religion && country && state && address && kinName &&
+            kinPhone && kinRelationship && kinAddress && emName && emPhone && emRelationship &&
+            emAddress) {
+                await axios.post('http://localhost:9000/api/patients/', { //LOCAL
+                //await axios.post('https://sapphire-api.onrender.com/api/patients/', {  //PRODUCTION
+                title:title,
+                firstName: firstname,
+                middleName: middlename,
+                lastName: lastname,
+                mobile: phone,
+                email: email,
+                gender:gender,
+                dateOfBirth: dob,
+                maritalStatus: maritalStatus,
+                religion:religion,
+                address: address,
+                city:city,
+                state: state,
+                country: country,
+                kinName: kinName,
+                kinPhone: kinPhone,
+                kinRelationship: kinRelationship,
+                kinAddress: kinAddress,
+                emergencyName:emName,
+                emergencyPhone:emPhone,
+                emergencyRelationship:emRelationship,
+                emergencyAddress:emAddress,
+                encodedBy: currentStaff.id,
+                encodedDate: encodedDate,
+                lastUpdatedBy: currentStaff.user_id,
+                lastUpdatedDate: encodedDate
+            })
+            .then(response => console.log(response))
+            navigate("/staff-portal/patient")
+            setIsRequired(false)
+            setPatientToggle(2)
 
-        //await axios.post('http://localhost:9000/api/patients/', { //LOCAL
-        await axios.post('https://sapphire-api.onrender.com/api/patients/', {  //PRODUCTION
-            
-            firstName: firstname,
-            middleName: middlename,
-            lastName: lastname,
-            mobile: phone,
-            email: email,
-            dateOfBirth: dob,
-            maritalStatus: maritalStatus,
-            address: address,
-            state: state,
-            country: country,
-            kinName: kinName,
-            kinPhone: kinPhone,
-            kinRelationship: kinRelationship,
-            kinAddress: kinAddress,
-            encodedBy: encodedBy,
-            encodedDate: encodedDate,
-            lastUpdatedBy: encodedBy,
-            lastUpdatedDate: encodedDate
-        })
-        .then(response => console.log(response))
-        navigate("/staff-portal/patient")
-        setPatientToggle(2)
+        }  else {
+            setIsRequired(true)
+        }
     }
 
     // useEffect(() => {
@@ -242,7 +259,7 @@ const Patient = () => {
                         Patients
                     </div>
                     <div className="name-space">
-                        Hi Kelvin, {greet}
+                        Hi {`${currentUser.firstname}`}, {greet}
                     </div>
 
                     <div className="patient-toggle">
@@ -282,6 +299,9 @@ const Patient = () => {
                         <div className="patient-create-wrapper">
                             <div className="left-items">
                                 <div className="body-item">
+                                    { isRequired && <div className="error_msg">
+                                        <AlertCircle /> Mandatory fields are required!
+                                    </div>}
                                     <div className='header-section'>
                                         <div className="icon-holder">
                                             <ClipboardList />
@@ -294,7 +314,7 @@ const Patient = () => {
                                         <form action="">
                                             <section>
                                                 <label>Title</label>
-                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setTitle(e.target.value)} value={title}>
+                                                <select className = {`formSelect sm ${isRequired && "required"}`} name="user_sex" onChange={(e)=>setTitle(e.target.value)} value={title}>
                                                     <option>- Select Title -</option>
                                                     <option value={'Master'}>Master</option>
                                                     <option value={'Mr'}>Mr</option>
@@ -315,7 +335,7 @@ const Patient = () => {
                                                     name='firstname'
                                                     value={firstname}
                                                     onChange = {(e)=>setFirstname(e.target.value)}
-                                                    className="formInput sm"
+                                                    className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
         
@@ -327,7 +347,7 @@ const Patient = () => {
                                                     name='middlename'
                                                     value={middlename}
                                                     onChange = {(e)=>setMiddlename(e.target.value)}
-                                                    className="formInput sm"
+                                                    className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
         
@@ -339,7 +359,7 @@ const Patient = () => {
                                                     name='lastname'
                                                     value={lastname}
                                                     onChange = {(e)=>setLastname(e.target.value)}
-                                                    className="formInput sm"
+                                                    className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
         
@@ -351,13 +371,13 @@ const Patient = () => {
                                                     name='email'
                                                     value={email}
                                                     onChange = {(e)=>setEmail(e.target.value)}
-                                                    className="formInput sm"
+                                                    className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
         
                                             <section>
                                                 <label>Gender</label>
-                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                                <select className = {`formSelect sm ${isRequired && "required"}`} name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
                                                     <option>- Select Gender -</option>
                                                     <option value={'Male'}>Male</option>
                                                     <option value={'Female'}>Female</option>
@@ -372,7 +392,7 @@ const Patient = () => {
                                                     name='phone'
                                                     value={phone}
                                                     onChange = {(e)=>setPhone(e.target.value)}
-                                                    className="formInput sm"
+                                                    className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
         
@@ -384,13 +404,13 @@ const Patient = () => {
                                                 name='dob'
                                                 value={dob}
                                                 onChange = {(e)=>setDob(e.target.value)}
-                                                className="formInput sm"
+                                                className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
                                             
                                             <section>
                                                 <label>Marital Status</label>
-                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
+                                                <select className = {`formSelect sm ${isRequired && "required"}`} name="user_sex" onChange={(e)=>setMaritalStatus(e.target.value)} value={maritalStatus}>
                                                     <option>-  Select Marital Status  -</option>
                                                     <option value={'Single'}>Single</option>
                                                     <option value={'Married'}>Married</option>
@@ -402,7 +422,7 @@ const Patient = () => {
                                             
                                             <section>
                                                 <label>Country</label>
-                                                <select className = 'formSelect sm' name="user_sex" onChange={getCountryValue} value={country}>
+                                                <select className = {`formSelect sm ${isRequired && "required"}`} name="user_sex" onChange={getCountryValue} value={country}>
                                                     <option>- Select Country -</option>
                                                     {
                                                         countryData.map(item=>{
@@ -416,7 +436,7 @@ const Patient = () => {
                                             
                                             <section>
                                                 <label>State</label>
-                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                                <select className = {`formSelect sm ${isRequired && "required"}`} name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
                                                     <option>- Select State -</option>
                                                     {/* <option value={'Lagos'}>Lagos</option> */}
                                                     {
@@ -431,7 +451,7 @@ const Patient = () => {
         
                                             <section>
                                                 <label>City</label>
-                                                <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
+                                                <select className = "formSelect sm" name="user_sex" onChange={(e)=>setCity(e.target.value)} value={city}>
                                                     <option>- Select City -</option>
                                                     <option value={'Ogba'}>Ogba</option>
                                                     <option value={'Alimosho'}>Alimosho</option>
@@ -448,7 +468,7 @@ const Patient = () => {
         
                                             <section>
                                                 <label>Religion</label>
-                                                <select className = 'formSelect sm' name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
+                                                <select className = {`formSelect sm ${isRequired && "required"}`} name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
                                                     <option>-  Select Religion  -</option>
                                                     <option value={'Christianity'}>Christianity</option>
                                                     <option value={'Islam'}>Islam</option>
@@ -459,7 +479,7 @@ const Patient = () => {
                                             
                                             <section>
                                                 <label>Address</label>
-                                                <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                                <textarea className= {`formTextArea sm ${isRequired && "required"}`}  type="text"name="user_additional_info" placeholder="Address here..."
                                                 value={address} onChange={(e)=> setAddress(e.target.value)}
                                                 />
                                             </section>
@@ -488,7 +508,7 @@ const Patient = () => {
                                                     name='name'
                                                     value={emName}
                                                     onChange = {(e)=>setEmName(e.target.value)}
-                                                    className="formInput sm"
+                                                    className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
         
@@ -500,13 +520,13 @@ const Patient = () => {
                                                     name='phone'
                                                     value={emPhone}
                                                     onChange = {(e)=>setEmPhone(e.target.value)}
-                                                    className="formInput sm"
+                                                    className={`formInput sm ${isRequired && "required"}`}
                                                 />
                                             </section>
         
                                             <section>
                                                 <label>Relationship</label>
-                                                    <select className = 'formSelect lg' name="user_sex" onChange={(e)=>setEmRelationship(e.target.value)} value={emRelationship}>
+                                                    <select className = {`formSelect lg ${isRequired && "required"}`} name="user_sex" onChange={(e)=>setEmRelationship(e.target.value)} value={emRelationship}>
                                                         <option>- Select Relationship -</option>
                                                         <option value={'Father'}>Father</option>
                                                         <option value={'Mother'}>Mother</option>
@@ -523,7 +543,7 @@ const Patient = () => {
                                             
                                             <section>
                                                 <label>Address</label>
-                                                <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                                <textarea className= {`formTextArea sm ${isRequired && "required"}`} type="text"name="user_additional_info" placeholder="Address here..."
                                                 value={emAddress} onChange={(e)=> setEmAddress(e.target.value)}
                                                 />
                                             </section>
@@ -553,7 +573,7 @@ const Patient = () => {
                                                         name='kinName'
                                                         value={kinName}
                                                         onChange = {(e)=>setKinName(e.target.value)}
-                                                        className="formInput sm"
+                                                        className= {`formInput sm ${isRequired && "required"}`}
                                                     />
                                             </section>
                                             <section>
@@ -564,12 +584,12 @@ const Patient = () => {
                                                     name='phone'
                                                     value={kinPhone}
                                                     onChange = {(e)=>setKinPhone(e.target.value)}
-                                                    className="formInput sm"
+                                                    className= {`formInput sm ${isRequired && "required"}`}
                                                     />
                                             </section>
                                             <section>
                                                 <label>Relationship</label>
-                                                    <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
+                                                    <select className = {`formSelect sm ${isRequired && "required"}`} name="user_sex" onChange={(e)=>setKinRelationship(e.target.value)} value={kinRelationship}>
                                                         <option>- Select Relationship -</option>
                                                         <option value={'Father'}>Father</option>
                                                         <option value={'Mother'}>Mother</option>
@@ -585,7 +605,7 @@ const Patient = () => {
                                             </section>
                                             <section>
                                                 <label>Kin Address</label>
-                                                    <textarea className="formTextArea sm" type="text"name="user_additional_info" placeholder="Address here..."
+                                                    <textarea className= {`formTextArea sm ${isRequired && "required"}`} type="text"name="user_additional_info" placeholder="Address here..."
                                                     value={kinAddress} onChange={(e)=> setKinAddress(e.target.value)}
                                                     />
                                             </section>
@@ -606,7 +626,11 @@ const Patient = () => {
                                     <div></div>
                                 </div>
                             </div>
+                            <div className="patient-button-holder">
+                                <button onClick={handleSubmit}>Save</button>
+                            </div>
                         </div>
+
                     }
 
                     {

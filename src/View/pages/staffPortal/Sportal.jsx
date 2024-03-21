@@ -53,8 +53,8 @@ function Sportal() {
 
     const loadAppointmentData = async() => {
         setIsLoading(true);
-        //await axios.get(`http://localhost:9000/api/appointments/`) //LOCAL
-        await axios.get(`https://sapphire-api.onrender.com/api/appointments/`) //PRODUCTION
+        await axios.get(`http://localhost:9000/api/appointments/`) //LOCAL
+        //await axios.get(`https://sapphire-api.onrender.com/api/appointments/`) //PRODUCTION
         //.then(response => console.log(response.data))
         .then(response => setAppointments(response.data))
         //console.log(appointments)
