@@ -8,11 +8,20 @@ import coker from '../../assets/images/coker.jpg';
 import oke from '../../assets/images/oke.jpg';
 import ohene from '../../assets/images/ohene.jpg';
 import anyadike from '../../assets/images/anyadike.png';
+import { Helmet, HelmetProvider, HelmetData } from 'react-helmet-async';
 import Footer from '../../components/footer/Footer';
+
+
+const helmetData = new HelmetData({});
 
 function AboutUs() {
   return (
     <div className="aboutUs-container">
+        <Helmet helmetData={helmetData}>
+        <title>Sapphire Surgeons | About Page</title>
+        <meta property="og:description" name='description' content='Sapphire Surgeons are a group of highly skilled doctors that perform complex surgeries, changing the face of surgical services in Nigeria. '/>
+        <link rel="canonical" href="https://www.sapphiresurgeons.com/" />
+        </Helmet>
         <Navbar />
         <div className="aboutUs-banner">
             <div className='aboutUs-darkOverlay'></div>

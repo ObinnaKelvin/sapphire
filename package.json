@@ -19,6 +19,7 @@
     "react-countup": "^6.5.2",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.5",
     "react-loading-skeleton": "^3.3.1",
     "react-paystack": "^5.0.0",
     "react-router-dom": "^6.15.0",
