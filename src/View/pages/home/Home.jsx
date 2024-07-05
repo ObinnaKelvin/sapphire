@@ -9,6 +9,7 @@ import { Helmet, HelmetProvider, HelmetData } from 'react-helmet-async';
 import Review from '../../components/reviews/Review';
 // import ReviewForm from '../../components/reviewForm/ReviewForm';
 import Footer from '../../components/footer/Footer';
+import SupportEngine from '../../components/supportEngine/SupportEngine';
 
 
 const helmetData = new HelmetData({});
@@ -29,6 +30,7 @@ function Home() {
         <WhyUs />
         {/*<Review />*/}   {/*Put on hold by Sapphire Partners*/}
         {/* <ReviewForm /> */}
+        <SupportEngine />
         <Footer />
     </div>
   )

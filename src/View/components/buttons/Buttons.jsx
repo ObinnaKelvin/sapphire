@@ -30,4 +30,12 @@ export const AddButton = () => {
             <img src={bot}/>
         </div>
       )
-    }
+  }
+
+  export const ChatUsButton = () => {
+      return (
+        <div className='chatusbutton-container'>
+          
+        </div>
+      )
+  }
