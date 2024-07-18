@@ -79,6 +79,19 @@ const Patient = () => {
     //     //console.log(thisYear)
     // }
 
+    const checkIfUserExist = () => {
+        if (currentUser || currentStaff) {
+            navigate("/staff-portal/patient")
+        } else {
+            navigate("/staff-login")
+        }
+    }
+
+    
+    useEffect(() => {
+        checkIfUserExist()
+    }, [])
+
     const handleGreet = () => {
         let today = new Date()
         let getCurrentHour = today.getHours() 
@@ -282,7 +295,8 @@ const Patient = () => {
                         Patients
                     </div>
                     <div className="name-space">
-                        Hi {`${currentUser.firstname}`}, {greet}
+                        {/* Hi {`${currentStaff.firstname}`}, {greet} */}
+                        Hi {`${currentStaff? currentStaff.firstname : currentUser.firstname}`}, {greet}
                     </div>
 
                     <div className="patient-toggle">
@@ -479,6 +493,7 @@ const Patient = () => {
                                                     <option value={'Ogba'}>Ogba</option>
                                                     <option value={'Alimosho'}>Alimosho</option>
                                                     <option value={'Alimosho'}>Ikeja</option>
+                                                    <option value={'Others'}>Others</option>
                                                     {/* {
                                                         cityDataFull.map((item, index) => {
                                                             return (

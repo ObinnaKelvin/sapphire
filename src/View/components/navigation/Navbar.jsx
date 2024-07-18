@@ -209,7 +209,7 @@ export const StaffNavbar = ({socket}) => {
                         <div className='staffnavbar-item notifications'>
                             <Bell size={20} />
                             <span>Notifications</span>
-                            <div className="stats">4</div>
+                            <div className="stats"></div>
                         </div>
                     </Link>
                 </div>
