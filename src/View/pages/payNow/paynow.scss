@@ -434,6 +434,20 @@
                                 border: 1px solid red;
                             }
 
+                            .tariff-box {
+                                width: max-content;
+                                // border: 1px solid red;
+                                font-size: 12px;
+                                background-color: #5CB85C;
+                                color: white;
+                                font-weight: bold;
+                                padding: 3px 5px;
+                                border-radius: 5px;
+                                position: absolute;
+                                right: 0;
+                                margin: 130px 50px 0px 0px;
+                            }
+
                         }
 
                         .button {
@@ -1364,6 +1378,20 @@
                                     transform: translateY(150px);
                                     transition: 0.5s ease;
                                     position: absolute;
+                                }
+
+                                .tariff-box {
+                                    width: max-content;
+                                    // border: 1px solid red;
+                                    font-size: 12px;
+                                    background-color: #5CB85C;
+                                    color: white;
+                                    font-weight: bold;
+                                    padding: 3px 5px;
+                                    border-radius: 5px;
+                                    position: absolute;
+                                    right: 0;
+                                    margin: 355px 50px 0px 0px;
                                 }
     
                             }

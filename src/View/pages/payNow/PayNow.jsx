@@ -385,7 +385,7 @@ function PayNow() {
 
                                 {/* <select className = 'formSelect mid' name="user_appointment_clinic" onChange={(e)=>setService(e.target.value)} value={service}> */}
                                 <select className = {`formSelect mid ${isRequired && "required"} `} name="user_appointment_clinic" onChange={getValue} value={service}>
-                                    <option>- Choose a Surgical Procedure -</option>
+                                    <option>- Choose a Service -</option>
                                     {
                                         // clinicData.map((data)=>(
                                         //     <option value={data.name} key={data.id}>{data.name}</option>
@@ -396,6 +396,7 @@ function PayNow() {
 
                                     }
                                 </select>
+                                <div className='tariff-box'>{numeral(tariff).format("0,0")}</div>
                             </section>
                             {/* <section>
                                 <select className = 'formSelect' name="user_appointment_clinic" onChange={(e)=>setClinic(e.target.value)} value={clinic}>
