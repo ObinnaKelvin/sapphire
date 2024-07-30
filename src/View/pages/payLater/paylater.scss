@@ -407,6 +407,7 @@
                                 border-radius: 2em;
                                 // position: relative;
                                 position: absolute;
+                                z-index: 10;
                             }
 
                             .calendar-backdrop.active {
@@ -647,7 +648,8 @@
 
                             .cost {
                                 display: flex;
-                                flex-direction: row;
+                                flex-direction: column;
+                                // flex-direction: row;
                                 align-items: center;
                                 gap: 15px;
                                 background-color: #e1f5fe;
@@ -659,12 +661,47 @@
                                 color: #757575;
                                 font-size: 28px;
                                 font-style: italic;
+                                // border: 1px solid red;
+
+                                .bill-summary-wrapper {
+                                    display: flex;
+                                    flex-direction: column;
+                                    font-size: 15px;
+                                    width: 100%;
+                                    // border: 1px solid red;
+                                    gap: 5px;
+
+                                    .summary-header {
+                                        width: 100%;
+                                        justify-content: left;
+                                        font-weight: bold;
+                                        color: #0c4cacc2;
+                                        // border: 1px solid red;
+                                    }
+
+                                    .summary-item {
+                                        display: flex;
+                                        flex-direction: row;
+
+                                        .item-left {
+                                            width: 60%;
+                                        }
+                                        .item-right {
+                                            width: 40%;
+                                        }
+                                    }
+
+                                    .summary-item.total {
+                                        font-size: 28px;
+                                    }
+                                }
 
                                 img {
                                     width: 20px;
                                 }
 
                             }
+
 
                         }
 

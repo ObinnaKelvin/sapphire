@@ -50,8 +50,12 @@ function PayLater({socket}) {
     const [success, setSuccess] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const [isRequired, setIsRequired] = useState(false);
+    const [isPatientLoading, setIsPatientLoading] = useState(null);
+    const [patientExist, setPatientExist] = useState('')
+    const [regfee, setRegfee] = useState(0);
     const [encodedDate, setEncodedDate] = useState(new Date());
     const [tariff, setTariff] = useState('');
+    let totalbill = regfee+tariff
     //const [tariffData, setTariffData] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
     // const [startDate, setStartDate] = useState(new Date());
@@ -121,8 +125,36 @@ function PayLater({socket}) {
         console.log(idChosen)
     }
 
+    const checkPatientIsExist = async () => {
+        setIsPatientLoading(true);
+        try {
+            //const response = await axios.get("http://localhost:9000/api/patients/find/${email}") //LOCAL
+            const response = await axios.get(`${PUBLIC_URL}api/patients/find/${email}`) //PRODUCTION
+            // if (response.status === 200) {
+            if (response.data.length > 0) {
+                setPatientExist(true);
+                setRegfee(0)
+                // console.log(patientExist)
+            } else {
+                setPatientExist(false)
+                setRegfee(12000)
+                // console.log(patientExist)
+            }
+            // setTimeout(() => {
+            //     setIsPatientLoading(true)
+            //   }, 5000);
+            setIsPatientLoading(false);
+            //.then(data => console.log(data.status))
+            
+        } catch (error) {
+            setIsPatientLoading(false)
+            console.log(error)
+        }
+    }
+
     const handleContinue = () => {
         if(firstname && lastname && email && mobile && showAppointmentDate && service && gender) {
+            checkPatientIsExist()
             setActiveStep(2);
             setIsRequired(false)
 
@@ -472,7 +504,25 @@ function PayLater({socket}) {
                                     <BookOpen size={16} /> {notes}
                                 </div>
                                 <div className="cost">
-                                    <img src={naira} alt='naira sign'/> {numeral(tariff).format("0,0")}
+                                    <div className="bill-summary-wrapper">
+                                        <div className="summary-header">Bill Summary</div>
+                                        {
+                                            regfee !== 0 && 
+                                            <div className="summary-item">
+                                                <div className="item-left">Registration Fee</div>
+                                                <div className="item-right">₦{numeral(regfee).format("0,0")}</div>
+                                            </div>
+                                        }
+                                        <div className="summary-item">
+                                            <div className="item-left">{service}</div>
+                                            <div className="item-right">₦{numeral(tariff).format("0,0")}</div>
+                                        </div>
+                                        <div className="summary-item total">
+                                            <div className="item-left">Total Bill</div>
+                                            <div className="item-right">₦{numeral(totalbill).format("0,0")}</div>
+                                        </div>
+                                    </div>
+                                    {/* <img src={naira} alt='naira sign'/> {numeral(tariff+50).format("0,0")} */}
                                 </div>
                             </section>
                             
