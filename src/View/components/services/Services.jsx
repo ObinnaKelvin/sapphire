@@ -8,7 +8,7 @@ import thyroid from '../../assets/images/thyroid.png';
 import breast from '../../assets/images/breasts.png';
 import endoscope from '../../assets/images/endoscope.png';
 import oncology from '../../assets/images/oncology.png';
-import { animate, delay, motion, transform, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 const spikesVariants = {
