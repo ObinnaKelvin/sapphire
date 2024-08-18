@@ -180,7 +180,7 @@ function PayLater({socket}) {
             
             const response = await axios.all([
                 axios.post(`${PUBLIC_URL}api/appointments/`, 
-                {firstname, lastname, email, gender, mobile, service, notes, service, tariff, encodedDate, appointmentDate, paymentStatus}),
+                {firstname, lastname, email, gender, mobile, service, notes, service, totalbill, encodedDate, appointmentDate, paymentStatus}),
                 axios.post(`${PUBLIC_URL}api/notifications/`, 
                 {title, body, type, destination, encodedDate}) 
             ]);

@@ -56,6 +56,8 @@ const PUProfile = () => {
     const currentState = JSON.parse(localStorage.getItem('currentState'));
     const cityData = JSON.parse(localStorage.getItem('cityData'));
     const [loading, setLoading] = useState(null);
+    const [emr_maidenname, setEmr_maidenname] = useState('');
+    const [emr_gender, setEmr_gender] = useState('');
     
 
     console.log("dob", parseISO(dob))
@@ -337,6 +339,17 @@ const PUProfile = () => {
         }
     }
 
+    const handleGenderChange = (e) => {
+        let gnder = e.target.value;
+        if(gnder === "Male") {
+            setEmr_gender("M")
+        }
+        if(gnder === "Female") {
+            setEmr_gender("F")
+        }
+        setGender(e.target.value)
+    }
+
   return (
     <div className='puprofile-container'>
         <Navbar />
@@ -392,6 +405,9 @@ const PUProfile = () => {
                                             <option value={'Dr.'}>Dr.</option>
                                             <option value={'Prof.'}>Prof.</option>
                                             <option value={'Revd.'}>Revd.</option>
+                                            <option value={'Alhaji'}>Alhaji</option>
+                                            <option value={'Alhaja'}>Alhaja</option>
+                                            <option value={'Chief'}>Chief</option>
                                         </select>
                                     </section>
                                     
@@ -445,7 +461,8 @@ const PUProfile = () => {
 
                                     <section>
                                         <label>Gender</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                        {/* <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}> */}
+                                        <select className = 'formSelect sm' name="user_sex" onChange={handleGenderChange} value={gender}>
                                             <option>- Select Gender -</option>
                                             <option value={'Male'}>Male</option>
                                             <option value={'Female'}>Female</option>
@@ -546,6 +563,18 @@ const PUProfile = () => {
                                             <option value={'Traditional'}>Traditional</option>
                                             <option value={'Unknown'}>Unknown</option>
                                         </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Maiden Name</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Maiden name'
+                                            name='emr_maidenname'
+                                            value={emr_maidenname}
+                                            onChange = {(e)=>setEmr_maidenname(e.target.value)}
+                                            className="formInput md"
+                                        />
                                     </section>
                                     
                                     <section>
@@ -802,6 +831,9 @@ const PUProfile = () => {
                                             <option value={'Dr.'}>Dr.</option>
                                             <option value={'Prof.'}>Prof.</option>
                                             <option value={'Revd.'}>Revd.</option>
+                                            <option value={'Alhaji'}>Alhaji</option>
+                                            <option value={'Alhaja'}>Alhaja</option>
+                                            <option value={'Chief'}>Chief</option>
                                         </select>
                                     </section>
                                     
@@ -855,7 +887,8 @@ const PUProfile = () => {
 
                                     <section>
                                         <label>Gender</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}>
+                                        {/* <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setGender(e.target.value)} value={gender}> */}
+                                        <select className = 'formSelect sm' name="user_sex" onChange={handleGenderChange} value={gender}>
                                             <option>- Select Gender -</option>
                                             <option value={'Male'}>Male</option>
                                             <option value={'Female'}>Female</option>
@@ -953,6 +986,18 @@ const PUProfile = () => {
                                             <option value={'Traditional'}>Traditional</option>
                                             <option value={'Unknown'}>Unknown</option>
                                         </select>
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Maiden Name</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Maiden name'
+                                            name='emr_maidenname'
+                                            value={emr_maidenname}
+                                            onChange = {(e)=>setEmr_maidenname(e.target.value)}
+                                            className="formInput sm"
+                                        />
                                     </section>
                                     
                                     <section>

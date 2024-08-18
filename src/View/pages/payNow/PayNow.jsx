@@ -231,7 +231,7 @@ function PayNow() {
                 
                 const response = await axios.all([
                     axios.post(`${PUBLIC_URL}api/appointments/`, //PRODUCTION
-                    {firstname, lastname, email, gender, mobile, referenceNo, service, notes, tariff, encodedDate, appointmentDate, paymentStatus}), 
+                    {firstname, lastname, email, gender, mobile, referenceNo, service, notes, totalbill, encodedDate, appointmentDate, paymentStatus}), 
                     axios.post(`${PUBLIC_URL}api/notifications/`, 
                     {title, body, type, destination, encodedDate}) 
                 ]);
