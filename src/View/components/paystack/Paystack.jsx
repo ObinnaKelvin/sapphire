@@ -33,8 +33,9 @@ export default function PaystackIntegration ({cost, email, mobile, name, title})
         email,
         label: name,
         amount: cost*100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-        // publicKey: 'pk_live_50c61b91d8000a4263308931c93a537481208282',
-        publicKey: 'pk_test_dabce201047e59fa0513c8980d20c210581f51fd',
+        // publicKey: 'pk_live_50c61b91d8000a4263308931c93a537481208282', //live kobisoft
+        // publicKey: 'pk_test_dabce201047e59fa0513c8980d20c210581f51fd', //test kobisoft
+        publicKey: 'pk_live_eefaaba3a73acf637dadac80e236b5fc6c3ef845', //live sapphire
         // onSuccess: ({ reference }) => {
         //   alert(
         //     `Your purchase was successful! Transaction reference: ${reference}`

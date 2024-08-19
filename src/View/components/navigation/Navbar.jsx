@@ -4,6 +4,7 @@ import './navbar.scss'
 import {Bell, CalendarClock, Contact2, LogOut, User2, Wallet2} from 'lucide-react';
 import logo from '../../assets/images/logo.PNG';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import * as TbIcons from 'react-icons/tb';
 
 export const Navbar = () => {
     // const navigate = useNavigate()
@@ -212,6 +213,12 @@ export const StaffNavbar = ({socket}) => {
                             <div className="stats"></div>
                         </div>
                     </Link>
+                    {/* <Link to={'/staff-portal/notifications'} className='link'>
+                        <div className='staffnavbar-item notifications'>
+                            <TbIcons.TbFileAnalytics  style={{width: '25px',height: '25px'}}  />
+                            <span>Reports</span>
+                        </div>
+                    </Link> */}
                 </div>
                 <div className="step2">
                     <Link to={'/staff-login'} className='link'>
