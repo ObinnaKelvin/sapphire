@@ -7,7 +7,8 @@ import cancel from '../../assets/images/cross.png'
 import user from '../../assets/images/user.png'
 import paper from '../../assets/images/paper.png'
 import flag from '../../assets/images/flag.png';
-import logo from '../../assets/images/logo.PNG';
+// import logo from '../../assets/images/logo.PNG';
+import logo from '../../assets/images/sapphirelogo.png';
 import naira from '../../assets/images/naira.png';
 import pay from '../../assets/images/wallet.png';
 import { Phone, Mail, User, Stethoscope, CalendarDays, BookOpen, DownloadCloud, AlertCircle } from 'lucide-react';
@@ -577,7 +578,7 @@ function PayNow() {
                         <div className="phase4-wrapper"  ref={printComponentRef}>
                             <div className="icon-holder">
                                 <img src={logo} alt="success tick" />
-                                Sapphire Surgical Center
+                                Sapphire Surgical Centre
                             </div>
                             <div className="titleText">
                                 Transaction Receipt

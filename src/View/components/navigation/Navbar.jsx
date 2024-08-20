@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.scss'
 import {Bell, CalendarClock, Contact2, LogOut, User2, Wallet2} from 'lucide-react';
-import logo from '../../assets/images/logo.PNG';
+// import logo from '../../assets/images/logo.PNG';
+import logo from '../../assets/images/sapphirelogo.png';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import * as TbIcons from 'react-icons/tb';
 
@@ -32,7 +33,7 @@ export const Navbar = () => {
             <div className="navbar-header-logo" onClick={() => switchMenu(1)}>
                 <Link to={'/'}  className='link'>
                 <img src={logo} alt="sapphire surgeons logo" className='nav-logo'/>
-                <span className='logo-text'>Sapphire Partners</span>
+                {/* <span className='logo-text'>Sapphire Surgical Centre</span> */}
                 </Link>
             </div>
             <div className="navbar-header-right">
