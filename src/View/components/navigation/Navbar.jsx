@@ -263,7 +263,7 @@ export const StaffNavbarMobile = () => {
                         <div className='staffnavbarmobile-item notifications'>
                             <Bell size={20} />
                             <span>Notifications</span>
-                            <div className="stats">3</div>
+                            <div className="stats"></div>
                         </div>
                     </Link>
                     <Link to={'/staff-login'} className='link'>

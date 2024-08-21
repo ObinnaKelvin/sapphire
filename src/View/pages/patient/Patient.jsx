@@ -14,6 +14,7 @@ import { Country, State, City }  from 'country-state-city';
 import { ClimbingBoxLoading } from '../../components/loading/Loading';
 import CountUp from 'react-countup'
 import { NoRecords } from '../../components/404/404';
+import { PatientRegInfo } from '../../components/modal/Modal';
 
 const Patient = () => {
     const [title, setTitle] = useState('');
@@ -55,6 +56,7 @@ const Patient = () => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const currentStaff = JSON.parse(localStorage.getItem('staff'));
     const [patientList, setPatientList] = useState([]);
+    const [currentSelectedPatient, setCurrentSelectedPatient] = useState([]);
     
     const navigate = useNavigate();
 
@@ -65,6 +67,7 @@ const Patient = () => {
     const [greet, setGreet] = useState('');
     const [patientToggle, setPatientToggle] = useState(1);
     const [query, setQuery] = useState("");
+    const [activeModal, setActiveModal] = useState(0);
     const onChangeDateofBirth = (dateSelected) => {
         // console.log(dateSelected)
         // console.log(format(dateSelected, 'dd/MM/yyyy'))
@@ -105,6 +108,17 @@ const Patient = () => {
         else {
             setGreet("Good Evening");
         }
+    }
+
+    const displayPatientInfo = (data) => {
+        // alert(`Hey! you clicked me ${data.firstName}`)
+        setCurrentSelectedPatient(data)
+        setActiveModal(1)
+    }
+
+    const closePatientInfo = () => {
+        setCurrentSelectedPatient('')
+        setActiveModal(0)
     }
 
     const handleSubmit = async(e) => {
@@ -273,6 +287,9 @@ const Patient = () => {
         loadPatientList()
     }, [])
 
+    const date = new Date();
+    const currentYear = date.getFullYear();
+
     
 
   return (
@@ -301,17 +318,17 @@ const Patient = () => {
 
                     <div className="patient-toggle">
                         <div className={`patient-item ${patientToggle === 1 ? "active" : "inactive"}`} onClick={() => setPatientToggle(1)}>
-                            <UserPlus2 />
-                            <span>New Patient</span>
-                        </div>
-                        <div className={`patient-item ${patientToggle === 2 ? "active" : "inactive"}`} onClick={() => setPatientToggle(2)}>
                             <Users />
                             <span>Patient List (<CountUp end={patientList?.length} />)</span>
+                        </div>
+                        <div className={`patient-item ${patientToggle === 2 ? "active" : "inactive"}`} onClick={() => setPatientToggle(2)}>
+                            <UserPlus2 />
+                            <span>New Patient</span>
                         </div>
 
                     </div>
                     {
-                        patientToggle === 2 &&
+                        patientToggle === 1 &&
                         <div className="search-bar">
                             <div className="search-icon">
                                 <Search size={19} />
@@ -333,6 +350,146 @@ const Patient = () => {
 
                     {
                         patientToggle ===  1 &&
+                        <div className="patient-list-wrapper"> 
+
+                                {
+                                    loading && <ClimbingBoxLoading />
+                                }
+
+                                {
+                                    search(patientList).map(data => {
+                                        return(  
+                                            <div className="patient-item" onClick={() => displayPatientInfo(data)}>
+                                                <div className="patient-user"><span><User2 size={16} /></span>{data.firstName} {data.lastName} <em>({data.gender})</em></div>
+                                                <div className="patient-phone"><span><Phone size={16} /></span>{data.mobile}</div>
+                                                <div className="patient-age">
+                                                    <span><CalendarRange size={16}/></span> {data.dateOfBirth ? <>{currentYear-`${new Date(`${data.dateOfBirth}`).getUTCFullYear()}`} </> : "??"} Years {/* {currentYear-`${new Date(`${data.dateOfBirth}`).getUTCFullYear()}`} Years */}
+                                                
+                                                </div>
+                                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                                <div className="patient-email"><span><AtSign size={16}/></span>{data.email}</div>
+                                            </div>
+                                        )
+                                    })
+                                }   
+                                {
+                                    !loading && patientList.length === 0 && patientToggle ===  2 && <NoRecords />
+                                } 
+                            {/* <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div>
+                            <div className="patient-item">
+                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
+                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
+                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
+                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
+                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
+                            </div> */}
+                            {
+                                activeModal === 1 &&
+                                <PatientRegInfo  item={currentSelectedPatient} onClose={()=>closePatientInfo()} />
+                            }
+
+                        </div>
+                    }
+
+                    {
+                        patientToggle ===  2 &&
                         <div className="patient-create-wrapper">
                             <div className="left-items">
                                 <div className="body-item">
@@ -669,139 +826,6 @@ const Patient = () => {
                             </div>
                         </div>
 
-                    }
-
-                    {
-                        patientToggle ===  2 &&
-                        <div className="patient-list-wrapper"> 
-                    
-                                {
-                                    loading && <ClimbingBoxLoading />
-                                }
-
-                                {
-                                    search(patientList).map(data => {
-                                        return(  
-                                            <div className="patient-item">
-                                                <div className="patient-user"><span><User2 size={16} /></span>{data.firstName} {data.lastName} <em>({data.gender})</em></div>
-                                                <div className="patient-phone"><span><Phone size={16} /></span>{data.mobile}</div>
-                                                <div className="patient-age"><span><CalendarRange size={16}/></span>?? Years</div>
-                                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                                <div className="patient-email"><span><AtSign size={16}/></span>{data.email}</div>
-                                            </div>
-                                        )
-                                    })
-                                }   
-                                {
-                                    !loading && patientList.length === 0 && patientToggle ===  2 && <NoRecords />
-                                } 
-                            {/* <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div>
-                            <div className="patient-item">
-                                <div className="patient-user"><span><User2 size={16} /></span>Nina Theresa Austin <em>(Female)</em></div>
-                                <div className="patient-phone"><span><Phone size={16} /></span>07023113345</div>
-                                <div className="patient-age"><span><CalendarRange size={16}/></span>41 Years</div>
-                                <div className="patient-payer"><span><Wallet size={16}/></span>Private</div>
-                                <div className="patient-email"><span><AtSign size={16}/></span>nina.austin@gmail.com</div>
-                            </div> */}
-    
-                        </div>
                     }
 
 
