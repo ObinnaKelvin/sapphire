@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'//transform the dates to readable formats
 import { Country, State, City }  from 'country-state-city';
+import { religionsData } from './religionsData';
 
 const PUProfile = () => {
     // const { patientId } = useParams();
@@ -37,6 +38,7 @@ const PUProfile = () => {
     const [country, setCountry] = useState([]);
     const [countryData, setCountryData] = useState([]);
     const [countryDataAbbrv, setCountryDataAbbrv] = useState('');
+    const [stateDataAbbrv, setStateDataAbbrv] = useState('');
     const [countryDataDetails, setCountryDataDetails] = useState('')
     const [encodedBy, setEncodedBy] = useState('');
     const [encodedDate, setEncodedDate] = useState(new Date());
@@ -58,6 +60,14 @@ const PUProfile = () => {
     const [loading, setLoading] = useState(null);
     const [emr_maidenname, setEmr_maidenname] = useState('');
     const [emr_gender, setEmr_gender] = useState('');
+    const [emr_tel, setEmr_tel] = useState('');
+    const [emr_birthplace, setEmr_birthplace] = useState('');
+    const [emr_occupation, setEmr_occupation] = useState('');
+    const [emr_workplace, setEmr_workplace] = useState('');
+    const [emr_kinOccupation, setEmr_kinOccupation] = useState('');
+    const [emr_stateCode, setEmr_stateCode] = useState('');
+    const [emr_nationalityId, setEmr_nationalityId] = useState('');
+    const [emr_religionId, setEmr_religionId] = useState('');
     
 
     console.log("dob", parseISO(dob))
@@ -167,7 +177,7 @@ const PUProfile = () => {
 
     useEffect(() => {
         loadCountryDataDetails()
-    }, [])
+    }, [country])
 
     useEffect(() => {
         loadStateData()
@@ -244,8 +254,23 @@ const PUProfile = () => {
     const getCountryValue = (e) => {
         const countryChosen = e.target.children[e.target.selectedIndex].getAttribute('item-abbrv')
         setCountryDataAbbrv(countryChosen)
+        setEmr_nationalityId(countryChosen)
         setCountry(e.target.value);
         //console.log("countryChosen", countryChosen)
+    }
+
+    const getStateValue = (e) => {
+        const stateChosen = e.target.children[e.target.selectedIndex].getAttribute('item-abbrv')
+        setStateDataAbbrv(stateChosen)
+        setEmr_stateCode(stateChosen)
+        setState(e.target.value);
+        //console.log("countryChosen", countryChosen)
+    }
+
+    const getReligionValue = (e) => {
+        const religionChosen = e.target.children[e.target.selectedIndex].getAttribute('item-id')
+        setEmr_religionId(religionChosen)
+        setReligion(e.target.value)
     }
 
     const loadCountryDataDetails = () => {  
@@ -513,13 +538,13 @@ const PUProfile = () => {
                                     </section>
                                     
                                     <section>
-                                        <label>State</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                        <label>State OF Origin</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>getStateValue} value={state}>
                                             <option>- Select State -</option>
                                             {
                                                 stateData.map(item => {
                                                     return (
-                                                        <option value={item.name}>{item.name}</option>
+                                                        <option value={item.name} item-abbrv={item.isoCode}>{item.name}</option>
                                                     )
                                                 })
                                             }
@@ -532,6 +557,13 @@ const PUProfile = () => {
                                             <option>- Select City -</option>
                                             <option value={'Ogba'}>Ogba</option>
                                             <option value={'Alimosho'}>Alimosho</option>
+                                            <option value={'Ikeja'}>Ikeja</option>
+                                            <option value={'Ajah'}>Ajah</option>
+                                            <option value={'Apapa'}>Apapa</option>
+                                            <option value={'Lagos Island'}>Lagos Island</option>
+                                            <option value={'Ikorodu'}>Ikorodu</option>
+                                            <option value={'Oshodi'}>Oshodi</option>
+                                            <option value={'Others'}>Others</option>
                                             {/* {
                                                 cityDataFull.map(item => {
                                                     return (
@@ -556,12 +588,19 @@ const PUProfile = () => {
 
                                     <section>
                                         <label>Religion</label>
-                                        <select className = 'formSelect sm' name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
+                                        <select className = 'formSelect sm' name="user_religion" onChange={getReligionValue} value={religion}>
                                             <option>-  Select Religion  -</option>
-                                            <option value={'Christianity'}>Christianity</option>
+                                            {/* <option value={'Christianity'}>Christianity</option>
                                             <option value={'Islam'}>Islam</option>
                                             <option value={'Traditional'}>Traditional</option>
-                                            <option value={'Unknown'}>Unknown</option>
+                                            <option value={'Unknown'}>Unknown</option> */}
+                                            {
+                                                religionsData.map(item => {
+                                                    return (
+                                                        <option value={item.rel_name} item-id={item.rel_id}>{item.rel_name}</option>
+                                                    )
+                                                })
+                                            }
                                         </select>
                                     </section>
                                     
@@ -573,6 +612,54 @@ const PUProfile = () => {
                                             name='emr_maidenname'
                                             value={emr_maidenname}
                                             onChange = {(e)=>setEmr_maidenname(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Birth Place</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Birth Place'
+                                            name='emr_birthplace'
+                                            value={emr_birthplace}
+                                            onChange = {(e)=>setEmr_birthplace(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Telephone</label>
+                                        <input 
+                                            type="tel" 
+                                            placeholder='Telephone'
+                                            name='emr_tel'
+                                            value={emr_tel}
+                                            onChange = {(e)=>setEmr_tel(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Occupation</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Occupation'
+                                            name='emr_occupation'
+                                            value={emr_occupation}
+                                            onChange = {(e)=>setEmr_occupation(e.target.value)}
+                                            className="formInput md"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Work Place</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Work Place'
+                                            name='emr_workplace'
+                                            value={emr_workplace}
+                                            onChange = {(e)=>setEmr_workplace(e.target.value)}
                                             className="formInput md"
                                         />
                                     </section>
@@ -617,7 +704,7 @@ const PUProfile = () => {
                                             />
                                     </section>
                                     <section>
-                                        <label> Phone</label>
+                                        <label>Phone</label>
                                             <input 
                                             type="text" 
                                             placeholder='Phone'
@@ -946,14 +1033,14 @@ const PUProfile = () => {
                                     </section>
                                     
                                     <section>
-                                        <label>State</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>setState(e.target.value)} value={state}>
+                                        <label>State Of Origin</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={getStateValue} value={state}>
                                             <option>- Select State -</option>
                                             {/* <option value={'Lagos'}>Lagos</option> */}
                                             {
                                                 stateData.map(item => {
                                                     return (
-                                                        <option value={item.name}>{item.name}</option>
+                                                        <option value={item.name} item-abbrv={item.isoCode}>{item.name}</option>
                                                     )
                                                 })
                                             }
@@ -966,7 +1053,13 @@ const PUProfile = () => {
                                             <option>- Select City -</option>
                                             <option value={'Ogba'}>Ogba</option>
                                             <option value={'Alimosho'}>Alimosho</option>
-                                            <option value={'Alimosho'}>Ikeja</option>
+                                            <option value={'Ikeja'}>Ikeja</option>
+                                            <option value={'Ajah'}>Ajah</option>
+                                            <option value={'Apapa'}>Apapa</option>
+                                            <option value={'Lagos Island'}>Lagos Island</option>
+                                            <option value={'Ikorodu'}>Ikorodu</option>
+                                            <option value={'Oshodi'}>Oshodi</option>
+                                            <option value={'Others'}>Others</option>
                                             {/* {
                                                 cityDataFull.map((item, index) => {
                                                     return (
@@ -979,12 +1072,19 @@ const PUProfile = () => {
 
                                     <section>
                                         <label>Religion</label>
-                                        <select className = 'formSelect sm' name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
+                                        <select className = 'formSelect sm' name="user_religion" onChange={getReligionValue} value={religion}>
                                             <option>-  Select Religion  -</option>
-                                            <option value={'Christianity'}>Christianity</option>
+                                            {/* <option value={'Christianity'}>Christianity</option>
                                             <option value={'Islam'}>Islam</option>
                                             <option value={'Traditional'}>Traditional</option>
-                                            <option value={'Unknown'}>Unknown</option>
+                                            <option value={'Unknown'}>Unknown</option> */}
+                                            {
+                                                religionsData.map(item => {
+                                                    return (
+                                                        <option value={item.rel_name} item-id={item.rel_id}>{item.rel_name}</option>
+                                                    )
+                                                })
+                                            }
                                         </select>
                                     </section>
                                     
@@ -996,6 +1096,54 @@ const PUProfile = () => {
                                             name='emr_maidenname'
                                             value={emr_maidenname}
                                             onChange = {(e)=>setEmr_maidenname(e.target.value)}
+                                            className="formInput sm"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Birth Place</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Birth Place'
+                                            name='emr_birthplace'
+                                            value={emr_birthplace}
+                                            onChange = {(e)=>setEmr_birthplace(e.target.value)}
+                                            className="formInput sm"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Telephone</label>
+                                        <input 
+                                            type="tel" 
+                                            placeholder='Telephone'
+                                            name='emr_tel'
+                                            value={emr_tel}
+                                            onChange = {(e)=>setEmr_tel(e.target.value)}
+                                            className="formInput sm"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Occupation</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Occupation'
+                                            name='emr_occupation'
+                                            value={emr_occupation}
+                                            onChange = {(e)=>setEmr_occupation(e.target.value)}
+                                            className="formInput sm"
+                                        />
+                                    </section>
+                                    
+                                    <section>
+                                        <label>Work Place</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder='Work Place'
+                                            name='emr_workplace'
+                                            value={emr_workplace}
+                                            onChange = {(e)=>setEmr_workplace(e.target.value)}
                                             className="formInput sm"
                                         />
                                     </section>
@@ -1107,6 +1255,17 @@ const PUProfile = () => {
                                             name='phone'
                                             value={kinPhone}
                                             onChange = {(e)=>setKinPhone(e.target.value)}
+                                            className="formInput sm"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label>Kin Occupation</label>
+                                            <input 
+                                            type="text" 
+                                            placeholder='Occupation'
+                                            name='occupation'
+                                            value={emr_kinOccupation}
+                                            onChange = {(e)=>setEmr_kinOccupation(e.target.value)}
                                             className="formInput sm"
                                             />
                                     </section>
