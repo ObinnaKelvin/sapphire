@@ -118,6 +118,16 @@ const PUProfile = () => {
                 emergencyPhone:emPhone,
                 emergencyRelationship:emRelationship,
                 emergencyAddress:emAddress,
+                emrmaidenname:emr_maidenname,
+                emrgender: emr_gender,
+                emrtel: emr_tel,
+                emrbirthplace:emr_birthplace,
+                emroccupation: emr_occupation,
+                emrworkplace: emr_workplace,
+                emrkinOccupation: emr_kinOccupation,
+                emrstateCode:emr_stateCode,
+                emrnationalityId:emr_nationalityId,
+                emrreligionId:emr_religionId,
                 encodedBy: patientId,
                 encodedDate,
 
@@ -154,6 +164,16 @@ const PUProfile = () => {
                 emergencyPhone:emPhone,
                 emergencyRelationship:emRelationship,
                 emergencyAddress:emAddress,
+                emrmaidenname:emr_maidenname,
+                emrgender: emr_gender,
+                emrtel: emr_tel,
+                emrbirthplace:emr_birthplace,
+                emroccupation: emr_occupation,
+                emrworkplace: emr_workplace,
+                emrkinOccupation: emr_kinOccupation,
+                emrstateCode:emr_stateCode,
+                emrnationalityId:emr_nationalityId,
+                emrreligionId:emr_religionId,
                 encodedBy: patientId,
                 encodedDate,
                 isFullyRegistered:completed
@@ -231,6 +251,16 @@ const PUProfile = () => {
                 setEmPhone(response.data[0].emergencyPhone)
                 setEmRelationship(response.data[0].emergencyRelationship)
                 setEmAddress(response.data[0].emergencyAddress)
+                setEmr_maidenname(response.data[0].emrmaidenname)
+                setEmr_gender(response.data[0].emrgender)
+                setEmr_tel(response.data[0].emrtel)
+                setEmr_birthplace(response.data[0].emrbirthplace)
+                setEmr_occupation(response.data[0].emroccupation)
+                setEmr_workplace(response.data[0].emrworkplace)
+                setEmr_kinOccupation(response.data[0].emrkinOccupation)
+                setEmr_stateCode(response.data[0].emrstateCode)
+                setEmr_nationalityId(response.data[0].emrnationalityId)
+                setEmr_religionId(response.data[0].emrreligionId)
                 setIsFullyRegistered(response.data[0].isFullyRegistered)
             })
 
