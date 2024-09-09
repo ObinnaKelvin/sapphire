@@ -118,16 +118,16 @@ const PUProfile = () => {
                 emergencyPhone:emPhone,
                 emergencyRelationship:emRelationship,
                 emergencyAddress:emAddress,
-                emrmaidenname:emr_maidenname,
-                emrgender: emr_gender,
-                emrtel: emr_tel,
-                emrbirthplace:emr_birthplace,
-                emroccupation: emr_occupation,
+                emr_maidenname:emr_maidenname,
+                emr_gender: emr_gender,
+                emr_tel: emr_tel,
+                emr_birthplace:emr_birthplace,
+                emr_occupation: emr_occupation,
                 emrworkplace: emr_workplace,
-                emrkinOccupation: emr_kinOccupation,
-                emrstateCode:emr_stateCode,
-                emrnationalityId:emr_nationalityId,
-                emrreligionId:emr_religionId,
+                emr_kinOccupation: emr_kinOccupation,
+                emr_stateCode:emr_stateCode,
+                emr_nationalityId:emr_nationalityId,
+                emr_religionId:emr_religionId,
                 encodedBy: patientId,
                 encodedDate,
 
@@ -251,16 +251,16 @@ const PUProfile = () => {
                 setEmPhone(response.data[0].emergencyPhone)
                 setEmRelationship(response.data[0].emergencyRelationship)
                 setEmAddress(response.data[0].emergencyAddress)
-                setEmr_maidenname(response.data[0].emrmaidenname)
-                setEmr_gender(response.data[0].emrgender)
-                setEmr_tel(response.data[0].emrtel)
-                setEmr_birthplace(response.data[0].emrbirthplace)
-                setEmr_occupation(response.data[0].emroccupation)
-                setEmr_workplace(response.data[0].emrworkplace)
-                setEmr_kinOccupation(response.data[0].emrkinOccupation)
-                setEmr_stateCode(response.data[0].emrstateCode)
-                setEmr_nationalityId(response.data[0].emrnationalityId)
-                setEmr_religionId(response.data[0].emrreligionId)
+                setEmr_maidenname(response.data[0].emr_maidenname)
+                setEmr_gender(response.data[0].emr_gender)
+                setEmr_tel(response.data[0].emr_tel)
+                setEmr_birthplace(response.data[0].emr_birthplace)
+                setEmr_occupation(response.data[0].emr_occupation)
+                setEmr_workplace(response.data[0].emr_workplace)
+                setEmr_kinOccupation(response.data[0].emr_kinOccupation)
+                setEmr_stateCode(response.data[0].emr_stateCode)
+                setEmr_nationalityId(response.data[0].emr_nationalityId)
+                setEmr_religionId(response.data[0].emr_religionId)
                 setIsFullyRegistered(response.data[0].isFullyRegistered)
             })
 
@@ -301,6 +301,7 @@ const PUProfile = () => {
         const religionChosen = e.target.children[e.target.selectedIndex].getAttribute('item-id')
         setEmr_religionId(religionChosen)
         setReligion(e.target.value)
+        console.log("religion >>", e.target.value)
     }
 
     const loadCountryDataDetails = () => {  
@@ -568,8 +569,8 @@ const PUProfile = () => {
                                     </section>
                                     
                                     <section>
-                                        <label>State OF Origin</label>
-                                        <select className = 'formSelect sm' name="user_sex" onChange={(e)=>getStateValue} value={state}>
+                                        <label>State Of Origin</label>
+                                        <select className = 'formSelect sm' name="user_sex" onChange={getStateValue} value={state}>
                                             <option>- Select State -</option>
                                             {
                                                 stateData.map(item => {
@@ -625,26 +626,35 @@ const PUProfile = () => {
                                             <option value={'Traditional'}>Traditional</option>
                                             <option value={'Unknown'}>Unknown</option> */}
                                             {
+                                                // religionsData.map(item => {
+                                                //     return (
+                                                //         <option value={item.rel_name} item-id={item.rel_id}>{item.rel_name}</option>
+                                                //     )
+                                                // })
+
                                                 religionsData.map(item => {
-                                                    return (
-                                                        <option value={item.rel_name} item-id={item.rel_id}>{item.rel_name}</option>
-                                                    )
+                                                   return (
+                                                    <option value={item.rel_name} item-id={item.rel_id}>{item.rel_name}</option>
+                                                   )
                                                 })
                                             }
                                         </select>
                                     </section>
                                     
-                                    <section>
-                                        <label>Maiden Name</label>
-                                        <input 
-                                            type="text" 
-                                            placeholder='Maiden name'
-                                            name='emr_maidenname'
-                                            value={emr_maidenname}
-                                            onChange = {(e)=>setEmr_maidenname(e.target.value)}
-                                            className="formInput md"
-                                        />
-                                    </section>
+                                    {
+                                        maritalStatus == "Married" && gender == "Female" && 
+                                        <section>
+                                            <label>Maiden Name</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Maiden name'
+                                                name='emr_maidenname'
+                                                value={emr_maidenname}
+                                                onChange = {(e)=>setEmr_maidenname(e.target.value)}
+                                                className="formInput md"
+                                            />
+                                        </section>
+                                    }
                                     
                                     <section>
                                         <label>Birth Place</label>
@@ -705,8 +715,10 @@ const PUProfile = () => {
                         </div>
                         <div className="modal-buttons">
                             <button onClick={(e) => handleNext(1)} className='passive'>Back</button>
+                            
                             <button onClick={(e) => {
                                 if(title&&firstname&&middlename&&lastname&&email&&gender&&phone&&dob&&city&&state&&country&&maritalStatus&&religion&&address){
+                                // if(title&&firstname&&middlename&&lastname&&email&&gender&&phone&&dob&&city&&state&&country&&maritalStatus&&religion&&address){
                                     handleUpdate(e); handleNext(3); 
                                 } else {
                                     alert("Please fill all fields in this section")
@@ -808,6 +820,17 @@ const PUProfile = () => {
                                             value={kinPhone}
                                             onChange = {(e)=>setKinPhone(e.target.value)}
                                             className="formInput md"
+                                            />
+                                    </section>
+                                    <section>
+                                        <label>Kin Occupation</label>
+                                            <input 
+                                            type="text" 
+                                            placeholder='Occupation'
+                                            name='occupation'
+                                            value={emr_kinOccupation}
+                                            onChange = {(e)=>setEmr_kinOccupation(e.target.value)}
+                                            className="formInput sm"
                                             />
                                     </section>
                                     <section>
@@ -1118,17 +1141,20 @@ const PUProfile = () => {
                                         </select>
                                     </section>
                                     
-                                    <section>
-                                        <label>Maiden Name</label>
-                                        <input 
-                                            type="text" 
-                                            placeholder='Maiden name'
-                                            name='emr_maidenname'
-                                            value={emr_maidenname}
-                                            onChange = {(e)=>setEmr_maidenname(e.target.value)}
-                                            className="formInput sm"
-                                        />
-                                    </section>
+                                    {
+                                        maritalStatus == "Married" && gender == "Female" && 
+                                        <section>
+                                            <label>Maiden Name</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Maiden name'
+                                                name='emr_maidenname'
+                                                value={emr_maidenname}
+                                                onChange = {(e)=>setEmr_maidenname(e.target.value)}
+                                                className="formInput md"
+                                            />
+                                        </section>
+                                    }
                                     
                                     <section>
                                         <label>Birth Place</label>
