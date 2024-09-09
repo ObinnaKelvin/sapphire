@@ -9,6 +9,7 @@ import { Country, State, City }  from 'country-state-city';
 import axios from 'axios';
 import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, ClipboardList, Siren, Users, Wallet, AlertCircle, XCircle } from 'lucide-react';
 import { ClimbingBoxLoading } from '../loading/Loading';
+import { religionsData } from '../../pages/patientUserProfile/religionsData';
 
 
 export const PatientTransaction = ({children, open, onClose, id }) => {
@@ -136,6 +137,16 @@ export const PatientRegInfo = ({item, onClose}) => {
     const [emPhone, setEmPhone] = useState('');
     const [emAddress, setEmAddress] = useState('');
     const [emRelationship, setEmRelationship] = useState('');
+    const [emr_maidenname, setEmr_maidenname] = useState('');
+    const [emr_gender, setEmr_gender] = useState('');
+    const [emr_tel, setEmr_tel] = useState('');
+    const [emr_birthplace, setEmr_birthplace] = useState('');
+    const [emr_occupation, setEmr_occupation] = useState('');
+    const [emr_workplace, setEmr_workplace] = useState('');
+    const [emr_kinOccupation, setEmr_kinOccupation] = useState('');
+    const [emr_stateCode, setEmr_stateCode] = useState('');
+    const [emr_nationalityId, setEmr_nationalityId] = useState('');
+    const [emr_religionId, setEmr_religionId] = useState('');
     const [isRequired, setIsRequired] = useState(false);
     const currentCountry = JSON.parse(localStorage.getItem('currentCountry'));
     const currentState = JSON.parse(localStorage.getItem('currentState'));
@@ -222,6 +233,13 @@ export const PatientRegInfo = ({item, onClose}) => {
         }
     }
 
+    const getReligionValue = (e) => {
+        const religionChosen = e.target.children[e.target.selectedIndex].getAttribute('item-id')
+        setEmr_religionId(religionChosen)
+        setReligion(e.target.value)
+        console.log("religion >>", e.target.value)
+    }
+
     const loadPatientRecord = async (item) => {
         try {
             setIsLoading(true);
@@ -251,6 +269,16 @@ export const PatientRegInfo = ({item, onClose}) => {
                 setEmPhone(response.data[0].emergencyPhone)
                 setEmRelationship(response.data[0].emergencyRelationship)
                 setEmAddress(response.data[0].emergencyAddress)
+                setEmr_maidenname(response.data[0].emr_maidenname)
+                setEmr_gender(response.data[0].emr_gender)
+                setEmr_tel(response.data[0].emr_tel)
+                setEmr_birthplace(response.data[0].emr_birthplace)
+                setEmr_occupation(response.data[0].emr_occupation)
+                setEmr_workplace(response.data[0].emr_workplace)
+                setEmr_kinOccupation(response.data[0].emr_kinOccupation)
+                setEmr_stateCode(response.data[0].emr_stateCode)
+                setEmr_nationalityId(response.data[0].emr_nationalityId)
+                setEmr_religionId(response.data[0].emr_religionId)
                 setIsFullyRegistered(response.data[0].isFullyRegistered)
             })
             // console.log(item)
@@ -359,6 +387,9 @@ export const PatientRegInfo = ({item, onClose}) => {
                                                 <option value={'Dr.'}>Dr.</option>
                                                 <option value={'Prof.'}>Prof.</option>
                                                 <option value={'Revd.'}>Revd.</option>
+                                                <option value={'Alhaji'}>Alhaji</option>
+                                                <option value={'Alhaja'}>Alhaja</option>
+                                                <option value={'Chief'}>Chief</option>
                                             </select>
                                         </section>
                                         
@@ -490,7 +521,12 @@ export const PatientRegInfo = ({item, onClose}) => {
                                                 <option>- Select City -</option>
                                                 <option value={'Ogba'}>Ogba</option>
                                                 <option value={'Alimosho'}>Alimosho</option>
-                                                <option value={'Alimosho'}>Ikeja</option>
+                                                <option value={'Ikeja'}>Ikeja</option>
+                                                <option value={'Ajah'}>Ajah</option>
+                                                <option value={'Apapa'}>Apapa</option>
+                                                <option value={'Lagos Island'}>Lagos Island</option>
+                                                <option value={'Ikorodu'}>Ikorodu</option>
+                                                <option value={'Oshodi'}>Oshodi</option>
                                                 <option value={'Others'}>Others</option>
                                                 {/* {
                                                     cityDataFull.map((item, index) => {
@@ -504,13 +540,84 @@ export const PatientRegInfo = ({item, onClose}) => {
     
                                         <section>
                                             <label>Religion</label>
-                                            <select className = {`formSelect sm ${isRequired && "required"}`} name="user_religion" onChange={(e)=>setReligion(e.target.value)} value={religion}>
+                                            <select className = {`formSelect sm ${isRequired && "required"}`} name="user_religion" onChange={getReligionValue} value={religion}>
                                                 <option>-  Select Religion  -</option>
-                                                <option value={'Christianity'}>Christianity</option>
+                                                {/* <option value={'Christianity'}>Christianity</option>
                                                 <option value={'Islam'}>Islam</option>
                                                 <option value={'Traditional'}>Traditional</option>
-                                                <option value={'Unknown'}>Unknown</option>
+                                                <option value={'Unknown'}>Unknown</option> */}
+                                                {
+
+                                                    religionsData.map(item => {
+                                                    return (
+                                                        <option value={item.rel_name} item-id={item.rel_id}>{item.rel_name}</option>
+                                                    )
+                                                    })
+                                                }
                                             </select>
+                                        </section>
+                                    
+                                        {
+                                            maritalStatus == "Married" && gender == "Female" && 
+                                            <section>
+                                                <label>Maiden Name</label>
+                                                <input 
+                                                    type="text" 
+                                                    placeholder='Maiden name'
+                                                    name='emr_maidenname'
+                                                    value={emr_maidenname}
+                                                    onChange = {(e)=>setEmr_maidenname(e.target.value)}
+                                                    className="formInput md"
+                                                />
+                                            </section>
+                                        }
+                                    
+                                        <section>
+                                            <label>Birth Place</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Birth Place'
+                                                name='emr_birthplace'
+                                                value={emr_birthplace}
+                                                onChange = {(e)=>setEmr_birthplace(e.target.value)}
+                                                className="formInput md"
+                                            />
+                                        </section>
+                                        
+                                        <section>
+                                            <label>Telephone</label>
+                                            <input 
+                                                type="tel" 
+                                                placeholder='Telephone'
+                                                name='emr_tel'
+                                                value={emr_tel}
+                                                onChange = {(e)=>setEmr_tel(e.target.value)}
+                                                className="formInput md"
+                                            />
+                                        </section>
+                                        
+                                        <section>
+                                            <label>Occupation</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Occupation'
+                                                name='emr_occupation'
+                                                value={emr_occupation}
+                                                onChange = {(e)=>setEmr_occupation(e.target.value)}
+                                                className="formInput md"
+                                            />
+                                        </section>
+                                        
+                                        <section>
+                                            <label>Work Place</label>
+                                            <input 
+                                                type="text" 
+                                                placeholder='Work Place'
+                                                name='emr_workplace'
+                                                value={emr_workplace}
+                                                onChange = {(e)=>setEmr_workplace(e.target.value)}
+                                                className="formInput md"
+                                            />
                                         </section>
                                         
                                         <section>
@@ -621,6 +728,17 @@ export const PatientRegInfo = ({item, onClose}) => {
                                                 value={kinPhone}
                                                 onChange = {(e)=>setKinPhone(e.target.value)}
                                                 className= {`formInput sm ${isRequired && "required"}`}
+                                                />
+                                        </section>
+                                        <section>
+                                            <label>Kin Occupation</label>
+                                                <input 
+                                                type="text" 
+                                                placeholder='Occupation'
+                                                name='occupation'
+                                                value={emr_kinOccupation}
+                                                onChange = {(e)=>setEmr_kinOccupation(e.target.value)}
+                                                className="formInput sm"
                                                 />
                                         </section>
                                         <section>
