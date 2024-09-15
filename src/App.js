@@ -17,6 +17,8 @@ import Patient from "./View/pages/patient/Patient";
 import AuthOTP from "./View/pages/auth/AuthOTP";
 import PUProfile from "./View/pages/patientUserProfile/PUProfile";
 import Notifications from "./View/pages/notifications/Notifications";
+import Reports from "./View/pages/reports/Reports";
+import Admin from "./View/pages/admin/Admin";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
@@ -63,6 +65,8 @@ function App() {
           <Route path='/staff-portal/create-appointment' element={<Sappointment />}/>
           <Route path='/staff-portal/patient' element={<Patient />}/>
           <Route path='/staff-portal/notifications' element={<Notifications socket={socket} />}/>
+          <Route path='/staff-portal/reports' element={<Reports />}/>
+          <Route path='/staff-portal/admin' element={<Admin />}/>
         </Routes>
     </Router>
   );

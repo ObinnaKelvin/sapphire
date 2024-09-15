@@ -285,7 +285,7 @@ export const PatientRegInfo = ({item, onClose}) => {
             setIsLoading(false);
 
         } catch (error) {
-            
+            console.log("Can't load Patient Reg Info", error)
         }
     }
 

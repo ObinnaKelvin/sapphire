@@ -6,6 +6,7 @@ import {Bell, CalendarClock, Contact2, LogOut, User2, Wallet2} from 'lucide-reac
 import logo from '../../assets/images/sapphirelogo.png';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import * as TbIcons from 'react-icons/tb';
+import * as GrIcons from 'react-icons/gr';
 
 export const Navbar = () => {
     // const navigate = useNavigate()
@@ -214,12 +215,18 @@ export const StaffNavbar = ({socket}) => {
                             <div className="stats"></div>
                         </div>
                     </Link>
-                    {/* <Link to={'/staff-portal/notifications'} className='link'>
+                    <Link to={'/staff-portal/reports'} className='link'>
                         <div className='staffnavbar-item notifications'>
-                            <TbIcons.TbFileAnalytics  style={{width: '25px',height: '25px'}}  />
+                            <TbIcons.TbFileAnalytics  style={{width: '22px',height: '22px'}}  />
                             <span>Reports</span>
                         </div>
-                    </Link> */}
+                    </Link>
+                    <Link to={'/staff-portal/admin'} className='link'>
+                        <div className='staffnavbar-item notifications'>
+                            <GrIcons.GrUserAdmin  style={{width: '22px',height: '22px'}}  />
+                            <span>Admin</span>
+                        </div>
+                    </Link>
                 </div>
                 <div className="step2">
                     <Link to={'/staff-login'} className='link'>
