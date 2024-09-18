@@ -21,6 +21,7 @@ import Reports from "./View/pages/reports/Reports";
 import Admin from "./View/pages/admin/Admin";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import axios from "axios";
 
 function App() {
 
@@ -33,8 +34,14 @@ function App() {
 
         setSocket(io("http://localhost:4000")) //1
         //localStorage.setItem('socket', JSON.stringify(io("http://localhost:4000")))
-        console.log(socket)
+        //console.log(socket)
     }, [])
+
+    const awakeServer = async() => {
+      await axios.get(`https://sapphire-api.onrender.com/api/appointments/`)
+    }
+
+    setInterval(awakeServer, 49000)
 
     // useEffect(() => {
 
