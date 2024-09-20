@@ -21,10 +21,12 @@ import Reports from "./View/pages/reports/Reports";
 import Admin from "./View/pages/admin/Admin";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import axios from "axios";
+// import axios from "axios";
 
 function App() {
 
+  
+  // const [isOnline, setIsOnline] = useState(null); 
   const [socket, setSocket] = useState(null); //1
   // const patient = JSON.parse(localStorage.getItem('patient'));
 
@@ -37,11 +39,51 @@ function App() {
         //console.log(socket)
     }, [])
 
+    // const awakeServer = async() => {
+    //   await axios.get(`https://sapphire-api.onrender.com/api/appointments/`)
+    //   .then(response => {
+    //     if(response.data){
+    //       console.log(response.data)
+    //     }else {
+    //       console.log("Offline")
+    //     }
+    //   })
+    // }
+
     const awakeServer = async() => {
-      await axios.get(`https://sapphire-api.onrender.com/api/appointments/`)
+      try {
+        // await axios.get(`https://sapphire-api.onrender.com/api/appointments/`)
+        await fetch(`https://sapphire-api.onrender.com/api/appointments/`)
+        //.then(response => console.log(response.json()))
+      } catch (error) {
+        console.log("You're Offline")
+      }
     }
 
-    setInterval(awakeServer, 49000)
+    setInterval(awakeServer, 49000) //This does a ping to the server every 49secs to keep it alive
+
+
+    //Check Online Status --Suspended
+    // useEffect(() => {
+
+    //   const handleOnlineStatus = () => {
+    //     setIsOnline(true)
+    //   }
+
+    //   const handleOfflineStatus = () => {
+    //     setIsOnline(false)
+    //   }
+
+    //   window.addEventListener("online", handleOnlineStatus)
+    //   window.addEventListener("offline", handleOfflineStatus)
+
+    //   return () => {
+    //     window.addEventListener("online", handleOnlineStatus)
+    //     window.addEventListener("offline", handleOfflineStatus)
+
+    //   }
+
+    // }, [])
 
     // useEffect(() => {
 

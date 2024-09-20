@@ -182,7 +182,7 @@ function PayNow() {
                 // console.log(patientExist)
             } else {
                 setPatientExist(false)
-                setRegfee(12000)
+                setRegfee(13000)
                 // console.log(patientExist)
             }
             // setTimeout(() => {
