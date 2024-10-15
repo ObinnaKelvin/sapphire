@@ -3,7 +3,7 @@ import './sportal.scss';
 import { Navbar, PatientNavbar, PatientNavbarMobile, StaffNavbar, StaffNavbarMobile } from '../../components/navigation/Navbar';
 import { AlignLeft, CalendarRange, LayoutPanelLeft, Phone, Search, User2 } from 'lucide-react';
 import { AddButton } from '../../components/buttons/Buttons';
-import { PatientAppointments } from '../../components/modal/Modal';
+import { AppointmentBillInfo, PatientAppointments } from '../../components/modal/Modal';
 import axios from 'axios';
 import numeral from 'numeral';
 import { ClimbingBoxLoading } from '../../components/loading/Loading';
@@ -11,7 +11,7 @@ import { format } from 'date-fns'//transform the dates to readable formats
 import { NoRecords } from '../../components/404/404';
 import { formatDate } from '../../utils/formatDate.js'
 
-function Sportal() {
+function Sportal() { //Appointments Module
 
     const staffUser = JSON.parse(localStorage.getItem('staff'));
     const [modalOpen, setModalOpen] = useState(false);
@@ -19,6 +19,7 @@ function Sportal() {
     const [categoryToggle, setCategoryToggle] = useState(1)
     const [appointments, setAppointments] = useState([])
     const [currentAppt, setCurrentAppt] = useState()
+    const [activeModal, setActiveModal] = useState(0);
     const [isLoading, setIsLoading] = useState(null);
     const [query, setQuery] = useState("");
     // const [tab, setTab] = useState("");
@@ -39,6 +40,7 @@ function Sportal() {
     }
     const displayAppointment = (item) => {
         setCurrentAppt(item);
+        console.log(item)
     }   
 
     const closeAppointment = () => {
@@ -152,11 +154,11 @@ function Sportal() {
                         {/* {
                             isLoading && <ClimbingBoxLoading />
                         } */}
-                        { categoryToggle === 1 && 
+                        { categoryToggle === 1 &&  //All
                             // appointments.map(data=>{
                             search(appointments).map(data=>{
                                 return (
-                                    <div className="booking-item">
+                                    <div className="booking-item" onClick={() => displayAppointment(data)}>
                                         {/* <div className="booking-orderno"></div> */}
                                         <div className="booking-service">{data.service}</div>
                                         <div className="booking-user"><span><User2 size={16} /></span>{data.firstname} {data.lastname}</div>
@@ -174,7 +176,7 @@ function Sportal() {
                             !isLoading && appointments.length === 0 && categoryToggle === 1 && <NoRecords />
                         }
 
-                        { categoryToggle === 2 &&
+                        { categoryToggle === 2 &&   //Today
                             // appointments.map(data=>{
                             search(allToday).map(data=>{
                                 return (
@@ -195,7 +197,7 @@ function Sportal() {
                             !isLoading && allToday.length === 0 && categoryToggle === 2 && <NoRecords />
                         }
 
-                        { categoryToggle === 3 &&
+                        { categoryToggle === 3 &&  //Pending
                             // appointments.map(data=>{
                             search(allPending).map(data=>{
                                 return (
@@ -226,7 +228,7 @@ function Sportal() {
                                         <div className="booking-service">{data.service}</div>
                                         <div className="booking-user"><span><User2 size={16} /></span>{data.firstname} {data.lastname}</div>
                                         <div className="booking-phone"><span><Phone size={16} /></span>{data.mobile}</div>
-                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{data.appointmentDate}</div>
+                                        <div className="booking-date"><span><CalendarRange size={16}/></span>{formatDate(data.appointmentDate)}</div>
                                         <div className="booking-amount">₦{numeral(data.tariff).format()}</div>
                                         <div className={`booking-status ${data.paymentStatus.toLowerCase()}`}>{data.paymentStatus}</div>
                                     </div>
@@ -335,7 +337,9 @@ function Sportal() {
                             <div className="booking-status success">Success</div>
                         </div> */}
                         
-                        <PatientAppointments item={currentAppt} onClose={()=>closeAppointment()} />
+                        {/* <PatientAppointments item={currentAppt} onClose={()=>closeAppointment()} /> */}
+
+                        <AppointmentBillInfo item={currentAppt} onClose={()=>closeAppointment()} />
                     </div>
                 </div>
             </div>

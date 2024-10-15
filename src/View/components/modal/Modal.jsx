@@ -10,6 +10,8 @@ import axios from 'axios';
 import { AtSign, CalendarRange, Camera, Phone, Search, User, User2, UserPlus2, ClipboardList, Siren, Users, Wallet, AlertCircle, XCircle } from 'lucide-react';
 import { ClimbingBoxLoading } from '../loading/Loading';
 import { religionsData } from '../../pages/patientUserProfile/religionsData';
+import * as SiIcons from 'react-icons/si';
+import * as ImIcons from 'react-icons/im';
 
 
 export const PatientTransaction = ({children, open, onClose, id }) => {
@@ -99,6 +101,203 @@ export const PatientAppointments = ({item, onClose}) => {
                 </div>
 
             </div>
+        </div>
+    )
+}
+
+export const AppointmentBillInfo = ({item, onClose}) => {
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
+
+    const [id, setId] = useState("")
+    const [firstname, setFirstname] = useState("")
+    const [lastname, setLastname] = useState("")
+    const [gender, setGender] = useState("")
+    const [mobile, setMobile] = useState("")
+    const [patientNo, setPatientNo] = useState("")
+    const [transDate, setTransDate] = useState("")
+    const [service, setService] = useState("")
+    const [tariff, setTariff] = useState("")
+    const [appointmentStatus, setAppointmentStatus] = useState("")
+    const [appointmentId, setAppointmentId] = useState("")
+    const [appointmentDate, setAppointmentDate] = useState(new Date())
+    const [referenceNo, setReferenceNo] = useState("")
+    const [paymentStatus, setPaymentStatus] = useState("")
+    const [notes, setNotes] = useState("")
+
+    const loadBillData = (item) => {
+        setId(item?._id)
+        setFirstname(item?.firstname)
+        setLastname(item?.lastname)
+        setGender(item?.gender)
+        setMobile(item?.mobile)
+        setPatientNo(item?.patientNo)
+        setTransDate(item?.encodedDate)
+        setService(item?.service)
+        setTariff(item?.tariff)
+        setAppointmentStatus(item?.appointmentStatus)
+        setAppointmentId(item?.appointmentId)
+        setAppointmentDate(item?.appointmentDate)
+        setReferenceNo(item?.referenceNo)
+        setPaymentStatus(item?.paymentStatus)
+        setNotes(item?.notes)
+    }
+
+
+    const handleBillUpdate = async () => {
+
+        try {
+            setIsLoading(true);
+            const response = await axios.put(`https://sapphire-api.onrender.com/api/appointments/set/${id}`, {paymentStatus})
+            if (response.status === 200) {
+                //setIsLoading(true)
+                // setSuccess(response.data.message);
+                setSuccess("Success");
+                setError(null); //set error to null after 5 seconds
+                console.log(response.data.message);
+            }
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+            setIsLoading(false);
+            console.log(response);
+            
+        } catch (error) {
+            setIsLoading(false)
+            setError(error.response.data)
+            console.log(error.response.data)
+            setTimeout(() => {
+                setSuccess(null); //set success to null after 5 seconds
+                setError(null); //set error to null after 5 seconds
+              }, 5000);
+        }
+    }
+
+
+    useEffect(() => {
+        loadBillData(item)
+    }, [item])
+    
+    return (
+        item &&
+        <div className={item ? `appointmentbillinfo-container` : `appointmentbillinfo-container inactive`}>
+            <div className="appointmentbillinfo-item">
+                <div className="appointmentbillinfo-panel">
+                    <div className="left">
+                        {/* {`${item?.firstname} ${item?.lastname}`} */}
+                        {`${firstname} ${lastname}`}
+                    </div>
+                    <div className="right">
+                        <XCircle size={25} className='closeicon'onClick={onClose}/>
+                    </div>
+                </div>
+
+                <div className="appointmentbillinfo-wrapper">
+
+                    {
+                        success && <div className="notification success"><SiIcons.SiTicktick style={{width: '35px',height: '35px'}} />{success}</div>
+                    }
+
+                    {
+                        error && <div className="notification error"><ImIcons.ImCancelCircle style={{width: '35px',height: '35px'}} />{error}</div>
+                    }
+
+
+                    <div className="appointmentbillinfo-item-header">
+                        {/* <div className="tariff">₦{numeral(item?.tariff).format()}</div>
+                        <div className="trans-date">{formatDate(item?.encodedDate)}</div> */}
+                        <div className="tariff">₦{numeral(tariff).format()}</div>
+                        <div className="trans-date">{formatDate(transDate)}</div>
+                    </div>
+
+                    {/* <span>Details</span> */}
+
+                    <div className="appointmentbillinfo-item-description">
+                        {/* <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Transaction Amount</div>
+                            <div className="right">{item?.tariff}</div>
+                        </div> */}
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Customer</div>
+                            {/* <div className="right">{item?.firstname} {item?.lastname}</div> */}
+                            <div className="right">{firstname} {lastname}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Gender</div>
+                            {/* <div className="right">{item?.gender}</div> */}
+                            <div className="right">{gender}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Mobile</div>
+                            {/* <div className="right">{item?.mobile}</div> */}
+                            <div className="right">{mobile}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Registration No</div>
+                            {/* <div className="right">{item?.patientNo}</div> */}
+                            <div className="right">{patientNo}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Transaction Date</div>
+                            {/* <div className="right">{formatDate(item?.encodedDate)}</div> */}
+                            <div className="right">{formatDate(transDate)}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Service</div>
+                            {/* <div className="right">{item?.service}</div> */}
+                            <div className="right">{service}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Appointment Status</div>
+                            {/* <div className="right">{item?.appointmentStatus}</div> */}
+                            <div className="right">{appointmentStatus}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Appointment ID</div>
+                            {/* <div className="right">SAPP-{item?.appointmentId}</div> */}
+                            <div className="right">SAPP-{appointmentId}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Appointment Date</div>
+                            <div className="right">{`${format(new Date(item.appointmentDate), "MMM do, yyy")}`}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Reference Number</div>
+                            {/* <div className="right">{item?.referenceNo}</div> */}
+                            <div className="right">{referenceNo}</div>
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Transaction Status</div>
+                            {/* <div className="right">{item?.paymentStatus}</div> */}
+                            {/* <div className="right">{paymentStatus}</div> */}
+                            <div className="right">       
+                                <select className = 'formSelect' name="user_sex" onChange={(e)=>setPaymentStatus(e.target.value)} value={paymentStatus}>
+                                
+                                    {/* <option value={paymentStatus}>{`Payment: ${paymentStatus}`}</option> */}
+                                    <option value={"Pending"}><span className='span'></span>Pending</option>
+                                    <option value={"Success"}><span className='span'></span>Success</option>
+                                    <option value={"Refund"}><span className='span'></span>Refund</option>
+                                    <option value={"Cancelled"}><span className='span'></span>Cancelled</option>
+                                </select>
+                            </div> 
+                        </div>
+                        <div className="appointmentbillinfo-item-description-item">
+                            <div className="left">Notes</div>
+                            {/* <div className="right"><em>{item?.notes}</em></div> */}
+                            <div className="right notes"><em>{notes}</em></div>
+                        </div>
+                        
+                    </div>
+
+                    <div className="appointmentbillinfo-button-holder">
+                        <button onClick={handleBillUpdate}>Update</button>
+                    </div>
+                </div>
+
+            </div>
+            
         </div>
     )
 }
