@@ -339,7 +339,7 @@ function Sportal() { //Appointments Module
                         
                         {/* <PatientAppointments item={currentAppt} onClose={()=>closeAppointment()} /> */}
 
-                        <AppointmentBillInfo item={currentAppt} onClose={()=>closeAppointment()} />
+                        <AppointmentBillInfo item={currentAppt} onClose={()=>{closeAppointment(); loadAppointmentData()}} />
                     </div>
                 </div>
             </div>
