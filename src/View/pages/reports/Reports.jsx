@@ -3,12 +3,16 @@ import { Navbar, StaffNavbar, StaffNavbarMobile } from '../../components/navigat
 import './reports.scss'
 import * as MdIcons from 'react-icons/md';
 import * as PiIcons from 'react-icons/pi';
+import { AllPatientsReport } from '../../components/modal/Modal';
 
 function Reports() {
 
   const staffUser = JSON.parse(localStorage.getItem('staff'));
   const [greet, setGreet] = useState('');
 
+  const closeReport = () => {
+
+  }
   const handleGreet = () => {
       let today = new Date()
       let getCurrentHour = today.getHours() 
@@ -61,17 +65,25 @@ function Reports() {
 
               <div className="reports-body-body">
 
-                  <div className={`reports-menu-wrapper `}>
-                      <div className="reports-item">
+                <div className="reports-menu-header">
+                    <div className="reports-menu-header-item">
+                        All Reports
+                    </div>
+                </div>
 
-                          <div className="icon">
-                              <PiIcons.PiUsersThreeBold  style={{width: '35px',height: '35px'}} />
-                          </div>
-                          <div className="description">
-                              Patients
-                          </div>
-                      </div>
-                  </div>
+                <div className={`reports-menu-wrapper `}>
+
+                    <div className="reports-item">
+                        <div className="icon">
+                            <PiIcons.PiUsersThreeBold  style={{width: '35px',height: '35px'}} />
+                        </div>
+                        <div className="description">
+                            Patients
+                        </div>
+                    </div>
+
+                    <AllPatientsReport onClose={()=>closeReport()}/>
+                </div>
 
               </div>
 

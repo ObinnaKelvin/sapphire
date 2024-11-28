@@ -1,0 +1,481 @@
+
+.patient-container {
+    display: flex;
+    flex-direction: column;
+
+    .patient-wrapper {
+        height: max-content;
+        margin: 60px 0px 0px 0px;
+        // border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+
+        .patient-sidenav {
+            height: 100%;
+            width: 60px;
+            // border: 1px solid blue;
+        }
+
+        .patient-mobile {
+            display: none;
+        }
+
+        .patient-body {
+            // height: 100vh;
+            height: max-content;
+            width: 100%;
+            // border: 1px solid orange;
+            background-color: #fafafa;
+
+            .patient-body-header {
+                display: flex;
+                flex-direction: row;
+                // align-items: center;
+                justify-content: space-around;
+                height: 150px;
+                width: 100%;
+                margin: 0px 0px 0px 0px;
+                // border: 1px solid orange;
+                // background-color: #0f5bce;
+                background-color: #0C4CAC;
+                border-radius: 0px 0px 20px 20px;
+                position: relative;
+
+                .page-title {
+                    display: flex;
+                    position: absolute;
+                    color: #fff;
+                    margin: 10px 0px 0px 20px;
+                    // border: 1px solid white;
+                    left: 0px;
+                    top: 0px;
+                }
+
+                .name-space {
+                    display: flex;
+                    position: absolute;
+                    color: #fff;
+                    margin: 10px 20px 0px 0px;
+                    font-size: 14px;
+                    top: 0px;
+                    right: 0px;
+
+                } 
+
+                .patient-toggle {
+                    display: flex;
+                    flex-direction: row;
+                    position: relative;
+                    // border: 1px solid red;
+                    width: max-content;
+                    height: max-content;
+                    position: absolute;
+                    left: 0px;
+                    margin: 70px 300px 0px 20px;
+                    background-color:#063b8a;
+                    border-radius: 30px;
+
+                    .patient-item {
+                        display: flex;
+                        gap: 7px;
+                        align-items: center;
+                        // border-radius: 2em;
+                        // border: 1px solid white;
+                        padding: 10px 20px;
+                        height: 20px;
+                        color: #fff;
+                        font-size: 12px;
+                        // position: absolute;
+                        // left: 0px;
+                        // margin: 70px 300px 0px 150px;
+                        cursor: pointer;
+                    }
+
+                    .patient-item.active {
+                        background-color: orange;
+                        border-radius: 2em;
+                        color: white;
+                        transition: 0.5s ease all;
+                    }
+                }
+
+                .search-bar {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    right: 0px;
+                    margin: 70px 17px 0px 0px;
+                    // position: fixed;
+                    // z-index: 10;
+
+                    input:focus, textarea:focus, select:focus {
+                        outline: #0C4CAC;
+                        border: 1px solid #0C4CAC;
+                    }
+
+                    .search-icon {
+                        position: absolute;
+                        margin: 11px 0px 0px 12px;
+                        // margin: 12px 0px 0px 12px;
+                        color: #e0e0e0;
+                    }
+
+                    .formInput {
+                        width: 220px;
+                        // padding: 15px 10px 15px 45px;
+                        padding: 12px 10px 12px 39px;
+                        border-radius: 20px;
+                        // border-radius: 2em;
+                        border: 1px solid #ececec;
+                    }
+                }
+
+            }
+
+            .patient-body-body {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                // border: 1px solid orange;
+
+                .patient-create-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    // border: 1px solid orange;
+                    justify-content: space-around;
+    
+                    .left-items {
+                        display: flex;
+                        flex-direction: column;
+                        width: 65%;
+                        //border: 1px solid orange;
+                        height: max-content;
+    
+                        .body-item {
+                            // width: 33.1%;
+                            // border: 1px solid orange;
+                            display: flex;
+                            flex-direction: column;
+                            background-color: white;
+                            border-radius: 20px;
+
+                            .error_msg {
+                                // border: 1px solid red;
+                                margin: 20px auto 10px auto;
+                                padding: 10px 20px;
+                                border-radius: 10px;
+                                width: max-content;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                background-color: red;
+                                color: white;
+                                font-size: 13px;
+                            }
+        
+                            .header-section {
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: wrap;
+                                gap: 10px;
+                                padding: 30px;
+                                margin-bottom: 10px;
+                                //border: 1px solid orange;
+                            }
+    
+                            .body-body {
+    
+                                form {
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: wrap;
+                                    padding: 30px;
+                                    gap: 20px;
+                                    //background-color: #fff;
+    
+                                    section {
+                                        display: flex;
+                                        position: relative;
+                                        margin-bottom: 50px;
+                                        width: max-content;
+                                        // border: 1px solid orange;
+    
+                                        label {
+                                            position: absolute;
+                                            margin: -20px 0px 10px 6px;
+                                            font-size: 12px;
+                                            width: max-content;
+                                        }
+    
+                                        .formSelect {
+                                            font-size: 12px;
+                                            border-radius: 9px;
+                                            cursor: pointer;
+                                            color: #333333;
+                                            padding: 8px 12px;
+                                            cursor: pointer;
+                                            border: 1px solid #e6e6e6;
+                                            height: 40px;
+    
+                                            //Replace default arrow
+                                            appearance: none;
+                                            -webkit-appearance: none;
+                                            -moz-appearance: none;
+                                            //background-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www/w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
+                                            //background-position: right 10px top 50%;
+    
+                                        }
+    
+                                        .formInput {
+                                            font-size: 12px;
+                                            border-radius: 9px;
+                                            cursor: pointer;
+                                            color: #333333;
+                                            padding: 8px 12px;
+                                            cursor: pointer;
+                                            border: 1px solid #e6e6e6;
+                                            width: 260px;
+                                        }
+    
+                                        .formTextArea {
+                                            width: 700px;
+                                            padding: 20px;
+                                            border-radius: 2em;
+                                            border: 1px solid #e0e0e0;
+                                            height: 100px;
+                                        }
+    
+                                        input:focus, textarea:focus, select:focus {
+                                            outline: #2196f3;
+                                            border: 1px solid #2196f3;
+                                        }
+
+                                        .required {
+                                            border: 1px solid red;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+    
+                    .right-items {
+                        display: flex;
+                        flex-direction: column;
+                        width: 30%;
+                        //border: 1px solid orange;
+                        height: 100vh;
+                        gap: 30px;
+    
+                        .body-item {
+                            // width: 33.1%;
+                            //border: 1px solid orange;
+                            display: flex;
+                            flex-direction: column;
+                            background-color: white;
+                            border-radius: 20px;
+        
+                            .header-section {
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: wrap;
+                                gap: 10px;
+                                padding: 30px;
+                                margin-bottom: 10px;
+                                //border: 1px solid orange;
+                            }
+    
+                            .body-body {
+    
+                                form {
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: wrap;
+                                    padding: 30px;
+                                    gap: 20px;
+    
+                                    section {
+                                        display: flex;
+                                        position: relative;
+                                        margin-bottom: 50px;
+                                        //border: 1px solid orange;
+                                        width: 100%;
+    
+                                        label {
+                                            position: absolute;
+                                            margin: -20px 0px 10px 6px;
+                                            font-size: 12px;
+                                            width: max-content;
+                                        }
+    
+                                        .formSelect {
+                                            font-size: 12px;
+                                            border-radius: 9px;
+                                            cursor: pointer;
+                                            color: #333333;
+                                            padding: 8px 12px;
+                                            cursor: pointer;
+                                            border: 1px solid #e6e6e6;
+                                            height: 40px;
+    
+                                            //Replace default arrow
+                                            appearance: none;
+                                            -webkit-appearance: none;
+                                            -moz-appearance: none;
+                                            //background-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www/w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
+                                            //background-position: right 10px top 50%;
+    
+                                        }
+    
+                                        .formInput {
+                                            font-size: 12px;
+                                            border-radius: 9px;
+                                            cursor: pointer;
+                                            color: #333333;
+                                            padding: 8px 12px;
+                                            cursor: pointer;
+                                            border: 1px solid #e6e6e6;
+                                            width: 100%;
+                                        }
+    
+                                        .formTextArea {
+                                            width: 100%;
+                                            padding: 20px;
+                                            border-radius: 2em;
+                                            border: 1px solid #e0e0e0;
+                                            // height: 100px;
+                                        }
+    
+                                        input:focus, textarea:focus, select:focus {
+                                            outline: #2196f3;
+                                            border: 1px solid #2196f3;
+                                        }
+                                        
+                                        .required {
+                                            border: 1px solid red;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .patient-button-holder {
+                        display: flex;
+                        width: 100%;
+                        // border: 1px solid orange;
+                        align-items: center;
+                        margin: 30px 0px 40px 0px;
+        
+                        button {
+                            padding: 10px;
+                            width: 200px;
+                            margin: 0px auto 0px auto;
+                            cursor: pointer;
+                            border: none;
+                            background-color: #005EFF; //new color
+                            color: white;
+                            height: 60px;
+                            font-size: 15px;
+                            border-radius: 9px;
+                        }
+                    }
+
+                }
+
+                .patient-list-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    padding: 10px;
+                    gap: 15px;
+                    align-items: center;
+                    justify-content: center;
+                    // margin-bottom: 300px;
+                    margin: -30px 0px 150px 0px;
+
+                    .patient-item {
+                        border: 1px solid #EEEEEE;
+                        padding: 15px;
+                        border-radius: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 9px;
+                        width: 200px;
+                        height: 135px;
+                        position: relative;
+                        background-color: white;
+
+                        .patient-user {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+                        }
+
+                        .patient-phone {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+
+                        }
+
+                        .patient-age {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+                        }
+
+                        .patient-payer {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+                        }
+
+                        .patient-email {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            color: #757575;
+                            font-size: 12px;
+
+                            span {
+                                color: #2196f3;
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}

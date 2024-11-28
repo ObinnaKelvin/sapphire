@@ -1,0 +1,20 @@
+
+.payment-item {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #c5c5c5;
+    border-radius: 10px;
+    // gap: 50px;
+    width: 400px;
+    height: 50px;
+    cursor: pointer;
+
+    .right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}

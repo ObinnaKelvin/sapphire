@@ -989,3 +989,19 @@ export const PatientRegInfo = ({item, onClose}) => {
         </div>
     )
 }
+
+export const AllPatientsReport = ({onClose}) => {
+
+    const [show, setShow] = useState(false)
+    
+    const handleShow = () => {
+        setShow(!show)
+    }
+
+    return (
+        <div className={ show ? `allpatientsreport-container` : `allpatientsreport-container inactive`} onClick={onClose}>
+
+        </div>
+    )
+
+}
