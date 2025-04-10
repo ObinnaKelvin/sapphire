@@ -21,6 +21,7 @@ import Reports from "./View/pages/reports/Reports";
 import Admin from "./View/pages/admin/Admin";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import UnderConstruction from "./View/pages/404/404";
 // import axios from "axios";
 
 function App() {
@@ -97,7 +98,8 @@ function App() {
   return (
     <Router>
         <Routes>
-          <Route path='/' element={<Home />}/>
+          <Route path='/' element={<UnderConstruction />}/>
+          {/* <Route path='/' element={<Home />}/> */}
           <Route path='/about-us' element={<AboutUs />}/>
           <Route path='/blog' element={<Blog />}/>
           <Route path='/gallery' element={<Gallery />}/>

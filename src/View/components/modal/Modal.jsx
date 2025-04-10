@@ -12,6 +12,10 @@ import { ClimbingBoxLoading } from '../loading/Loading';
 import { religionsData } from '../../pages/patientUserProfile/religionsData';
 import * as SiIcons from 'react-icons/si';
 import * as ImIcons from 'react-icons/im';
+import * as MdIcons from 'react-icons/md';
+import * as PiIcons from 'react-icons/pi';
+import * as AiIcons from 'react-icons/ai';
+import patientreport from '../../assets/images/patientreport.png'
 
 
 export const PatientTransaction = ({children, open, onClose, id }) => {
@@ -994,13 +998,71 @@ export const AllPatientsReport = ({onClose}) => {
 
     const [show, setShow] = useState(false)
     
-    const handleShow = () => {
-        setShow(!show)
-    }
+    // const handleShow = () => {
+    //     setShow(!show)
+    // }
 
     return (
-        <div className={ show ? `allpatientsreport-container` : `allpatientsreport-container inactive`} onClick={onClose}>
+        // <div className={ show ? `allpatientsreport-container` : `allpatientsreport-container inactive`} onClick={onClose}>
+        <div className={ `allpatientsreport-container`}>
+            <div className="allpatientsreportinfo-item">
 
+                <div className="allpatientsreportinfo-panel">
+
+                    <div className="left">
+                        All Patients Report
+                    </div>
+
+                    <div className="right">
+                        <XCircle size={25} className='closeicon'onClick={onClose}/>
+                    </div>
+
+                </div>
+
+                <div className="allpatientsreportinfo-wrapper">
+
+                    <div className="allpatientsreportinfo-item-header">
+
+                        <div className="generate-button">
+                            <AiIcons.AiOutlineSync  style={{width: '20px',height: '20px'}} className='rotate' />
+                            Generate
+                        </div>
+
+                    </div>
+
+                    {/* <div className="notification">
+                        
+                    </div> */}
+
+                    <div className="allpatientsreportinfo-item-body">
+
+                        <div className="left">
+                            <div className="idle-state">
+                                <img className='grow-shrink ' src={patientreport} alt="" />
+                            </div>
+                            {/* <div className="loading-state"></div>
+                            <div className="preview-state"></div>
+                            <div className="liable-state"></div>
+                            <div className="review-state"></div>
+                            <div className="engage-state"></div> */}
+                        </div>
+
+                        <div className="right">
+                                {/* <div className="doc-format">
+                                    <PiIcons.PiMicrosoftExcelLogoFill style={{width: '25px',height: '25px'}} /> Excel Format
+                                </div> */}
+                                <div className="download-btn">
+                                    {/* <MdIcons.MdCloudDownload  style={{width: '35px',height: '35px'}} /> */}
+                                    <PiIcons.PiMicrosoftExcelLogoFill style={{width: '25px',height: '25px'}} /> 
+                                    Download
+                                </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     )
 

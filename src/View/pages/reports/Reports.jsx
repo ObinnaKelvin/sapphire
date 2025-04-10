@@ -9,10 +9,14 @@ function Reports() {
 
   const staffUser = JSON.parse(localStorage.getItem('staff'));
   const [greet, setGreet] = useState('');
+  const [showReport, setShowReport] = useState(0);
+
 
   const closeReport = () => {
-
+    setShowReport(0)
   }
+
+
   const handleGreet = () => {
       let today = new Date()
       let getCurrentHour = today.getHours() 
@@ -73,7 +77,7 @@ function Reports() {
 
                 <div className={`reports-menu-wrapper `}>
 
-                    <div className="reports-item">
+                    <div className="reports-item" onClick={() => setShowReport(1)}>
                         <div className="icon">
                             <PiIcons.PiUsersThreeBold  style={{width: '35px',height: '35px'}} />
                         </div>
@@ -82,7 +86,11 @@ function Reports() {
                         </div>
                     </div>
 
-                    <AllPatientsReport onClose={()=>closeReport()}/>
+                    {
+                        showReport === 1 && 
+
+                        <AllPatientsReport onClose={()=>closeReport()}/>
+                    }
                 </div>
 
               </div>

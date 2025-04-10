@@ -710,7 +710,344 @@
     transition: opacity .2s ease;
     height: 120%;
     z-index: 20;
-    margin: -90px 0px 0px 0px;
+    margin: -60px 0px 0px 0px;
+
+    .allpatientsreportinfo-item {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        position: relative;
+        // border: 1px solid red;
+
+        .allpatientsreportinfo-panel {
+            display: flex;
+            position: absolute;
+            background-color:#005EFF;
+            height: 30px;
+            width: 1000px;
+            margin-top: 70px;
+            border-radius: 20px 20px 0px 0px;
+            justify-content: space-around;
+            color: #fff;
+            // padding: 0px 20px;
+
+            .left {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 200px;
+                width: 95%;
+                // width: max-content;
+            }
+
+            .right {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // width: 10%;
+                // border: 1px solid red;
+
+                .closeicon {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .allpatientsreportinfo-wrapper {
+            display: flex;
+            flex-direction: column;
+            // flex-wrap: wrap;
+            // border: 1px solid red;
+            // justify-content: space-around;
+            width: 1000px;
+            height: 550px;
+            margin-top: 100px;
+            background-color: #fff;
+            // border: 1px solid red;
+            gap: 10px;
+            overflow-y: scroll;
+            padding: 10px 0px;
+            position: relative;
+
+            // .notification {
+            //     border:  1px solid red;
+            //     border-radius: 5px;
+            //     position: absolute;
+            //     //margin: -150px 50px 140px 0px;
+            //     right: 40px;
+            //     top: 120px;
+            //     padding: 10px 20px;
+            //     width: max-content;
+            //     display: flex;
+            //     align-items: center;
+            //     justify-content: center;
+            //     gap: 20px;
+                
+            // }
+
+            // .notification.success {
+            //     color: white;
+            //     background: #47ae74;
+            //     border: 1px solid #47ae74;
+            // }
+
+            // .notification.error {
+            //     color: white;
+            //     background: #b05150;
+            //     border: 1px solid #b05150;
+            // }
+
+
+            .allpatientsreportinfo-item-header {
+                display: flex;
+                flex-direction: column;
+                align-items: left;
+                justify-content: right;
+                // width: 100%;
+                height: 35px;
+                background-color: #e1f5fe8c;
+                color: #0c4cacc2;
+                // border-radius: 10px;
+                padding: 0px 10px;
+                // border: 1px solid orange;
+                margin: 0px 30px;
+                gap: 20px;
+
+                .generate-button {
+                    display: flex;
+                    align-items: center;
+                    font-size: 14px;
+                    height: 35px;
+                    width: max-content;
+                    padding: 0px 15px;
+                    background-color: #0C4CAC;
+                    right: 10px;
+                    color: white;
+                    cursor: pointer;
+                    gap: 5px;
+                    margin-left: 89%;
+
+                    .rotate {
+                        -webkit-animation:spin 1s linear infinite;
+                        -moz-animation:spin 1s linear infinite;
+                        animation:spin 1s linear infinite;
+                    }
+                    @-moz-keyframes spin { 
+                        100% { -moz-transform: rotate(360deg); } 
+                    }
+                    @-webkit-keyframes spin { 
+                        100% { -webkit-transform: rotate(360deg); } 
+                    }
+                    @keyframes spin { 
+                        100% { 
+                            -webkit-transform: rotate(360deg); 
+                            transform:rotate(360deg); 
+                        } 
+                    }
+
+                }
+                
+
+            }
+
+            .allpatientsreportinfo-item-body {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                // border: 1px solid black;
+                min-height: 20px;
+                // gap: 30px;
+
+                .left {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 80%;
+                    // border: 1px solid #cfcfcf;
+                    font-size: 14px;
+                    color: #757575;
+                    height: 400px;
+
+                    .idle-state {
+                        display: flex;
+                        // border: 1px solid #cfcfcf;
+
+                        img {
+                            width: 300px;
+                            
+                        }
+
+                        img.fade {
+                            opacity: 0.6;
+                        }
+
+                        img.grow-shrink {
+                            
+                                animation: grow-shrink 3s infinite;
+
+                            @keyframes grow-shrink {
+                                0% {
+                                    transform: scale(0.8);
+                                }
+                                50% {
+                                    transform: scale(1);
+                                }
+                                100% {
+                                    transform: scale(0.8);
+                                }
+                            }
+
+                        }
+                    }
+                }
+                .right {
+                    display: flex;
+                    flex-direction: column;
+                    // align-items: center;
+                    width: 20%;
+                    border: 0.5px solid #cfcfcf71;
+                    color: #757575;
+                    font-weight: 500;
+                    // height: max-content;
+                    height: 400px;
+                    gap: 20px;
+
+                    .doc-format {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+
+                    }
+
+                    .download-btn {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        width: 100%;
+                        // border: 0.5px solid #cfcfcf;
+                        background-color: #47ae74;
+                        color: white;
+                        height: 60px;
+                        cursor: pointer;
+                        font-size: 17px;
+
+                    }
+                    
+                }
+            }
+            
+
+            .allpatientsreportinfo-item-description {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                width: 900px;
+                height: max-content;
+                background-color: #fff;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 0px 30px;
+                // border: 1px solid blue;
+                // height: 800px;
+
+                .allpatientsreportinfo-item-description-item {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+                    // border: 1px solid black;
+                    min-height: 20px;
+                    // gap: 30px;
+    
+                    .left {
+                        display: flex;
+                        align-items: center;
+                        width: 43%;
+                        //border: 1px solid #cfcfcf;
+                        font-size: 14px;
+                        color: #757575;
+                    }
+                    .right {
+                        display: flex;
+                        align-items: center;
+                        justify-content: left;
+                        width: 57%;
+                        //border: 1px solid #cfcfcf;
+                        font-size: 14px;
+                        color: #757575;
+                        font-weight: 500;
+                        height: max-content;
+
+                        .formSelect {
+                            font-size: 12px;
+                            border-radius: 9px;
+                            cursor: pointer;
+                            color: #333333;
+                            padding: 8px 12px;
+                            cursor: pointer;
+                            outline: #2196f3;
+                            border: 1px solid #2196f3;
+                            height: 40px;
+                            width: 100px;
+
+                            //Replace default arrow
+                            appearance: none;
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            //background-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www/w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
+                            //background-position: right 10px top 50%;
+
+                            option {
+                                display: flex;
+                                // width: 100px;
+                                flex-direction: row;
+
+                                .span {
+                                    height: 100px;
+                                    width: 100px;
+                                    background-color: #005EFF;
+                                }
+                            }
+                        }
+                    }
+
+                    .right.notes {
+                        padding: 20px 20px;
+                        border: 1px solid #75757527;
+                        border-radius: 9px;
+                    }
+                }
+
+            }
+
+            .allpatientsreportinfo-button-holder {
+                display: flex;
+                width: 100%;
+                // border: 1px solid orange;
+                align-items: center;
+                // margin: 30px 0px 40px 0px;
+
+                button {
+                    padding: 10px;
+                    width: 200px;
+                    margin: 0px auto 0px auto;
+                    cursor: pointer;
+                    border: none;
+                    background-color: #005EFF; //new color
+                    color: white;
+                    height: 50px;
+                    font-size: 15px;
+                    border-radius: 9px;
+                }
+            }
+
+        }
+
+    }
 
 }
 
