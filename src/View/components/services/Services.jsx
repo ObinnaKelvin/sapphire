@@ -1,13 +1,13 @@
 import React from 'react';
 import './services.scss';
-import scapel from '../../assets/images/scalpel.png';
-import kidney from '../../assets/images/kidney.png';
-import bariatric from '../../assets/images/bariatric-surgery.png';
-import intestine from '../../assets/images/intestine.png';
-import thyroid from '../../assets/images/thyroid.png';
-import breast from '../../assets/images/breasts.png';
-import endoscope from '../../assets/images/endoscope.png';
-import oncology from '../../assets/images/oncology.png';
+import scapel from '../../assets/svg/scalpel.svg';
+import kidney from '../../assets/svg/kidney.svg';
+import bariatric from '../../assets/svg/bariatric-surgery.svg';
+import intestine from '../../assets/svg/intestine.svg';
+import thyroid from '../../assets/svg/thyroid.svg';
+import breast from '../../assets/svg/breasts.svg';
+import endoscope from '../../assets/svg/endoscope.svg';
+import oncology from '../../assets/svg/oncology.svg';
 import { motion } from "framer-motion";
 
 

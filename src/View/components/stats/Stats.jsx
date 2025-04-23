@@ -1,9 +1,9 @@
 import React from 'react'
 import './stats.scss';
-import shimmer from '../../assets/images/abstract-shape.png';
-import happy from '../../assets/images/happy.png';
-import medical from '../../assets/images/medical.png';
-import talent from '../../assets/images/talent.png';
+import shimmer from '../../assets/svg/abstract-shape.svg';
+import happy from '../../assets/svg/happy.svg';
+import medical from '../../assets/svg/medical.svg';
+import talent from '../../assets/svg/talent.svg';
 import CountUp from 'react-countup';
 
 const Stats = () => {

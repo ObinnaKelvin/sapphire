@@ -1,8 +1,8 @@
 import React from 'react';
 import './whyus.scss';
-import safe from '../../assets/images/shield.png';
-import value from '../../assets/images/gold-ingots.png';
-import expert from '../../assets/images/surgeon.png';
+import safe from '../../assets/svg/shield.svg';
+import value from '../../assets/svg/gold-ingots.svg';
+import expert from '../../assets/svg/surgeon.svg';
 import { motion } from "framer-motion";
 
 

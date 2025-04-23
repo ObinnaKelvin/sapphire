@@ -98,8 +98,8 @@ function App() {
   return (
     <Router>
         <Routes>
-          <Route path='/' element={<UnderConstruction />}/>
-          {/* <Route path='/' element={<Home />}/> */}
+          {/*<Route path='/' element={<UnderConstruction />}/>*/}
+          <Route path='/' element={<Home />}/> 
           <Route path='/about-us' element={<AboutUs />}/>
           <Route path='/blog' element={<Blog />}/>
           <Route path='/gallery' element={<Gallery />}/>
