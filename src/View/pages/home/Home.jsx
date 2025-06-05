@@ -10,6 +10,8 @@ import Review from '../../components/reviews/Review';
 // import ReviewForm from '../../components/reviewForm/ReviewForm';
 import Footer from '../../components/footer/Footer';
 import SupportEngine from '../../components/supportEngine/SupportEngine';
+import NewsFeeds from '../../components/newsFeeds/NewsFeeds';
+import VideoUpdates from '../../components/videoUpdates/VideoUpdates';
 
 
 const helmetData = new HelmetData({});
@@ -28,6 +30,8 @@ function Home() {
         <Services/>
         <Stats/>
         <WhyUs />
+        <VideoUpdates />
+        <NewsFeeds />
         {/*<Review />*/}   {/*Put on hold by Sapphire Partners*/}
         {/* <ReviewForm /> */}
         <SupportEngine />
