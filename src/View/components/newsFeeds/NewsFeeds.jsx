@@ -44,7 +44,7 @@ function NewsFeeds() {
                             But Dr.Akinoso invites us to think bigger—and more human.
                         </div>
                         <div className="news-date"> May 25, 2025</div>
-                        <div className="news-continue">{`Continue Reading >>>`}</div>
+                        <div className="news-continue"><Link className='link' to={'/blog/scale-elite'}>{`Continue Reading >>>`}</Link></div>
                     </div>
 
                 </div>
@@ -70,7 +70,7 @@ function NewsFeeds() {
                         pushes through a weak spot in the surrounding muscle or tissue wall. Though often not immediately life-threatening, hernias do not heal on their own and can lead to serious complications if left untreated.
                         </div>
                         <div className="news-date"> May 25, 2025</div>
-                        <div className="news-continue">{`Continue Reading >>>`}</div>
+                        <div className="news-continue"><Link className='link' to={'/blog/hernia-occur'}>{`Continue Reading >>>`}</Link></div>
                     </div>
 
                 </div>
@@ -96,7 +96,7 @@ function NewsFeeds() {
                             a small butterfly-shaped gland located in the neck, fails to produce enough thyroid hormones.
                         </div>
                         <div className="news-date"> May 25, 2025</div>
-                        <div className="news-continue">{`Continue Reading >>>`}</div>
+                        <div className="news-continue"><Link className='link' to={'/blog/thyroid-disorder'}>{`Continue Reading >>>`}</Link></div>
                     </div>
 
                 </div>

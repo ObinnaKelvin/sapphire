@@ -163,9 +163,14 @@
                         font-size: 13px;
                         font-weight: bold;
                         font-style: italic;
-                        color: #39d388;
+                        // color: #39d388;
                         cursor: pointer;
                         padding: 0px 5px;
+
+                        .link {
+                            text-decoration: none;
+                            color: #39d388;
+                        }
                     }
                 }
 

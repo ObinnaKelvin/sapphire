@@ -6,8 +6,8 @@ import Footer from '../../components/footer/Footer'
 import vidpic1 from '../../assets/images/ProstateSentenceEnPic.webp';
 import vidpic2 from'../../assets/images/ProstateSlowEnPic.webp';
 import vidpic3 from'../../assets/images/SignsofColorectalCancerEnPic.webp';
-import vidpic4 from'../../assets/images/Laparoscopic1.PNG';
-import vidpic5 from'../../assets/images/Laparoscopic2.PNG'; 
+import vidpic4 from'../../assets/images/Laparoscopic1.webp';
+import vidpic5 from'../../assets/images/Laparoscopic2.webp'; 
 import vidpic6 from'../../assets/images/FreqUrination.webp'; 
 import vidpic7 from'../../assets/images/Happensurgery.webp';
 import vidpic8 from'../../assets/images/Agecolorectal.webp';

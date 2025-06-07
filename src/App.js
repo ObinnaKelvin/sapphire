@@ -22,6 +22,9 @@ import Admin from "./View/pages/admin/Admin";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import UnderConstruction from "./View/pages/404/404";
+import ScaleElite from "./View/pages/blog/blogPages/ScaleElite";
+import Hernia from "./View/pages/blog/blogPages/Hernia";
+import Thyroid from "./View/pages/blog/blogPages/Thyroid";
 // import axios from "axios";
 
 function App() {
@@ -102,6 +105,10 @@ function App() {
           <Route path='/' element={<Home />}/> 
           <Route path='/about-us' element={<AboutUs />}/>
           <Route path='/blog' element={<Blog />}/>
+          <Route path='/blog/scale-elite' element={<ScaleElite />}/>
+          <Route path='/blog/hernia-occur' element={<Hernia />}/>
+          <Route path='/blog/scale-elite' element={<ScaleElite />}/>
+          <Route path='/blog/thyroid-disorder' element={<Thyroid />}/>
           <Route path='/updates' element={<Updates />}/>
           <Route path='/contact-us' element={<Contact />}/>
           <Route path='/book-appointment' element={<Booking />}/>
