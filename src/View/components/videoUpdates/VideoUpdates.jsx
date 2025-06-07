@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import './videoupdates.scss';
 import videoIcon from '../../assets/svg/video-icon-edit.svg';
 import PicCoverA from '../../assets/images/ProstateSentenceEnPic.webp';
@@ -5,8 +6,22 @@ import PicCoverB from '../../assets/images/ProstateSlowEnPic.webp';
 import PicCoverC from '../../assets/images/SignsofColorectalCancerEnPic.webp';
 import playButton from '../../assets/images/play.webp';
 import { Link } from 'react-router-dom';
+import vid1 from '../../assets/videos/ProstateScreeningTest.mp4';
+import vid2 from '../../assets/videos/ProstateEnlargementvsProstateCancer.mp4';
+import vid3 from '../../assets/videos/SignsOfColorecalCancer.mp4';
+import close from'../../assets/images/close.png';
 
 function VideoUpdates() {
+  const[currentVideo, setCurrentVideo] = useState('')
+
+  const playVideo = (video) => {
+    setCurrentVideo(video)
+  }
+
+  const closeVideo = () => {
+    setCurrentVideo('')
+  }
+
   return (
         <div className='videoupdates-container'>
     
@@ -23,7 +38,7 @@ function VideoUpdates() {
                 <div className="videoupdates-video-items">
     
                     <div className="videoupdates-video-item">
-                        <div className="img-holder">
+                        <div className="img-holder" onClick={() => playVideo(vid2)}>
                             <img class="piccover" src={PicCoverA}/>
                             <div className="dark-overlay"></div>
                             <div className="play-button-holder">
@@ -48,7 +63,7 @@ function VideoUpdates() {
     
     
                     <div className="videoupdates-video-item">
-                        <div className="img-holder">
+                        <div className="img-holder" onClick={() => playVideo(vid1)}>
                             <img class="piccover" src={PicCoverB}/>
                             <div className="dark-overlay"></div>
                             <div className="play-button-holder">
@@ -74,7 +89,7 @@ function VideoUpdates() {
     
     
                     <div className="videoupdates-video-item">
-                        <div className="img-holder">
+                        <div className="img-holder" onClick={() => playVideo(vid3)}>
                             <img class="piccover" src={PicCoverC}/>
                             <div className="dark-overlay"></div>
                             <div className="play-button-holder">
@@ -104,6 +119,16 @@ function VideoUpdates() {
                     </Link>
                 </div>
                 
+            </div>
+            
+            
+            <div className={currentVideo ? `video-player-wrapper`: `video-player-wrapper inactive`} onClick={() => closeVideo()}>
+                <div className={currentVideo ? `video-player`: `video-player inactive`}>
+                <div className="close-wrapper" onClick={() => closeVideo()}>
+                    <img src={close} className='close-btn'/>
+                </div>
+                <video width="100%" src={currentVideo} controls autoPlay></video>
+                </div>
             </div>
             
         </div>
